@@ -1,11 +1,10 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TravelDesk.SiteMaster" %>
-
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteEmployee.master.cs" Inherits="TravelDesk.SiteEmployee" %>
 
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
-    <title>Travel Desk | Admin
+    <title>Travel Desk | Employee
     </title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -23,7 +22,7 @@
     <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
     <meta name="author" content="codedthemes" />
     <!-- Favicon icon -->
-    <link rel="icon" href="/images/innodataLogo.png" type="image/x-icon">
+    <link rel="icon" href="/images/FinalLogo.PNG" type="image/x-icon">
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- waves.css -->
@@ -92,8 +91,8 @@
                                     <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                                 </li>
                                 <div class="text-center">
-                                    <!--CENTER LOGO-->
-                                   <%-- <img src="/images/innodataLogo.png" style="width: 250px; padding-top: 5px;" alt="logo.png">--%>
+                                    <!--LOGO IN THE HEADER - CENTER -->
+<%--                                    <img src="/images/imgLogo.png" style="width: 750px; padding-top: 5px;" alt="logo.png">--%>
                                 </div>
                             </ul>
 
@@ -150,7 +149,7 @@
                                 <!-- NOTIFICATIONS END -->
                                 <li class="user-profile header-notification">
                                     <a href="#!" class="waves-effect waves-light">
-                                        <asp:Label ID="lblWRSname" runat="server"> Admin </asp:Label>
+                                        <asp:Label ID="lblWRSname" runat="server"></asp:Label>
                                         <i class="ti-angle-down"></i>
                                     </a>
                                     <ul class="show-notification profile-notification">
@@ -179,11 +178,11 @@
                 <div class="pcoded-wrapper" id="navigationBarMaster" runat="server">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-                        <div class="pcoded-inner-navbar main-menu" style="background-color:#fff">
+                        <div class="pcoded-inner-navbar main-menu" <%-- style="background-color:#deffea"--%>>
                             <div class="">
                                 <div>
-                                    <!--LOGO BEFORE THE MAIN-->
-                                    <%--<img class="img-fluid" src="/images/FinalLogo.png" alt="Theme-Logo" style="width: 200px">--%>
+                                    <!--LOGO BEFORE MAIN-->
+<%--                                    <img class="img-fluid" src="/assets/images/innodataLogo.png" alt="Theme-Logo" style="width: 200px">--%>
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">MAIN</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
@@ -204,17 +203,10 @@
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-                                     <li>
-                                        <a href="/Admin/WaterProduct" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-package"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Product </span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
                                 </ul>
 
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms">REPORTS</div>
-                                <ul class="pcoded-item pcoded-left-item">
+<%--                                <ul class="pcoded-item pcoded-left-item">
 
                                     <li class=" ">
                                         <a href="/Admin/WaterOrders" class="waves-effect waves-dark">
@@ -248,7 +240,7 @@
                                     </li>
                                     
 
-                                </ul>
+                                </ul>--%>
 
                             </div>
                     </nav>
@@ -290,3 +282,4 @@
     </form>
 </body>
 </html>
+

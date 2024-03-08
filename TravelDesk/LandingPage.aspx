@@ -97,6 +97,10 @@
 <section class="login-block">
     <!-- Container-fluid starts -->
     <div class="container">
+                            <div style="text-align:center">
+                                <img src="/images/TDLogoPng.png" style="width: 650px" alt="logo.png"> <br />
+                            </div>
+
         <div class="row">
             <div class="col-sm-6" >
                 <a href="ApproverLandingPage.aspx" class="btnk">
@@ -120,7 +124,7 @@
 
             <!-- Second Box -->
             <div class="col-sm-6"  style="margin-left: -30px; margin-right: -10px;">
-                 <a href="#" class="btnk">
+                 <a href="Employee/EmployeeLogin" class="btnk">
                     <form class="md-float-material form-material">
                     <div class="text-center">
                         
