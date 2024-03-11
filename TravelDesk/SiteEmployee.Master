@@ -43,6 +43,11 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
   <%--  Google chart api--%>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- Bootstrap Datepicker CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+<!-- Bootstrap Datepicker JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 </head>
 <body>
@@ -149,20 +154,14 @@
                                 <!-- NOTIFICATIONS END -->
                                 <li class="user-profile header-notification">
                                     <a href="#!" class="waves-effect waves-light">
-                                        <asp:Label ID="lblWRSname" runat="server"></asp:Label>
+                                        <asp:Label ID="lblWRSname" runat="server"> LASTNAME , FN</asp:Label>
                                         <i class="ti-angle-down"></i>
                                     </a>
                                     <ul class="show-notification profile-notification">
                                         <li class="waves-effect waves-light">
-                                            <a href="/Admin/AdminProfile">
-                                                <i class="ti-user"></i>PROFILE
-                                            </a>
-                                        </li>
-                                        <li class="waves-effect waves-light">
                                             <i class="ti-layout-sidebar-left">
-                                                <asp:Button ID="btnLogout" runat="server" Text="LOGOUT" BorderColor="Transparent" BackColor="Transparent" />
+                                                <asp:Button ID="btnLogout" runat="server" Text="SIGN OUT" BorderColor="Transparent" BackColor="Transparent" style="font-size:16px;color:#09426a"/>
                                             </i>
-                                            <%--  </a>--%>
                                         </li>
                                     </ul>
                                 </li>
@@ -181,12 +180,12 @@
                         <div class="pcoded-inner-navbar main-menu" <%-- style="background-color:#deffea"--%>>
                             <div class="">
                                 <div>
-                                    <!--LOGO BEFORE MAIN-->
-<%--                                    <img class="img-fluid" src="/assets/images/innodataLogo.png" alt="Theme-Logo" style="width: 200px">--%>
+                                    <!--LOGO BEFORE THE MAIN--> <br />
+                                    <img class="img-fluid" src="/images/MainLogoTD.png" alt="Theme-Logo" style="width: 500px">
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">MAIN</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="">
-                                        <a href="Admin/AdminDashboard" class="waves-effect waves-dark">
+                                        <a href="EmployeeDashboard" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                             <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                             <span class="pcoded-mcaret"></span>
@@ -197,7 +196,7 @@
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms">MANAGEMENT</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                      <li>
-                                        <a href="/Admin/EmployeeRecord" class="waves-effect waves-dark">
+                                        <a href="/Employee/EmployeeRequest" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
                                             <span class="pcoded-mtext" data-i18n="nav.form-components.main">Requests</span>
                                             <span class="pcoded-mcaret"></span>
@@ -206,41 +205,17 @@
                                 </ul>
 
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms">REPORTS</div>
-<%--                                <ul class="pcoded-item pcoded-left-item">
+                                <ul class="pcoded-item pcoded-left-item">
 
                                     <li class=" ">
-                                        <a href="/Admin/WaterOrders" class="waves-effect waves-dark">
+                                        <a href="/Employee/EmployeeLogs" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-envelope"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Travels
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">History
                                             </span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-                                    <li class="">
-                                        <a href="/Admin/SalesReports" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Employees</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/Admin/Reviews" class="waves-effect waves-dark active">
-                                            <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Managers</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-
-                                    <li class="">
-                                        <a href="/Admin/UsersLog" class="waves-effect waves-dark">
-                                            <span class="pcoded-micon"><i class="ti-list"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Activity</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    
-
-                                </ul>--%>
+                                </ul>
 
                             </div>
                     </nav>
@@ -278,7 +253,6 @@
         <script src="/assets/js/vertical-layout.min.js "></script>
         <!-- custom js -->
         <script type="text/javascript" src="/assets/pages/dashboard/custom-dashboard.js"></script>
-        <script type="text/javascript" src="/assets/js/script.js "></script>
     </form>
 </body>
 </html>

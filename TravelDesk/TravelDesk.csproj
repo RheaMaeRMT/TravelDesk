@@ -123,7 +123,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Activity.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
+    <Content Include="Admin\Employees.aspx" />
+    <Content Include="Admin\Managers.aspx" />
+    <Content Include="Admin\TravelRequests.aspx" />
+    <Content Include="Admin\Travels.aspx" />
     <Content Include="ApproverLandingPage.aspx" />
     <Content Include="assets\css\animate.css\css\animate.css" />
     <Content Include="assets\css\bootstrap\css\bootstrap.min.css" />
@@ -265,7 +270,11 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="EmployeeLogin.aspx" />
+    <Content Include="Employee\DomesticRequest.aspx" />
     <Content Include="Employee\EmployeeDashboard.aspx" />
+    <Content Include="Employee\EmployeeLogs.aspx" />
+    <Content Include="Employee\EmployeeRequest.aspx" />
+    <Content Include="Employee\InternationalRequest.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -320,7 +329,10 @@
     <Content Include="assets\images\auth\Thumbs.db" />
     <Content Include="assets\images\Thumbs.db" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="images\2ndLogoTD.png" />
+    <Content Include="images\icons8-plane-50.png" />
     <Content Include="images\innodataLogo.png" />
+    <Content Include="images\MainLogoTD.png" />
     <Content Include="images\TDLogo.png" />
     <Content Include="images\TDLogoPng.png" />
     <Content Include="LandingPage.aspx" />
@@ -359,12 +371,47 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Activity.aspx.cs">
+      <DependentUpon>Activity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Activity.aspx.designer.cs">
+      <DependentUpon>Activity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AdminDashboard.aspx.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\AdminDashboard.aspx.designer.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Employees.aspx.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Employees.aspx.designer.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Managers.aspx.cs">
+      <DependentUpon>Managers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Managers.aspx.designer.cs">
+      <DependentUpon>Managers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TravelRequests.aspx.cs">
+      <DependentUpon>TravelRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TravelRequests.aspx.designer.cs">
+      <DependentUpon>TravelRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Travels.aspx.cs">
+      <DependentUpon>Travels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Travels.aspx.designer.cs">
+      <DependentUpon>Travels.aspx</DependentUpon>
     </Compile>
     <Compile Include="ApproverLandingPage.aspx.cs">
       <DependentUpon>ApproverLandingPage.aspx</DependentUpon>
@@ -382,12 +429,40 @@
     <Compile Include="EmployeeLogin.aspx.designer.cs">
       <DependentUpon>EmployeeLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Employee\DomesticRequest.aspx.cs">
+      <DependentUpon>DomesticRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\DomesticRequest.aspx.designer.cs">
+      <DependentUpon>DomesticRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Employee\EmployeeDashboard.aspx.cs">
       <DependentUpon>EmployeeDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Employee\EmployeeDashboard.aspx.designer.cs">
       <DependentUpon>EmployeeDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\EmployeeLogs.aspx.cs">
+      <DependentUpon>EmployeeLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\EmployeeLogs.aspx.designer.cs">
+      <DependentUpon>EmployeeLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\EmployeeRequest.aspx.cs">
+      <DependentUpon>EmployeeRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\EmployeeRequest.aspx.designer.cs">
+      <DependentUpon>EmployeeRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\InternationalRequest.aspx.cs">
+      <DependentUpon>InternationalRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\InternationalRequest.aspx.designer.cs">
+      <DependentUpon>InternationalRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

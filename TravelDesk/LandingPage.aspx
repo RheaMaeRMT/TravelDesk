@@ -38,7 +38,7 @@
       <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
 
-  <body themebg-pattern="theme1">
+  <body style="background-color:white">
   <!-- Pre-loader start -->
   <div class="theme-loader">
       <div class="loader-track">
@@ -98,7 +98,7 @@
     <!-- Container-fluid starts -->
     <div class="container">
                             <div style="text-align:center">
-                                <img src="/images/TDLogoPng.png" style="width: 650px" alt="logo.png"> <br />
+                                <img src="/images/MainLogoTD.png" style="width: 650px" alt="logo.png"> <br />
                             </div>
 
         <div class="row">
@@ -109,10 +109,10 @@
                     <div class="text-center">
                     </div>
                     <div class="auth-box card">
-                        <div class="card-block">
+                        <div class="card-block" style="background-color:#09426a">
                             <div class="row m-b-20">
-                                <div class="col-md-12 pcoded-micon" style="text-align:center"><i class="ti-user" style="font-size: 2em;"></i><br />
-                                    <h3 class="text-center">APPROVER</h3>
+                                <div class="col-md-12 pcoded-micon" style="text-align:center"><i class="ti-user" style="font-size: 2em;color:white;"></i><br />
+                                    <h3 class="text-center" style="color:white">APPROVER</h3>
                                 </div>
                             </div>
                         </div>
@@ -130,11 +130,11 @@
                         
                     </div>
                     <div class="auth-box card">
-                        <div class="card-block">
+                        <div class="card-block" style="background-color:#09426a">
                             <div class="row m-b-20">
-                                <div class="col-md-12" style="text-align:center"><i class="ti-user" style="font-size: 2em;"></i><br />
+                                <div class="col-md-12" style="text-align:center"><i class="ti-user" style="font-size: 2em; color:white;"></i><br />
 
-                                    <h3 class="text-center">REQUESTER</h3>
+                                    <h3 class="text-center" style="color:white">REQUESTER</h3>
                                 </div>
                             </div>
                         </div>
