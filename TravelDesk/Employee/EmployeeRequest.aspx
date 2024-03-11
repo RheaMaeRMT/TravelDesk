@@ -33,6 +33,9 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
+                                                    <div class="card-block">
+                                                        <asp:Label ID="Label13" runat="server" Text="View Travel Requests"></asp:Label>
+                                                    </div>
                                         <section class="login-block">
                                             <!-- Container-fluid starts -->
                                             <div class="container">

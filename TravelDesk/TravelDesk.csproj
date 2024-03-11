@@ -275,6 +275,7 @@
     <Content Include="Employee\EmployeeLogs.aspx" />
     <Content Include="Employee\EmployeeRequest.aspx" />
     <Content Include="Employee\InternationalRequest.aspx" />
+    <Content Include="Employee\TravelRequests.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -328,6 +329,7 @@
     <Content Include="assets\icon\themify-icons\fonts\themify.woff" />
     <Content Include="assets\images\auth\Thumbs.db" />
     <Content Include="assets\images\Thumbs.db" />
+    <Content Include="ApproverSite.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\2ndLogoTD.png" />
     <Content Include="images\icons8-plane-50.png" />
@@ -420,6 +422,13 @@
     <Compile Include="ApproverLandingPage.aspx.designer.cs">
       <DependentUpon>ApproverLandingPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ApproverSite.Master.cs">
+      <DependentUpon>ApproverSite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApproverSite.Master.designer.cs">
+      <DependentUpon>ApproverSite.Master</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="EmployeeLogin.aspx.cs">
@@ -463,6 +472,13 @@
     </Compile>
     <Compile Include="Employee\InternationalRequest.aspx.designer.cs">
       <DependentUpon>InternationalRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\TravelRequests.aspx.cs">
+      <DependentUpon>TravelRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\TravelRequests.aspx.designer.cs">
+      <DependentUpon>TravelRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
