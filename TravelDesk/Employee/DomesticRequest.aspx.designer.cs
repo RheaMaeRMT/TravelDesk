@@ -24,13 +24,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// IntLocationtxtbx control.
+        /// locationtxtbx control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IntLocationtxtbx;
+        protected global::System.Web.UI.WebControls.TextBox locationtxtbx;
 
         /// <summary>
         /// Label2 control.
@@ -42,13 +42,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Int control.
+        /// empIDtxtbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Int;
+        protected global::System.Web.UI.WebControls.TextBox empIDtxtbox;
 
         /// <summary>
         /// Label7 control.
@@ -60,13 +60,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label7;
 
         /// <summary>
-        /// TextBox1 control.
+        /// empNametxtbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox empNametxtbox;
 
         /// <summary>
         /// Label3 control.
@@ -78,13 +78,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// TextBox2 control.
+        /// empDesignation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox empDesignation;
 
         /// <summary>
         /// Label8 control.
@@ -96,13 +96,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label8;
 
         /// <summary>
-        /// TextBox6 control.
+        /// empLeveltxtbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox6;
+        protected global::System.Web.UI.WebControls.TextBox empLeveltxtbox;
 
         /// <summary>
         /// Label4 control.
@@ -114,13 +114,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// TextBox3 control.
+        /// empvoiptxtbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox empvoiptxtbox;
 
         /// <summary>
         /// Label9 control.
@@ -132,13 +132,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label9;
 
         /// <summary>
-        /// TextBox7 control.
+        /// empNumtxtbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox7;
+        protected global::System.Web.UI.WebControls.TextBox empNumtxtbox;
 
         /// <summary>
         /// Label5 control.
@@ -150,13 +150,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label5;
 
         /// <summary>
-        /// TextBox4 control.
+        /// empProjCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox4;
+        protected global::System.Web.UI.WebControls.TextBox empProjCode;
 
         /// <summary>
         /// Label6 control.
@@ -168,13 +168,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// TextBox5 control.
+        /// empFacility control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.TextBox empFacility;
 
         /// <summary>
         /// Label10 control.
@@ -186,13 +186,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label10;
 
         /// <summary>
-        /// TextBox8 control.
+        /// empDestination control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox8;
+        protected global::System.Web.UI.WebControls.TextBox empDestination;
 
         /// <summary>
         /// Label11 control.
@@ -204,13 +204,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label11;
 
         /// <summary>
-        /// TextBox9 control.
+        /// empDeparture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox9;
+        protected global::System.Web.UI.WebControls.TextBox empDeparture;
 
         /// <summary>
         /// Label12 control.
@@ -222,22 +222,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label12;
 
         /// <summary>
-        /// RadioButtonList1 control.
+        /// empReturn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
-
-        /// <summary>
-        /// TextBox10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox10;
+        protected global::System.Web.UI.WebControls.TextBox empReturn;
 
         /// <summary>
         /// Label13 control.
@@ -249,13 +240,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label13;
 
         /// <summary>
-        /// TextBox11 control.
+        /// empPurpose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox11;
+        protected global::System.Web.UI.WebControls.TextBox empPurpose;
 
         /// <summary>
         /// Label14 control.
@@ -267,13 +258,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label14;
 
         /// <summary>
-        /// TextBox12 control.
+        /// empOthers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox12;
+        protected global::System.Web.UI.WebControls.TextBox empOthers;
 
         /// <summary>
         /// Label16 control.
@@ -294,6 +285,24 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
 
         /// <summary>
+        /// approved control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListItem approved;
+
+        /// <summary>
+        /// notApproved control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListItem notApproved;
+
+        /// <summary>
         /// Label17 control.
         /// </summary>
         /// <remarks>
@@ -303,13 +312,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label17;
 
         /// <summary>
-        /// TextBox14 control.
+        /// empManagername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox14;
+        protected global::System.Web.UI.WebControls.TextBox empManagername;
 
         /// <summary>
         /// Label15 control.
@@ -321,13 +330,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label15;
 
         /// <summary>
-        /// FileUpload1 control.
+        /// empAttachment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
+        protected global::System.Web.UI.WebControls.FileUpload empAttachment;
 
         /// <summary>
         /// Label18 control.
@@ -339,13 +348,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label18;
 
         /// <summary>
-        /// TextBox13 control.
+        /// empRemarks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox13;
+        protected global::System.Web.UI.WebControls.TextBox empRemarks;
 
         /// <summary>
         /// submitBtn control.

@@ -78,7 +78,7 @@
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label1" runat="server" Text="Location"></asp:Label>
-                                                        <asp:TextBox ID="IntLocationtxtbx" runat="server" Width="345px" CssClass="auto-style6"></asp:TextBox>
+                                                        <asp:TextBox ID="locationtxtbx" runat="server" Width="345px" CssClass="auto-style6"></asp:TextBox>
                                                     </div>
                                                     <!--EMPLOYEE DETAILS-->
                                                     <div class="card-block">
@@ -86,25 +86,25 @@
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label2" runat="server" Text="Employee ID" ></asp:Label>
-                                                        <asp:TextBox ID="Int" runat="server" style="margin-left:80px" Width="345px"></asp:TextBox> 
+                                                        <asp:TextBox ID="empIDtxtbox" runat="server" style="margin-left:80px" Width="345px"></asp:TextBox> 
                                                         <asp:Label ID="Label7" runat="server" Text="Employee Name" style="padding-left:150px" ></asp:Label>
-                                                        <asp:TextBox ID="TextBox1" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
+                                                        <asp:TextBox ID="empNametxtbox" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label3" runat="server" Text="Designation"></asp:Label>
-                                                        <asp:TextBox ID="TextBox2" runat="server"  CssClass="auto-style4" Width="341px"></asp:TextBox>
+                                                        <asp:TextBox ID="empDesignation" runat="server"  CssClass="auto-style4" Width="341px"></asp:TextBox>
                                                         <asp:Label ID="Label8" runat="server" Text="Level"  style="padding-left:150px"></asp:Label>
-                                                        <asp:TextBox ID="TextBox6" runat="server"  CssClass="auto-style5"  Width="260px"></asp:TextBox>
+                                                        <asp:TextBox ID="empLeveltxtbox" runat="server"  CssClass="auto-style5"  Width="260px"></asp:TextBox>
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label4" runat="server" Text="VOIP Ext."></asp:Label>
-                                                        <asp:TextBox ID="TextBox3" runat="server"  CssClass="auto-style1" Width="343px"></asp:TextBox>
+                                                        <asp:TextBox ID="empvoiptxtbox" runat="server"  CssClass="auto-style1" Width="343px"></asp:TextBox>
                                                         <asp:Label ID="Label9" runat="server" Text="Mobile Number" style="padding-left:150px" ></asp:Label>
-                                                        <asp:TextBox ID="TextBox7" runat="server"  Width="260px" CssClass="auto-style7"></asp:TextBox>
+                                                        <asp:TextBox ID="empNumtxtbox" runat="server"  Width="260px" CssClass="auto-style7"></asp:TextBox>
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label5" runat="server" Text="Project Code"></asp:Label>
-                                                        <asp:TextBox ID="TextBox4" runat="server" CssClass="auto-style3" Width="341px"></asp:TextBox>
+                                                        <asp:TextBox ID="empProjCode" runat="server" CssClass="auto-style3" Width="341px"></asp:TextBox>
                                                     </div>
                                                     <!--TRAVEL DETAILS-->
                                                     <div class="card-block">
@@ -112,23 +112,24 @@
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label6" runat="server" Text="Home Facility" ></asp:Label>
-                                                        <asp:TextBox ID="TextBox5" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
+                                                        <asp:TextBox ID="empFacility" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
                                                         <asp:Label ID="Label10" runat="server" Text="Destination" style="padding-left:150px" ></asp:Label>
-                                                        <asp:TextBox ID="TextBox8" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
+                                                        <asp:TextBox ID="empDestination" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label11" runat="server" Text="Date of Departure"></asp:Label>
                                                        
-                                                        <asp:TextBox ID="TextBox9" TextMode="DateTimeLocal" runat="server"  CssClass="m-l-50" Width="342px"></asp:TextBox>
+                                                        <asp:TextBox ID="empDeparture" TextMode="DateTimeLocal" runat="server"  CssClass="m-l-50" Width="342px"></asp:TextBox>
                                                         <asp:Label ID="Label12" runat="server" Text="Date of Return"  style="padding-left:150px"></asp:Label>
                                                         
-                                                        <asp:RadioButtonList ID="RadioButtonList1" runat="server"></asp:RadioButtonList>                          <asp:TextBox ID="TextBox10" TextMode="DateTimeLocal" runat="server"  CssClass="auto-style9"  Width="260px"></asp:TextBox>
+                                                        
+                                                        <asp:TextBox ID="empReturn" TextMode="DateTimeLocal" runat="server"  CssClass="auto-style9"  Width="260px"></asp:TextBox>
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label13" runat="server" Text="Purpose of Travel"></asp:Label>
-                                                        <asp:TextBox ID="TextBox11" runat="server"  CssClass="m-l-50" Width="343px"></asp:TextBox>
+                                                        <asp:TextBox ID="empPurpose" runat="server"  CssClass="m-l-50" Width="343px"></asp:TextBox>
                                                         <asp:Label ID="Label14" runat="server" Text="Others" style="padding-left:150px" ></asp:Label>
-                                                        <asp:TextBox ID="TextBox12" runat="server"  Width="260px" CssClass="auto-style10"></asp:TextBox>
+                                                        <asp:TextBox ID="empOthers" runat="server"  Width="260px" CssClass="auto-style10"></asp:TextBox>
                                                     </div>
                                                     <!--ATTACHMENT-->
                                                     <div class="card-block">
@@ -138,8 +139,8 @@
                                                         <asp:Label ID="Label16" runat="server" Text="Manager Approval"></asp:Label>
                                                         <asp:DropDownList ID="DropDownList1" runat="server" CssClass="m-l-50" Width="343px" onchange="checkSelection()">
                                                             <asp:ListItem Text="" Value="3" Selected="True"/>
-                                                            <asp:ListItem Text="YES" Value="1" />
-                                                            <asp:ListItem Text="NO" Value="0" />
+                                                            <asp:ListItem ID="approved" Text="YES" Value="1" />
+                                                            <asp:ListItem ID="notApproved" Text="NO" Value="0" />
                                                         </asp:DropDownList>
                                                         <!--MODAL FOR THE NO OPTION -->
                                                         <div class="modal fade" id="noModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -209,18 +210,18 @@
                                                         </div>
                                                         <!-- manager name should auto-populate based on the manager assigned of the employees department -->
                                                         <asp:Label ID="Label17" runat="server" Text="Manager Name" style="padding-left:150px" ></asp:Label>
-                                                        <asp:TextBox ID="TextBox14" runat="server"  Width="236px" CssClass="auto-style13"></asp:TextBox>
+                                                        <asp:TextBox ID="empManagername" runat="server"  Width="236px" CssClass="auto-style13"></asp:TextBox>
                                                     </div>
                                                     <div class="card-block" id="uploadBlock" style="display:none">
                                                         <asp:Label ID="Label15" runat="server" Text="Attachment"></asp:Label>
-                                                        <asp:FileUpload ID="FileUpload1" runat="server" CssClass="auto-style12" Width="348px" />
+                                                        <asp:FileUpload ID="empAttachment" runat="server" CssClass="auto-style12" Width="348px" />
                                                     </div>
                                                     <div class="card-block">
                                                          <asp:Label ID="Label18" runat="server" Text="Remarks"></asp:Label> <br />
-                                                        <asp:TextBox ID="TextBox13" runat="server"  Width="896px" CssClass="auto-style10" TextMode="MultiLine" Height="91px"></asp:TextBox>                                                    
+                                                        <asp:TextBox ID="empRemarks" runat="server"  Width="896px" CssClass="auto-style10" TextMode="MultiLine" Height="91px"></asp:TextBox>                                                    
                                                     </div>
                                                     <div class="card-block" id="submitCard" style="display:none;margin-left:600px">
-                                                        <asp:Button runat="server" class="btn btn-primary" ID="submitBtn" Text="SUBMIT" style="background-color:#09426a;color:white"/>
+                                                        <asp:Button runat="server" class="btn btn-primary" ID="submitBtn" Text="SUBMIT" style="background-color:#09426a;color:white" OnClick="submitBtn_Click"/>
 
                                                     </div>
 
