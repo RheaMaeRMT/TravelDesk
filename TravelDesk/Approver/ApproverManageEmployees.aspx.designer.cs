@@ -7,21 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TravelDesk.Admin
+namespace TravelDesk.Approver
 {
 
 
-    public partial class Managers
+    public partial class ApproverManageEmployees
     {
-
-        /// <summary>
-        /// newApproverbtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button newApproverbtn;
 
         /// <summary>
         /// Label2 control.

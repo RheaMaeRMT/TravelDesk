@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="InternationalRequest.aspx.cs" Inherits="TravelDesk.Employee.InternationalRequest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ApproverSite.Master" AutoEventWireup="true" CodeBehind="InternationalTravel.aspx.cs" Inherits="TravelDesk.Approver.InternationalTravel" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .txtBox{
@@ -58,7 +58,7 @@
                                           <li class="breadcrumb-item">
                                               <a href="index.html"> <i class="fa fa-home"></i> </a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="EmployeeDashboard.aspx">Dashboard</a>
+                                          <li class="breadcrumb-item"><a href="AdminDashboard.aspx">Dashboard</a>
                                           </li>
                                       </ul>
                                   </div>

@@ -130,6 +130,15 @@
     <Content Include="Admin\TravelRequests.aspx" />
     <Content Include="Admin\Travels.aspx" />
     <Content Include="ApproverLandingPage.aspx" />
+    <Content Include="Approver\ApproverActivity.aspx" />
+    <Content Include="Approver\ApproverDashboard.aspx" />
+    <Content Include="Approver\ApproverEmployees.aspx" />
+    <Content Include="Approver\ApproverManageEmployees.aspx" />
+    <Content Include="Approver\ApproverTravelRequest.aspx" />
+    <Content Include="Approver\ApproverTravels.aspx" />
+    <Content Include="Approver\DomesticTravel.aspx" />
+    <Content Include="Approver\InternationalTravel.aspx" />
+    <Content Include="Approver\ManagernewRequest.aspx" />
     <Content Include="assets\css\animate.css\css\animate.css" />
     <Content Include="assets\css\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\css\chartist\chartist.css" />
@@ -429,6 +438,69 @@
     <Compile Include="ApproverSite.Master.designer.cs">
       <DependentUpon>ApproverSite.Master</DependentUpon>
     </Compile>
+    <Compile Include="Approver\ApproverActivity.aspx.cs">
+      <DependentUpon>ApproverActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\ApproverActivity.aspx.designer.cs">
+      <DependentUpon>ApproverActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\ApproverDashboard.aspx.cs">
+      <DependentUpon>ApproverDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\ApproverDashboard.aspx.designer.cs">
+      <DependentUpon>ApproverDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\ApproverEmployees.aspx.cs">
+      <DependentUpon>ApproverEmployees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\ApproverEmployees.aspx.designer.cs">
+      <DependentUpon>ApproverEmployees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\ApproverManageEmployees.aspx.cs">
+      <DependentUpon>ApproverManageEmployees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\ApproverManageEmployees.aspx.designer.cs">
+      <DependentUpon>ApproverManageEmployees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\ApproverTravelRequest.aspx.cs">
+      <DependentUpon>ApproverTravelRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\ApproverTravelRequest.aspx.designer.cs">
+      <DependentUpon>ApproverTravelRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\ApproverTravels.aspx.cs">
+      <DependentUpon>ApproverTravels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\ApproverTravels.aspx.designer.cs">
+      <DependentUpon>ApproverTravels.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\DomesticTravel.aspx.cs">
+      <DependentUpon>DomesticTravel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\DomesticTravel.aspx.designer.cs">
+      <DependentUpon>DomesticTravel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\InternationalTravel.aspx.cs">
+      <DependentUpon>InternationalTravel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\InternationalTravel.aspx.designer.cs">
+      <DependentUpon>InternationalTravel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\ManagernewRequest.aspx.cs">
+      <DependentUpon>ManagernewRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\ManagernewRequest.aspx.designer.cs">
+      <DependentUpon>ManagernewRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="EmployeeLogin.aspx.cs">
@@ -521,7 +593,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Approver\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

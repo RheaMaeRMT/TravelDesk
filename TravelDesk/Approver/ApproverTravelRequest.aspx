@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TravelRequests.aspx.cs" Inherits="TravelDesk.Admin.TravelRequests" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ApproverSite.Master" AutoEventWireup="true" CodeBehind="ApproverTravelRequest.aspx.cs" Inherits="TravelDesk.Approver.ApproverTravelRequest" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -19,7 +19,7 @@
                                           <li class="breadcrumb-item">
                                               <a href="index.html"> <i class="fa fa-home"></i> </a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="AdminDashboard.aspx">Dashboard</a>
+                                          <li class="breadcrumb-item"><a href="ApproverDashboard.aspx">Dashboard</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -33,6 +33,7 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
+                                            <asp:LinkButton runat="server" href="ManagernewRequest.aspx" Text="Create Request" class="btn btn-primary" ID="newRequestbtn"/> <br/> <br />
 
                                         <div class="row">
                                             <!-- task, page, download counter  start -->

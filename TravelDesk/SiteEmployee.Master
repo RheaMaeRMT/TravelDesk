@@ -48,6 +48,8 @@
 
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 </head>
 <body>
@@ -198,7 +200,7 @@
                                      <li>
                                         <a href="/Employee/EmployeeRequest" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Requests</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Travel Request</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
@@ -210,7 +212,7 @@
                                     <li class=" ">
                                         <a href="/Employee/EmployeeLogs" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-envelope"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Logs
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Activity Log
                                             </span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>

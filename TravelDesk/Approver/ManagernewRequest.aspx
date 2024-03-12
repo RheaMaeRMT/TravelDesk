@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="EmployeeRequest.aspx.cs" Inherits="TravelDesk.Employee.EmployeeRequest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ApproverSite.Master" AutoEventWireup="true" CodeBehind="ManagernewRequest.aspx.cs" Inherits="TravelDesk.Approver.ManagernewRequest" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -11,7 +11,7 @@
                               <div class="row align-items-center">
                                   <div class="col-md-8">
                                       <div class="page-header-title">
-                                          <h5 class="m-b-10">REQUEST MANAGEMENT</h5>
+                                          <h5 class="m-b-10">APPROVER TRAVEL REQUEST</h5>
                                       </div>
                                   </div>
                                   <div class="col-md-4">
@@ -19,7 +19,7 @@
                                           <li class="breadcrumb-item">
                                               <a href="index.html"> <i class="fa fa-home"></i> </a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="Employee/EmployeeDashboard">Dashboard</a>
+                                          <li class="breadcrumb-item"><a href="Approver/ApproverDashboard">Dashboard</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -34,14 +34,14 @@
                                     <!-- Page-body start -->
                                     <div class="page-body">
                                                     <div class="card-block">
-                                                        <asp:LinkButton runat="server" Text="View Travel Request" class="btn btn-primary"></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" Text="View Travel Requests" class="btn btn-primary"></asp:LinkButton>
                                                     </div>
                                         <section class="login-block">
                                             <!-- Container-fluid starts -->
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-sm-6" >
-                                                        <a href="InternationalRequest" class="btnk">
+                                                        <a href="InternationalTravel" class="btnk">
                                                         <!-- First Box -->
                                                         <form class="md-float-material form-material">
                                                             <div class="text-center">
@@ -63,7 +63,7 @@
 
                                                     <!-- Second Box -->
                                                     <div class="col-sm-6"  style="margin-left: -30px; margin-right: -10px;">
-                                                         <a href="DomesticRequest" class="btnk">
+                                                         <a href="DomesticTravel" class="btnk">
                                                             <form class="md-float-material form-material">
                                                             <div class="text-center">
                         

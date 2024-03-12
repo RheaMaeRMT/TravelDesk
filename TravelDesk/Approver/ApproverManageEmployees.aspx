@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Managers.aspx.cs" Inherits="TravelDesk.Admin.Managers" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ApproverSite.Master" AutoEventWireup="true" CodeBehind="ApproverManageEmployees.aspx.cs" Inherits="TravelDesk.Approver.ApproverManageEmployees" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-               <div class="pcoded-main-container">
+           <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <div class="pcoded-content">
                       <!-- Page-header start -->
@@ -11,7 +11,8 @@
                               <div class="row align-items-center">
                                   <div class="col-md-8">
                                       <div class="page-header-title">
-                                          <h5 class="m-b-10">MANAGERS</h5>
+                                          <h5 class="m-b-10"> EMPLOYEE MANAGEMENT</h5>
+                                         
                                       </div>
                                   </div>
                                   <div class="col-md-4">
@@ -19,7 +20,7 @@
                                           <li class="breadcrumb-item">
                                               <a href="index.html"> <i class="fa fa-home"></i> </a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="AdminDashboard.aspx">Dashboard</a>
+                                          <li class="breadcrumb-item"><a href="ApproverDashboard.aspx">Dashboard</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -32,15 +33,16 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
-                                        <div class="page-body" style="color:black;">
-                                            <asp:Button runat="server" Text="Add new Approver" class="btn btn-primary" ID="newApproverbtn" OnClientClick="showModal(); return false;" />
-
+                                    <div class="page-body">
+                                                    <div class="card-block">
+                                                        <asp:LinkButton runat="server" Text="Enroll New Employee" class="btn btn-primary" OnClientClick="showModal(); return false;"></asp:LinkButton>
+                                                    </div>
                                             <!-- MODAL FOR THE add new approver -->
-                                            <div class="modal fade" id="noModal" tabindex="-1" role="dialog" aria-labelledby="newApproverModal" aria-hidden="true">
+                                            <div class="modal fade" id="noModal" tabindex="-1" role="dialog" aria-labelledby="newEmployeeModal" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="noModalLabel">New Approver</h5>
+                                                            <h5 class="modal-title" id="noModalLabel">New Employee</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -75,7 +77,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <asp:Button runat="server" class="btn btn-primary" data-dismiss="modal" Text="Add" />
+                                                            <asp:Button runat="server" class="btn btn-primary" data-dismiss="modal" Text="Enroll" />
                                                             <asp:Button runat="server" class="btn btn-secondary" data-dismiss="modal" Text="Cancel" />
                                                         </div>
                                                     </div>
@@ -88,8 +90,7 @@
                                                     $('#noModal').modal('show');
                                                 }
                                             </script>
-                                        </div>
-
+                                    </div>
                                     <!-- Page-body end -->
                                 </div>
                                 <div id="styleSelector"> </div>
@@ -99,3 +100,4 @@
                 </div>
             </div>
 </asp:Content>
+

@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="InternationalRequest.aspx.cs" Inherits="TravelDesk.Employee.InternationalRequest" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ApproverSite.Master" AutoEventWireup="true" CodeBehind="DomesticTravel.aspx.cs" Inherits="TravelDesk.Approver.DomesticTravel" %>
+<asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
     <style>
         .txtBox{
             Width: 260px;
@@ -40,7 +40,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
                 <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <div class="pcoded-content">
@@ -50,7 +50,7 @@
                               <div class="row align-items-center">
                                   <div class="col-md-8">
                                       <div class="page-header-title">
-                                          <h5 class="m-b-10">TRAVEL REQUEST - INTERNATIONAL</h5>
+                                          <h5 class="m-b-10">TRAVEL REQUEST - DOMESTIC</h5>
                                       </div>
                                   </div>
                                   <div class="col-md-4">
@@ -58,7 +58,7 @@
                                           <li class="breadcrumb-item">
                                               <a href="index.html"> <i class="fa fa-home"></i> </a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="EmployeeDashboard.aspx">Dashboard</a>
+                                          <li class="breadcrumb-item"><a href="ApproverDashboard.aspx">Dashboard</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -71,10 +71,10 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
-                                    <div class="page-body">
+                                         <div class="page-body">
                                                 <div class="card" style="color:black;">
                                                     <div class="card-header" style="background-color:#09426a">
-                                                        <h5 style="color:white">International Travel Request Form</h5>
+                                                        <h5 style="color:white">Domestic Travel Request Form</h5>
                                                     </div>
                                                     <div class="card-block">
                                                         <asp:Label ID="Label1" runat="server" Text="Location"></asp:Label>
@@ -235,3 +235,4 @@
                 </div>
             </div>
 </asp:Content>
+
