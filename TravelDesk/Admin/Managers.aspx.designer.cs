@@ -33,13 +33,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Int control.
+        /// approverID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Int;
+        protected global::System.Web.UI.WebControls.TextBox approverID;
 
         /// <summary>
         /// Label7 control.
@@ -51,13 +51,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label Label7;
 
         /// <summary>
-        /// TextBox1 control.
+        /// approverName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox approverName;
 
         /// <summary>
         /// Label3 control.
@@ -69,13 +69,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// TextBox2 control.
+        /// approverDU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox approverDU;
 
         /// <summary>
         /// Label9 control.
@@ -87,12 +87,21 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label Label9;
 
         /// <summary>
-        /// TextBox7 control.
+        /// approverPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox7;
+        protected global::System.Web.UI.WebControls.TextBox approverPhone;
+
+        /// <summary>
+        /// addBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button addBtn;
     }
 }

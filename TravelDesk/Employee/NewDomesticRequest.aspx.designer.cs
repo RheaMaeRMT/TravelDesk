@@ -11,26 +11,8 @@ namespace TravelDesk.Employee
 {
 
 
-    public partial class DomesticRequest
+    public partial class NewDomesticRequest
     {
-
-        /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-
-        /// <summary>
-        /// locationtxtbx control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox locationtxtbx;
 
         /// <summary>
         /// Label2 control.
@@ -87,13 +69,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.TextBox employeeDU;
 
         /// <summary>
-        /// Label8 control.
+        /// Label9 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.Label Label9;
 
         /// <summary>
         /// employeePhone control.

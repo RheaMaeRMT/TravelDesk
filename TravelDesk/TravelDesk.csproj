@@ -50,6 +50,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.6, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.6\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -284,6 +287,7 @@
     <Content Include="Employee\EmployeeLogs.aspx" />
     <Content Include="Employee\EmployeeRequest.aspx" />
     <Content Include="Employee\InternationalRequest.aspx" />
+    <Content Include="Employee\NewDomesticRequest.aspx" />
     <Content Include="Employee\TravelRequests.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -544,6 +548,13 @@
     </Compile>
     <Compile Include="Employee\InternationalRequest.aspx.designer.cs">
       <DependentUpon>InternationalRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\NewDomesticRequest.aspx.cs">
+      <DependentUpon>NewDomesticRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\NewDomesticRequest.aspx.designer.cs">
+      <DependentUpon>NewDomesticRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee\TravelRequests.aspx.cs">
       <DependentUpon>TravelRequests.aspx</DependentUpon>

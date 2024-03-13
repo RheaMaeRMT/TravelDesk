@@ -44,6 +44,9 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
   <%--  Google chart api--%>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
@@ -278,6 +281,7 @@
         <script src="/assets/js/vertical-layout.min.js "></script>
         <!-- custom js -->
         <script type="text/javascript" src="/assets/pages/dashboard/custom-dashboard.js"></script>
+
 
     </form>
 </body>

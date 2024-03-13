@@ -8,9 +8,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace TravelDesk.Approver
+namespace TravelDesk.Employee
 {
-    public partial class ApproverManageEmployees : System.Web.UI.Page
+    public partial class NewDomesticRequest : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DB_TravelDesk"].ConnectionString;
 

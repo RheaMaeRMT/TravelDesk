@@ -53,29 +53,20 @@
                                                             <div style="margin-left:20px">
                                                                 <div class="card-block">
                                                                     <asp:Label ID="Label2" runat="server" Text="Employee ID" ></asp:Label>
-                                                                    <asp:TextBox ID="Int" runat="server" style="margin-left:80px" Width="345px"></asp:TextBox> <br /> <br />
+                                                                    <asp:TextBox ID="approverID" runat="server" style="margin-left:80px" Width="345px"></asp:TextBox> <br /> <br />
                                                                     <asp:Label ID="Label7" runat="server" Text="Employee Name" ></asp:Label>
-                                                                    <asp:TextBox ID="TextBox1" runat="server"  Width="345px" style="margin-left:55px"></asp:TextBox> <br /> <br />
+                                                                    <asp:TextBox ID="approverName" runat="server"  Width="345px" style="margin-left:55px"></asp:TextBox> <br /> <br />
                                                                 </div>
                                                                 <div class="card-block">
                                                                     <asp:Label ID="Label3" runat="server" Text="Department Unit"></asp:Label>
-                                                                    <asp:TextBox ID="TextBox2" runat="server"  CssClass="auto-style4" Width="345px" style="margin-left:50px"></asp:TextBox> <br /> <br />
+                                                                    <asp:TextBox ID="approverDU" runat="server"  CssClass="auto-style4" Width="345px" style="margin-left:50px"></asp:TextBox> <br /> <br />
                                                                     <asp:Label ID="Label9" runat="server" Text="Mobile Number"  ></asp:Label>
-                                                                    <asp:TextBox ID="TextBox7" runat="server"  Width="345px" CssClass="auto-style7" style="margin-left:55px"></asp:TextBox> <br /> <br />
+                                                                    <asp:TextBox ID="approverPhone" runat="server"  Width="345px" CssClass="auto-style7" style="margin-left:55px"></asp:TextBox> <br /> <br />
                                                                 </div>
-<%--                                                                <div class="card-block">
-                                                                    <asp:Label ID="Label4" runat="server" Text="VOIP Ext."></asp:Label>
-                                                                    <asp:TextBox ID="TextBox3" runat="server"  CssClass="auto-style1" Width="345px" style="margin-left:95px"></asp:TextBox> <br /> <br />
-                                                                    
-                                                                </div>--%>
-<%--                                                                <div class="card-block">
-                                                                    <asp:Label ID="Label5" runat="server" Text="Project Code"></asp:Label>
-                                                                    <asp:TextBox ID="TextBox4" runat="server" CssClass="auto-style3" Width="345px" style="margin-left:70px"></asp:TextBox>
-                                                                </div>--%>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <asp:Button runat="server" class="btn btn-primary" data-dismiss="modal" Text="Add" />
+                                                            <asp:Button runat="server" class="btn btn-primary" ID="addBtn" Text="Add" OnClick="addBtn_Click" />
                                                             <asp:Button runat="server" class="btn btn-secondary" data-dismiss="modal" Text="Cancel" />
                                                         </div>
                                                     </div>

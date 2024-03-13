@@ -24,13 +24,13 @@ namespace TravelDesk.Approver
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Int control.
+        /// employeeID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Int;
+        protected global::System.Web.UI.WebControls.TextBox employeeID;
 
         /// <summary>
         /// Label7 control.
@@ -42,13 +42,13 @@ namespace TravelDesk.Approver
         protected global::System.Web.UI.WebControls.Label Label7;
 
         /// <summary>
-        /// TextBox1 control.
+        /// employeeName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox employeeName;
 
         /// <summary>
         /// Label3 control.
@@ -60,13 +60,13 @@ namespace TravelDesk.Approver
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// TextBox2 control.
+        /// employeeDU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox employeeDU;
 
         /// <summary>
         /// Label9 control.
@@ -78,12 +78,21 @@ namespace TravelDesk.Approver
         protected global::System.Web.UI.WebControls.Label Label9;
 
         /// <summary>
-        /// TextBox7 control.
+        /// employeePhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox7;
+        protected global::System.Web.UI.WebControls.TextBox employeePhone;
+
+        /// <summary>
+        /// enrollBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button enrollBtn;
     }
 }
