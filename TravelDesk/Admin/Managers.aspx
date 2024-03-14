@@ -50,18 +50,28 @@
                                                                 <div class="card-block">
                                                                     <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Employee Information</p>
                                                                 </div>
-                                                            <div style="margin-left:20px">
+                                                            <div style="margin-left:50px">
                                                                 <div class="card-block">
                                                                     <asp:Label ID="Label2" runat="server" Text="Employee ID" ></asp:Label>
-                                                                    <asp:TextBox ID="approverID" runat="server" style="margin-left:80px" Width="345px"></asp:TextBox> <br /> <br />
+                                                                    <asp:TextBox ID="approverCompanyID" runat="server" style="margin-left:80px" Width="345px"></asp:TextBox> <br /> <br />
                                                                     <asp:Label ID="Label7" runat="server" Text="Employee Name" ></asp:Label>
                                                                     <asp:TextBox ID="approverName" runat="server"  Width="345px" style="margin-left:55px"></asp:TextBox> <br /> <br />
                                                                 </div>
                                                                 <div class="card-block">
-                                                                    <asp:Label ID="Label3" runat="server" Text="Department Unit"></asp:Label>
-                                                                    <asp:TextBox ID="approverDU" runat="server"  CssClass="auto-style4" Width="345px" style="margin-left:50px"></asp:TextBox> <br /> <br />
                                                                     <asp:Label ID="Label9" runat="server" Text="Mobile Number"  ></asp:Label>
                                                                     <asp:TextBox ID="approverPhone" runat="server"  Width="345px" CssClass="auto-style7" style="margin-left:55px"></asp:TextBox> <br /> <br />
+                                                                    <asp:Label ID="Label1" runat="server" Text="Email"></asp:Label>
+                                                                    <asp:TextBox ID="approverEmail" runat="server"  CssClass="auto-style4" Width="345px" style="margin-left:120px"></asp:TextBox> <br /> <br />
+                                                                </div>
+                                                                <div class="card-block">
+                                                                    <asp:Label ID="Label4" runat="server" Text="Manager"  ></asp:Label>
+                                                                    <asp:TextBox ID="approverManager" runat="server"  Width="345px" CssClass="auto-style7" style="margin-left:100px"></asp:TextBox> <br /> <br />
+                                                                    <asp:Label ID="Label3" runat="server" Text="Department Unit"></asp:Label>
+                                                                    <asp:TextBox ID="approverDU" runat="server"  CssClass="auto-style4" Width="345px" style="margin-left:50px"></asp:TextBox> <br /> <br />
+                                                                </div>
+                                                                <div class="card-block">
+                                                                    <asp:Label ID="Label6" runat="server" Text="Level"></asp:Label>
+                                                                    <asp:TextBox ID="approverLevel" runat="server"  CssClass="auto-style4" Width="345px" style="margin-left:120px"></asp:TextBox> <br /> <br />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -79,6 +89,29 @@
                                                     $('#noModal').modal('show');
                                                 }
                                             </script>
+                                            <!-- Modal -->
+                                                <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        New Approver Successfully Added!<br>
+                                                        Account Credentials:<br>
+                                                        Email: <span id="approverEmaildone"></span><br>
+                                                        Company ID: <span id="approverCompanyIDdone"></span>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
                                         </div>
 
                                     <!-- Page-body end -->

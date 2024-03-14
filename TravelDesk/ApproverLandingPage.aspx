@@ -102,7 +102,7 @@
                             </div>
         <div class="row">
             <div class="col-sm-6" >
-                <a href="#" class="btnk">
+                <a href="ApproverLogin.aspx" class="btnk">
                 <!-- First Box -->
                 <form class="md-float-material form-material">
                     <div class="text-center">
@@ -111,7 +111,7 @@
                         <div class="card-block" style="background-color:#09426a">
                             <div class="row m-b-20">
                                 <div class="col-md-12 pcoded-micon" style="text-align:center"><i class="ti-user" style="font-size: 2em;color:white"></i><br />
-                                    <h3 class="text-center" style="color:white">MANAGER</h3>
+                                    <h3 class="text-center" style="color:white">APPROVER</h3>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
 
             <!-- Second Box -->
             <div class="col-sm-6"  style="margin-left: -30px; margin-right: -10px;">
-                 <a href="Admin/AdminDashboard.aspx" class="btnk">
+                 <a href="AdminLogin.aspx" class="btnk">
                     <form class="md-float-material form-material">
                     <div class="text-center">
                         

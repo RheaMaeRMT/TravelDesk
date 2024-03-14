@@ -167,7 +167,7 @@ namespace TravelDesk.Employee
                         cmd.Parameters.AddWithValue("@departure", employeeDeparture.Text);
                         cmd.Parameters.AddWithValue("@return", employeeReturn.Text);
                         cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
-                        cmd.Parameters.AddWithValue("@approvalStat", employeeApproval.SelectedValue);
+                        cmd.Parameters.AddWithValue("@approvalStat", employeeApproval.SelectedItem.Text);
                         
                         cmd.Parameters.AddWithValue("@manager", employeeManager.Text);
                         cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
