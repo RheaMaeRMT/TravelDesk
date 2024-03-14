@@ -42,13 +42,13 @@ namespace TravelDesk
         protected global::System.Web.UI.WebControls.Label unread;
 
         /// <summary>
-        /// lblWRSname control.
+        /// lblUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblWRSname;
+        protected global::System.Web.UI.WebControls.Label lblUserName;
 
         /// <summary>
         /// btnLogout control.

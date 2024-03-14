@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TravelDesk.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ApproverSite.master.cs" Inherits="TravelDesk.ApproverSite" %>
 
 
 <!DOCTYPE html>
@@ -150,25 +150,33 @@
 
                                 </li>
                                 <!-- NOTIFICATIONS END -->
-                                <li class="user-profile header-notification">
-                                    <a href="#!" class="waves-effect waves-light">
-                                        <asp:Label ID="lblWRSname" runat="server"> LASTNAME , FN</asp:Label>
-                                        <i class="ti-angle-down"></i>
-                                    </a>
-                                    <ul class="show-notification profile-notification">
-                                        <li class="waves-effect waves-light">
-                                            <a href="/Admin/AdminProfile">
-                                                <i class="ti-user"></i>PROFILE
-                                            </a>
-                                        </li>
-                                        <li class="waves-effect waves-light">
-                                            <i class="ti-layout-sidebar-left">
-                                                <asp:Button ID="btnLogout" runat="server" Text="SIGN OUT" BorderColor="Transparent" BackColor="Transparent"  style="font-size:16px;color:#09426a"/>
-                                            </i>
-                                            <%--  </a>--%>
-                                        </li>
-                                    </ul>
-                                </li>
+                                    <li class="user-profile header-notification">
+                                        <a href="#!" class="waves-effect waves-light" id="dropdownToggle">
+                                            <span>
+                                                <asp:Label runat="server" ID="lblUserName"></asp:Label>
+                                            </span>
+                                            <i class="ti-angle-down" id="arrowDownIcon"></i>
+                                        </a>
+                                        <ul class="show-notification profile-notification" id="dropdownContent" style="display: none;">
+                                            <li class="waves-effect waves-light">
+                                                    <asp:Button ID="btnLogout" runat="server" class="ti-layout-sidebar-left"  Text="LOG OUT" style="font-size:16px" BorderColor="Transparent" BackColor="Transparent" /> <br />
+
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            document.getElementById("arrowDownIcon").addEventListener("click", function () {
+                                                var dropdownContent = document.getElementById("dropdownContent");
+                                                if (dropdownContent.style.display === "none") {
+                                                    dropdownContent.style.display = "block";
+                                                } else {
+                                                    dropdownContent.style.display = "none";
+                                                }
+                                            });
+                                        });
+                                    </script>
                             </ul>
                         </div>
                     </div>

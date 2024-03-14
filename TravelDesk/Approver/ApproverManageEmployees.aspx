@@ -105,7 +105,7 @@
                                                         New Employee Successfully Added!<br>
                                                         Account Credentials:<br>
                                                         Email: <span id="employeeEmaildone"></span><br>
-                                                        Company ID: <span id="employeeCompanyIDdone"></span>
+                                                        Password: <span id="employeeCompanyIDdone"></span>
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
