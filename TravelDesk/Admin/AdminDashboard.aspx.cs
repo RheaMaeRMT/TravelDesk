@@ -19,6 +19,10 @@ namespace TravelDesk
                 Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
 
             }
+            else
+            {
+                //PERFORM FUNCTIONS HERE
+            }
         }
     }
 }

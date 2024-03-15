@@ -14,17 +14,17 @@ namespace TravelDesk
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["userID"] == null && Session["userName"] == null)
-            {
-                Response.Write("<script>alert ('Session Expired!'); window.location.href = 'LoginPage.aspx'; </script>");
+            //if (Session["userID"] == null && Session["userName"] == null)
+            //{
+            //    Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
 
-            }
-            else if (Session["userID"] != null && (Session["userName"] != null))
-            {
-                string userName = (string)Session["userName"];
-                lblUserName.Text = userName;
+            //}
+            //else if (Session["userID"] != null && (Session["userName"] != null))
+            //{
+            //    string userName = (string)Session["userName"];
+            //    lblUserName.Text = userName;
 
-            }
+            //}
         }
     }
 }
