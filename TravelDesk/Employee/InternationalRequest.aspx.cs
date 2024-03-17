@@ -59,9 +59,21 @@ namespace TravelDesk.Employee
                         {
                             cmd.Parameters.Clear();
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO route (routeID, routeTravelID, routeOFrom, routeOTo, routeR1From, routeR1From, routeR2From, routeR2To, routeM1From, routeM1To, routeM2From, routeM2To, routeM3From, routeM3To, routeM4From, travelRemarks, travelDestination, travelOthers)"
-                                + "VALUES (@ID, @location, @empID, @empName, @designation, @level, @voip, @mobile, @projCode, @facility, @departure, @return, @purpose, @approvalStat, @manager, @remarks, @destination, @others)";
-                            Response.Write("<script>alert ('Travel Request Submitted!') </script>");
+                            cmd.CommandText = "INSERT INTO route (routeID, routeTravelID, routeOFrom, routeOTo, routeR1From, routeR1To, routeR2From, routeR2To, routeM1From, routeM1To, routeM1FromDate, routeM1ToDate, routeM2From, routeM2To, routeM2FromDate, routeM2ToDate, routeM3From, routeM3To, routeM3FromDate, routeM3ToDate,  routeM4From, routeM4To, routeM4FromDate, routeM4ToDate,  routeM5From, routeM5To,  routeM5FromDate, routeM5ToDate )"
+                                + "VALUES (@ID, @travelID, @onewayFrom, @onewayTo, @round1From, @round1To, @round2From, @round2To, @m1from, @m1to, @m1fromDate, @m1ToDate,  @m2from, @m2to, @m2fromDate, @m2ToDate,  @m3from, @m3to, @m3fromDate, @m3ToDate,  @m4from, @m4to, @m4fromDate, @m4ToDate,  @m5from, @m5to, @m5fromDate, @m5ToDate )";
+
+                            // Execute the insertion into anotherTable
+                            ctr = cmd.ExecuteNonQuery();
+
+                            if (ctr >= 1)
+                            {
+                                Response.Write("<script>alert ('Travel Request Submitted!') </script>");
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+
+                            }
 
                         }
                         else
