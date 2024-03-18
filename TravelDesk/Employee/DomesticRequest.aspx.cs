@@ -20,6 +20,10 @@ namespace TravelDesk.Employee
 
         protected void submitRequestbtn_Click(object sender, EventArgs e)
         {
+            Random rand = new Random();
+            int random = rand.Next(100, 999999);
+            string ID = "TR" + employeeID.Text + random;
+
             try
             {
                 using (var db = new SqlConnection(connectionString))
@@ -28,11 +32,11 @@ namespace TravelDesk.Employee
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelLocation, travelEmpID, travelFname, travelDesignation, travelLevel, travelVoip, travelMobilenum, travelProjectCode, travelHomeFacility, travelDeparture, travelReturn, travelPurpose, travelApprovalStat, travelManager, travelRemarks, travelDestination, travelOthers)"
-                            + "VALUES (@ID, @location, @empID, @empName, @designation, @level, @voip, @mobile, @projCode, @facility, @departure, @return, @purpose, @approvalStat, @manager, @remarks, @destination, @others)";
+                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelLocation, travelEmpID, travelFname, travelDesignation, travelLevel, travelVoip, travelMobilenum, travelProjectCode, travelHomeFacility, travelDeparture, travelReturn, travelPurpose, travelApprovalStat, travelManager, travelRemarks, travelDestination, travelOthers, travelUserID, travelType)"
+                            + "VALUES (@ID, @location, @empID, @empName, @designation, @level, @voip, @mobile, @projCode, @facility, @departure, @return, @purpose, @approvalStat, @manager, @remarks, @destination, @others, @user, @type)";
 
 
-                        cmd.Parameters.AddWithValue("@ID", "TR" + employeeID.Text + employeeDesignation.Text);
+                        cmd.Parameters.AddWithValue("@ID", ID);
                         cmd.Parameters.AddWithValue("@location", employeeLocation.Text);
                         cmd.Parameters.AddWithValue("@empID", employeeID.Text);
                         cmd.Parameters.AddWithValue("@empName", employeeName.Text);
@@ -50,6 +54,8 @@ namespace TravelDesk.Employee
                         cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
                         cmd.Parameters.AddWithValue("@destination", employeeDestination.Text);
                         cmd.Parameters.AddWithValue("@others", employeeOthers.Text);
+                        cmd.Parameters.AddWithValue("@user", Session["userID"].ToString());
+                        cmd.Parameters.AddWithValue("@type", "Domestic");
 
 
                         var ctr = cmd.ExecuteNonQuery();

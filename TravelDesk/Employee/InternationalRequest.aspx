@@ -183,25 +183,25 @@
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label21" runat="server" Text="Departing To" style="padding-left:150px" ></asp:Label>
-                                                                <asp:TextBox ID="depart1To" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
+                                                                <asp:TextBox ID="onewayTo" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
 
                                                             </div>
                                                             <div class="card-block" style="display:none" id="roundTripInput">
                                                                 <asp:Label ID="Label22" runat="server" Text="1. Departing From" ></asp:Label>
-                                                                <asp:TextBox ID="depart2From" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
+                                                                <asp:TextBox ID="round1From" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label23" runat="server" Text="1. Departing To" style="padding-left:150px" ></asp:Label>
-                                                                <asp:TextBox ID="depart2To" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
+                                                                <asp:TextBox ID="round1To" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
                                                                     <br /><br />
                                                                 <asp:Label ID="Label24" runat="server" Text="2. Departing From" ></asp:Label>
-                                                                <asp:TextBox ID="depart" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
+                                                                <asp:TextBox ID="round2From" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label25" runat="server" Text="2. Departing To" style="padding-left:150px" ></asp:Label>
-                                                                <asp:TextBox ID="TextBox6" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
+                                                                <asp:TextBox ID="round2To" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
 
                                                             </div>
@@ -411,9 +411,16 @@
 
                                                             </div>
                                                             <div class="card-block" id="uploadBlock" style="display:none">
-                                                                <asp:Label ID="Label15" runat="server" Text="Attachment"></asp:Label>
+                                                                <asp:Label ID="Label15" runat="server" Text="Approval Proof"></asp:Label>
+                                                                <label ID="uploadStatus" runat="server" Text="Attachment"></label>
                                                                 <asp:FileUpload ID="employeeUpload" type="file" runat="server" CssClass="auto-style12" Width="348px" />
+
                                                             </div>
+
+                                                                <div class="col-md-5">
+                                                                    <asp:Image CssClass="img-fluid img-thumbnail" ID="productImage" runat="server" Visible="False" />
+                                                                </div>
+                                                            
                                                             <div class="card-block">
                                                                  <asp:Label ID="Label18" runat="server" Text="Remarks"></asp:Label> <br />
                                                                 <asp:TextBox ID="employeeRemarks" runat="server"  Width="896px" CssClass="auto-style10" TextMode="MultiLine" Height="91px"></asp:TextBox> 

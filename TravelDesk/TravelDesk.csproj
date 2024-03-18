@@ -286,7 +286,7 @@
     <Content Include="Employee\EmployeeLogs.aspx" />
     <Content Include="Employee\EmployeeRequest.aspx" />
     <Content Include="Employee\InternationalRequest.aspx" />
-    <Content Include="Employee\TravelRequests.aspx" />
+    <Content Include="Employee\ListofRequests.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -542,12 +542,12 @@
     <Compile Include="Employee\InternationalRequest.aspx.designer.cs">
       <DependentUpon>InternationalRequest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Employee\TravelRequests.aspx.cs">
-      <DependentUpon>TravelRequests.aspx</DependentUpon>
+    <Compile Include="Employee\ListofRequests.aspx.cs">
+      <DependentUpon>ListofRequests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Employee\TravelRequests.aspx.designer.cs">
-      <DependentUpon>TravelRequests.aspx</DependentUpon>
+    <Compile Include="Employee\ListofRequests.aspx.designer.cs">
+      <DependentUpon>ListofRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -597,6 +597,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="approvalProofs\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

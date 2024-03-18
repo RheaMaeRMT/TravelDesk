@@ -429,13 +429,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label21;
 
         /// <summary>
-        /// depart1To control.
+        /// onewayTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox depart1To;
+        protected global::System.Web.UI.WebControls.TextBox onewayTo;
 
         /// <summary>
         /// RequiredFieldValidator16 control.
@@ -456,13 +456,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label22;
 
         /// <summary>
-        /// depart2From control.
+        /// round1From control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox depart2From;
+        protected global::System.Web.UI.WebControls.TextBox round1From;
 
         /// <summary>
         /// RequiredFieldValidator17 control.
@@ -483,13 +483,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label23;
 
         /// <summary>
-        /// depart2To control.
+        /// round1To control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox depart2To;
+        protected global::System.Web.UI.WebControls.TextBox round1To;
 
         /// <summary>
         /// RequiredFieldValidator18 control.
@@ -510,13 +510,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label24;
 
         /// <summary>
-        /// depart control.
+        /// round2From control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox depart;
+        protected global::System.Web.UI.WebControls.TextBox round2From;
 
         /// <summary>
         /// RequiredFieldValidator19 control.
@@ -537,13 +537,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label25;
 
         /// <summary>
-        /// TextBox6 control.
+        /// round2To control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox6;
+        protected global::System.Web.UI.WebControls.TextBox round2To;
 
         /// <summary>
         /// RequiredFieldValidator20 control.
@@ -1104,6 +1104,15 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label15;
 
         /// <summary>
+        /// uploadStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl uploadStatus;
+
+        /// <summary>
         /// employeeUpload control.
         /// </summary>
         /// <remarks>
@@ -1111,6 +1120,15 @@ namespace TravelDesk.Employee
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload employeeUpload;
+
+        /// <summary>
+        /// productImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image productImage;
 
         /// <summary>
         /// Label18 control.
