@@ -34,7 +34,7 @@
                                     <!-- Page-body start -->
                                     <div class="page-body">
                                                     <div class="card-block">
-                                                        <asp:LinkButton runat="server" Text="View Travel Request" class="btn btn-primary"></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" Text="View Travel Request" class="btn btn-primary" ID="viewRequests" OnClick="viewRequests_Click"></asp:LinkButton>
                                                     </div>
                                         <section class="login-block">
                                             <!-- Container-fluid starts -->

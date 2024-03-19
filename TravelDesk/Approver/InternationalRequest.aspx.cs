@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace TravelDesk.Employee
+namespace TravelDesk.Approver
 {
     public partial class InternationalRequest : System.Web.UI.Page
     {

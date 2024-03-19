@@ -13,5 +13,11 @@ namespace TravelDesk.Employee
         {
 
         }
+
+        protected void viewRequests_Click(object sender, EventArgs e)
+        {
+            Response.Write("<script>window.location.href = 'ListofRequests.aspx'; </script>");
+
+        }
     }
 }

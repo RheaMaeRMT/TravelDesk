@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ApproverSite.Master" AutoEventWireup="true" CodeBehind="ApproverTravelRequest.aspx.cs" Inherits="TravelDesk.Approver.ApproverTravelRequest" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style2 {
+            margin-left: 24px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
                <div class="pcoded-main-container">
@@ -17,7 +22,7 @@
                                   <div class="col-md-4">
                                       <ul class="breadcrumb-title">
                                           <li class="breadcrumb-item">
-                                              <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                              <a href="ApproverDashboard.aspx"> <i class="fa fa-home"></i> </a>
                                           </li>
                                           <li class="breadcrumb-item"><a href="ApproverDashboard.aspx">Dashboard</a>
                                           </li>
@@ -33,18 +38,26 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                            <asp:LinkButton runat="server" href="ManagernewRequest.aspx" Text="Create Request" class="btn btn-primary" ID="newRequestbtn"/> <br/> <br />
-
+                                            <asp:LinkButton runat="server" href="ManagernewRequest.aspx" Text="Create Request" class="btn btn-primary" ID="newRequestbtn"/>
+                                            <asp:LinkButton runat="server" href="myRequests.aspx" Text="My Requests" class="btn btn-primary" ID="myRequests" style="margin-left:10px"/> <br/> <br />
+                                              <br/> 
+                                        <asp:Label runat="server" style="font-size:large; color:#09436b" > Employee Requests </asp:Label> <br /> <br />
                                         <div class="row">
                                             <!-- task, page, download counter  start -->
                                             <div class="col-xl-3 col-md-3">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
-                                                            <div class="col-8">
-                                                                <h4 class="text-c-purple">2</h4>
-                                                                <h6 class="text-muted m-b-0">Approved Requests</h6>
+                                                            <div class="col-8" style="align-content:center">
+                                                                <asp:Label ID="approved" runat="server" class="text-c-purple h4"></asp:Label>
+
+<%--                                                                <h4 class="text-c-purple"></h4>--%>
+                                                                <h6 class="text-muted m-b-0">Auto-Approved</h6>
                                                             </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="fa fa-file-text-o f-28"></i>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -54,8 +67,8 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">3</h4>
-                                                                <h6 class="text-muted m-b-0">Processing Requests</h6>
+                                                                <asp:Label ID="pending" runat="server" class="text-c-purple h4"></asp:Label>
+                                                                <h6 class="text-muted m-b-0">Pending Requests</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-file-text-o f-28"></i>
@@ -69,7 +82,7 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-red">2</h4>
+                                                                <asp:Label ID="completed" runat="server" class="text-c-purple h4"></asp:Label>
                                                                 <h6 class="text-muted m-b-0">Completed Requests</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
@@ -84,8 +97,8 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-blue">0</h4>
-                                                                <h6 class="text-muted m-b-0">Cancelled Requests</h6>
+                                                                <asp:Label ID="processing" runat="server" class="text-c-purple h4"></asp:Label>
+                                                                <h6 class="text-muted m-b-0">Processing Requests</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-hand-o-down f-28"></i>

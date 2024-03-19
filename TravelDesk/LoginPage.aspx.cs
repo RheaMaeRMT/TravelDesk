@@ -48,7 +48,7 @@ namespace TravelDesk
                         {
                             // User credentials exist in the database
                             // Retrieve user information
-                            cmd.CommandText = "SELECT userID, userRole, userName, userComID FROM users WHERE userEmail = @Email AND userPassword = @Password";
+                            cmd.CommandText = "SELECT userID, userRole, userName, userComID, userDU, userName FROM users WHERE userEmail = @Email AND userPassword = @Password";
                             using (var reader = cmd.ExecuteReader())
                             {
                                 if (reader.Read())
@@ -57,12 +57,14 @@ namespace TravelDesk
                                     string userRole = reader["userRole"].ToString();
                                     string userName = reader["userName"].ToString();
                                     string userComID = reader["userComID"].ToString();
+                                    string userDU = reader["userDU"].ToString();
 
                                     // Set session variables
                                     Session["userID"] = userID;
                                     Session["userRole"] = userRole;
                                     Session["userName"] = userName;
                                     Session["userComID"] = userComID;
+                                    Session["userDU"] = userDU;
 
                                     // Redirect to appropriate dashboard based on user role
                                     if (userRole == "Approver")

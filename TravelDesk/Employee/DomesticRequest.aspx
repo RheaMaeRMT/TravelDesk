@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="DomesticRequest.aspx.cs" Inherits="TravelDesk.Employee.DomesticRequest" %>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -152,12 +153,20 @@
                                                             </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label13" runat="server" Text="Purpose of Travel"></asp:Label>
-                                                                <asp:TextBox ID="employeePurpose" runat="server"  CssClass="m-l-50" Width="343px"></asp:TextBox>
+                                                                <asp:DropDownList ID="employeePurpose" runat="server" CssClass="m-l-50" Width="343px">
+                                                                    <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True"/>
+                                                                    <asp:ListItem Text="Client Meeting" Value="Client Meeting" />
+                                                                    <asp:ListItem Text="Business Summit" Value="Business Summit" />
+                                                                    <asp:ListItem Text="Seminars" Value="Seminars" />
+                                                                    <asp:ListItem Text="Facility Visit" Value="Facility Visit" />
+    
+                                                                </asp:DropDownList>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePurpose"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label14" runat="server" Text="Others" style="padding-left:150px" ></asp:Label>
                                                                 <asp:TextBox ID="employeeOthers" runat="server"  Width="260px" CssClass="auto-style10"></asp:TextBox>
                                                             </div>
+
                                                             <div class="card-block">
                                                                 <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Approval</p>
                                                             </div>
@@ -187,7 +196,6 @@
                                                                     </div>
                                                                 </div>
 
-
                                                                 <!--javascript for the dropdown: manager approval options-->
                                                                 <script type="text/javascript">
                                                                     function checkSelection() {
@@ -203,10 +211,13 @@
                                                                             $('#yesModal').modal('show');
                                                                             document.getElementById('uploadBlock').style.display = 'block';
                                                                             document.getElementById('submitCard').style.display = 'block';
+                                                                            document.getElementById('uploadbtn').style.display = 'block';
 
                                                                         }
 
                                                                     }
+                                                                    
+
                                                                 </script>                                                       
                                                         
                                                                 <!--MODAL FOR THE YES OPTION -->
@@ -237,9 +248,19 @@
 
                                                             </div>
                                                             <div class="card-block" id="uploadBlock" style="display:none">
-                                                                <asp:Label ID="Label15" runat="server" Text="Attachment"></asp:Label>
+                                                                <asp:Label ID="Label15" runat="server" Text="Approval Proof"></asp:Label>
+                                                                <label ID="uploadStatus" runat="server" Text="Attachment"></label>
                                                                 <asp:FileUpload ID="employeeUpload" type="file" runat="server" CssClass="auto-style12" Width="348px" />
+                                                                <asp:Button class="form-control btn btn-primary btn-sm"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" />
+
+                                                            </div> <br />
+                                                            <div class="col-md-2" id="uploadbtn">
                                                             </div>
+
+                                                                <div class="col-md-5">
+                                                                    <asp:Image CssClass="img-fluid img-thumbnail" ID="productImage" runat="server" Visible="False" />
+                                                                </div>
+                                                            
                                                             <div class="card-block">
                                                                  <asp:Label ID="Label18" runat="server" Text="Remarks"></asp:Label> <br />
                                                                 <asp:TextBox ID="employeeRemarks" runat="server"  Width="896px" CssClass="auto-style10" TextMode="MultiLine" Height="91px"></asp:TextBox> 

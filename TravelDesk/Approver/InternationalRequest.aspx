@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="InternationalRequest.aspx.cs" Inherits="TravelDesk.Employee.InternationalRequest" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ApproverSite.Master" AutoEventWireup="true" CodeBehind="InternationalRequest.aspx.cs" Inherits="TravelDesk.Approver.InternationalRequest" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 

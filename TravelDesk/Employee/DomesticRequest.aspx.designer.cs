@@ -345,7 +345,7 @@ namespace TravelDesk.Employee
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeePurpose;
+        protected global::System.Web.UI.WebControls.DropDownList employeePurpose;
 
         /// <summary>
         /// RequiredFieldValidator12 control.
@@ -429,6 +429,15 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label15;
 
         /// <summary>
+        /// uploadStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl uploadStatus;
+
+        /// <summary>
         /// employeeUpload control.
         /// </summary>
         /// <remarks>
@@ -436,6 +445,24 @@ namespace TravelDesk.Employee
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload employeeUpload;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
+
+        /// <summary>
+        /// productImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image productImage;
 
         /// <summary>
         /// Label18 control.

@@ -139,9 +139,10 @@
     <Content Include="Approver\ApproverManageEmployees.aspx" />
     <Content Include="Approver\ApproverTravelRequest.aspx" />
     <Content Include="Approver\ApproverTravels.aspx" />
-    <Content Include="Approver\DomesticTravel.aspx" />
-    <Content Include="Approver\InternationalTravel.aspx" />
+    <Content Include="Approver\DomesticRequest.aspx" />
+    <Content Include="Approver\InternationalRequest.aspx" />
     <Content Include="Approver\ManagernewRequest.aspx" />
+    <Content Include="Approver\myRequests.aspx" />
     <Content Include="assets\css\animate.css\css\animate.css" />
     <Content Include="assets\css\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\css\chartist\chartist.css" />
@@ -484,19 +485,19 @@
     <Compile Include="Approver\ApproverTravels.aspx.designer.cs">
       <DependentUpon>ApproverTravels.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Approver\DomesticTravel.aspx.cs">
-      <DependentUpon>DomesticTravel.aspx</DependentUpon>
+    <Compile Include="Approver\DomesticRequest.aspx.cs">
+      <DependentUpon>DomesticRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Approver\DomesticTravel.aspx.designer.cs">
-      <DependentUpon>DomesticTravel.aspx</DependentUpon>
+    <Compile Include="Approver\DomesticRequest.aspx.designer.cs">
+      <DependentUpon>DomesticRequest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Approver\InternationalTravel.aspx.cs">
-      <DependentUpon>InternationalTravel.aspx</DependentUpon>
+    <Compile Include="Approver\InternationalRequest.aspx.cs">
+      <DependentUpon>InternationalRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Approver\InternationalTravel.aspx.designer.cs">
-      <DependentUpon>InternationalTravel.aspx</DependentUpon>
+    <Compile Include="Approver\InternationalRequest.aspx.designer.cs">
+      <DependentUpon>InternationalRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Approver\ManagernewRequest.aspx.cs">
       <DependentUpon>ManagernewRequest.aspx</DependentUpon>
@@ -504,6 +505,13 @@
     </Compile>
     <Compile Include="Approver\ManagernewRequest.aspx.designer.cs">
       <DependentUpon>ManagernewRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\myRequests.aspx.cs">
+      <DependentUpon>myRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\myRequests.aspx.designer.cs">
+      <DependentUpon>myRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

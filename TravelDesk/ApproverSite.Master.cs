@@ -16,7 +16,7 @@ namespace TravelDesk
         {
             if (Session["userID"] == null && Session["userName"] == null)
             {
-                Response.Write("<script>alert ('Session Expired!'); window.location.href = 'LoginPage.aspx'; </script>");
+                Response.Write("<script>window.location.href = '../LoginPage.aspx'; </script>");
 
             }
             else if (Session["userID"] != null && (Session["userName"] != null))
@@ -25,6 +25,14 @@ namespace TravelDesk
                 lblUserName.Text = userName;
 
             }
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Session.RemoveAll();
+            Session.Clear();
+            Response.Redirect("../LoginPage.aspx");
         }
     }
 }

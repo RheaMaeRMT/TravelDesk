@@ -41,7 +41,7 @@
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-sm-6" >
-                                                        <a href="InternationalTravel" class="btnk">
+                                                        <a href="InternationalRequest" class="btnk">
                                                         <!-- First Box -->
                                                         <form class="md-float-material form-material">
                                                             <div class="text-center">
@@ -63,7 +63,7 @@
 
                                                     <!-- Second Box -->
                                                     <div class="col-sm-6"  style="margin-left: -30px; margin-right: -10px;">
-                                                         <a href="DomesticTravel" class="btnk">
+                                                         <a href="DomesticRequest" class="btnk">
                                                             <form class="md-float-material form-material">
                                                             <div class="text-center">
                         
