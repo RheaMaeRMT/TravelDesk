@@ -34,7 +34,14 @@
                                     <!-- Page-body start -->
                                        <div class="page-body">
                                             <asp:GridView CssClass="table container" ID="purchaseView" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CellSpacing="2" ForeColor="Black">               
-                                                <Columns>                
+                                                <Columns>             
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+<%--                                                        <asp:CheckBox runat="server" Style="font-size: 18px" ID="select" />--%>
+                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 16px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
+                                                        </ItemTemplate>
+
+                                                    </asp:TemplateField>
                                                     <asp:BoundField DataField="travelApprovalStat" HeaderText="Status" SortExpression="travelApprovalStat" />  
                                                     <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" SortExpression="travelRequestID" />
                                                     <asp:BoundField DataField="travelType" HeaderText="Travel" SortExpression="travelType" /> 
@@ -46,8 +53,7 @@
                                                 </Columns>
                 
                                                 <FooterStyle BackColor="#CCCCCC" />
-                                                <HeaderStyle BackColor="#003366" Font-Bold="True" ForeColor="White" />
-                                                <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
+                                                <HeaderStyle BackColor="#003366" Font-Bold="True" ForeColor="White" />                                                <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
                                                 <RowStyle BackColor="White" />
                                                 <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />

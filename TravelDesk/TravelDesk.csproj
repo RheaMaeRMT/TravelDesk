@@ -283,11 +283,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Employee\DomesticRequest.aspx" />
+    <Content Include="Employee\domesticRequestDetails.aspx" />
     <Content Include="Employee\EmployeeDashboard.aspx" />
     <Content Include="Employee\EmployeeLogs.aspx" />
     <Content Include="Employee\EmployeeRequest.aspx" />
     <Content Include="Employee\InternationalRequest.aspx" />
+    <Content Include="Employee\internationalRequestDetails.aspx" />
     <Content Include="Employee\ListofRequests.aspx" />
+    <Content Include="Employee\modifyDomesticRequests.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -522,6 +525,13 @@
     <Compile Include="Employee\DomesticRequest.aspx.designer.cs">
       <DependentUpon>DomesticRequest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Employee\domesticRequestDetails.aspx.cs">
+      <DependentUpon>domesticRequestDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\domesticRequestDetails.aspx.designer.cs">
+      <DependentUpon>domesticRequestDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Employee\EmployeeDashboard.aspx.cs">
       <DependentUpon>EmployeeDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -550,12 +560,26 @@
     <Compile Include="Employee\InternationalRequest.aspx.designer.cs">
       <DependentUpon>InternationalRequest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Employee\internationalRequestDetails.aspx.cs">
+      <DependentUpon>internationalRequestDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\internationalRequestDetails.aspx.designer.cs">
+      <DependentUpon>internationalRequestDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Employee\ListofRequests.aspx.cs">
       <DependentUpon>ListofRequests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Employee\ListofRequests.aspx.designer.cs">
       <DependentUpon>ListofRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\modifyDomesticRequests.aspx.cs">
+      <DependentUpon>modifyDomesticRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\modifyDomesticRequests.aspx.designer.cs">
+      <DependentUpon>modifyDomesticRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

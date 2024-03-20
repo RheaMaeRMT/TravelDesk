@@ -16,7 +16,7 @@ namespace TravelDesk
         {
             if (Session["userID"] == null && Session["userName"] == null)
             {
-                Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+                Response.Write("<script> window.location.href = '../LoginPage.aspx'; </script>");
 
             }
             else

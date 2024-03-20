@@ -23,15 +23,28 @@ namespace TravelDesk.Employee
             }
             else
             {
-               // DisplayRequests();
+               
             }
 
         }
-        private void DisplayRequests()
+
+
+        protected void viewDetails_Click(object sender, EventArgs e)
         {
+            //Get the GridViewRow that contains the clicked button
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+
+            //Get the order ID from the first cell in the row
+            string requestID = row.Cells[2].Text;
+
+            Console.WriteLine(requestID);
+
+            Session["clickedRequest"] = requestID.ToString();
 
 
-
+            //redirect to the next page after clicking the view button
+            Response.Redirect("domesticRequestDetails.aspx");
         }
     }
 }

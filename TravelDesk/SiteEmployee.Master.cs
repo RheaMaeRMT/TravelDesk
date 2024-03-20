@@ -22,7 +22,19 @@ namespace TravelDesk
             else if (Session["userID"] != null && (Session["userName"] != null))
             {
                 string userName = (string)Session["userName"];
-                lblUserName.Text = userName;
+                string role = (string)Session["userRole"];
+
+                if (role == "Employee")
+                {
+                    lblUserName.Text = userName;
+
+                }
+                else
+                {
+                    Response.Write("<script>window.location.href = '../LoginPage.aspx'; </script>");
+
+
+                }
 
             }
         }
