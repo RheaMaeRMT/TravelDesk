@@ -164,7 +164,7 @@
                                         </a>
                                         <ul class="show-notification profile-notification" id="dropdownContent" style="display: none;">
                                             <li class="waves-effect waves-light">
-                                                    <asp:Button ID="btnLogout" runat="server" class="ti-layout-sidebar-left"  Text="LOG OUT" style="font-size:16px" BorderColor="Transparent" BackColor="Transparent" /> <br />
+                                                    <asp:Button ID="btnLogout" runat="server" class="ti-layout-sidebar-left"  Text="LOG OUT" style="font-size:16px" BorderColor="Transparent" BackColor="Transparent" OnClick="btnLogout_Click" /> <br />
 
                                             </li>
                                         </ul>

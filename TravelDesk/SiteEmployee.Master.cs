@@ -38,5 +38,17 @@ namespace TravelDesk
 
             }
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Session.Clear();
+            Session.RemoveAll();
+            //REDIRECT TO LANDING PAGE
+            //if (Session["firstname"] == null)
+            //{
+            //    Response.Redirect("homepage.aspx", false);
+            //}
+        }
     }
 }

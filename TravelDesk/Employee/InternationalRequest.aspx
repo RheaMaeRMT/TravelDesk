@@ -56,7 +56,7 @@
                               <div class="row align-items-center">
                                   <div class="col-md-8">
                                       <div class="page-header-title">
-                                          <h5 class="m-b-10">TRAVEL REQUEST - DOMESTIC</h5>
+                                          <h5 class="m-b-10">TRAVEL REQUEST - INTERNATIONAL</h5>
                                       </div>
                                   </div>
                                   <div class="col-md-4">
@@ -80,7 +80,7 @@
                                          <div class="page-body">
                                                 <div class="card" style="color:black;">
                                                     <div class="card-header" style="background-color:#09426a">
-                                                        <h5 style="color:white">Domestic Travel Request Form</h5>
+                                                        <h5 style="color:white">International Travel Request Form</h5>
                                                     </div>
                                                         <div>
                                                             <div class="card-block">

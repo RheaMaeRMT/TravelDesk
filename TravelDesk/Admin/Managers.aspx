@@ -102,8 +102,8 @@
                                                       <div class="modal-body">
                                                         New Approver Successfully Added!<br>
                                                         Account Credentials:<br>
-                                                        Email: <span id="approverEmaildone"></span><br>
-                                                        Company ID: <span id="approverCompanyIDdone"></span>
+                                                        Email: <span id="employeeEmaildone"></span><br>
+                                                        Company ID: <span id="employeeCompanyIDdone"></span>
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
