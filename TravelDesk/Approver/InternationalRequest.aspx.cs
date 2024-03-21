@@ -170,7 +170,7 @@ namespace TravelDesk.Approver
                         if (ctr >= 1)
                         {
 
-                            Response.Write("<script>alert ('International Travel Request Submitted!'); window.location.href = 'ListofRequests.aspx'; </script>");
+                            Response.Write("<script>alert ('International Travel Request Submitted!'); window.location.href = 'myRequests.aspx'; </script>");
                            
 
                         }

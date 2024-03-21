@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TravelRequests.aspx.cs" Inherits="TravelDesk.Admin.TravelRequests" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ApproverSite.Master" AutoEventWireup="true" CodeBehind="myEmployeeRequests.aspx.cs" Inherits="TravelDesk.Approver.myEmployeeRequests" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-               <div class="pcoded-main-container">
+                  <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <div class="pcoded-content">
                       <!-- Page-header start -->
@@ -19,10 +19,10 @@
                                           <li class="breadcrumb-item">
                                               <a href="index.html"> <i class="fa fa-home"></i> </a>
                                           </li>
-                                          <li class="breadcrumb-item"><a href="AdminDashboard.aspx">Dashboard</a>
+                                          <li class="breadcrumb-item"><a href="Approver/ApproverDashboard">Dashboard</a>
                                           </li>
                                       </ul>
-                                  </div>
+                                   </div>
                               </div>
                           </div>
                       </div>
@@ -32,13 +32,13 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
-                                    <div class="page-body">
-                                            <asp:GridView CssClass="table container" ID="purchaseView" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="2px" CellPadding="2" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CellSpacing="2" ForeColor="Black">               
+                                       <div class="page-body">
+                                            <asp:GridView CssClass="table container" ID="purchaseView" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CellSpacing="2" ForeColor="Black">               
                                                 <Columns>             
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
 <%--                                                        <asp:CheckBox runat="server" Style="font-size: 18px" ID="select" />--%>
-                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 14px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
+                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 16px;" class="active btn waves-effect text-center" ID="viewDetails"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
@@ -63,14 +63,15 @@
                                                 <SortedDescendingHeaderStyle BackColor="#383838" />
                                             </asp:GridView>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_TravelDesk %>" 
-                                                SelectCommand="SELECT travelRequest.travelApprovalStat, travelRequest.travelRequestID, travelRequest.travelType, travelRequest.travelDestination, travelRequest.travelDeparture, travelRequest.travelReturn, travelRequest.travelPurpose, travelRequest.travelDesignation FROM travelRequest WHERE travelRequest.travelApprovalStat = 'auto-approved' ">
+                                                SelectCommand="SELECT travelRequest.travelApprovalStat, travelRequest.travelRequestID, travelRequest.travelType, travelRequest.travelDestination, travelRequest.travelDeparture, travelRequest.travelReturn, travelRequest.travelPurpose, travelRequest.travelDesignation FROM travelRequest WHERE (travelRequest.travelManager = @userName)">
                                                 <SelectParameters>
                                                     <asp:SessionParameter Name="userName" SessionField="userName" />
                                                 </SelectParameters>
-                                            </asp:SqlDataSource>                                       
+                                            </asp:SqlDataSource>
 
- 
-                                    </div>
+
+                                       </div>
+
                                     <!-- Page-body end -->
                                 </div>
                                 <div id="styleSelector"> </div>
@@ -80,3 +81,4 @@
                 </div>
             </div>
 </asp:Content>
+

@@ -115,7 +115,7 @@
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label4" runat="server" Text="VOIP Ext."></asp:Label>
                                                                 <asp:TextBox ID="employeeVoip" runat="server"  CssClass="auto-style1" Width="343px"></asp:TextBox>
-                                                                <asp:Label ID="Label9" runat="server" Text="Mobile Number" style="padding-left:150px" ></asp:Label>
+                                                                <asp:Label ID="Label9" runat="server" Text="Mobile Number" style="padding-left:160px" ></asp:Label>
                                                                 <asp:TextBox ID="employeePhone" runat="server"  Width="260px" CssClass="auto-style7"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePhone"></asp:RequiredFieldValidator>
 

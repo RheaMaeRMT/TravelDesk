@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TravelDesk.Admin
+namespace TravelDesk.Approver
 {
 
 
-    public partial class TravelRequests
+    public partial class myEmployeeRequests
     {
 
         /// <summary>

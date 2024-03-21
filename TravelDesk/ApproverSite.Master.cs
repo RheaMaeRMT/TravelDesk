@@ -44,6 +44,7 @@ namespace TravelDesk
             Session.Abandon();
             Session.RemoveAll();
             Session.Clear();
+            Response.Write("<script>window.location.href = '../LoginPage.aspx'; </script>");
 
             //REDIRECT TO LANDING PAGE
             //if (Session["firstname"] == null)

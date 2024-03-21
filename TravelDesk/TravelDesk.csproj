@@ -128,6 +128,7 @@
   <ItemGroup>
     <Content Include="Admin\Activity.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
+    <Content Include="Admin\domesticRequestDetails.aspx" />
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Managers.aspx" />
     <Content Include="Admin\TravelRequests.aspx" />
@@ -142,6 +143,7 @@
     <Content Include="Approver\DomesticRequest.aspx" />
     <Content Include="Approver\InternationalRequest.aspx" />
     <Content Include="Approver\ManagernewRequest.aspx" />
+    <Content Include="Approver\myEmployeeRequests.aspx" />
     <Content Include="Approver\myRequests.aspx" />
     <Content Include="assets\css\animate.css\css\animate.css" />
     <Content Include="assets\css\bootstrap\css\bootstrap.min.css" />
@@ -404,6 +406,13 @@
     <Compile Include="Admin\AdminDashboard.aspx.designer.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\domesticRequestDetails.aspx.cs">
+      <DependentUpon>domesticRequestDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\domesticRequestDetails.aspx.designer.cs">
+      <DependentUpon>domesticRequestDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Employees.aspx.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -508,6 +517,13 @@
     </Compile>
     <Compile Include="Approver\ManagernewRequest.aspx.designer.cs">
       <DependentUpon>ManagernewRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approver\myEmployeeRequests.aspx.cs">
+      <DependentUpon>myEmployeeRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approver\myEmployeeRequests.aspx.designer.cs">
+      <DependentUpon>myEmployeeRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Approver\myRequests.aspx.cs">
       <DependentUpon>myRequests.aspx</DependentUpon>

@@ -50,8 +50,8 @@ namespace TravelDesk.Employee
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelLocation, travelEmpID, travelFname, travelDesignation, travelLevel, travelVoip, travelMobilenum, travelProjectCode, travelHomeFacility, travelDeparture, travelReturn, travelPurpose, travelApprovalStat, travelManager, travelRemarks, travelDestination, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath)"
-                            + "VALUES (@ID, @location, @empID, @empName, @designation, @level, @voip, @mobile, @projCode, @facility, @departure, @return, @purpose, @approvalStat, @manager, @remarks, @destination, @others, @type, @options, @userID, @proofname, @proofpath)";
+                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelLocation, travelEmpID, travelFname, travelLevel, travelMobilenum, travelProjectCode, travelHomeFacility, travelDeparture, travelReturn, travelPurpose, travelApprovalStat, travelManager, travelRemarks, travelDestination, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath)"
+                            + "VALUES (@ID, @location, @empID, @empName, @level, @mobile, @projCode, @facility, @departure, @return, @purpose, @approvalStat, @manager, @remarks, @destination, @others, @type, @options, @userID, @proofname, @proofpath)";
 
                         string approvalStat = (employeeApproval.SelectedItem.Text == "YES") ? "auto-approved" : "Pending Approval";
                         string filename = Session["filename"].ToString();
@@ -61,9 +61,7 @@ namespace TravelDesk.Employee
                         cmd.Parameters.AddWithValue("@location", employeeLocation.Text);
                         cmd.Parameters.AddWithValue("@empID", employeeID.Text);
                         cmd.Parameters.AddWithValue("@empName", employeeName.Text);
-                        cmd.Parameters.AddWithValue("@designation", employeeDesignation.Text);
                         cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
-                        cmd.Parameters.AddWithValue("@voip", employeeVoip.Text);
                         cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
                         cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
                         cmd.Parameters.AddWithValue("@facility", employeeFacility.Text);
@@ -201,9 +199,7 @@ namespace TravelDesk.Employee
             employeeLocation.Text = string.Empty;
            employeeID.Text = string.Empty;
             employeeName.Text = string.Empty;
-            employeeDesignation.Text = string.Empty;
             employeeLevel.Text = string.Empty;
-            employeeVoip.Text = string.Empty;
             employeePhone.Text = string.Empty;
             employeeProjCode.Text = string.Empty;
             employeeFacility.Text = string.Empty;

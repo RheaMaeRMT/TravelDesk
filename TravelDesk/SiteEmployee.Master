@@ -107,10 +107,10 @@
                             <!-- NOTIFICATIONS -->
                             <ul class="nav-right">
                                 <li class="header-notification">
-                                    <a href="#!">
+                                    <%--<a href="#!">
                                         <i class="ti-bell"></i>
                                         <asp:Label runat="server" ID="unread" class="badge bg-c-red"></asp:Label>
-                                    </a>
+                                    </a>--%>
 
 <%--                                    <asp:Repeater ID="rptNotifications" runat="server">
                                         <HeaderTemplate>

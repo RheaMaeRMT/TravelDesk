@@ -36,30 +36,22 @@
                                     <div class="page-body">
                                         <div class="row">
                                             <!-- task, page, download counter  start -->
-                                            <div class="col-xl-3 col-md-6">
+                                            <div class="col-xl-3 col-md-3">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
-                                                            <div class="col-8">
-                                                                <h4 class="text-c-purple">2</h4>
-                                                                <h6 class="text-muted m-b-0">Approved Requests</h6>
+                                                            <div class="col-8" style="align-content:center">
+                                                                <asp:Label ID="approved" runat="server" class="text-c-purple h4"></asp:Label>
+
+<%--                                                                <h4 class="text-c-purple"></h4>--%>
+                                                                <h6 class="text-muted m-b-0">Auto-Approved</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-bar-chart f-28"></i>
+                                                                <i class="fa fa-file-text-o f-28"></i>
                                                             </div>
+
                                                         </div>
                                                     </div>
-<%--                                                    <div class="card-footer bg-c-purple">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-9">
-                                                                <p class="text-white m-b-0">% change</p>
-                                                            </div>
-                                                            <div class="col-3 text-right">
-                                                                <i class="fa fa-line-chart text-white f-16"></i>
-                                                            </div>
-                                                        </div>
-            
-                                                    </div>--%>
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-md-6">
@@ -67,8 +59,8 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">3</h4>
-                                                                <h6 class="text-muted m-b-0">Processing Requests</h6>
+                                                                <asp:Label ID="pending" runat="server" class="text-c-purple h4"></asp:Label>
+                                                                <h6 class="text-muted m-b-0">Pending Requests</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-file-text-o f-28"></i>
@@ -82,7 +74,7 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-red">2</h4>
+                                                                <asp:Label ID="completed" runat="server" class="text-c-purple h4"></asp:Label>
                                                                 <h6 class="text-muted m-b-0">Completed Requests</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
@@ -97,8 +89,8 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-blue">0</h4>
-                                                                <h6 class="text-muted m-b-0">Cancelled Requests</h6>
+                                                                <asp:Label ID="processing" runat="server" class="text-c-purple h4"></asp:Label>
+                                                                <h6 class="text-muted m-b-0">Processing Requests</h6>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-hand-o-down f-28"></i>

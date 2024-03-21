@@ -102,7 +102,7 @@
                             </div>
         <div class="row">
             <div class="col-sm-6" >
-                <a href="ApproverLogin.aspx" class="btnk">
+                <a href="LoginPage.aspx" class="btnk">
                 <!-- First Box -->
                 <form class="md-float-material form-material">
                     <div class="text-center">
@@ -123,7 +123,7 @@
 
             <!-- Second Box -->
             <div class="col-sm-6"  style="margin-left: -30px; margin-right: -10px;">
-                 <a href="AdminLogin.aspx" class="btnk">
+                 <a href="LoginPage.aspx" class="btnk">
                     <form class="md-float-material form-material">
                     <div class="text-center">
                         
