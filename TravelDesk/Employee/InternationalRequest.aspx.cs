@@ -1,10 +1,13 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -29,9 +32,9 @@ namespace TravelDesk.Employee
 
 
         }
-
         protected void submitRequestbtn_Click(object sender, EventArgs e)
         {
+            Response.Write("<script>alert('BUTTON WORKING.')</script>");
 
             Random rand = new Random();
             int random = rand.Next(100000, 999999);
@@ -72,20 +75,22 @@ namespace TravelDesk.Employee
                         cmd.Parameters.AddWithValue("@manager", employeeManager.Text);
                         cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
                         cmd.Parameters.AddWithValue("@destination", employeeDestination.Text);
-                        cmd.Parameters.AddWithValue("@others", employeeOthers.Text);
+                        cmd.Parameters.AddWithValue("@others", otherspecified.Text);
                         cmd.Parameters.AddWithValue("@type", "International");
                         cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
                         cmd.Parameters.AddWithValue("@userID", Session["userID"].ToString());
                         cmd.Parameters.AddWithValue("@proofname", filename);
                         cmd.Parameters.AddWithValue("@proofpath", imgPath);
 
-                        
+
 
                         var ctr = cmd.ExecuteNonQuery();
 
                         if (ctr >= 1)
                         {
-                            insertRoute(ID);
+                            Response.Write("<script>alert('Checking your uploaded file')</script>");
+                            checkPdfFile();
+
                         }
                         else
                         {
@@ -111,6 +116,8 @@ namespace TravelDesk.Employee
             }
 
         }
+
+
         //insert route details in the table
         private void insertRoute(string ID)
         {
@@ -210,7 +217,7 @@ namespace TravelDesk.Employee
             employeeManager.Text = string.Empty;
             employeeRemarks.Text = string.Empty;
             employeeDestination.Text = string.Empty;
-            employeeOthers.Text = string.Empty;
+            otherspecified.Text = string.Empty;
             flightOptions.ClearSelection();
            onewayFrom.Text = string.Empty;
             onewayTo.Text = string.Empty;
@@ -244,57 +251,130 @@ namespace TravelDesk.Employee
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
+
             string saveDIR = Server.MapPath("/approvalProofs");
+
             try
             {
                 if (employeeUpload.HasFile)
                 {
                     string filename = Server.HtmlEncode(employeeUpload.FileName);
-                    string extension = System.IO.Path.GetExtension(filename);
+                    string extension = System.IO.Path.GetExtension(filename).ToLower();
                     int filesize = employeeUpload.PostedFile.ContentLength;
-                    if (File.Exists(Path.Combine(saveDIR, filename)))
-                    {
-                        uploadStatus.InnerText = "File already exist";
-                    }
-                    else
-                    {
-                        if ((extension == ".jpg") || (extension == ".jpeg") || (extension == ".png") || (extension == ".JPG") || (extension == ".JPEG") || (extension == ".PNG"))
-                        {
-                            if (filesize < 4100000)
-                            {
-                                string savePath = Path.Combine(saveDIR, filename);
-                                employeeUpload.SaveAs(savePath);
-                                productImage.Visible = true;
-                                productImage.ImageUrl = Path.Combine("/approvalProofs/", filename);
-                                Session["imgPath"] = Path.Combine("/approvalProofs/", filename);
-                                Session["filename"] = filename;
-                                uploadStatus.InnerText = "Your file was uploaded successfully.";
 
-                                // Write session values to the console
-                                Console.WriteLine("imgPath: " + Session["imgPath"]);
-                                Console.WriteLine("filename: " + Session["filename"]);
-                            }
-                            else
-                            {
-                                uploadStatus.InnerText = "Your file was not uploaded because image size is more than 4MB";
-                            }
+                    if (extension == ".pdf")
+                    {
+                        if (filesize < 5100000)
+                        {
+                            string savePath = System.IO.Path.Combine(saveDIR, filename);
+                            employeeUpload.SaveAs(savePath);
+
+                            // Store file path in session
+                            Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
+                            Session["filename"] = filename;
+
+                            // Set the source of the iframe to the PDF file path
+                            pdfViewer.Attributes["src"] = Session["pdfPath"].ToString();
+
+                            // Show the PDF viewer
+                            pdfViewer.Style["display"] = "block";
+
+                            Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
                         }
                         else
                         {
-                            uploadStatus.InnerText = "Invalid File Upload. Please upload an image as a proof of your travel approval";
+                            Response.Write("<script>alert('Your file was not uploaded because its size is more than 5MB.')</script>");
                         }
                     }
+                    else
+                    {
+                        Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as a proof of your travel approval.')</script>");
+                    }
+
                 }
                 else
                 {
-                    uploadStatus.InnerText = "Upload Failed: Try again";
+                    Response.Write("<script>alert('Upload Failed: Try again')</script>");
                 }
             }
             catch (Exception ex)
             {
                 Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre><script>alert('" + ex.Message + "');</script>");
             }
+        }
+
+        private void checkPdfFile()
+        {
+            string currentPDFPath = Session["pdfPath"]?.ToString();
+
+            if (!string.IsNullOrEmpty(currentPDFPath))
+            {
+                try
+                {
+                    // Open the PDF file
+                    PdfReader reader = new PdfReader(currentPDFPath);
+
+                    // Extract text from each page of the PDF
+                    string extractedText = "";
+                    for (int i = 1; i <= reader.NumberOfPages; i++)
+                    {
+                        extractedText += PdfTextExtractor.GetTextFromPage(reader, i);
+                    }
+
+                    // Close the PDF reader
+                    reader.Close();
+
+                    // Search for the words "approved" and "legible" using regular expressions
+                    bool containsApproved = Regex.IsMatch(extractedText, @"\bapproved\b", RegexOptions.IgnoreCase);
+                    bool containsLegible = Regex.IsMatch(extractedText, @"\blegible\b", RegexOptions.IgnoreCase);
+
+                    // Check if the PDF contains the words
+                    if (containsApproved || containsLegible)
+                    {
+                        Response.Write("<script>alert('PDF File accepted')</script>");
+                        insertRoute(ID);
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('The file you uploaded is not valid. Please upload your Valid Managers Approval and try again.')</script>");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                    Response.Write("<script>alert('An error occurred while processing the PDF file: " + ex.Message + "')</script>");
+                }
+            }
+            else
+            {
+                // Handle case where session variable is empty or null
+                Console.WriteLine("No PDF file uploaded!");
+            }
+        }
+
+        protected void draftButton_Click(object sender, EventArgs e)
+        {
 
         }
+        // Recursive method to find a control by ID
+        public Control FindControlRecursive(Control control, string id)
+        {
+            if (control.ID == id)
+            {
+                return control;
+            }
+
+            foreach (Control childControl in control.Controls)
+            {
+                Control foundControl = FindControlRecursive(childControl, id);
+                if (foundControl != null)
+                {
+                    return foundControl;
+                }
+            }
+
+            return null;
+        }
+
     }
 }

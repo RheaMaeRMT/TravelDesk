@@ -2,7 +2,13 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+
     <style>
+        /* Define styles for the PDF viewer container */
+        .pdfViewer {
+            width: 100%;
+            height: 500px; /* Adjust height as needed */
+        }
         .txtBox{
             Width: 260px;
             margin-left:80px;
@@ -10,14 +16,11 @@
         .auto-style3 {
             margin-left: 76px;
         }
-        .auto-style6 {
-            margin-left: 106px;
-        }
         .auto-style9 {
             margin-left: 65px;
         }
         .auto-style10 {
-            margin-left: 114px;
+            margin-left: 116px;
         }
         .auto-style11 {
             margin-left: 78px;
@@ -122,7 +125,7 @@
                                                                 <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Travel Information</p>
                                                             </div>
                                                             <div class="card-block">
-                                                                <asp:Label ID="Label6" runat="server" Text="Travelling From" ></asp:Label>
+                                                                <asp:Label ID="Label6" runat="server" Text="Departing From" ></asp:Label>
                                                                 <asp:TextBox ID="employeeFacility" runat="server" Width="332px" CssClass="auto-style14"></asp:TextBox> 
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
 
@@ -146,12 +149,12 @@
                                                                 <asp:Label ID="Label13" runat="server" Text="Purpose of Travel" ></asp:Label>
                                                                 <asp:DropDownList ID="employeePurpose" runat="server" CssClass="m-l-50" Width="343px" onchange="showHideTextBox()">
                                                                     <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True"/>
-                                                                    <asp:ListItem Text="Client Meeting" Value="Client Meeting" />
-                                                                    <asp:ListItem Text="Business Summit" Value="Business Summit" />
-                                                                    <asp:ListItem Text="Seminars" Value="Seminars" />
-                                                                    <asp:ListItem Text="Facility Visit" Value="Facility Visit" />
+                                                                    <asp:ListItem Text="Strategic Planning" Value="Strategic Planning" />
+                                                                    <asp:ListItem Text="Facility Visit" Value="Client Meeting" />
+                                                                    <asp:ListItem Text="Training" Value="Training" />
+                                                                    <asp:ListItem Text="Audit" Value="Audit" />
+                                                                    <asp:ListItem Text="Client Visit" Value="Client Visit" />
                                                                     <asp:ListItem Text="others" Value="Others" />
-
                                                                 </asp:DropDownList>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePurpose"></asp:RequiredFieldValidator> <br />
                                                                  <br />
@@ -159,10 +162,6 @@
                                                                 <asp:TextBox ID="otherspecified" runat="server" Width="320px" TextMode="MultiLine" Style="margin-left:170px; display: none"></asp:TextBox> 
                                                           
                                                             </div>
-                                                           <%-- to display the others textbox--%>
-                                                                    <script type="text/javascript">
-                                                                        
-                                                                    </script>
                                                             <div class="card-block">
                                                                 <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Flight Information</p>
                                                             </div>
@@ -435,25 +434,28 @@
                                                                 <asp:Button class="form-control btn btn-primary btn-sm"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" />
 
                                                             </div> <br />
-                                                            <div class="col-md-2" id="uploadbtn" style="display:none">
-                                                            </div>
-
+        
                                                                 <div class="col-md-5">
-                                                                    <asp:Image CssClass="img-fluid img-thumbnail" ID="productImage" runat="server" Visible="False" />
+                                                                    <iframe id="pdfViewer" runat="server" width="100%" height="500px" style="display:none;"></iframe>
                                                                 </div>
+
                                                             
                                                             <div class="card-block">
                                                                  <asp:Label ID="Label18" runat="server" Text="Remarks"></asp:Label> <br />
-                                                                <asp:TextBox ID="employeeRemarks" runat="server"  Width="896px" CssClass="auto-style10" TextMode="MultiLine" Height="91px"></asp:TextBox> 
+                                                                <asp:TextBox ID="employeeRemarks" runat="server"  Width="939px" CssClass="auto-style10" TextMode="MultiLine" Height="91px"></asp:TextBox> 
                                                                 
                                                             </div>
+
+
                                                     </div>
-                                                 </div>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn" OnClick="submitRequestbtn_Click"/>
+                                                 </div> 
 
-<%--                                                 <asp:Button runat="server" class="btn btn-primary" ID="submitBtn" Text="SUBMIT" OnClick="submitBtn_Click"/>--%>
+                                                  
+                                                             <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn"/>
+                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="draftButton"  Style="margin-left:20px" OnClick="submitRequestbtn_Click"/>
 
-                                           </div>
+                                                         
+                                           </div> 
                                     
                                     <!-- Page-body end -->
                                 </div>

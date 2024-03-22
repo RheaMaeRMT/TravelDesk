@@ -1158,13 +1158,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// productImage control.
+        /// pdfViewer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image productImage;
+        protected global::System.Web.UI.HtmlControls.HtmlIframe pdfViewer;
 
         /// <summary>
         /// Label18 control.
@@ -1192,5 +1192,14 @@ namespace TravelDesk.Employee
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button submitRequestbtn;
+
+        /// <summary>
+        /// draftButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button draftButton;
     }
 }
