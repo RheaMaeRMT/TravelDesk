@@ -32,18 +32,18 @@ namespace TravelDesk.Employee
 
 
         }
-        protected void submitRequestbtn_Click(object sender, EventArgs e)
+        protected void submit_Click(object sender, EventArgs e)
         {
-            Response.Write("<script>alert('BUTTON WORKING.')</script>");
+            // Add message to the Output window in Visual Studio
+            System.Diagnostics.Debug.WriteLine("Submit button clicked.");
 
             Random rand = new Random();
             int random = rand.Next(100000, 999999);
-            string ID = "TR" + employeeID.Text + random;
+            string ID = "TR" + random;
 
+            Session["currentID"] = ID;
             try
             {
-
-                //uploadImage();
 
 
                 using (var db = new SqlConnection(connectionString))
@@ -53,8 +53,8 @@ namespace TravelDesk.Employee
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelLocation, travelEmpID, travelFname, travelLevel, travelMobilenum, travelProjectCode, travelHomeFacility, travelDeparture, travelReturn, travelPurpose, travelApprovalStat, travelManager, travelRemarks, travelDestination, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath)"
-                            + "VALUES (@ID, @location, @empID, @empName, @level, @mobile, @projCode, @facility, @departure, @return, @purpose, @approvalStat, @manager, @remarks, @destination, @others, @type, @options, @userID, @proofname, @proofpath)";
+                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelLocation, travelEmpID, travelFname, travelMName, travelLName, travelLevel, travelMobilenum, travelProjectCode, travelHomeFacility, travelDeparture, travelReturn, travelPurpose, travelApprovalStat, travelManager, travelRemarks, travelDestination, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath)"
+                            + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @level, @mobile, @projCode, @facility, @departure, @return, @purpose, @approvalStat, @manager, @remarks, @destination, @others, @type, @options, @userID, @proofname, @proofpath)";
 
                         string approvalStat = (employeeApproval.SelectedItem.Text == "YES") ? "auto-approved" : "Pending Approval";
                         string filename = Session["filename"].ToString();
@@ -63,7 +63,9 @@ namespace TravelDesk.Employee
                         cmd.Parameters.AddWithValue("@ID", ID);
                         cmd.Parameters.AddWithValue("@location", employeeLocation.Text);
                         cmd.Parameters.AddWithValue("@empID", employeeID.Text);
-                        cmd.Parameters.AddWithValue("@empName", employeeName.Text);
+                        cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
+                        cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
+                        cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
                         cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
                         cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
                         cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
@@ -89,7 +91,7 @@ namespace TravelDesk.Employee
                         if (ctr >= 1)
                         {
                             Response.Write("<script>alert('Checking your uploaded file')</script>");
-                            checkPdfFile();
+                            insertRoute(ID);
 
                         }
                         else
@@ -114,9 +116,7 @@ namespace TravelDesk.Employee
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
-
         }
-
 
         //insert route details in the table
         private void insertRoute(string ID)
@@ -174,8 +174,7 @@ namespace TravelDesk.Employee
 
                         if (ctr >= 1)
                         {
-
-                            Response.Write("<script>alert ('International Travel Request Submitted!'); window.location.href = 'ListofRequests.aspx'; </script>");
+                            checkPdfFile();
                            
 
                         }
@@ -205,7 +204,9 @@ namespace TravelDesk.Employee
         {
             employeeLocation.Text = string.Empty;
            employeeID.Text = string.Empty;
-            employeeName.Text = string.Empty;
+            employeeFName.Text = string.Empty;
+            employeeMName.Text = string.Empty;
+            employeeLName.Text = string.Empty;
             employeeLevel.Text = string.Empty;
             employeePhone.Text = string.Empty;
             employeeProjCode.Text = string.Empty;
@@ -273,11 +274,11 @@ namespace TravelDesk.Employee
                             Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
                             Session["filename"] = filename;
 
-                            // Set the source of the iframe to the PDF file path
-                            pdfViewer.Attributes["src"] = Session["pdfPath"].ToString();
+                            //// Set the source of the iframe to the PDF file path
+                            //pdfViewer.Attributes["src"] = Session["pdfPath"].ToString();
 
-                            // Show the PDF viewer
-                            pdfViewer.Style["display"] = "block";
+                            //// Show the PDF viewer
+                            //pdfViewer.Style["display"] = "block";
 
                             Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
                         }
@@ -306,8 +307,9 @@ namespace TravelDesk.Employee
         private void checkPdfFile()
         {
             string currentPDFPath = Session["pdfPath"]?.ToString();
+            string ID = Session["currentID"]?.ToString();
 
-            if (!string.IsNullOrEmpty(currentPDFPath))
+            if (!string.IsNullOrEmpty(currentPDFPath) && !string.IsNullOrEmpty(ID))
             {
                 try
                 {
@@ -331,12 +333,12 @@ namespace TravelDesk.Employee
                     // Check if the PDF contains the words
                     if (containsApproved || containsLegible)
                     {
-                        Response.Write("<script>alert('PDF File accepted')</script>");
-                        insertRoute(ID);
+                        Response.Write("<script>alert ('International Travel Request Submitted!'); window.location.href = 'ListofRequests.aspx'; </script>");
+
                     }
                     else
                     {
-                        Response.Write("<script>alert('The file you uploaded is not valid. Please upload your Valid Managers Approval and try again.')</script>");
+                        Response.Write("<script>alert('The file you uploaded is not valid. Travel Request not submitted. Please upload your Valid Managers Approval and try again.')</script>");
                     }
                 }
                 catch (Exception ex)
@@ -357,24 +359,24 @@ namespace TravelDesk.Employee
 
         }
         // Recursive method to find a control by ID
-        public Control FindControlRecursive(Control control, string id)
-        {
-            if (control.ID == id)
-            {
-                return control;
-            }
+        ////public Control FindControlRecursive(Control control, string id)
+        ////{
+        ////    if (control.ID == id)
+        ////    {
+        ////        return control;
+        ////    }
 
-            foreach (Control childControl in control.Controls)
-            {
-                Control foundControl = FindControlRecursive(childControl, id);
-                if (foundControl != null)
-                {
-                    return foundControl;
-                }
-            }
+        ////    foreach (Control childControl in control.Controls)
+        ////    {
+        ////        Control foundControl = FindControlRecursive(childControl, id);
+        ////        if (foundControl != null)
+        ////        {
+        ////            return foundControl;
+        ////        }
+        ////    }
 
-            return null;
-        }
+        ////    return null;
+        ////}
 
     }
 }

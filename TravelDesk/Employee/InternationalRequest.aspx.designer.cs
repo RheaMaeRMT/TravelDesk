@@ -51,13 +51,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label7;
 
         /// <summary>
-        /// employeeName control.
+        /// employeeFName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeName;
+        protected global::System.Web.UI.WebControls.TextBox employeeFName;
 
         /// <summary>
         /// RequiredFieldValidator3 control.
@@ -78,22 +78,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
-        /// TextBox2 control.
+        /// employeeMName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
-
-        /// <summary>
-        /// RequiredFieldValidator31 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator31;
+        protected global::System.Web.UI.WebControls.TextBox employeeMName;
 
         /// <summary>
         /// Label3 control.
@@ -105,13 +96,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// TextBox1 control.
+        /// employeeLName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox employeeLName;
 
         /// <summary>
         /// RequiredFieldValidator4 control.
@@ -1158,15 +1149,6 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// pdfViewer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlIframe pdfViewer;
-
-        /// <summary>
         /// Label18 control.
         /// </summary>
         /// <remarks>
@@ -1185,13 +1167,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.TextBox employeeRemarks;
 
         /// <summary>
-        /// submitRequestbtn control.
+        /// submit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitRequestbtn;
+        protected global::System.Web.UI.WebControls.Button submit;
 
         /// <summary>
         /// draftButton control.

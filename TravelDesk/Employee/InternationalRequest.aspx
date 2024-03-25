@@ -41,7 +41,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-                <div class="pcoded-main-container">
+         <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <div class="pcoded-content">
                       <!-- Page-header start -->
@@ -88,16 +88,15 @@
                                                             </div>
                                                             <div class="card-block">
                                                                  <asp:Label ID="Label7" runat="server" Text="First name" ></asp:Label>
-                                                                <asp:TextBox ID="employeeName" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeName"></asp:RequiredFieldValidator>
+                                                                <asp:TextBox ID="employeeFName" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFName"></asp:RequiredFieldValidator>
                                                                 
                                                                 <asp:Label ID="Label4" runat="server" Text="Middle name" style="padding-left:80px" ></asp:Label>
-                                                                <asp:TextBox ID="TextBox2" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator31" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeName"></asp:RequiredFieldValidator>
+                                                                <asp:TextBox ID="employeeMName" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
                                                             
                                                                 <asp:Label ID="Label3" runat="server" Text="Last name" style="padding-left:120px" ></asp:Label>
-                                                                <asp:TextBox ID="TextBox1" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeName"></asp:RequiredFieldValidator>
+                                                                <asp:TextBox ID="employeeLName" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeLName"></asp:RequiredFieldValidator>
 
                                                             </div>
 
@@ -147,7 +146,7 @@
                                                             </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label13" runat="server" Text="Purpose of Travel" ></asp:Label>
-                                                                <asp:DropDownList ID="employeePurpose" runat="server" CssClass="m-l-50" Width="343px" onchange="showHideTextBox()">
+                                                                <asp:DropDownList ID="employeePurpose" runat="server" CssClass="m-l-50" Width="343px" onchange="checkSelection()">
                                                                     <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True"/>
                                                                     <asp:ListItem Text="Strategic Planning" Value="Strategic Planning" />
                                                                     <asp:ListItem Text="Facility Visit" Value="Client Meeting" />
@@ -311,94 +310,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-                                                                <!--javascript for the dropdown: manager approval options-->
-                                                                <script type="text/javascript">
-                                                                    function checkSelection() {
-                                                                        var ddl = document.getElementById('<%= employeeApproval.ClientID %>');
-                                                                        var flightOptions = document.getElementById('<%= flightOptions.ClientID %>')
-                                                                        var selectedOption = flightOptions.options[flightOptions.selectedIndex].value;
-                                                                        var selectedValue = ddl.options[ddl.selectedIndex].value;
-                                                                       
-
-
-                                                                        if (selectedValue === "0") {
-                                                                            // Display the NO modal
-                                                                            $('#noModal').modal('show');
-                                                                            document.getElementById('uploadBlock').style.display = 'none';
-                                                                        } else if (selectedValue == "1") {
-                                                                            //display YES modal
-                                                                            $('#yesModal').modal('show');
-                                                                            document.getElementById('uploadBlock').style.display = 'block';
-                                                                            document.getElementById('submitCard').style.display = 'block';
-                                                                            document.getElementById('uploadbtn').style.display = 'block';
-
-                                                                        }
-                                                                        if (selectedOption === "One Way") {
-                                                                            document.getElementById('more2multipleInput').style.display = 'none'
-                                                                            document.getElementById('oneWaynput').style.display = 'block';
-                                                                            document.getElementById('roundTripInput').style.display = 'none';
-                                                                            document.getElementById('multipleInput').style.display = 'none';
-                                                                            document.getElementById('more3multipleInput').style.display = 'none'
-                                                                            document.getElementById('more4multipleInput').style.display = 'none'
-
-                                                                        } else if (selectedOption === "Roundtrip") {
-                                                                            document.getElementById('more2multipleInput').style.display = 'none'
-                                                                            document.getElementById('oneWaynput').style.display = 'none';
-                                                                            document.getElementById('roundTripInput').style.display = 'block';
-                                                                            document.getElementById('multipleInput').style.display = 'none';
-                                                                            document.getElementById('more3multipleInput').style.display = 'none'
-                                                                            document.getElementById('more4multipleInput').style.display = 'none'
-
-                                                                        } else if (selectedOption === "multiple") {
-                                                                            document.getElementById('oneWaynput').style.display = 'none';
-                                                                            document.getElementById('roundTripInput').style.display = 'none';
-                                                                            document.getElementById('multipleInput').style.display = 'block';
-
-                                                                        }
-
-                                                                    }
-                                                                    function addMoreInput() {
-                                                                        document.getElementById('more2multipleInput').style.display = 'block'
-                                                                        document.getElementById('oneWaynput').style.display = 'none';
-                                                                        document.getElementById('roundTripInput').style.display = 'none';
-                                                                        document.getElementById('multipleInput').style.display = 'block';
-
-
-                                                                    }
-                                                                    function addMore2Input() {
-                                                                        document.getElementById('more2multipleInput').style.display = 'block'
-                                                                        document.getElementById('oneWaynput').style.display = 'none';
-                                                                        document.getElementById('roundTripInput').style.display = 'none';
-                                                                        document.getElementById('multipleInput').style.display = 'block';
-                                                                        document.getElementById('more3multipleInput').style.display = 'block'
-    
-
-                                                                    }
-                                                                    function addMore3Input() {
-                                                                        document.getElementById('more2multipleInput').style.display = 'block'
-                                                                        document.getElementById('oneWaynput').style.display = 'none';
-                                                                        document.getElementById('roundTripInput').style.display = 'none';
-                                                                        document.getElementById('multipleInput').style.display = 'block';
-                                                                        document.getElementById('more3multipleInput').style.display = 'block'
-                                                                        document.getElementById('more4multipleInput').style.display = 'block'
-                                                                    }
-                                                                    function showHideTextBox() {
-                                                                        var ddlPurpose = document.getElementById('<%= employeePurpose.ClientID %>');
-                                                                        var txtOtherPurpose = document.getElementById('<%= otherspecified.ClientID %>');
-                                                                        var labelothers = document.getElementById('<%=Label14.ClientID%>');
-
-                                                                        if (ddlPurpose.value === "Others") {
-                                                                            txtOtherPurpose.style.display = 'block';
-                                                                            labelothers.style.display = 'block';
-                                                                        } else {
-                                                                            txtOtherPurpose.style.display = 'none';
-                                                                            labelothers.style.display = 'none';
-                                                                            txtOtherPurpose.value = ''; // Clear textbox value if not 'Others'
-                                                                        }
-                                                                    }
-
-                                                                </script>                                                       
                                                         
                                                                 <!--MODAL FOR THE YES OPTION -->
                                                                 <div class="modal fade" id="yesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -431,13 +342,13 @@
                                                                 <asp:Label ID="Label15" runat="server" Text="Approval Proof"></asp:Label>
                                                                 <label ID="uploadStatus" runat="server" Text="Attachment"></label>
                                                                 <asp:FileUpload ID="employeeUpload" type="file" runat="server" CssClass="auto-style12" Width="348px" />
-                                                                <asp:Button class="form-control btn btn-primary btn-sm"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" />
+                                                                <asp:Button class="btn btn-primary"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" />
 
                                                             </div> <br />
         
-                                                                <div class="col-md-5">
+<%--                                                                <div class="col-md-5">
                                                                     <iframe id="pdfViewer" runat="server" width="100%" height="500px" style="display:none;"></iframe>
-                                                                </div>
+                                                                </div>--%>
 
                                                             
                                                             <div class="card-block">
@@ -449,11 +360,97 @@
 
                                                     </div>
                                                  </div> 
+                                                                <!--javascript for the dropdown: manager approval options-->
+                                                                <script type="text/javascript">
+                                                                    function checkSelection() {
+                                                                        //approval dropdown
+                                                                        var ddl = document.getElementById('<%= employeeApproval.ClientID %>');
+                                                                        var selectedValue = ddl.options[ddl.selectedIndex].value;
+
+                                                                        //flight options dropdown
+                                                                        var flightOptions = document.getElementById('<%= flightOptions.ClientID %>')
+                                                                        var selectedOption = flightOptions.options[flightOptions.selectedIndex].value;
+
+                                                                        //purpose dropdown
+                                                                        var options = document.getElementById('<%= employeePurpose.ClientID %>');
+                                                                        var selectedPurpose = options.options[employeePurpose.selectedIndex].value;
+
+
+                                                                        //approval
+                                                                        if (selectedValue === "0") {
+                                                                            // Display the NO modal
+                                                                            $('#noModal').modal('show');
+                                                                            document.getElementById('uploadBlock').style.display = 'none';
+                                                                        } else if (selectedValue == "1") {
+                                                                            //display YES modal
+                                                                            $('#yesModal').modal('show');
+                                                                            document.getElementById('uploadBlock').style.display = 'block';
+
+                                                                        }
+                                                                        //flight options
+                                                                        if (selectedOption === "One Way") {
+                                                                            document.getElementById('more2multipleInput').style.display = 'none'
+                                                                            document.getElementById('oneWaynput').style.display = 'block';
+                                                                            document.getElementById('roundTripInput').style.display = 'none';
+                                                                            document.getElementById('multipleInput').style.display = 'none';
+                                                                            document.getElementById('more3multipleInput').style.display = 'none'
+                                                                            document.getElementById('more4multipleInput').style.display = 'none'
+
+                                                                        } else if (selectedOption === "Roundtrip") {
+                                                                            document.getElementById('more2multipleInput').style.display = 'none'
+                                                                            document.getElementById('oneWaynput').style.display = 'none';
+                                                                            document.getElementById('roundTripInput').style.display = 'block';
+                                                                            document.getElementById('multipleInput').style.display = 'none';
+                                                                            document.getElementById('more3multipleInput').style.display = 'none'
+                                                                            document.getElementById('more4multipleInput').style.display = 'none'
+
+                                                                        } else if (selectedOption === "multiple") {
+                                                                            document.getElementById('oneWaynput').style.display = 'none';
+                                                                            document.getElementById('roundTripInput').style.display = 'none';
+                                                                            document.getElementById('multipleInput').style.display = 'block';
+
+                                                                        }
+                                                                        if (selectedPurpose === "Others") {
+                                                                            document.getElementById('txtOtherPurpose').style.display = 'block';
+                                                                            document.getElementById('labelothers').style.display = 'block'
+                                                                        } else {
+                                                                            document.getElementById('txtOtherPurpose').style.display = 'none';
+                                                                            document.getElementById('labelothers').style.display = 'none';
+                                                                            document.getElementById('txtOtherPurpose').value = '';
+                                                                        }
+
+                                                                    }
+                                                                    function addMoreInput() {
+                                                                        document.getElementById('more2multipleInput').style.display = 'block'
+                                                                        document.getElementById('oneWaynput').style.display = 'none';
+                                                                        document.getElementById('roundTripInput').style.display = 'none';
+                                                                        document.getElementById('multipleInput').style.display = 'block';
+
+
+                                                                    }
+                                                                    function addMore2Input() {
+                                                                        document.getElementById('more2multipleInput').style.display = 'block'
+                                                                        document.getElementById('oneWaynput').style.display = 'none';
+                                                                        document.getElementById('roundTripInput').style.display = 'none';
+                                                                        document.getElementById('multipleInput').style.display = 'block';
+                                                                        document.getElementById('more3multipleInput').style.display = 'block'
+
+
+                                                                    }
+                                                                    function addMore3Input() {
+                                                                        document.getElementById('more2multipleInput').style.display = 'block'
+                                                                        document.getElementById('oneWaynput').style.display = 'none';
+                                                                        document.getElementById('roundTripInput').style.display = 'none';
+                                                                        document.getElementById('multipleInput').style.display = 'block';
+                                                                        document.getElementById('more3multipleInput').style.display = 'block'
+                                                                        document.getElementById('more4multipleInput').style.display = 'block'
+                                                                    }
+
+                                                                </script>                                                       
 
                                                   
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn"/>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="draftButton"  Style="margin-left:20px" OnClick="submitRequestbtn_Click"/>
-
+                                                              <asp:Button ID="submit" runat="server" Text="Submit Request"  class="btn btn-primary"   OnClick="submit_Click"/>
+                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="draftButton"  Style="margin-left:20px" />
                                                          
                                            </div> 
                                     
