@@ -231,13 +231,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label6;
 
         /// <summary>
-        /// employeeFacility control.
+        /// employeeDeparture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeFacility;
+        protected global::System.Web.UI.WebControls.TextBox employeeDeparture;
 
         /// <summary>
         /// RequiredFieldValidator6 control.
@@ -258,13 +258,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label10;
 
         /// <summary>
-        /// employeeDestination control.
+        /// employeeArrival control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeDestination;
+        protected global::System.Web.UI.WebControls.TextBox employeeArrival;
 
         /// <summary>
         /// RequiredFieldValidator9 control.
@@ -285,13 +285,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label Label11;
 
         /// <summary>
-        /// employeeDeparture control.
+        /// employeeDepartureDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeDeparture;
+        protected global::System.Web.UI.WebControls.TextBox employeeDepartureDate;
 
         /// <summary>
         /// RequiredFieldValidator10 control.
@@ -1185,12 +1185,12 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator15;
 
         /// <summary>
-        /// submitRequestbtn control.
+        /// submitRequest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button submitRequestbtn;
+        protected global::System.Web.UI.WebControls.Button submitRequest;
     }
 }

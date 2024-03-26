@@ -37,7 +37,7 @@
             font-size:14px;
         }
         .auto-style14 {
-            margin-left: 1;
+            margin-left: 1px;
         }
     </style>
 </asp:Content>
@@ -73,6 +73,7 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                          <div class="page-body">
+
                                                 <div class="card" style="color:black;">
                                                     <div class="card-header" style="background-color:#09426a">
                                                         <h5 style="color:white">Domestic Travel Request Form</h5>
@@ -137,18 +138,18 @@
                                                             </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label6" runat="server" Text="Departing From" ></asp:Label>
-                                                                <asp:TextBox ID="employeeFacility" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
+                                                                <asp:TextBox ID="employeeDeparture" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label10" runat="server" Text="Arriving To" style="padding-left:150px" ></asp:Label>
-                                                                <asp:TextBox ID="employeeDestination" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
+                                                                <asp:TextBox ID="employeeArrival" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeArrival"></asp:RequiredFieldValidator>
 
                                                             </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label11" runat="server" Text="Date of Departure"></asp:Label>
                                                        
-                                                                <asp:TextBox ID="employeeDeparture" TextMode="Date" runat="server"  CssClass="m-l-50" Width="342px"></asp:TextBox>
+                                                                <asp:TextBox ID="employeeDepartureDate" TextMode="Date" runat="server"  CssClass="m-l-50" Width="342px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label12" runat="server" Text="Date of Return"  style="padding-left:150px"></asp:Label>
@@ -158,7 +159,7 @@
                                                             </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label13" runat="server" Text="Purpose of Travel"></asp:Label >
-                                                                <asp:DropDownList ID="employeePurpose" runat="server" CssClass="m-l-50" Width="343px" onchange="checkSelection()">
+                                                                <asp:DropDownList ID="employeePurpose" runat="server" CssClass="m-l-50" Width="343px" onchange="othersSelection()">
                                                                     <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True"/>
                                                                     <asp:ListItem Text="Strategic Planning" Value="Strategic Planning" />
                                                                     <asp:ListItem Text="Facility Visit" Value="Client Meeting" />
@@ -182,7 +183,7 @@
                                                             </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label3" runat="server" Text="Flight Options"></asp:Label>
-                                                                <asp:DropDownList ID="flightOptions" runat="server" CssClass="m-l-50" Width="343px" onchange="checkSelection()" style="margin-left:70px">
+                                                                <asp:DropDownList ID="flightOptions" runat="server" CssClass="m-l-50" Width="343px" onchange="flightSelection()" style="margin-left:70px">
                                                                     <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True"/>
                                                                     <asp:ListItem Text="One Way" Value="One Way" />
                                                                     <asp:ListItem Text="Round trip" Value="Roundtrip" />
@@ -192,71 +193,71 @@
                                                             <div class="card-block" style="display:none" id="oneWaynput">
                                                                 <asp:Label ID="Label4" runat="server" Text="Departing From" ></asp:Label>
                                                                 <asp:TextBox ID="onewayFrom" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayFrom"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label21" runat="server" Text="Departing To" style="padding-left:150px" ></asp:Label>
                                                                 <asp:TextBox ID="onewayTo" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayTo"></asp:RequiredFieldValidator>
 
                                                             </div>
                                                             <div class="card-block" style="display:none" id="roundTripInput">
                                                                 <asp:Label ID="Label22" runat="server" Text="1. Departing From" ></asp:Label>
                                                                 <asp:TextBox ID="round1From" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round1From"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label23" runat="server" Text="1. Departing To" style="padding-left:150px" ></asp:Label>
                                                                 <asp:TextBox ID="round1To" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round1To"></asp:RequiredFieldValidator>
                                                                     <br /><br />
                                                                 <asp:Label ID="Label24" runat="server" Text="2. Departing From" ></asp:Label>
                                                                 <asp:TextBox ID="round2From" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round2From"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label25" runat="server" Text="2. Departing To" style="padding-left:150px" ></asp:Label>
                                                                 <asp:TextBox ID="round2To" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round2To"></asp:RequiredFieldValidator>
 
                                                             </div>
                                                             <div class="card-block" style="display:none" id="multipleInput">
                                                                 <asp:Label ID="Label34" runat="server" Text="1st Destination:" ></asp:Label><br />
                                                                 <asp:Label ID="Label26" runat="server" Text="1. Departing From" ></asp:Label>
                                                                 <asp:TextBox ID="TextBox7" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox7"></asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Label30" runat="server" Text="Date" style="margin-left:30px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox11" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox11"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label27" runat="server" Text="Departing To" style="padding-left:150px" ></asp:Label>
                                                                 <asp:TextBox ID="TextBox8" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox8"></asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Label31" runat="server" Text="Date" style="margin-left:30px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox12" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox12"></asp:RequiredFieldValidator>
         
                                                                 <br /><hr />
                                                                 <asp:Label ID="Label35" runat="server" Text="2nd Destination:" ></asp:Label><br />
                                                                 <asp:Label ID="Label28" runat="server" Text="2. Departing From" ></asp:Label>
                                                                 <asp:TextBox ID="TextBox9" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox9"></asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Label32" runat="server" Text="Date" style="margin-left:30px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox13" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox13"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label29" runat="server" Text="Departing To" style="padding-left:150px" ></asp:Label>
                                                                 <asp:TextBox ID="TextBox10" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDestination"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox10"></asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Label33" runat="server" Text="Date" style="margin-left:30px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox14" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox14"></asp:RequiredFieldValidator>
                                                                 <asp:Button runat="server" class="btn btn-primary" Text="+" OnClientClick="addMoreInput()"/> <hr />
                                                             <div style="display:none" id="more2multipleInput">
                                                                 <asp:Label ID="Label36" runat="server" Text="3rd Destination:" ></asp:Label><br />
                                                                 <asp:Label ID="Label37" runat="server" Text="3. Departing From" ></asp:Label>
                                                                 <asp:TextBox ID="TextBox15" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox> 
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFacility"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox15"></asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Label38" runat="server" Text="Date" style="margin-left:30px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox16" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox16"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label39" runat="server" Text="Departing To" style="padding-left:150px" ></asp:Label>
                                                                 <asp:TextBox ID="TextBox17" runat="server"  Width="260px" style="margin-left:80px"></asp:TextBox>
@@ -329,113 +330,6 @@
                                                                     </div>
                                                                 </div>
 
-                                                                 <script type="text/javascript">
-                                                                     function checkSelection() {
-                                                                         // Approval dropdown
-                                                                         var ddl = document.getElementById('<%= employeeApproval.ClientID %>');
-                                                                        var selectedValue = ddl ? ddl.options[ddl.selectedIndex].value : null;
-
-                                                                        // Flight options dropdown
-                                                                        var flightOptions = document.getElementById('<%= flightOptions.ClientID %>');
-                                                                        var selectedOption = flightOptions ? flightOptions.options[flightOptions.selectedIndex].value : null;
-
-                                                                        // Purpose dropdown
-                                                                        var employeePurpose = document.getElementById('<%= employeePurpose.ClientID %>');
-                                                                        var selectedPurpose = employeePurpose ? employeePurpose.options[employeePurpose.selectedIndex].value : null;
-
-                                                                        // Approval
-                                                                        if (selectedValue === "0") {
-                                                                            // Display the NO modal
-                                                                            $('#noModal').modal('show');
-                                                                            var uploadBlock = document.getElementById('uploadBlock');
-                                                                            if (uploadBlock) {
-                                                                                uploadBlock.style.display = 'none';
-                                                                            }
-                                                                        } else if (selectedValue == "1") {
-                                                                            // Display YES modal
-                                                                            $('#yesModal').modal('show');
-                                                                            var uploadBlock = document.getElementById('uploadBlock');
-                                                                            if (uploadBlock) {
-                                                                                uploadBlock.style.display = 'block';
-                                                                            }
-                                                                        }
-
-                                                                        // Flight options
-                                                                        if (selectedOption === "One Way") {
-                                                                            document.getElementById('more2multipleInput').style.display = 'none';
-                                                                            document.getElementById('oneWaynput').style.display = 'block';
-                                                                            document.getElementById('roundTripInput').style.display = 'none';
-                                                                            document.getElementById('multipleInput').style.display = 'none';
-                                                                            document.getElementById('more3multipleInput').style.display = 'none';
-                                                                            document.getElementById('more4multipleInput').style.display = 'none';
-                                                                        } else if (selectedOption === "Roundtrip") {
-                                                                            document.getElementById('more2multipleInput').style.display = 'none';
-                                                                            document.getElementById('oneWaynput').style.display = 'none';
-                                                                            document.getElementById('roundTripInput').style.display = 'block';
-                                                                            document.getElementById('multipleInput').style.display = 'none';
-                                                                            document.getElementById('more3multipleInput').style.display = 'none';
-                                                                            document.getElementById('more4multipleInput').style.display = 'none';
-                                                                        } else if (selectedOption === "multiple") {
-                                                                            document.getElementById('oneWaynput').style.display = 'none';
-                                                                            document.getElementById('roundTripInput').style.display = 'none';
-                                                                            document.getElementById('multipleInput').style.display = 'block';
-                                                                        }
-
-                                                                        // Purpose
-                                                                        if (selectedPurpose === "Others") {
-                                                                            var otherspecified = document.getElementById('<%= otherspecified.ClientID %>');
-                                                                            var label14 = document.getElementById('<%= Label14.ClientID %>');
-                                                                            if (otherspecified) {
-                                                                                otherspecified.style.display = 'block';
-                                                                            }
-                                                                            if (label14) {
-                                                                                label14.style.display = 'block';
-                                                                            }
-                                                                        }
-                                                                        else {
-                                                                            var otherspecified = document.getElementById('<%= otherspecified.ClientID %>');
-                                                                            var label14 = document.getElementById('<%= Label14.ClientID %>');
-
-                                                                             if (otherspecified) {
-                                                                                 otherspecified.style.display = 'none';
-                                                                             }
-                                                                             if (label14) {
-                                                                                 label14.style.display = 'none';
-                                                                             }
-                                                                             if (otherspecified) {
-                                                                                 otherspecified.value = '';
-                                                                             }
-                                                                        }
-                                                                    }
-
-
-                                                                 function addMoreInput() {
-                                                                     document.getElementById('more2multipleInput').style.display = 'block'
-                                                                     document.getElementById('oneWaynput').style.display = 'none';
-                                                                     document.getElementById('roundTripInput').style.display = 'none';
-                                                                     document.getElementById('multipleInput').style.display = 'block';
-
-
-                                                                 }
-                                                                 function addMore2Input() {
-                                                                     document.getElementById('more2multipleInput').style.display = 'block'
-                                                                     document.getElementById('oneWaynput').style.display = 'none';
-                                                                     document.getElementById('roundTripInput').style.display = 'none';
-                                                                     document.getElementById('multipleInput').style.display = 'block';
-                                                                     document.getElementById('more3multipleInput').style.display = 'block'
-
-
-                                                                 }
-                                                                 function addMore3Input() {
-                                                                     document.getElementById('more2multipleInput').style.display = 'block'
-                                                                     document.getElementById('oneWaynput').style.display = 'none';
-                                                                     document.getElementById('roundTripInput').style.display = 'none';
-                                                                     document.getElementById('multipleInput').style.display = 'block';
-                                                                     document.getElementById('more3multipleInput').style.display = 'block'
-                                                                     document.getElementById('more4multipleInput').style.display = 'block'
-                                                                 }
-
-                                                                 </script>                                                        
                                                     
                                                         
                                                                 <!--MODAL FOR THE YES OPTION -->
@@ -486,9 +380,124 @@
                                                             </div>
                                                     </div>
                                                  </div>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn" OnClick="submitRequestbtn_Click"/>
 
-<%--                                                 <asp:Button runat="server" class="btn btn-primary" ID="submitBtn" Text="SUBMIT" OnClick="submitBtn_Click"/>--%>
+                                                            <script type="text/javascript">
+                                                                     function othersSelection() {
+                                                                         // Purpose dropdown
+                                                                         var employeePurpose = document.getElementById('<%= employeePurpose.ClientID %>');
+                                                                         var selectedPurpose = employeePurpose ? employeePurpose.options[employeePurpose.selectedIndex].value : null;
+
+                                                                         // Purpose
+                                                                         if (selectedPurpose === "Others") {
+                                                                             var otherspecified = document.getElementById('<%= otherspecified.ClientID %>');
+                                                                             var label14 = document.getElementById('<%= Label14.ClientID %>');
+                                                                             if (otherspecified) {
+                                                                                 otherspecified.style.display = 'block';
+                                                                             }
+                                                                             if (label14) {
+                                                                                 label14.style.display = 'block';
+                                                                             }
+                                                                         }
+                                                                         else {
+                                                                             var otherspecified = document.getElementById('<%= otherspecified.ClientID %>');
+                                                                             var label14 = document.getElementById('<%= Label14.ClientID %>');
+
+                                                                             if (otherspecified) {
+                                                                                 otherspecified.style.display = 'none';
+                                                                             }
+                                                                             if (label14) {
+                                                                                 label14.style.display = 'none';
+                                                                             }
+                                                                             if (otherspecified) {
+                                                                                 otherspecified.value = '';
+                                                                             }
+                                                                         }
+
+
+                                                                     }
+                                                                     function flightSelection() {
+                                                                         // Flight options dropdown
+                                                                         var flightOptions = document.getElementById('<%= flightOptions.ClientID %>');
+                                                                         var selectedOption = flightOptions ? flightOptions.options[flightOptions.selectedIndex].value : null;
+
+                                                                         // Flight options
+                                                                         if (selectedOption === "One Way") {
+                                                                             document.getElementById('more2multipleInput').style.display = 'none';
+                                                                             document.getElementById('oneWaynput').style.display = 'block';
+                                                                             document.getElementById('roundTripInput').style.display = 'none';
+                                                                             document.getElementById('multipleInput').style.display = 'none';
+                                                                             document.getElementById('more3multipleInput').style.display = 'none';
+                                                                             document.getElementById('more4multipleInput').style.display = 'none';
+                                                                         } else if (selectedOption === "Roundtrip") {
+                                                                             document.getElementById('more2multipleInput').style.display = 'none';
+                                                                             document.getElementById('oneWaynput').style.display = 'none';
+                                                                             document.getElementById('roundTripInput').style.display = 'block';
+                                                                             document.getElementById('multipleInput').style.display = 'none';
+                                                                             document.getElementById('more3multipleInput').style.display = 'none';
+                                                                             document.getElementById('more4multipleInput').style.display = 'none';
+                                                                         } else if (selectedOption === "multiple") {
+                                                                             document.getElementById('oneWaynput').style.display = 'none';
+                                                                             document.getElementById('roundTripInput').style.display = 'none';
+                                                                             document.getElementById('multipleInput').style.display = 'block';
+                                                                         }
+
+
+                                                                     }
+                                                                     function checkSelection() {
+                                                                         // Approval dropdown
+                                                                         var ddl = document.getElementById('<%= employeeApproval.ClientID %>');
+                                                                         var selectedValue = ddl ? ddl.options[ddl.selectedIndex].value : null;
+
+
+                                                                         // Approval
+                                                                         if (selectedValue === "0") {
+                                                                             // Display the NO modal
+                                                                             $('#noModal').modal('show');
+                                                                             var uploadBlock = document.getElementById('uploadBlock');
+                                                                             if (uploadBlock) {
+                                                                                 uploadBlock.style.display = 'none';
+                                                                             }
+                                                                         } else if (selectedValue == "1") {
+                                                                             // Display YES modal
+                                                                             $('#yesModal').modal('show');
+                                                                             var uploadBlock = document.getElementById('uploadBlock');
+                                                                             if (uploadBlock) {
+                                                                                 uploadBlock.style.display = 'block';
+                                                                             }
+                                                                         }
+
+                                                                     }
+
+
+                                                                     function addMoreInput() {
+                                                                         document.getElementById('more2multipleInput').style.display = 'block'
+                                                                         document.getElementById('oneWaynput').style.display = 'none';
+                                                                         document.getElementById('roundTripInput').style.display = 'none';
+                                                                         document.getElementById('multipleInput').style.display = 'block';
+
+
+                                                                     }
+                                                                     function addMore2Input() {
+                                                                         document.getElementById('more2multipleInput').style.display = 'block'
+                                                                         document.getElementById('oneWaynput').style.display = 'none';
+                                                                         document.getElementById('roundTripInput').style.display = 'none';
+                                                                         document.getElementById('multipleInput').style.display = 'block';
+                                                                         document.getElementById('more3multipleInput').style.display = 'block'
+
+
+                                                                     }
+                                                                     function addMore3Input() {
+                                                                         document.getElementById('more2multipleInput').style.display = 'block'
+                                                                         document.getElementById('oneWaynput').style.display = 'none';
+                                                                         document.getElementById('roundTripInput').style.display = 'none';
+                                                                         document.getElementById('multipleInput').style.display = 'block';
+                                                                         document.getElementById('more3multipleInput').style.display = 'block'
+                                                                         document.getElementById('more4multipleInput').style.display = 'block'
+                                                                     }
+
+                                                                 </script>      
+
+                                              <asp:Button ID="submitRequest" runat="server" Text="Submit Request" OnClick="submitRequest_Click" CssClass="btn btn-primary"/>                       
 
                                            </div>
                                     
