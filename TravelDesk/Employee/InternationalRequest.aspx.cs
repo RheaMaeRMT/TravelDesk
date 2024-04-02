@@ -174,7 +174,9 @@ namespace TravelDesk.Employee
 
                         if (ctr >= 1)
                         {
-                            checkPdfFile();
+                            Response.Write("<script>alert ('International Travel Request Submitted!'); window.location.href = 'ListofRequests.aspx'; </script>");
+
+                            //checkPdfFile();
                            
 
                         }
@@ -250,58 +252,115 @@ namespace TravelDesk.Employee
 
         }
 
+        //protected void btnUpload_Click(object sender, EventArgs e)
+        //{
+
+        //    string saveDIR = Server.MapPath("/approvalProofs");
+
+        //    try
+        //    {
+        //        if (employeeUpload.HasFile)
+        //        {
+        //            string filename = Server.HtmlEncode(employeeUpload.FileName);
+        //            string extension = System.IO.Path.GetExtension(filename).ToLower();
+        //            int filesize = employeeUpload.PostedFile.ContentLength;
+
+        //            if (extension == ".pdf")
+        //            {
+        //                if (filesize < 5100000)
+        //                {
+        //                    string savePath = System.IO.Path.Combine(saveDIR, filename);
+        //                    employeeUpload.SaveAs(savePath);
+
+        //                    // Store file path in session
+        //                    Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
+        //                    Session["filename"] = filename;
+
+        //                    //// Set the source of the iframe to the PDF file path
+        //                    //pdfViewer.Attributes["src"] = Session["pdfPath"].ToString();
+
+        //                    //// Show the PDF viewer
+        //                    //pdfViewer.Style["display"] = "block";
+
+        //                    Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+        //                }
+        //                else
+        //                {
+        //                    Response.Write("<script>alert('Your file was not uploaded because its size is more than 5MB.')</script>");
+        //                }
+        //            }
+        //            else
+        //            {
+        //                Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as a proof of your travel approval.')</script>");
+        //            }
+
+        //        }
+        //        else
+        //        {
+        //            Response.Write("<script>alert('Upload Failed: Try again')</script>");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre><script>alert('" + ex.Message + "');</script>");
+        //    }
+        //}
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-
             string saveDIR = Server.MapPath("/approvalProofs");
-
             try
             {
                 if (employeeUpload.HasFile)
                 {
                     string filename = Server.HtmlEncode(employeeUpload.FileName);
-                    string extension = System.IO.Path.GetExtension(filename).ToLower();
+                    string extension = System.IO.Path.GetExtension(filename);
                     int filesize = employeeUpload.PostedFile.ContentLength;
-
-                    if (extension == ".pdf")
+                    if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
                     {
-                        if (filesize < 5100000)
-                        {
-                            string savePath = System.IO.Path.Combine(saveDIR, filename);
-                            employeeUpload.SaveAs(savePath);
-
-                            // Store file path in session
-                            Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
-                            Session["filename"] = filename;
-
-                            //// Set the source of the iframe to the PDF file path
-                            //pdfViewer.Attributes["src"] = Session["pdfPath"].ToString();
-
-                            //// Show the PDF viewer
-                            //pdfViewer.Style["display"] = "block";
-
-                            Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
-                        }
-                        else
-                        {
-                            Response.Write("<script>alert('Your file was not uploaded because its size is more than 5MB.')</script>");
-                        }
+                        uploadStatus.InnerText = "File already exist";
                     }
                     else
                     {
-                        Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as a proof of your travel approval.')</script>");
-                    }
+                        if ((extension == ".jpg") || (extension == ".jpeg") || (extension == ".png") || (extension == ".JPG") || (extension == ".JPEG") || (extension == ".PNG"))
+                        {
+                            if (filesize < 4100000)
+                            {
+                                string savePath = System.IO.Path.Combine(saveDIR, filename);
+                                employeeUpload.SaveAs(savePath);
+                                productImage.Visible = true;
+                                productImage.ImageUrl = System.IO.Path.Combine("/approvalProofs/", filename);
+                                Session["imgPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
+                                Session["filename"] = filename;
 
+
+                                Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+
+                                // Write session values to the console
+                                Console.WriteLine("imgPath: " + Session["imgPath"]);
+                                Console.WriteLine("filename: " + Session["filename"]);
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Your file was not uploaded because image size is more than 4MB')</script>");
+
+                            }
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Invalid File Upload. Please upload an image as a proof of your travel approval')</script>");
+                        }
+                    }
                 }
                 else
                 {
-                    Response.Write("<script>alert('Upload Failed: Try again')</script>");
+                    uploadStatus.InnerText = "Upload Failed: Try again";
                 }
             }
             catch (Exception ex)
             {
                 Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre><script>alert('" + ex.Message + "');</script>");
             }
+
         }
 
         private void checkPdfFile()

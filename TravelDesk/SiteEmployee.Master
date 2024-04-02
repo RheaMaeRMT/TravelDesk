@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteEmployee.master.cs" Inherits="TravelDesk.SiteEmployee" %>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -67,17 +66,6 @@
                             <a class="mobile-menu waves-effect waves-light text-left" id="mobile-collapse" href="#!">
                                 <i class="ti-menu"></i>
                             </a>
-                            <div class="mobile-search waves-effect waves-light">
-                                <div class="header-search">
-                                    <div class="main-search morphsearch-search">
-                                        <div class="input-group">
-                                            <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                            <input type="text" class="form-control" placeholder="Enter Keyword">
-                                            <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <a class="mobile-options waves-effect waves-light">
                                 <i class="ti-more"></i>
                             </a>
@@ -191,7 +179,6 @@
         <script type="text/javascript" src="/assets/js/bootstrap/js/bootstrap.min.js "></script>
         <script type="text/javascript" src="/assets/pages/widget/excanvas.js "></script>
         <!-- waves js -->
-        <script src="assets/pages/waves/js/waves.min.js"></script>
         <!-- jquery slimscroll js -->
         <script type="text/javascript" src="/assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
         <!-- modernizr js -->
@@ -200,7 +187,6 @@
         <script type="text/javascript" src="/assets/js/SmoothScroll.js"></script>
         <script src="/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
         <!-- Chart js -->
-        <script type="text/javascript" src="assets/js/chart.js/Chart.js"></script>
         <!-- amchart js -->
         <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
         <script src="/assets/pages/widget/amchart/gauge.js"></script>

@@ -346,9 +346,9 @@
 
                                                             </div> <br />
         
-<%--                                                                <div class="col-md-5">
-                                                                    <iframe id="pdfViewer" runat="server" width="100%" height="500px" style="display:none;"></iframe>
-                                                                </div>--%>
+                                                                <div class="col-md-5">
+                                                                    <asp:Image CssClass="img-fluid img-thumbnail" ID="productImage" runat="server" Visible="False" />
+                                                                </div>
 
                                                             
                                                             <div class="card-block">
