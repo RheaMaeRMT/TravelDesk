@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 <!--javascript for the dropdown: manager approval options-->
                                 <script type="text/javascript">
                                     function showHideOthers(dropdown) {
@@ -17,47 +16,25 @@
                                                                         othersTextbox.style.display = 'none';
                                                                     }
                                     }
-
                                     function flightSelection() {
                                         // Flight options dropdown
                                         var flightOptions = document.getElementById('<%= flightOptions.ClientID %>');
                                         var selectedOption = flightOptions ? flightOptions.options[flightOptions.selectedIndex].value : null;
-
-                                        // Flight options
-//                                        if (selectedOption === "One Way") {
-///*                                            document.getElementById('more2multipleInput').style.display = 'none';*/
-//                                            document.getElementById('oneWaynput').style.display = 'block';
-//                                            document.getElementById('roundTripInput').style.display = 'none';
-//                                            document.getElementById('multipleInput').style.display = 'none';
-//                                            //document.getElementById('more3multipleInput').style.display = 'none';
-//                                            //document.getElementById('more4multipleInput').style.display = 'none';
-//                                        } else if (selectedOption === "Roundtrip") {
-///*                                            document.getElementById('more2multipleInput').style.display = 'none';*/
-//                                            document.getElementById('oneWaynput').style.display = 'none';
-//                                            document.getElementById('roundTripInput').style.display = 'block';
-//                                            document.getElementById('multipleInput').style.display = 'none';
-//                                            //document.getElementById('more3multipleInput').style.display = 'none';
-//                                            //document.getElementById('more4multipleInput').style.display = 'none';
-//                                        } else if (selectedOption === "multiple") {
-//                                            document.getElementById('oneWaynput').style.display = 'none';
-//                                            document.getElementById('roundTripInput').style.display = 'none';
-//                                            document.getElementById('multipleInput').style.display = 'block';
-//                                        }
                                         if (selectedOption === "One Way") {
                                             document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'block';
-                                                document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'none';
-                                                document.getElementById('<%= multipleInput.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= multipleInput.ClientID %>').style.display = 'none'
                                         } else if (selectedOption === "Roundtrip") {
-                                                document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'none';
-                                                document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'block';
-                                                document.getElementById('<%= multipleInput.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'block';
+                                            document.getElementById('<%= multipleInput.ClientID %>').style.display = 'none';
                                         } else if (selectedOption === "multiple") {
-                                                document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'none';
-                                                document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'none';
-                                                document.getElementById('<%= multipleInput.ClientID %>').style.display = 'block';
-                                         }
-                                        
+                                            document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= multipleInput.ClientID %>').style.display = 'block';
 
+
+                                        }
                                     }
                                     function checkSelection() {
                                         // Approval dropdown
@@ -69,23 +46,17 @@
                                         if (selectedValue === "0") {
                                             // Display the NO modal
                                             $('#noModal').modal('show');
-                                            var uploadBlock = document.getElementById('uploadBlock');
-                                            if (uploadBlock) {
-                                                uploadBlock.style.display = 'none';
-                                            }
+                                            document.getElementById('<%=uploadBlock.ClientID%>').style.display = 'none';                                  
                                         } else if (selectedValue == "1") {
                                             // Display YES modal
                                             $('#yesModal').modal('show');
-                                            var uploadBlock = document.getElementById('uploadBlock');
-                                            if (uploadBlock) {
-                                                uploadBlock.style.display = 'block';
-                                            }
+                                            document.getElementById('<%=uploadBlock.ClientID%>').style.display = 'block';
                                         }
 
                                     }
 
                                     function add3rd(button) {
-                                        document.getElementById('destination3').style.display = 'block';
+                                        document.getElementById('<%= additionalFields.ClientID %>').style.display = 'block';
                                     }
                                     function add4th(button) {
                                         document.getElementById('destination4').style.display = 'block';
@@ -97,6 +68,7 @@
 
 
                                 </script>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <style>
@@ -231,27 +203,6 @@
                                                                 <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Travel Information</p>
                                                             </div>
                                                             <div class="card-block">
-                                                                <asp:Label ID="Label4" runat="server" Text="Departing From"></asp:Label>
-                                                                <asp:TextBox ID="employeeFrom" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox>
-                                                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>--%>
-
-                                                                <asp:Label ID="Label9" runat="server" Text="Arriving To" Style="padding-left: 150px"></asp:Label>
-                                                                <asp:TextBox ID="employeeTo" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-                                                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeArrival"></asp:RequiredFieldValidator>--%>
-                                                            </div>
-
-                                                            <div class="card-block">
-                                                                <asp:Label ID="Label6" runat="server" Text="Date of Departure"></asp:Label>
-                                                                <asp:TextBox ID="employeeDepartureDate" TextMode="Date" runat="server" Width="300px" Style="margin-left: 60px"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDepartureDate"></asp:RequiredFieldValidator>--%>
-
-                                                                <asp:Label ID="Label5" runat="server" Text="Date of Return" Style="padding-left: 150px"></asp:Label>
-                                                                <asp:TextBox ID="employeeArrivalDate" runat="server" TextMode="Date" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeArrivalDate"></asp:RequiredFieldValidator>--%>
-
-
-                                                            </div>
-                                                            <div class="card-block">
                                                                 <asp:Label ID="Label13" runat="server" Text="Purpose of Travel"></asp:Label>
                                                                 <asp:DropDownList ID="employeePurpose" runat="server" CssClass="m-l-50" Width="343px" onchange="showHideOthers(this)">
                                                                     <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True" />
@@ -265,6 +216,28 @@
                                                                 <br /><br />
                                                                 <asp:Label ID="Label14" runat="server" Text="Others, please specify... " Style="display: none;"></asp:Label>
                                                                 <asp:TextBox ID="otherspecified" runat="server" Width="320px" TextMode="MultiLine" Style="margin-left: 170px; display: none"></asp:TextBox>
+                                                            </div>
+
+                                                            <div class="card-block">
+                                                                <asp:Label ID="Label4" runat="server" Text="Departing From"></asp:Label>
+                                                                <asp:TextBox ID="employeeFrom" runat="server" Width="343px" CssClass="auto-style11"></asp:TextBox>
+                                                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>--%>
+
+                                                                <asp:Label ID="Label9" runat="server" Text="Arriving To" Style="padding-left: 150px"></asp:Label>
+                                                                <asp:TextBox ID="employeeTo" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
+                                                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeArrival"></asp:RequiredFieldValidator>--%>
+                                                            </div>
+
+                                                            <div class="card-block">
+                                                                <asp:Label ID="Label6" runat="server" Text="Date of Departure"></asp:Label>
+                                                                <asp:TextBox ID="employeeDepartureDate" TextMode="Date" runat="server" Width="100px" Style="margin-left: 60px"></asp:TextBox>
+<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDepartureDate"></asp:RequiredFieldValidator>--%>
+
+                                                                <asp:Label ID="Label5" runat="server" Text="Date of Return" Style="padding-left: 150px"></asp:Label>
+                                                                <asp:TextBox ID="employeeArrivalDate" runat="server" TextMode="Date" Width="100px" Style="margin-left: 80px"></asp:TextBox>
+<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeArrivalDate"></asp:RequiredFieldValidator>--%>
+
+
                                                             </div>
 
                                         <!--FLIGHT INFORMATION-->
@@ -316,90 +289,92 @@
                                                     <asp:Label ID="Label34" runat="server" Text="1st Destination:"></asp:Label><br />
                                                     <asp:Label ID="Label26" runat="server" Text="1. Departing From"></asp:Label>
                                                     <asp:TextBox ID="TextBox7" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-<%--                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox7"></asp:RequiredFieldValidator>--%>
+                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox7"></asp:RequiredFieldValidator>
                                                    
                                                     <asp:Label ID="Label30" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox11" TextMode="Date" runat="server"  Width="260px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox11"></asp:RequiredFieldValidator>--%>
+                                                    <asp:TextBox ID="TextBox11" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox11"></asp:RequiredFieldValidator>
                                                     
-                                                    <asp:Label ID="Label27" runat="server" Text="Departing To" Style="padding-left: 150px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox8" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox8"></asp:RequiredFieldValidator>--%>
+                                                    <asp:Label ID="Label27" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
+                                                    <asp:TextBox ID="TextBox8" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox8"></asp:RequiredFieldValidator>
                                                     <asp:Label ID="Label31" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox12" TextMode="Date" runat="server"  Width="260px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox12"></asp:RequiredFieldValidator>--%>
-                                                 </div>  
+                                                    <asp:TextBox ID="TextBox12" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox12"></asp:RequiredFieldValidator>
+                                                 </div>   <br />
                                                 <div id="destination2">
                                                     <!--SECOND DESTINATION-->
                                                     <asp:Label ID="Label35" runat="server" Text="2nd Destination:"></asp:Label><br />
                                                     <asp:Label ID="Label28" runat="server" Text="2. Departing From"></asp:Label>
                                                     <asp:TextBox ID="TextBox9" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox9"></asp:RequiredFieldValidator>--%>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox9"></asp:RequiredFieldValidator>
                                                     <asp:Label ID="Label32" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox13" TextMode="Date" runat="server" Width="260px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox13"></asp:RequiredFieldValidator>--%>
+                                                    <asp:TextBox ID="TextBox13" TextMode="Date" runat="server" Width="100px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox13"></asp:RequiredFieldValidator>
 
-                                                    <asp:Label ID="Label29" runat="server" Text="Departing To" Style="padding-left: 150px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox10" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox10"></asp:RequiredFieldValidator>--%>
+                                                    <asp:Label ID="Label29" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
+                                                    <asp:TextBox ID="TextBox10" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox10"></asp:RequiredFieldValidator>
                                                     <asp:Label ID="Label33" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox14" TextMode="Date" runat="server" Width="260px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox14"></asp:RequiredFieldValidator>--%>
-                                              <asp:Button runat="server" ID="add3rd" class="btn btn-primary" Text="+"  OnClientClick="add3rd(); return false;" CausesValidation="False" />
+                                                    <asp:TextBox ID="TextBox14" TextMode="Date" runat="server" Width="100px"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox14"></asp:RequiredFieldValidator>
+                                                    <asp:Button runat="server" ID="add3rd" class="btn btn-primary" Text="+"  OnClientClick="add3rd(); return false;" CausesValidation="False" />
 
-                                                </div>
-                                                             <div id="destination3" style="display:none">
+                                                </div>                                                   
+                                            </div>
+                                                    <div class="card-block" style="display:none" id="additionalFields" runat="server"> <hr />
+                                                             <div id="destination3">
                                                                  <!--THIRD DESTINATION-->
                                                                 <asp:Label ID="Label36" runat="server" Text="3rd Destination:"></asp:Label><br />
                                                                 <asp:Label ID="Label37" runat="server" Text="3. Departing From"></asp:Label>
                                                                 <asp:TextBox ID="TextBox15" runat="server" Width="260px" CssClass="auto-style11"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox15"></asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Label38" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                <asp:TextBox ID="TextBox16" TextMode="Date" runat="server"  Width="260px"></asp:TextBox>
+                                                                <asp:TextBox ID="TextBox16" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox16"></asp:RequiredFieldValidator>
 
-                                                                <asp:Label ID="Label39" runat="server" Text="Departing To" Style="padding-left: 150px"></asp:Label>
-                                                                <asp:TextBox ID="TextBox17" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
+                                                                <asp:Label ID="Label39" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
+                                                                <asp:TextBox ID="TextBox17" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator32" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox17"></asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Label40" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                <asp:TextBox ID="TextBox18" TextMode="Date" runat="server"  Width="260px"></asp:TextBox>
-                                                                 <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4th();  return false;"  CausesValidation="False" />
+                                                                <asp:TextBox ID="TextBox18" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                                 <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
                                                                 </div>
-                                                                <div id="destination4" style="display:none">
+                                                             <div id="destination4" style="display:none">
                                                                             <!--FOURTH DESTINATION-->
                                                                             <asp:Label ID="Label51" runat="server" Text="4th Destination:"></asp:Label><br />
                                                                             <asp:Label ID="Label52" runat="server" Text="4. Departing From"></asp:Label>
                                                                             <asp:TextBox ID="TextBox27" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
 
-                                                                            <asp:Label ID="Label53" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                            <asp:TextBox ID="TextBox28" TextMode="Date" runat="server"  Width="260px"></asp:TextBox>
+                                                                            <asp:Label ID="Label53" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
+                                                                            <asp:TextBox ID="TextBox28" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
 
-                                                                            <asp:Label ID="Label54" runat="server" Text="Departing To" Style="padding-left: 150px"></asp:Label>
-                                                                            <asp:TextBox ID="TextBox29" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-                                                                            <asp:Label ID="Label55" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                            <asp:TextBox ID="TextBox30" TextMode="Date" runat="server"  Width="260px"></asp:TextBox>
-                                                                 <asp:Button runat="server" ID="add5th" class="btn btn-primary" Text="+" OnClientClick="add5th();  return false;"  CausesValidation="False" />
+                                                                            <asp:Label ID="Label54" runat="server" Text="Departing To" Style="padding-left: 60px"></asp:Label>
+                                                                            <asp:TextBox ID="TextBox29" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
+                                                                            <asp:Label ID="Label55" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
+                                                                            <asp:TextBox ID="TextBox30" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                                            <asp:Button runat="server" ID="add5th" class="btn btn-primary" Text="+" OnClientClick="add5th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
-                                                                </div>
-                                             
-                                                    <div id="destination5" style="display:none">
-                                                            <!--FIFTH DESTINATION-->
-                                                            <asp:Label ID="Label41" runat="server" Text="5th Destination:"></asp:Label><br />
-                                                            <asp:Label ID="Label42" runat="server" Text="5. Departing From"></asp:Label>
-                                                            <asp:TextBox ID="TextBox19" runat="server"  Width="260px"></asp:TextBox>
-                                                            <asp:Label ID="Label43" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                            <asp:TextBox ID="TextBox20" TextMode="Date" runat="server"  Width="260px"></asp:TextBox>
+                                                                </div>                                             
+                                                             <div id="destination5" style="display:none">
+                                                                        <!--FIFTH DESTINATION-->
+                                                                        <asp:Label ID="Label41" runat="server" Text="5th Destination:"></asp:Label><br />
+                                                                        <asp:Label ID="Label42" runat="server" Text="5. Departing From"></asp:Label>
+                                                                        <asp:TextBox ID="TextBox19" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
+                                                                        <asp:Label ID="Label43" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
+                                                                        <asp:TextBox ID="TextBox20" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
 
-                                                            <asp:Label ID="Label44" runat="server" Text="Departing To" Style="padding-left: 150px"></asp:Label>
-                                                            <asp:TextBox ID="TextBox21" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-                                                            <asp:Label ID="Label45" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                            <asp:TextBox ID="TextBox22" TextMode="Date" runat="server"  Width="260px"></asp:TextBox>
+                                                                        <asp:Label ID="Label44" runat="server" Text="Departing To" Style="padding-left: 60px"></asp:Label>
+                                                                        <asp:TextBox ID="TextBox21" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
+                                                                        <asp:Label ID="Label45" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
+                                                                        <asp:TextBox ID="TextBox22" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
 
-                                                </div>   
+                                                                </div>   
 
-                                                    
-                                        </div>
+                                                    </div>
+
+
                                                  
                                         <!--END OF FLIGHT INFORMATION-->
                                                             <div class="card-block">
@@ -459,11 +434,11 @@
 <%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeManager"></asp:RequiredFieldValidator>--%>
 
                                                             </div>
-                                                            <div class="card-block" id="uploadBlock" style="display:none">
+                                                            <div class="card-block" id="uploadBlock" style="display:none" runat="server">
                                                                 <asp:Label ID="Label15" runat="server" Text="Approval Proof"></asp:Label>
 
                                                                <asp:FileUpload ID="employeeUpload" type="file" runat="server" CssClass="auto-style12" Width="348px" />
-                                                                <asp:Button class="form-control btn btn-primary btn-sm"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" OnClientClick="displayAll" />
+                                                                <asp:Button class="form-control btn btn-primary btn-sm"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" />
 
                                                             </div> <br />
                                                                 <div class="col-md-5">
@@ -478,6 +453,7 @@
                                                             </div>
                                                  </div>
                                                              <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn" OnClick="submitRequestbtn_Click"/>
+                                                             <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="saveAsDraft"/>
 
 <%--                                                 <asp:Button runat="server" class="btn btn-primary" ID="submitBtn" Text="SUBMIT" OnClick="submitBtn_Click"/>--%>
 

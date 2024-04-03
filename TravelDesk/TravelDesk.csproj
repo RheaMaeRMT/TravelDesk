@@ -299,6 +299,7 @@
     <Content Include="Employee\internationalRequestDetails.aspx" />
     <Content Include="Employee\ListofRequests.aspx" />
     <Content Include="Employee\modifyDomesticRequests.aspx" />
+    <Content Include="Employee\myRequests.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -602,6 +603,13 @@
     </Compile>
     <Compile Include="Employee\modifyDomesticRequests.aspx.designer.cs">
       <DependentUpon>modifyDomesticRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\myRequests.aspx.cs">
+      <DependentUpon>myRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\myRequests.aspx.designer.cs">
+      <DependentUpon>myRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
