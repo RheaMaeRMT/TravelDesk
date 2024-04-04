@@ -34,7 +34,7 @@
                                     <!-- Page-body start -->
                                     <div class="page-body">
                                                     <div class="card-block">
-                                                        <asp:LinkButton runat="server" Text="View Travel Request" class="btn btn-primary" ID="viewRequests" OnClick="viewRequests_Click"></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" Text="My Travel Requests" class="btn btn-primary" ID="viewRequests" OnClick="viewRequests_Click"></asp:LinkButton>
                                                     </div>
                                         <section class="login-block">
                                             <!-- Container-fluid starts -->
@@ -50,8 +50,8 @@
                                                                 <div class="card-block" style="background-color:#09426a">
                                                                     <div class="row m-b-20">
                                                                         <div class="col-md-12 pcoded-micon" style="text-align:center"><br />
-                                                                             <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png">
-                                                                            <h3 class="text-center" style="color:white">INTERNATIONAL TRAVEL</h3>
+                                                                             <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png"> <br />
+                                                                            <asp:LinkButton runat="server" ID="international" Text ="INTERNATIONAL TRAVEL" CssClass="text-center" style="color:white;font-size:30px" OnClick="international_Click"></asp:LinkButton>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -73,7 +73,7 @@
                                                                     <div class="row m-b-20">
                                                                         <div class="col-md-12" style="text-align:center"><br />
                                                                              <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png">
-                                                                            <h3 class="text-center" style="color:white">DOMESTIC TRAVEL</h3>
+                                                                            <asp:LinkButton runat="server" ID="domestic" Text ="DOMESTIC TRAVEL" CssClass="text-center" style="color:white;font-size:30px" OnClick="domestic_Click"></asp:LinkButton>
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -41,7 +41,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -91,7 +91,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(userID))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelUserID = @UserID";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelUserID = @UserID AND travelDraftStat = 'Yes'";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -128,6 +128,11 @@ namespace TravelDesk.Employee
                     }
                 }
             }
+
+        }
+        protected void viewDrafts_Click(object sender, EventArgs e)
+        {
+            Response.Write("<script>window.location.href = 'myDraftRequests.aspx'; </script>");
 
         }
     }

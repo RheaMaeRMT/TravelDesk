@@ -289,35 +289,35 @@
                                                     <asp:Label ID="Label34" runat="server" Text="1st Destination:"></asp:Label><br />
                                                     <asp:Label ID="Label26" runat="server" Text="1. Departing From"></asp:Label>
                                                     <asp:TextBox ID="TextBox7" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox7"></asp:RequiredFieldValidator>
+<%--                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox7"></asp:RequiredFieldValidator>--%>
                                                    
                                                     <asp:Label ID="Label30" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                     <asp:TextBox ID="TextBox11" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox11"></asp:RequiredFieldValidator>
+<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox11"></asp:RequiredFieldValidator>--%>
                                                     
                                                     <asp:Label ID="Label27" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
                                                     <asp:TextBox ID="TextBox8" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox8"></asp:RequiredFieldValidator>
+<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox8"></asp:RequiredFieldValidator>--%>
                                                     <asp:Label ID="Label31" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                     <asp:TextBox ID="TextBox12" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox12"></asp:RequiredFieldValidator>
+<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox12"></asp:RequiredFieldValidator>--%>
                                                  </div>   <br />
                                                 <div id="destination2">
                                                     <!--SECOND DESTINATION-->
                                                     <asp:Label ID="Label35" runat="server" Text="2nd Destination:"></asp:Label><br />
                                                     <asp:Label ID="Label28" runat="server" Text="2. Departing From"></asp:Label>
                                                     <asp:TextBox ID="TextBox9" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox9"></asp:RequiredFieldValidator>
+<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox9"></asp:RequiredFieldValidator>--%>
                                                     <asp:Label ID="Label32" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                     <asp:TextBox ID="TextBox13" TextMode="Date" runat="server" Width="100px"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox13"></asp:RequiredFieldValidator>
+<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox13"></asp:RequiredFieldValidator>--%>
 
                                                     <asp:Label ID="Label29" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
                                                     <asp:TextBox ID="TextBox10" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox10"></asp:RequiredFieldValidator>
+<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox10"></asp:RequiredFieldValidator>--%>
                                                     <asp:Label ID="Label33" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                     <asp:TextBox ID="TextBox14" TextMode="Date" runat="server" Width="100px"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox14"></asp:RequiredFieldValidator>
+<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox14"></asp:RequiredFieldValidator>--%>
                                                     <asp:Button runat="server" ID="add3rd" class="btn btn-primary" Text="+"  OnClientClick="add3rd(); return false;" CausesValidation="False" />
 
                                                 </div>                                                   
@@ -328,14 +328,14 @@
                                                                 <asp:Label ID="Label36" runat="server" Text="3rd Destination:"></asp:Label><br />
                                                                 <asp:Label ID="Label37" runat="server" Text="3. Departing From"></asp:Label>
                                                                 <asp:TextBox ID="TextBox15" runat="server" Width="260px" CssClass="auto-style11"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox15"></asp:RequiredFieldValidator>
+<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox15"></asp:RequiredFieldValidator>--%>
                                                                 <asp:Label ID="Label38" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox16" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox16"></asp:RequiredFieldValidator>
+<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox16"></asp:RequiredFieldValidator>--%>
 
                                                                 <asp:Label ID="Label39" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox17" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator32" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox17"></asp:RequiredFieldValidator>
+<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator32" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox17"></asp:RequiredFieldValidator>--%>
                                                                 <asp:Label ID="Label40" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox18" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
                                                                  <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
@@ -441,9 +441,11 @@
                                                                 <asp:Button class="form-control btn btn-primary btn-sm"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" />
 
                                                             </div> <br />
-                                                                <div class="col-md-5">
-                                                                    <asp:Image CssClass="img-fluid img-thumbnail" ID="productImage" runat="server" Visible="False" />
-                                                                </div>
+                                                                <div class="col-md-5" style="display:none" id="pdfBlock" runat="server">
+                                                                    
+                                                                        <asp:Button runat="server" class="btn btn-danger" Text="Delete" ID="Delete" OnClick="reUpload_Click" CausesValidation="False" /> 
+                                                                    <br />
+                                                                        <iframe id="pdfViewer" runat="server" style="width:100%; height:600px" frameborder="0"></iframe>
                                                             
                                                             <div class="card-block">
                                                                  <asp:Label ID="Label18" runat="server" Text="Remarks"></asp:Label> <br />
@@ -452,12 +454,12 @@
                                                                 
                                                             </div>
                                                  </div>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn" OnClick="submitRequestbtn_Click"/>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="saveAsDraft"/>
 
-<%--                                                 <asp:Button runat="server" class="btn btn-primary" ID="submitBtn" Text="SUBMIT" OnClick="submitBtn_Click"/>--%>
 
                                            </div>
+                                                             <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn" OnClick="submitRequestbtn_Click"/>
+                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="saveAsDraft" OnClick="saveAsDraft_Click"/>
+
                                     
                                     <!-- Page-body end -->
                                 </div>

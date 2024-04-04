@@ -111,7 +111,7 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Processing'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Processing' AND travelDraftStat = 'NO'";
                             cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
@@ -161,7 +161,7 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Completed'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Completed' AND travelDraftStat = 'NO'";
                             cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
@@ -211,7 +211,7 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Cancelled'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Cancelled' AND travelDraftStat = 'NO'";
                             cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();

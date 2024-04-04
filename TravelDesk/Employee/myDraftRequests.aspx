@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="myRequests.aspx.cs" Inherits="TravelDesk.Employee.myRequests" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="myDraftRequests.aspx.cs" Inherits="TravelDesk.Employee.myDraftRequests" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -32,17 +32,14 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
-                                       <div class="page-body">
-                                                    <div class="card-block">
-                                                        <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br />
-                                                    </div> <br />
+                                       <div class="page-body"><br />
                                             <asp:GridView CssClass="table container" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
                                                 <Columns>   
                                                     <asp:BoundField DataField="travelReqStatus" HeaderText="Request Status" />
                                                     <asp:BoundField DataField="travelType" HeaderText="Travel Type" />
                                                     <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" />
                                                     <asp:BoundField DataField="travelUserID" HeaderText="User ID" />
-                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
+                                                    <asp:BoundField DataField="travelDateCreated" HeaderText="Date Created" />
                                                     <asp:BoundField DataField="travelHomeFacility" HeaderText="Home Facility" />
                                                     <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
                                                     <asp:BoundField DataField="travelFrom" HeaderText="Origin" />
@@ -71,3 +68,4 @@
             </div>
 
 </asp:Content>
+

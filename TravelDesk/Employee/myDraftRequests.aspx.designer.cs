@@ -11,17 +11,8 @@ namespace TravelDesk.Employee
 {
 
 
-    public partial class myRequests
+    public partial class myDraftRequests
     {
-
-        /// <summary>
-        /// viewDrafts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton viewDrafts;
 
         /// <summary>
         /// travelRequests control.

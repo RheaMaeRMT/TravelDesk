@@ -16,7 +16,24 @@ namespace TravelDesk.Employee
 
         protected void viewRequests_Click(object sender, EventArgs e)
         {
-            Response.Write("<script>window.location.href = 'ListofRequests.aspx'; </script>");
+            Response.Write("<script>window.location.href = 'myRequests.aspx'; </script>");
+
+        }
+
+        protected void international_Click(object sender, EventArgs e)
+        {
+            string type = "International";
+            Session["travelType"] = type;
+
+            Response.Write("<script>window.location.href = 'DomesticRequest.aspx'; </script>");
+        }
+
+        protected void domestic_Click(object sender, EventArgs e)
+        {
+            string type = "Domestic";
+            Session["travelType"] = type;
+
+            Response.Write("<script>window.location.href = 'DomesticRequest.aspx'; </script>");
 
         }
     }
