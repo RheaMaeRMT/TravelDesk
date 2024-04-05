@@ -15,39 +15,39 @@ namespace TravelDesk
     {
 
         /// <summary>
-        /// approved control.
+        /// Approved control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label approved;
+        protected global::System.Web.UI.WebControls.Button Approved;
 
         /// <summary>
-        /// pending control.
+        /// Processing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pending;
+        protected global::System.Web.UI.WebControls.Button Processing;
 
         /// <summary>
-        /// completed control.
+        /// Completed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label completed;
+        protected global::System.Web.UI.WebControls.Button Completed;
 
         /// <summary>
-        /// processing control.
+        /// Cancelled control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label processing;
+        protected global::System.Web.UI.WebControls.Button Cancelled;
     }
 }

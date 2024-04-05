@@ -21,22 +21,27 @@ namespace TravelDesk
                 Response.Write("<script> window.location.href = '../LoginPage.aspx'; </script>");
 
             }
-            else
+
+            if (!IsPostBack)
             {
                 int approvedCount = populateDashboardApproved();
-                approved.Text = approvedCount.ToString();
+                Approved.Text = approvedCount.ToString();
 
-                int pendingCount = populateDashboardPending();
-                pending.Text = pendingCount.ToString();
+                int pendingCount = populateDashboardProcessing();
+                Processing.Text = pendingCount.ToString();
 
                 int completedCount = populateDashboardCompleted();
-                completed.Text = completedCount.ToString();
+                Completed.Text = completedCount.ToString();
 
-                int processingCount = populateDashboardProcessing();
-                processing.Text = processingCount.ToString();
-
+                int processingCount = populateDashboardCancelled();
+                Cancelled.Text = processingCount.ToString();
             }
+
+
         }
+
+
+        //POPULATE NUMBERS IN THE DASHBOARD
         private int populateDashboardApproved()
         {
 
@@ -44,9 +49,9 @@ namespace TravelDesk
 
             try
             {
-                string currentManager = Session["userName"]?.ToString(); // Null-conditional operator added
+                string currentUser = Session["userID"]?.ToString(); // Null-conditional operator added
 
-                if (!string.IsNullOrEmpty(currentManager)) // Check if currentDU is not null or empty
+                if (!string.IsNullOrEmpty(currentUser)) // Check if currentDU is not null or empty
                 {
                     using (var db = new SqlConnection(connectionString))
                     {
@@ -54,8 +59,8 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest TR INNER JOIN users U ON TR.travelUserID = U.userID WHERE TR.travelApprovalStat = 'auto-approved' ";
-                            cmd.Parameters.AddWithValue("@userManager", currentManager);
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Approved'";
+                            cmd.Parameters.AddWithValue("@UserID", currentUser);
 
                             object result = cmd.ExecuteScalar();
                             if (result != null)
@@ -90,13 +95,13 @@ namespace TravelDesk
 
 
         }
-        private int populateDashboardPending()
+        private int populateDashboardProcessing()
         {
             int countPending = 0;
 
             try
             {
-                string currentManager = Session["userName"]?.ToString(); // Null-conditional operator added
+                string currentManager = Session["userID"]?.ToString(); // Null-conditional operator added
 
                 if (!string.IsNullOrEmpty(currentManager)) // Check if currentDU is not null or empty
                 {
@@ -106,8 +111,8 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest TR INNER JOIN users U ON TR.travelUserID = U.userID WHERE TR.travelApprovalStat = 'pending' ";
-                            cmd.Parameters.AddWithValue("@userManager", currentManager);
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Processing'";
+                            cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
                             if (result != null)
@@ -142,11 +147,11 @@ namespace TravelDesk
         }
         private int populateDashboardCompleted()
         {
-            int count = 0;
+            int countCompleted = 0;
 
             try
             {
-                string currentManager = Session["userName"]?.ToString(); // Null-conditional operator added
+                string currentManager = Session["userID"]?.ToString(); // Null-conditional operator added
 
                 if (!string.IsNullOrEmpty(currentManager)) // Check if currentDU is not null or empty
                 {
@@ -156,13 +161,13 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest TR INNER JOIN users U ON TR.travelUserID = U.userID WHERE TR.travelApprovalStat = 'completed' ";
-                            cmd.Parameters.AddWithValue("@userManager", currentManager);
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Completed'";
+                            cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
                             if (result != null)
                             {
-                                count = Convert.ToInt32(result);
+                                countCompleted = Convert.ToInt32(result);
                             }
                         }
                     }
@@ -187,16 +192,16 @@ namespace TravelDesk
             }
 
 
-            return count;
+            return countCompleted;
 
         }
-        private int populateDashboardProcessing()
+        private int populateDashboardCancelled()
         {
-            int count = 0;
+            int countCancelled = 0;
 
             try
             {
-                string currentManager = Session["userName"]?.ToString(); // Null-conditional operator added
+                string currentManager = Session["userID"]?.ToString(); // Null-conditional operator added
 
                 if (!string.IsNullOrEmpty(currentManager)) // Check if currentDU is not null or empty
                 {
@@ -206,13 +211,13 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest TR INNER JOIN users U ON TR.travelUserID = U.userID WHERE TR.travelApprovalStat = 'processing' ";
-                            cmd.Parameters.AddWithValue("@userManager", currentManager);
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Cancelled'";
+                            cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
                             if (result != null)
                             {
-                                count = Convert.ToInt32(result);
+                                countCancelled = Convert.ToInt32(result);
                             }
                         }
                     }
@@ -237,7 +242,54 @@ namespace TravelDesk
             }
 
 
-            return count;
+            return countCancelled;
+
+        }
+        //END POPULATE NUMBERS IN THE DASHBOARD
+
+        //to get the status clicked from the dashboard
+        protected void approved_Click(object sender, EventArgs e)
+        {
+            // Cast the sender object to a Button
+            Button clickedButton = (Button)sender;
+
+            string clicked = clickedButton.ID;
+
+
+            if (clicked == "Approved")
+            {
+                string status = clicked;
+                Session["reqStatus"] = status;
+
+                Response.Write("<script> window.location.href = 'TravelRequests.aspx'; </script>");
+
+
+            }
+            else if (clicked == "Completed")
+            {
+                string status = clicked;
+                Session["reqStatus"] = status;
+
+                Response.Write("<script> window.location.href = 'TravelRequests.aspx'; </script>");
+
+            }
+            else if (clicked == "Processing")
+            {
+                string status = clicked;
+                Session["reqStatus"] = status;
+
+                Response.Write("<script>window.location.href = 'TravelRequests.aspx'; </script>");
+
+            }
+            else if (clicked == "Cancelled")
+            {
+                string status = clicked;
+                Session["reqStatus"] = status;
+
+                Response.Write("<script>window.location.href = 'TravelRequests.aspx'; </script>");
+
+            }
+
 
         }
 

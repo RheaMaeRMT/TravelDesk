@@ -33,17 +33,14 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                                    <div class="card-block">
-                                                        <asp:LinkButton runat="server" Text="My Travel Requests" class="btn btn-primary" ID="viewRequests" OnClick="viewRequests_Click"></asp:LinkButton>
-                                                    </div>
                                         <section class="login-block">
                                             <!-- Container-fluid starts -->
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-sm-6" >
-                                                        <a href="InternationalRequest" class="btnk">
+                                                        <a class="btnk">
                                                         <!-- First Box -->
-                                                        <form class="md-float-material form-material">
+                                                        <div class="md-float-material form-material">
                                                             <div class="text-center">
                                                             </div>
                                                             <div class="auth-box card">
@@ -56,15 +53,15 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        </div>
                                                         </a>
                                                         <!-- end of first form -->
                                                     </div>
 
                                                     <!-- Second Box -->
                                                     <div class="col-sm-6"  style="margin-left: -30px; margin-right: -10px;">
-                                                         <a href="DomesticRequest" class="btnk">
-                                                            <form class="md-float-material form-material">
+                                                         <a class="btnk">
+                                                            <div class="md-float-material form-material">
                                                             <div class="text-center">
                         
                                                             </div>
@@ -72,13 +69,13 @@
                                                                 <div class="card-block" style="background-color:#09426a">
                                                                     <div class="row m-b-20">
                                                                         <div class="col-md-12" style="text-align:center"><br />
-                                                                             <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png">
+                                                                             <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png"> <br />
                                                                             <asp:LinkButton runat="server" ID="domestic" Text ="DOMESTIC TRAVEL" CssClass="text-center" style="color:white;font-size:30px" OnClick="domestic_Click"></asp:LinkButton>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        </div>
                                                          </a>
                                                         <!-- end of second form -->
                                                     </div>
@@ -86,6 +83,30 @@
                                                     <!-- end of col-sm-12 -->
 
                                                 </div>
+                                                <center>
+                                                    <div class="col-sm-6"  style="margin-left: -30px; margin-right: -10px;">
+                                                         <a class="btnk">
+                                                            <div class="md-float-material form-material">
+                                                            <div class="text-center">
+                        
+                                                            </div>
+                                                            <div class="auth-box card">
+                                                                <div class="card-block" style="background-color:#09426a">
+                                                                    <div class="row m-b-20">
+                                                                        <div class="col-md-12" style="text-align:center"><br />
+                                                                             <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png"> <br />
+                                                                            <asp:LinkButton runat="server" ID="LinkButton2" Text ="MY TRAVEL REQUESTS" CssClass="text-center" style="color:white;font-size:30px" OnClick="viewRequests_Click"></asp:LinkButton>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                         </a>
+                                                        <!-- end of second form -->
+                                                    </div>
+
+                                                </center>
+
                                                 <!-- end of row -->
                                             </div>
                                             <!-- end of container-fluid -->

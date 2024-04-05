@@ -269,9 +269,9 @@
   <ItemGroup>
     <Content Include="Admin\Activity.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
-    <Content Include="Admin\domesticRequestDetails.aspx" />
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Managers.aspx" />
+    <Content Include="Admin\RequestDetails.aspx" />
     <Content Include="Admin\TravelRequests.aspx" />
     <Content Include="Admin\Travels.aspx" />
     <Content Include="ApproverLandingPage.aspx" />
@@ -549,13 +549,6 @@
     <Compile Include="Admin\AdminDashboard.aspx.designer.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\domesticRequestDetails.aspx.cs">
-      <DependentUpon>domesticRequestDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\domesticRequestDetails.aspx.designer.cs">
-      <DependentUpon>domesticRequestDetails.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\Employees.aspx.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -569,6 +562,13 @@
     </Compile>
     <Compile Include="Admin\Managers.aspx.designer.cs">
       <DependentUpon>Managers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\RequestDetails.aspx.cs">
+      <DependentUpon>RequestDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RequestDetails.aspx.designer.cs">
+      <DependentUpon>RequestDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\TravelRequests.aspx.cs">
       <DependentUpon>TravelRequests.aspx</DependentUpon>

@@ -18,7 +18,7 @@ namespace TravelDesk
 
             if (Session["userID"] == null && Session["userName"] == null)
             {
-                Response.Write("<script>window.location.href = 'LoginPage.aspx'; </script>");
+                Response.Write("<script>window.location.href = '../LoginPage.aspx'; </script>");
 
             }
             else if (Session["userID"] != null && (Session["userName"] != null))
