@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace TravelDesk.Admin
 {
-    public partial class RequestDetails : System.Web.UI.Page
+    public partial class TravelArrangements : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DB_TravelDesk"].ConnectionString;
 
@@ -23,14 +23,141 @@ namespace TravelDesk.Admin
             }
             if (!IsPostBack)
             {
-                string request = Session["clickedRequest"].ToString();
-                if (!string.IsNullOrEmpty(request))
+                if (Session["clickedRequest"].ToString() != null)
                 {
-                    DisplayRequest();
+                    string request = Session["clickedRequest"].ToString();
+                    if (!string.IsNullOrEmpty(request))
+                    {
+                        changeStatus();
+                        DisplayRequest();
+                        populateEmployeeDetails();
+
+                    }
                 }
                 else
                 {
+                    Response.Write("<script> window.location.href = '../LoginPage.aspx'; </script>");
 
+                }
+
+            }
+        }
+        private void changeStatus()
+        {
+            try
+            {
+                string request = Session["clickedRequest"].ToString();
+                
+
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.Parameters.Clear();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
+
+                        // Set parameters
+                        cmd.Parameters.AddWithValue("@newStatus", "Processing");
+                        cmd.Parameters.AddWithValue("@ID", request);
+
+                        // Execute the update query
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                           
+                            // The update was successful
+                            Response.Write("<script>alert ('Processing Request'); </script>");
+
+                        }
+                        else
+                        {
+                            // No rows were affected, meaning no matching travel request ID was found
+                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during insertion of date submitted and draft state. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+        }
+
+        private void populateEmployeeDetails()
+        {
+            try
+            {
+                string requestId = Session["clickedRequest"].ToString();
+
+                if (!string.IsNullOrEmpty(requestId))
+                {
+                    // Query the database to retrieve the request details based on the ID
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "SELECT * FROM travelRequest WHERE travelRequestID = @RequestId";
+                            cmd.Parameters.AddWithValue("@RequestId", requestId);
+
+                            using (var reader = cmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    // Retrieve the request details from the reader
+                                    string facility = reader["travelHomeFacility"].ToString();
+                                    string name = reader["travelFname"].ToString() + " " + reader["travelMname"].ToString() + " " + reader["travelLname"].ToString();
+                                    string userID = reader["travelUserID"].ToString();
+                                    string mobile = reader["travelMobilenum"].ToString();
+                                    string level = reader["travelLevel"].ToString();
+
+                                    // Retrieve other request details as needed
+
+                                    // Display or use the retrieved request details
+                                    employeeID.Text = userID;
+                                    employeeName.Text = name;
+                                    homeFacility.Text = facility;
+                                    employeePhone.Text = mobile;
+                                    employeeLevel.Text = level;
+
+                                    // Assign other request details to corresponding controls
+                                }
+                                else
+                                {
+                                    // Handle the case where no request with the given ID is found
+                                    Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle the case where the request ID stored in the session is null or empty
+                    Response.Write("<script>alert('Invalid request ID.')</script>");
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred while retrieving the request details.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
         }
@@ -131,14 +258,14 @@ namespace TravelDesk.Admin
                                     string mul5ToDate = reader["routeM5ToDate"] != DBNull.Value ? reader["routeM5ToDate"].ToString() : "";
 
                                     // Display or use the retrieved request details
-                                    homeFacility.Text = travelFacility;
-                                    employeeID.Text = empID;
+                                    TextBox3.Text = travelFacility;
+                                    TextBox4.Text = empID;
                                     employeeFName.Text = empFname;
                                     employeeMName.Text = empMname;
                                     employeeLName.Text = empLname;
                                     employeeProjCode.Text = empProjCode;
-                                    employeePhone.Text = empPhone;
-                                    employeeLevel.Text = empLevel;
+                                    TextBox5.Text = empPhone;
+                                    TextBox6.Text = empLevel;
                                     employeeManager.Text = manager;
                                     pdfViewer.Src = proof;
                                     flightOptions.Text = flight;
@@ -190,7 +317,8 @@ namespace TravelDesk.Admin
                                         round1To.Text = r1To;
                                         round2From.Text = r2From;
                                         round2To.Text = r2To;
-                                    } else if (!string.IsNullOrEmpty(mul1From) && (!string.IsNullOrEmpty(mul1To)))
+                                    }
+                                    else if (!string.IsNullOrEmpty(mul1From) && (!string.IsNullOrEmpty(mul1To)))
                                     {
                                         multipleInput.Style["display"] = "block";
                                         if (!string.IsNullOrEmpty(mul2From) && (!string.IsNullOrEmpty(mul2To)))
@@ -371,7 +499,7 @@ namespace TravelDesk.Admin
                                             }
 
                                         }
-                                    } 
+                                    }
 
                                     // Assign other request details to corresponding controls
                                 }
@@ -403,32 +531,6 @@ namespace TravelDesk.Admin
             }
         }
 
-        protected void processRequest_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Get the ID of the clicked request from the session
-                string requestId = Session["clickedRequest"].ToString();
 
-                if (!string.IsNullOrEmpty(requestId))
-                {
-                    Response.Write("<script> window.location.href = 'TravelArrangements.aspx'; </script>");
-
-                }
-            }
-            catch (SqlException ex)
-            {
-                // Log the exception or display a user-friendly error message
-                // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                Response.Write("<script>alert('An error occurred while processing the request details.')</script>");
-                // Log additional information from the SQL exception
-                for (int i = 0; i < ex.Errors.Count; i++)
-                {
-                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
-                }
-            }
-
-
-        }
     }
 }

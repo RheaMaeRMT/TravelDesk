@@ -264,7 +264,6 @@
         <script type="text/javascript" src="/assets/js/bootstrap/js/bootstrap.min.js "></script>
         <script type="text/javascript" src="/assets/pages/widget/excanvas.js "></script>
         <!-- waves js -->
-        <script src="assets/pages/waves/js/waves.min.js"></script>
         <!-- jquery slimscroll js -->
         <script type="text/javascript" src="/assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
         <!-- modernizr js -->
@@ -273,7 +272,6 @@
         <script type="text/javascript" src="/assets/js/SmoothScroll.js"></script>
         <script src="/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
         <!-- Chart js -->
-        <script type="text/javascript" src="assets/js/chart.js/Chart.js"></script>
         <!-- amchart js -->
         <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
         <script src="/assets/pages/widget/amchart/gauge.js"></script>

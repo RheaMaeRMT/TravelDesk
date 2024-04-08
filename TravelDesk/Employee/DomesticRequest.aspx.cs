@@ -486,8 +486,8 @@ namespace TravelDesk.Employee
                 if (Session["userID"] != null)
                 {
                     // Session values are not null, proceed with inserting into the database
-                    string filename = Session["filename"].ToString();
-                    string imgPath = Session["pdfPath"].ToString();
+                    string filename = Session["filename"] != null ? Session["filename"].ToString() : null;
+                    string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : null;
                     string userID = Session["userID"].ToString();
 
                     using (var db = new SqlConnection(connectionString))
@@ -520,8 +520,8 @@ namespace TravelDesk.Employee
                             cmd.Parameters.AddWithValue("@type", "Domestic");
                             cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
                             cmd.Parameters.AddWithValue("@userID", userID);
-                            cmd.Parameters.AddWithValue("@proofname", filename);
-                            cmd.Parameters.AddWithValue("@proofpath", imgPath);
+                            cmd.Parameters.AddWithValue("@proofname", filename != null ? filename : (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@proofpath", imgPath != null ? imgPath : (object)DBNull.Value);
                             cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
                             cmd.Parameters.AddWithValue("@draftStat", "Yes");
 

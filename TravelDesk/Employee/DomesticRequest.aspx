@@ -57,13 +57,19 @@
 
                                     function add3rd(button) {
                                         document.getElementById('<%= additionalFields.ClientID %>').style.display = 'block';
+                                        document.getElementById('<%= add3rd.ClientID %>').style.display = 'none';
+
                                     }
                                     function add4th(button) {
                                         document.getElementById('destination4').style.display = 'block';
+                                        document.getElementById('<%= add4th.ClientID %>').style.display = 'none';
+
                                     }
                                     function add5th(button) {
 
                                         document.getElementById('destination5').style.display = 'block';
+                                        document.getElementById('<%= add5th.ClientID %>').style.display = 'none';
+
                                     }
 
 
@@ -116,7 +122,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-                <div class="pcoded-main-container">
+           <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <div class="pcoded-content">
                       <!-- Page-header start -->
@@ -322,14 +328,14 @@
 
                                                 </div>                                                   
                                             </div>
-                                                    <div class="card-block" style="display:none" id="additionalFields" runat="server"> <hr />
+                                                    <div class="card-block" style="display:none" id="additionalFields" runat="server"> <hr /> 
                                                              <div id="destination3">
                                                                  <!--THIRD DESTINATION-->
                                                                 <asp:Label ID="Label36" runat="server" Text="3rd Destination:"></asp:Label><br />
                                                                 <asp:Label ID="Label37" runat="server" Text="3. Departing From"></asp:Label>
                                                                 <asp:TextBox ID="TextBox15" runat="server" Width="260px" CssClass="auto-style11"></asp:TextBox>
 <%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox15"></asp:RequiredFieldValidator>--%>
-                                                                <asp:Label ID="Label38" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
+                                                                <asp:Label ID="Label38" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox16" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
 <%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox16"></asp:RequiredFieldValidator>--%>
 
@@ -341,7 +347,7 @@
                                                                  <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
                                                                 </div>
-                                                             <div id="destination4" style="display:none">
+                                                             <div id="destination4" style="display:none"> <br />
                                                                             <!--FOURTH DESTINATION-->
                                                                             <asp:Label ID="Label51" runat="server" Text="4th Destination:"></asp:Label><br />
                                                                             <asp:Label ID="Label52" runat="server" Text="4. Departing From"></asp:Label>
@@ -357,7 +363,7 @@
                                                                             <asp:Button runat="server" ID="add5th" class="btn btn-primary" Text="+" OnClientClick="add5th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
                                                                 </div>                                             
-                                                             <div id="destination5" style="display:none">
+                                                             <div id="destination5" style="display:none"> <br />
                                                                         <!--FIFTH DESTINATION-->
                                                                         <asp:Label ID="Label41" runat="server" Text="5th Destination:"></asp:Label><br />
                                                                         <asp:Label ID="Label42" runat="server" Text="5. Departing From"></asp:Label>
@@ -469,4 +475,5 @@
                     </div>
                 </div>
             </div>
+         </div>
 </asp:Content>

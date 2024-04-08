@@ -272,6 +272,7 @@
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Managers.aspx" />
     <Content Include="Admin\RequestDetails.aspx" />
+    <Content Include="Admin\TravelArrangements.aspx" />
     <Content Include="Admin\TravelRequests.aspx" />
     <Content Include="Admin\Travels.aspx" />
     <Content Include="ApproverLandingPage.aspx" />
@@ -569,6 +570,13 @@
     </Compile>
     <Compile Include="Admin\RequestDetails.aspx.designer.cs">
       <DependentUpon>RequestDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TravelArrangements.aspx.cs">
+      <DependentUpon>TravelArrangements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TravelArrangements.aspx.designer.cs">
+      <DependentUpon>TravelArrangements.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\TravelRequests.aspx.cs">
       <DependentUpon>TravelRequests.aspx</DependentUpon>

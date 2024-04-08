@@ -18,19 +18,21 @@ namespace TravelDesk.Admin
         {
             if (Session["userID"] == null && Session["userName"] == null)
             {
+                
                 Response.Write("<script> window.location.href = '../LoginPage.aspx'; </script>");
 
             }
             if (!IsPostBack)
             {
                 string status = Session["reqStatus"]?.ToString();
-                if (!string.IsNullOrEmpty(status))
+                if (status == null)
                 {
-                    DisplayRequests(); //method for the clicked requests from dashboard
+                    DisplayAllRequests(); //method to display all the requests
                 }
                 else
                 {
-                    DisplayAllRequests(); //method to display all the requests
+                    DisplayRequests(); //method for the clicked requests from dashboard
+                  
                 }
             }
 
@@ -79,7 +81,9 @@ namespace TravelDesk.Admin
                     }
                 }
             }
-            
+            // Remove the reqStatus session variable after displaying the requests
+            Session.Remove("reqStatus");
+
         }
         private void DisplayAllRequests()
         {
@@ -88,7 +92,7 @@ namespace TravelDesk.Admin
             if (!string.IsNullOrEmpty(userID))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelUserID = @UserID AND travelDraftStat = 'No'";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelDraftStat = 'No'";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))

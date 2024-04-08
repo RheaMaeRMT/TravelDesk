@@ -287,7 +287,7 @@
                                                             </div>
                                                  
                                            </div>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Process Request" ID="processRequest"/>
+                                                <asp:Button runat="server" class="btn btn-primary" Text="Process Request" ID="processRequest" OnClick="processRequest_Click"/>
                                     
                                     <!-- Page-body end -->
                                 </div>
