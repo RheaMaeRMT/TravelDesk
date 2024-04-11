@@ -26,9 +26,16 @@ namespace TravelDesk.Admin
                 if (Session["clickedRequest"].ToString() != null)
                 {
                     string request = Session["clickedRequest"].ToString();
+
                     if (!string.IsNullOrEmpty(request))
                     {
-                        changeStatus();
+                        //string status = Session["reqStatus"].ToString();
+                        //if (status != "Processing")
+                        //{
+
+                        //}
+
+
                         DisplayRequest();
                         populateEmployeeDetails();
 
@@ -41,57 +48,6 @@ namespace TravelDesk.Admin
                 }
 
             }
-        }
-        private void changeStatus()
-        {
-            try
-            {
-                string request = Session["clickedRequest"].ToString();
-                
-
-                using (var db = new SqlConnection(connectionString))
-                {
-                    db.Open();
-                    using (var cmd = db.CreateCommand())
-                    {
-                        cmd.Parameters.Clear();
-                        cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
-
-                        // Set parameters
-                        cmd.Parameters.AddWithValue("@newStatus", "Processing");
-                        cmd.Parameters.AddWithValue("@ID", request);
-
-                        // Execute the update query
-                        int rowsAffected = cmd.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
-                        {
-                           
-                            // The update was successful
-                            Response.Write("<script>alert ('Processing Request'); </script>");
-
-                        }
-                        else
-                        {
-                            // No rows were affected, meaning no matching travel request ID was found
-                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                // Log the exception or display a user-friendly error message
-                // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                Response.Write("<script>alert('An error occurred during insertion of date submitted and draft state. Please try again.')</script>");
-                // Log additional information from the SQL exception
-                for (int i = 0; i < ex.Errors.Count; i++)
-                {
-                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
-                }
-            }
-
         }
 
         private void populateEmployeeDetails()
@@ -531,6 +487,286 @@ namespace TravelDesk.Admin
             }
         }
 
+        protected void submitArrangement_Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            int random = rand.Next(100000, 999999);
+            string ID = "TA" + random;
 
+            try
+            {
+
+                if (Session["userID"] != null && Session["clickedRequest"] != null)
+                {
+                    // Session values are not null, proceed with inserting into the database
+                    string userID = Session["userID"].ToString();
+                    string requestId = Session["clickedRequest"].ToString();
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "INSERT INTO TravelArrangement (arrangeID, arrangeUserID, arrangeTravelID, arrangeAirline, arrangeAccomodations, arrangeHotelName , arrangeHotelAdd, arrangeHotelFrom, arrangeHotelTo, " +
+                                "arrangeTransfer1, arrangeTransfer1Date, arrangeTransfer2, arrangeTransfer2Date, arrangeTransfer3, arrangeTransfer3Date, arrangeTransfer4, arrangeTransfer4Date, arrangeTransfer5, arrangeTransfer5Date, " +
+                                "arrangeRequirements, arrangeNotes, arrangeDateCreated, routeM1From, routeM1FromDate, routeM1To, routeM1ToDate, routeM2From, routeM2FromDate, routeM2To, routeM2ToDate, routeM3From, routeM3FromDate, routeM3To, routeM3ToDate, routeM4From, routeM4FromDate, routeM4To, routeM4ToDate, routeM5From, routeM5FromDate, routeM5To, routeM5ToDate)"
+                                + "VALUES (@ID, @userID, @travelID, @airline, @accomodations, @hotelName, @hotelAddress, @hotelFrom, @hotelTo, @transfer1, @transfer1Date, @transfer2, @transfer2Date, @transfer3, @transfer3Date, @transfer4, @transfer4Date, @transfer5, @transfer5Date, @requirements, @notes, @dateCreated," +
+                                "@r1From, @r1FromDate, @r1To, @r1ToDate, @r2From, @r2FromDate, @r2To, @r2ToDate, @r3From, @r3FromDate, @r3To, @r3ToDate, @r4From, @r4FromDate, @r4To, @r4ToDate, @r5From, @r5FromDate, @r5To, @r5ToDate)";
+
+                            cmd.Parameters.AddWithValue("@ID", ID);
+                            cmd.Parameters.AddWithValue("@userID", userID);
+                            cmd.Parameters.AddWithValue("@travelID", requestId);
+                            cmd.Parameters.AddWithValue("@airline", airline.Text);
+                            cmd.Parameters.AddWithValue("@accomodations", accomodations.SelectedItem.Text);
+                            cmd.Parameters.AddWithValue("@hotelName", hotel.Text);
+                            cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
+                            cmd.Parameters.AddWithValue("@hotelFrom", string.IsNullOrEmpty(durationFrom.Text) ? (object)DBNull.Value : durationFrom.Text);
+                            cmd.Parameters.AddWithValue("@hotelTo", string.IsNullOrEmpty(durationTo.Text) ? (object)DBNull.Value : durationTo.Text);
+                            cmd.Parameters.AddWithValue("@transfer1", transfer1.Text);
+                            cmd.Parameters.AddWithValue("@transfer1Date", string.IsNullOrEmpty(transfer1Date.Text) ? (object)DBNull.Value : transfer1Date.Text);
+                            cmd.Parameters.AddWithValue("@transfer2", transfer2.Text);
+                            cmd.Parameters.AddWithValue("@transfer2Date", string.IsNullOrEmpty(transfer2Date.Text) ? (object)DBNull.Value : transfer2Date.Text);
+                            cmd.Parameters.AddWithValue("@transfer3", transfer3.Text);
+                            cmd.Parameters.AddWithValue("@transfer3Date", string.IsNullOrEmpty(transfer3Date.Text) ? (object)DBNull.Value : transfer3Date.Text);
+                            cmd.Parameters.AddWithValue("@transfer4", transfer4.Text);
+                            cmd.Parameters.AddWithValue("@transfer4Date", string.IsNullOrEmpty(transfer4Date.Text) ? (object)DBNull.Value : transfer4Date.Text);
+                            cmd.Parameters.AddWithValue("@transfer5", transfer5.Text);
+                            cmd.Parameters.AddWithValue("@transfer5Date", string.IsNullOrEmpty(transfer5Date.Text) ? (object)DBNull.Value : transfer5Date.Text);
+                            cmd.Parameters.AddWithValue("@requirements", ""); // Initialize the parameter outside the loop
+                            cmd.Parameters.AddWithValue("@notes", additionalNotes.Text);
+                            cmd.Parameters.AddWithValue("@dateCreated", DateTime.Now);
+                            cmd.Parameters.AddWithValue("@r1From", r1From.Text);
+                            cmd.Parameters.AddWithValue("@r1FromDate", string.IsNullOrEmpty(r1FromDate.Text) ? (object)DBNull.Value : r1FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r1To", r1To.Text);
+                            cmd.Parameters.AddWithValue("@r1ToDate", string.IsNullOrEmpty(r1ToDate.Text) ? (object)DBNull.Value : r1ToDate.Text);
+                            cmd.Parameters.AddWithValue("@r2From", r2From.Text);
+                            cmd.Parameters.AddWithValue("@r2FromDate", string.IsNullOrEmpty(r2FromDate.Text) ? (object)DBNull.Value : r2FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r2To", r2To.Text);
+                            cmd.Parameters.AddWithValue("@r2ToDate", string.IsNullOrEmpty(r2ToDate.Text) ? (object)DBNull.Value : r2ToDate.Text);
+                            cmd.Parameters.AddWithValue("@r3From", r3From.Text);
+                            cmd.Parameters.AddWithValue("@r3FromDate", string.IsNullOrEmpty(r3FromDate.Text) ? (object)DBNull.Value : r3FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r3To", r3To.Text);
+                            cmd.Parameters.AddWithValue("@r3ToDate", string.IsNullOrEmpty(r3ToDate.Text) ? (object)DBNull.Value : r3ToDate.Text);
+                            cmd.Parameters.AddWithValue("@r4From", r4From.Text);
+                            cmd.Parameters.AddWithValue("@r4FromDate", string.IsNullOrEmpty(r4FromDate.Text) ? (object)DBNull.Value : r4FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r4To", r4To.Text);
+                            cmd.Parameters.AddWithValue("@r4ToDate", string.IsNullOrEmpty(r4ToDate.Text) ? (object)DBNull.Value : r4ToDate.Text);
+                            cmd.Parameters.AddWithValue("@r5From", r5From.Text);
+                            cmd.Parameters.AddWithValue("@r5FromDate", string.IsNullOrEmpty(r5FromDate.Text) ? (object)DBNull.Value : r5FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r5To", r5To.Text);
+                            cmd.Parameters.AddWithValue("@r5ToDate", string.IsNullOrEmpty(r5ToDate.Text) ? (object)DBNull.Value : r5ToDate.Text);
+
+
+                            //for the REQUIREMENTS
+                            foreach (ListItem item in requirements.Items)
+                            {
+                                if (item.Selected)
+                                {
+                                    // Append the selected requirements to the parameter value
+                                    cmd.Parameters["@requirements"].Value += item.Value + ", ";
+                                }
+                            }
+
+                            // Execute the command after setting all parameters
+                            var ctr = cmd.ExecuteNonQuery();
+
+                            if (ctr >= 1)
+                            {
+                                //UPDATE STATUS TO "ARRANGED"
+                                updateRequestStat();
+                                //Response.Write("<script>alert ('Travel Arrangement Submitted!'); window.location.href = 'AdminDashboard.aspx'; </script>");
+
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Session values are null
+                    Response.Write("<script>alert('Session Expired! Please login again.')</script>");
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during travel ARRANGEMENT. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+        }
+        private void updateTravelRoute()
+        {
+            try
+            {
+                if (Session["clickedRequest"] != null)
+                {
+                    string requestId = Session["clickedRequest"].ToString();
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.Parameters.Clear();
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "UPDATE route SET " +
+                                "routeM1From = @r1From, " +
+                                "routeM1FromDate = @r1FromDate, " +
+                                "routeM1To = @r1To," +
+                                "routeM1ToDate = @r1ToDate," +
+                                "routeM2From = @r2From, " +
+                                "routeM2FromDate = @r2FromDate, " +
+                                "routeM2To = @r2To," +
+                                "routeM2ToDate = @r2ToDate," +
+                                "routeM3From = @r3From, " +
+                                "routeM3FromDate = @r3FromDate, " +
+                                "routeM3To = @r3To," +
+                                "routeM3ToDate = @r3ToDate," +
+                                "routeM4From = @r4From, " +
+                                "routeM4FromDate = @r4FromDate, " +
+                                "routeM4To = @r4To," +
+                                "routeM4ToDate = @r4ToDate," +
+                                "routeM5From = @r5From, " +
+                                "routeM5FromDate = @r5FromDate, " +
+                                "routeM5To = @r5To," +
+                                "routeM5ToDate = @r5ToDate " +
+                                "WHERE routeTravelID = @ID";
+
+                            cmd.Parameters.AddWithValue("@ID", requestId);
+                            cmd.Parameters.AddWithValue("@r1From", r1From.Text);
+                            cmd.Parameters.AddWithValue("@r1FromDate", string.IsNullOrEmpty(r1FromDate.Text) ? (object)DBNull.Value : r1FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r1To", r1To.Text);
+                            cmd.Parameters.AddWithValue("@r1ToDate", string.IsNullOrEmpty(r1ToDate.Text) ? (object)DBNull.Value : r1ToDate.Text);
+                            cmd.Parameters.AddWithValue("@r2From", r2From.Text);
+                            cmd.Parameters.AddWithValue("@r2FromDate", string.IsNullOrEmpty(r2FromDate.Text) ? (object)DBNull.Value : r2FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r2To", r2To.Text);
+                            cmd.Parameters.AddWithValue("@r2ToDate", string.IsNullOrEmpty(r2ToDate.Text) ? (object)DBNull.Value : r2ToDate.Text);
+                            cmd.Parameters.AddWithValue("@r3From", r3From.Text);
+                            cmd.Parameters.AddWithValue("@r3FromDate", string.IsNullOrEmpty(r3FromDate.Text) ? (object)DBNull.Value : r3FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r3To", r3To.Text);
+                            cmd.Parameters.AddWithValue("@r3ToDate", string.IsNullOrEmpty(r3ToDate.Text) ? (object)DBNull.Value : r3ToDate.Text);
+                            cmd.Parameters.AddWithValue("@r4From", r4From.Text);
+                            cmd.Parameters.AddWithValue("@r4FromDate", string.IsNullOrEmpty(r4FromDate.Text) ? (object)DBNull.Value : r4FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r4To", r4To.Text);
+                            cmd.Parameters.AddWithValue("@r4ToDate", string.IsNullOrEmpty(r4ToDate.Text) ? (object)DBNull.Value : r4ToDate.Text);
+                            cmd.Parameters.AddWithValue("@r5From", r5From.Text);
+                            cmd.Parameters.AddWithValue("@r5FromDate", string.IsNullOrEmpty(r5FromDate.Text) ? (object)DBNull.Value : r5FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r5To", r5To.Text);
+                            cmd.Parameters.AddWithValue("@r5ToDate", string.IsNullOrEmpty(r5ToDate.Text) ? (object)DBNull.Value : r5ToDate.Text);
+
+
+                            // Execute the update query
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+
+                                // The update was successful
+                                Response.Write("<script>alert ('Travel Arrangement Submitted!'); window.location.href = 'AdminDashboard.aspx'; </script>");
+
+                            }
+                            else
+                            {
+                                // No rows were affected, meaning no matching travel request ID was found
+                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                            }
+                        }
+                    }
+
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during update route. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+        }
+        private void updateRequestStat()
+        {
+            try
+            {
+                if (Session["clickedRequest"] != null)
+                {
+                    string requestId = Session["clickedRequest"].ToString();
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
+
+                            // Set parameters for updating request status
+                            cmd.Parameters.AddWithValue("@newStatus", "Arranged");
+                            cmd.Parameters.AddWithValue("@ID", requestId);
+
+                            // Execute the update query
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                // Fetch employee's first name and last name
+                                cmd.Parameters.Clear();
+                                cmd.CommandText = "SELECT travelFname, travelLname FROM travelRequest WHERE travelRequestID = @ID";
+                                cmd.Parameters.AddWithValue("@ID", requestId);
+
+                                using (var reader = cmd.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        string firstName = reader["travelFname"].ToString();
+                                        string lastName = reader["travelLname"].ToString();
+
+                                        // Display alert message with employee's name
+                                        string alertMessage = "Travel Arrangement for " + firstName + " " + lastName + " has been submitted";
+                                        Response.Write("<script>alert('" + alertMessage + "'); window.location.href = 'AdminDashboard.aspx'; </script>");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // No rows were affected, meaning no matching travel request ID was found
+                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Session is expired, redirect to login page
+                    Response.Write("<script>alert('Session Expired! Please login again.'); window.location.href = '../LoginPage.aspx'; </script>");
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request status update", ex);
+                Response.Write("<script>alert('An error occurred during travel request status update. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+        }
     }
 }

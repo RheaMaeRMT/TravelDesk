@@ -33,8 +33,8 @@ namespace TravelDesk
                 int completedCount = populateDashboardCompleted();
                 Completed.Text = completedCount.ToString();
 
-                int processingCount = populateDashboardCancelled();
-                Cancelled.Text = processingCount.ToString();
+                int processingCount = populateDashboardArranged();
+                Arranged.Text = processingCount.ToString();
             }
 
 
@@ -196,6 +196,57 @@ namespace TravelDesk
             return countCompleted;
 
         }
+        private int populateDashboardArranged()
+        {
+            int countCompleted = 0;
+
+            try
+            {
+                string currentManager = Session["userID"]?.ToString(); // Null-conditional operator added
+
+                if (!string.IsNullOrEmpty(currentManager)) // Check if currentDU is not null or empty
+                {
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Arranged'";
+                            cmd.Parameters.AddWithValue("@UserID", currentManager);
+
+                            object result = cmd.ExecuteScalar();
+                            if (result != null)
+                            {
+                                countCompleted = Convert.ToInt32(result);
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during travel request enrollment. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+
+            return countCompleted;
+
+        }
+
         private int populateDashboardCancelled()
         {
             int countCancelled = 0;
@@ -282,7 +333,7 @@ namespace TravelDesk
                 Response.Write("<script>window.location.href = 'TravelRequests.aspx'; </script>");
 
             }
-            else if (clicked == "Cancelled")
+            else if (clicked == "Arranged")
             {
                 string status = clicked;
                 Session["reqStatus"] = status;

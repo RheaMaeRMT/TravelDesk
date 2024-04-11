@@ -144,9 +144,57 @@ namespace TravelDesk.Admin
 
             Session["clickedRequest"] = requestID;
 
+            if (!string.IsNullOrEmpty(requestID))
+            {
+                // Query the database to retrieve the request details based on the ID
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM travelRequest WHERE travelRequestID = @RequestId";
+                        cmd.Parameters.AddWithValue("@RequestId", requestID);
 
-            //redirect to the next page after clicking the view button
-            Response.Redirect("RequestDetails.aspx");
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Retrieve the request details from the reader
+                                string status = reader["travelReqStatus"].ToString();
+
+                                //check the status
+                                if (status == "Processing")
+                                {
+                                    Session["status"] = status;
+                                    //if processing, the page should redirect to the travel arrangement form
+                                    Response.Redirect("TravelArrangements.aspx");
+                                } else if (status == "Arranged")
+                                {
+                                    Response.Redirect("arrangedRequest.aspx");
+
+                                }
+                                else
+                                {
+                                    //redirect to the next page after clicking the view button
+                                    Response.Redirect("RequestDetails.aspx");
+                                }
+
+
+                            }
+                            else
+                            {
+                                // Handle the case where no request with the given ID is found
+                                Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                            }
+                        }
+                    }
+                }
+            }
+
+            
+
+           
         }
     }
 }

@@ -49,7 +49,7 @@
         .textboxes{
             color:black;
             background-color:transparent;
-            
+           
         }
     </style>
 </asp:Content>

@@ -71,9 +71,9 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <asp:Button runat="server" ID="Completed" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
+                                                                <asp:Button runat="server" ID="Arranged" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
 <%--                                                                <asp:Label ID="completed" runat="server" class="text-c-purple h4"></asp:Label> <br />--%>
-                                                                <a class=" m-b-0">Completed Requests</a>
+                                                                <a class=" m-b-0">Arranged Requests</a>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-check-square f-28"></i>
@@ -87,9 +87,9 @@
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <asp:Button runat="server" ID="Cancelled" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
+                                                                <asp:Button runat="server" ID="Completed" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
 <%--                                                                <asp:Label ID="cancelled" runat="server" class="text-c-purple h4"></asp:Label> <br />--%>
-                                                                <a class="m-b-0">Cancelled Requests</a>
+                                                                <a class="m-b-0">Completed Requests</a>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-ban f-28"></i>

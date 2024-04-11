@@ -11,7 +11,7 @@ namespace TravelDesk.Admin
 {
 
 
-    public partial class TravelArrangements
+    public partial class arrangedRequest
     {
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace TravelDesk.Admin
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList accomodations;
+        protected global::System.Web.UI.WebControls.TextBox accomodations;
 
         /// <summary>
         /// hotelAccomodations control.
@@ -714,7 +714,7 @@ namespace TravelDesk.Admin
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList requirements;
+        protected global::System.Web.UI.WebControls.TextBox requirements;
 
         /// <summary>
         /// Label66 control.
