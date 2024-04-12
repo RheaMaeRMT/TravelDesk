@@ -738,7 +738,7 @@ namespace TravelDesk.Admin
 
                                         // Display alert message with employee's name
                                         string alertMessage = "Travel Arrangement for " + firstName + " " + lastName + " has been submitted";
-                                        Response.Write("<script>alert('" + alertMessage + "'); window.location.href = 'AdminDashboard.aspx'; </script>");
+                                        Response.Write("<script>alert('" + alertMessage + "'); window.location.href = 'arrangedRequest.aspx'; </script>");
                                     }
                                 }
                             }

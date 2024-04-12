@@ -216,81 +216,88 @@ namespace TravelDesk.Employee
             string saveDIR = Server.MapPath("/approvalProofs");
             try
             {
-                if (employeeUpload.HasFile)
+                if (Session["userName"] != null)
                 {
-                    string filename = Server.HtmlEncode(employeeUpload.FileName);
-                    string extension = System.IO.Path.GetExtension(filename).ToLower(); // Convert extension to lowercase for comparison
-                    int filesize = employeeUpload.PostedFile.ContentLength;
-                    if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
-                    {
-                        Response.Write("<script>alert('File already exists.Please upload your current proof of approval.')</script>");
-                        uploadBlock.Style["display"] = "block";
+                    string name = Session["userName"].ToString();
 
-
-                    }
-                    else
+                    if (employeeUpload.HasFile)
                     {
-                        if (extension == ".pdf") // Allow only PDF files
+                        string filename = Server.HtmlEncode(employeeUpload.FileName) + name;
+                        string extension = System.IO.Path.GetExtension(filename).ToLower(); // Convert extension to lowercase for comparison
+                        int filesize = employeeUpload.PostedFile.ContentLength;
+                        if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
                         {
-                            if (filesize < 4100000)
-                            {
-                                string savePath = System.IO.Path.Combine(saveDIR, filename);
+                            Response.Write("<script>alert('File already exists. Please upload a valid proof of approval for this travel request.')</script>");
+                            uploadBlock.Style["display"] = "block";
 
-                                // Save the uploaded file
-                                employeeUpload.SaveAs(savePath);
 
-                                // Store file path in session
-                                Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
-                                Session["filename"] = filename;
-
-                                // Check if the uploaded PDF contains the required keywords
-                                if (CheckKeywordsInPDF(savePath))
-                                {
-                                    // Show the PDF viewer
-                                    pdfViewer.Attributes["src"] = Session["pdfPath"].ToString();
-                                    pdfBlock.Style["display"] = "block";
-
-                                    Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
-
-                                    string path = Session["pdfPath"].ToString();
-                                    Session["filePath"] = path;
-                                }
-                                else
-                                {
-                                    // Delete the invalid file
-                                    File.Delete(savePath);
-
-                                    Response.Write("<script>alert('It seems like your uploaded file is not valid. Please try again.')</script>");
-                                    uploadBlock.Style["display"] = "block";
-                                }
-
-                                // Log success message to the console
-                                Console.WriteLine("File uploaded successfully: " + filename);
-                                Console.WriteLine("PDF path: " + Session["imgPath"]);
-
-                                // Display contents after successful upload
-                                displayContents();
-                            }
-                            else
-                            {
-                                Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
-                                uploadBlock.Style["display"] = "block";
-                            }
                         }
                         else
                         {
-                            Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
-                            uploadBlock.Style["dipsplay"] = "block";
+                            if (extension == ".pdf") // Allow only PDF files
+                            {
+                                if (filesize < 4100000)
+                                {
+                                    string savePath = System.IO.Path.Combine(saveDIR, filename);
 
+                                    // Save the uploaded file
+                                    employeeUpload.SaveAs(savePath);
+
+                                    // Store file path in session
+                                    Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
+                                    Session["filename"] = filename;
+
+                                    // Check if the uploaded PDF contains the required keywords
+                                    if (CheckKeywordsInPDF(savePath))
+                                    {
+                                        // Show the PDF viewer
+                                        pdfViewer.Attributes["src"] = Session["pdfPath"].ToString();
+                                        pdfBlock.Style["display"] = "block";
+
+                                        Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+
+                                        string path = Session["pdfPath"].ToString();
+                                        Session["filePath"] = path;
+                                    }
+                                    else
+                                    {
+                                        // Delete the invalid file
+                                        File.Delete(savePath);
+
+                                        Response.Write("<script>alert('It seems like your uploaded file is not valid. Please try again.')</script>");
+                                        uploadBlock.Style["display"] = "block";
+                                    }
+
+                                    // Log success message to the console
+                                    Console.WriteLine("File uploaded successfully: " + filename);
+                                    Console.WriteLine("PDF path: " + Session["imgPath"]);
+
+                                    // Display contents after successful upload
+                                    displayContents();
+                                }
+                                else
+                                {
+                                    Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
+                                    uploadBlock.Style["display"] = "block";
+                                }
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
+                                uploadBlock.Style["dipsplay"] = "block";
+
+                            }
                         }
                     }
-                }
-                else
-                {
-                    Response.Write("<script>alert('Upload failed: No file selected.')</script>");
-                    uploadBlock.Style["dipsplay"] = "block";
+                    else
+                    {
+                        Response.Write("<script>alert('Upload failed: No file selected.')</script>");
+                        uploadBlock.Style["dipsplay"] = "block";
+
+                    }
 
                 }
+
             }
             catch (Exception ex)
             {
