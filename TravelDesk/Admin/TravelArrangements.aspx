@@ -111,7 +111,7 @@
                                                     </div>      
                                                                                      
                                                     <div class="card-block">
-                                             <asp:Button runat="server" class="btn btn-primary" Text="Open Request" ID="openRequest" OnClientClick="return showModal();" />
+                                                         <asp:Button runat="server" class="btn btn-primary" Text="Open Request" ID="openRequest" OnClientClick="return showModal();" />
 
                                                     </div>
                                                             <!--EMPLOYEE DETAILS-->

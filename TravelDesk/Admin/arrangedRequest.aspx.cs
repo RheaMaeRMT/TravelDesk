@@ -940,46 +940,46 @@ namespace TravelDesk.Admin
 
         protected void confirmArrangement_Click(object sender, EventArgs e)
         {
-
+            Response.Write("<script> window.location.href = 'billingInformation.aspx'; </script>");
         }
 
-        protected void exportasPdf_Click(object sender, EventArgs e)
-        {
-            using (StringWriter sw = new StringWriter())
-            {
-                using (HtmlTextWriter hw = new HtmlTextWriter(sw))
-                {
-                    // Render the content of the page to the StringWriter
-                    this.Page.RenderControl(hw);
+        //protected void exportasPdf_Click(object sender, EventArgs e)
+        //{
+        //    using (StringWriter sw = new StringWriter())
+        //    {
+        //        using (HtmlTextWriter hw = new HtmlTextWriter(sw))
+        //        {
+        //            // Render the content of the page to the StringWriter
+        //            this.Page.RenderControl(hw);
 
-                    // Convert the rendered HTML to PDF
-                    StringReader sr = new StringReader(sw.ToString());
-                    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+        //            // Convert the rendered HTML to PDF
+        //            StringReader sr = new StringReader(sw.ToString());
+        //            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
 
-                    // Create a MemoryStream to hold the PDF content
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, ms);
-                        pdfDoc.Open();
+        //            // Create a MemoryStream to hold the PDF content
+        //            using (MemoryStream ms = new MemoryStream())
+        //            {
+        //                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, ms);
+        //                pdfDoc.Open();
 
-                        // Parse HTML content to PDF
-                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                        pdfDoc.Close();
+        //                // Parse HTML content to PDF
+        //                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+        //                pdfDoc.Close();
 
-                        // Get the byte array from the MemoryStream
-                        byte[] pdfBytes = ms.ToArray();
+        //                // Get the byte array from the MemoryStream
+        //                byte[] pdfBytes = ms.ToArray();
 
-                        // Set the response headers
-                        Response.ContentType = "application/pdf";
-                        Response.AddHeader("content-disposition", "attachment;filename=file1.pdf");
-                        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        //                // Set the response headers
+        //                Response.ContentType = "application/pdf";
+        //                Response.AddHeader("content-disposition", "attachment;filename=file1.pdf");
+        //                Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
-                        // Write the byte array to the response output stream
-                        Response.BinaryWrite(pdfBytes);
-                    }
-                }
-                Response.End();
-            }
-        }
+        //                // Write the byte array to the response output stream
+        //                Response.BinaryWrite(pdfBytes);
+        //            }
+        //        }
+        //        Response.End();
+        //    }
+        //}
     }
 }

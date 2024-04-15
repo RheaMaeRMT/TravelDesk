@@ -413,7 +413,7 @@
                                                                 </div> --%>
 
                                              <asp:Button runat="server" class="btn btn-primary" Text="Proceed" ID="confirmArrangement" OnClick="confirmArrangement_Click" />
-                                                <asp:Button runat="server" class="btn btn-primary" Text="Export" ID="exportasPdf" OnClick="exportasPdf_Click"/>
+                                                <asp:Button runat="server" class="btn btn-primary" Text="Export" ID="exportasPdf"/>
                                  
                                     <!-- Page-body end -->
                                          </div>

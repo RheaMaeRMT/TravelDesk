@@ -276,6 +276,7 @@
     <Content Include="Admin\Activity.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
     <Content Include="Admin\arrangedRequest.aspx" />
+    <Content Include="Admin\billingInformation.aspx" />
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Managers.aspx" />
     <Content Include="Admin\RequestDetails.aspx" />
@@ -563,6 +564,13 @@
     </Compile>
     <Compile Include="Admin\arrangedRequest.aspx.designer.cs">
       <DependentUpon>arrangedRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\billingInformation.aspx.cs">
+      <DependentUpon>billingInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\billingInformation.aspx.designer.cs">
+      <DependentUpon>billingInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Employees.aspx.cs">
       <DependentUpon>Employees.aspx</DependentUpon>

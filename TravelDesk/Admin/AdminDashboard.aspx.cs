@@ -31,7 +31,7 @@ namespace TravelDesk
                 Processing.Text = pendingCount.ToString();
 
                 int completedCount = populateDashboardCompleted();
-                Completed.Text = completedCount.ToString();
+                Processed.Text = completedCount.ToString();
 
                 int processingCount = populateDashboardArranged();
                 Arranged.Text = processingCount.ToString();
@@ -162,7 +162,7 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Completed'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Processed'";
                             cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
