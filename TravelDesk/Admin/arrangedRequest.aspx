@@ -8,12 +8,38 @@
         }
         
     </style>
-    <script  type="text/javascript">
-        function showModal() {
-            $('#requestModal').modal('show');
-            return false; // Prevents the default behavior of the button click event
-        }
-     </script>
+
+<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script type="text/javascript">
+
+    function showModal() {
+        $('#requestModal').modal('show');
+        return false; // Prevents the default behavior of the button click event
+    }
+    //function captureScreenshotAndSubmit() {
+    //    // Specify the element to capture
+    //    var elementToCapture = document.getElementById('arrangementBlock');
+
+    //    // Capture screenshot of the specified element
+    //    html2canvas(elementToCapture).then(function (canvas) {
+    //        // Convert the screenshot to a data URL
+    //        var screenshotDataUrl = canvas.toDataURL("image/png");
+
+    //        // Send the screenshot data to the server using AJAX
+    //        var xhr = new XMLHttpRequest();
+    //        xhr.open("POST", "CaptureScreenshot.aspx", true);
+    //        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    //        xhr.onreadystatechange = function () {
+    //            if (xhr.readyState === 4 && xhr.status === 200) {
+    //                // Screenshot captured successfully
+    //                alert("Screenshot captured!");
+    //            }
+    //        };
+    //        xhr.send("screenshotData=" + encodeURIComponent(screenshotDataUrl));
+    //    });
+    //}
+</script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
         <div class="pcoded-main-container">
@@ -47,7 +73,7 @@
                                 <div class="page-wrapper" >
                                     <!-- Page-body start -->
                                          <div class="page-body" style="color:black;font-size:16px;">
-                                                <div class="card" style="color:black;background-color:white">
+                                                <div class="card" style="color:black;background-color:white" ID="arrangementBlock">
                                                     <div class="card-header" style="background-color:#09426a">
                                                         <h5 style="color:white">Travel Arrangement</h5>
                                                     </div>      
@@ -91,7 +117,9 @@
                                                                 <asp:Label ID="Label1" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
                                                                 <asp:TextBox ID="hotel" runat="server" Width="300px" Style="margin-left: 50px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
                                                                 <asp:Label ID="Label4" runat="server" Text="Address" Style="margin-left: 50px;" > </asp:Label>
-                                                                <asp:TextBox ID="hotelAddress" runat="server" Width="300px" Style="margin-left: 50px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox> <br /> <br />
+                                                                <asp:TextBox ID="hotelAddress" runat="server" Width="300px" Style="margin-left: 50px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
+                                                                <asp:Label ID="Label67" runat="server" Text="Contact Number" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="hotelContact" runat="server" Width="300px" Style="margin-left: 50px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox> <br /> <br />
                                                                 <asp:Label ID="Label9" runat="server" Text="Hotel Duration" Style="margin-left: 40px;"></asp:Label> <br />
                                                                 <asp:Label ID="Label10" runat="server" Text="From:" Style="margin-left: 150px;"></asp:Label> 
                                                                 <asp:TextBox ID="durationFrom" runat="server" Width="150px" Style="margin-left: 40px;border-radius: 5px"  CssClass="textboxes" Enabled="false"></asp:TextBox> 
@@ -202,7 +230,7 @@
                                                                                          </div>
                                            </div>
                                                                 <!--MODAL FOR REQUEST DETAILS -->
-<%--                                                                <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document" style="max-width: 1500px;">>
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -410,10 +438,10 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div> --%>
+                                                                </div> 
 
                                              <asp:Button runat="server" class="btn btn-primary" Text="Proceed" ID="confirmArrangement" OnClick="confirmArrangement_Click" />
-                                                <asp:Button runat="server" class="btn btn-primary" Text="Export" ID="exportasPdf"/>
+                                                <asp:Button runat="server" class="btn btn-primary" Text="Export" ID="exportasPdf" OnClick="exportasPdf_Click"/>
                                  
                                     <!-- Page-body end -->
                                          </div>

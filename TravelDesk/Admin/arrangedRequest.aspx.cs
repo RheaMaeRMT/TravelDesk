@@ -1,6 +1,10 @@
-﻿using iTextSharp.text;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,6 +12,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -943,43 +948,483 @@ namespace TravelDesk.Admin
             Response.Write("<script> window.location.href = 'billingInformation.aspx'; </script>");
         }
 
+
         //protected void exportasPdf_Click(object sender, EventArgs e)
         //{
-        //    using (StringWriter sw = new StringWriter())
+        //    // Receive the screenshot data from the client
+        //    string screenshotData = Request.Form["screenshotData"];
+
+        //    if (!string.IsNullOrEmpty(screenshotData))
         //    {
-        //        using (HtmlTextWriter hw = new HtmlTextWriter(sw))
+        //        // Convert the screenshot data from base64 string to byte array
+        //        byte[] screenshotBytes = Convert.FromBase64String(screenshotData.Split(',')[1]);
+
+        //        // Convert the byte array to an image
+        //        iTextSharp.text.Image screenshotImage;
+        //        using (MemoryStream ms = new MemoryStream(screenshotBytes))
         //        {
-        //            // Render the content of the page to the StringWriter
-        //            this.Page.RenderControl(hw);
-
-        //            // Convert the rendered HTML to PDF
-        //            StringReader sr = new StringReader(sw.ToString());
-        //            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
-
-        //            // Create a MemoryStream to hold the PDF content
-        //            using (MemoryStream ms = new MemoryStream())
-        //            {
-        //                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, ms);
-        //                pdfDoc.Open();
-
-        //                // Parse HTML content to PDF
-        //                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-        //                pdfDoc.Close();
-
-        //                // Get the byte array from the MemoryStream
-        //                byte[] pdfBytes = ms.ToArray();
-
-        //                // Set the response headers
-        //                Response.ContentType = "application/pdf";
-        //                Response.AddHeader("content-disposition", "attachment;filename=file1.pdf");
-        //                Response.Cache.SetCacheability(HttpCacheability.NoCache);
-
-        //                // Write the byte array to the response output stream
-        //                Response.BinaryWrite(pdfBytes);
-        //            }
+        //            screenshotImage = iTextSharp.text.Image.GetInstance(ms);
         //        }
+
+        //        // Create a PDF document
+        //        Document document = new Document();
+        //        string outputPath = Server.MapPath("~/screenshot.pdf");
+
+        //        // Initialize the PDF writer
+        //        PdfWriter.GetInstance(document, new FileStream(outputPath, FileMode.Create));
+
+        //        // Open the document
+        //        document.Open();
+
+        //        // Add the screenshot image to the PDF document
+        //        document.Add(screenshotImage);
+
+        //        // Close the document
+        //        document.Close();
+
+        //        // Send a response to the client
+        //        Response.ContentType = "text/plain";
+        //        Response.Write("Screenshot saved as PDF: " + outputPath);
         //        Response.End();
         //    }
+
         //}
+
+
+        //protected void exportasPdf_Click(object sender, EventArgs e)
+        //{
+        //    // Create a new MemoryStream to hold the PDF
+        //    using (MemoryStream ms = new MemoryStream())
+        //    {
+        //        // Create a new Document
+        //        Document doc = new Document();
+        //        PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+
+        //        // Open the Document for writing
+        //        doc.Open();
+
+        //        BaseColor customColor = new BaseColor(9, 66, 106);
+
+        //        // Add header
+        //        Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, customColor);
+        //        Chunk headerChunk = new Chunk("Travel Arrangement", headerFont);
+        //        //Chunk chunk = headerChunk.SetBackground(customColor); // Set background color
+        //        Paragraph header = new Paragraph(headerChunk);
+        //        header.Alignment = Element.ALIGN_CENTER;
+        //        doc.Add(header);
+
+        //        // Add employee information
+        //        Chunk employeeInfoTitle = new Chunk("Employee Information", headerFont);
+        //        //Chunk chunkEmp = employeeInfoTitle.SetBackground(customColor);
+        //        employeeInfoTitle.Font.Color = customColor; // White font color
+        //        doc.Add(employeeInfoTitle);
+
+        //        // Add employee details
+        //        PdfPTable employeeTable = new PdfPTable(2);
+        //        employeeTable.TotalWidth = 500f; // Adjust width as needed
+        //        employeeTable.LockedWidth = true;
+        //        employeeTable.SpacingBefore = 10f;
+        //        employeeTable.SpacingAfter = 10f;
+        //        employeeTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+        //        // Add rows for employee details
+        //        AddRowToTable(employeeTable, "Traveller Name:", employeeName.Text);
+        //        AddRowToTable(employeeTable, "Employee ID:", employeeID.Text);
+        //        AddRowToTable(employeeTable, "Level:", employeeLevel.Text);
+        //        AddRowToTable(employeeTable, "Home Facility:", homeFacility.Text);
+        //        AddRowToTable(employeeTable, "Mobile Number:", employeePhone.Text);
+
+        //        // Add employee table to document
+        //        doc.Add(employeeTable);
+
+               
+
+        //        // Add hotel accommodations section
+        //        Chunk hotelAccommodationsTitle = new Chunk("Hotel Accommodations", headerFont);
+        //        //Chunk chunkHotel = hotelAccommodationsTitle.SetBackground(customColor); // Gray background
+        //        hotelAccommodationsTitle.Font.Color = customColor; // White font color
+        //        doc.Add(hotelAccommodationsTitle);
+
+        //        // Add hotel accommodations details
+        //        PdfPTable hotelAccommodationsTable = new PdfPTable(2);
+        //        hotelAccommodationsTable.TotalWidth = 500f; // Adjust width as needed
+        //        hotelAccommodationsTable.LockedWidth = true;
+        //        hotelAccommodationsTable.SpacingBefore = 10f;
+        //        hotelAccommodationsTable.SpacingAfter = 10f;
+        //        hotelAccommodationsTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+        //        // Add rows for hotel accommodations details
+        //        AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
+        //        AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
+        //        AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
+        //        AddRowToTable(hotelAccommodationsTable, "Hotel Duration:", durationFrom.Text + " - " + durationTo.Text);
+
+        //        // Add hotel accommodations table to document
+        //        doc.Add(hotelAccommodationsTable);
+
+        //        // Add flight details section
+        //        Chunk flightDetailsTitle = new Chunk("Flight Details", headerFont);
+        //        //Chunk chunk1 = flightDetailsTitle.SetBackground(customColor); // Gray background
+        //        flightDetailsTitle.Font.Color = customColor; // White font color
+        //        doc.Add(flightDetailsTitle);
+
+        //        // Add flight details
+        //        PdfPTable flightDetailsTable = new PdfPTable(1);
+        //        flightDetailsTable.TotalWidth = 300f; // Adjust width as needed
+        //        flightDetailsTable.LockedWidth = true;
+        //        flightDetailsTable.SpacingBefore = 7f;
+        //        flightDetailsTable.SpacingAfter = 7f;
+        //        flightDetailsTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+        //        // Add rows for flight details
+        //        AddRowToTable(flightDetailsTable, "Airline:", bookedairline.Text);
+        //        // Add rows for flight schedule details
+        //        AddRowToTable(flightDetailsTable, "Flight Schedule:",
+        //            $"{r1From.Text} - {r1To.Text} ({r1FromDate.Text} - {r1ToDate.Text})");
+        //        // Add additional flight schedule details if available
+        //        if (additional2routeFields.Visible)
+        //        {
+        //            AddRowToTable(flightDetailsTable, "",
+        //                $"{r2From.Text} - {r2To.Text} ({r2FromDate.Text} - {r2ToDate.Text})");
+        //        }
+        //        if (additional3routeFields.Visible)
+        //        {
+        //            AddRowToTable(flightDetailsTable, "",
+        //                $"{r3From.Text} - {r3To.Text} ({r3FromDate.Text} - {r3ToDate.Text})");
+        //        }
+        //        // Add more if needed for additional routes
+
+        //        // Add flight details table to document
+        //        doc.Add(flightDetailsTable);
+
+        //        // Add transfers section
+        //        Chunk transfersTitle = new Chunk("Car/Airport Transfers", headerFont);
+        //        //Chunk chunk2 = transfersTitle.SetBackground(customColor); // Gray background
+        //        transfersTitle.Font.Color = customColor; // White font color
+        //        doc.Add(transfersTitle);
+
+        //        // Add transfers details
+        //        PdfPTable transfersTable = new PdfPTable(1);
+        //        transfersTable.TotalWidth = 500f; // Adjust width as needed
+        //        transfersTable.LockedWidth = true;
+        //        transfersTable.SpacingBefore = 10f;
+        //        transfersTable.SpacingAfter = 10f;
+        //        transfersTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+        //        // Add rows for transfers details
+        //        AddRowToTable(transfersTable, "", transfer1.Text + " (" + transfer1Date.Text + ")");
+        //        // Add more if needed for additional transfers
+
+        //        // Add transfers table to document
+        //        doc.Add(transfersTable);
+
+        //        // Add others section
+        //        Chunk othersTitle = new Chunk("Others", headerFont);
+        //        //Chunk chunk3 = othersTitle.SetBackground(customColor); // Gray background
+        //        othersTitle.Font.Color = customColor; // White font color
+        //        doc.Add(othersTitle);
+
+        //        // Add others details
+        //        PdfPTable othersTable = new PdfPTable(1);
+        //        othersTable.TotalWidth = 500f; // Adjust width as needed
+        //        othersTable.LockedWidth = true;
+        //        othersTable.SpacingBefore = 10f;
+        //        othersTable.SpacingAfter = 10f;
+        //        othersTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+        //        // Add rows for others details
+        //        AddRowToTable(othersTable, "Travel Requirements:", requirements.Text);
+        //        AddRowToTable(othersTable, "Additional Notes:", additionalNotes.Text);
+
+        //        // Add others table to document
+        //        doc.Add(othersTable);
+
+        //        // Close the Document
+        //        doc.Close();
+
+        //        // Convert the MemoryStream to a byte array
+        //        byte[] pdfBytes = ms.ToArray();
+
+        //        if (Session["clickedRequest"] != null)
+        //        {
+        //            string ID = Session["clickedRequest"].ToString();
+        //            string name = employeeName.Text;
+        //            string filename = name + "_" + ID + ".pdf";
+
+        //            // Send the PDF to the user for download
+        //            Response.Clear();
+        //            Response.ContentType = "application/pdf";
+        //            Response.AddHeader("Content-Disposition", "attachment; filename=" + filename);
+        //            Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
+        //            Response.End();
+        //        }
+        //    }
+        //}
+
+        //Helper method to add a row to a PdfPTable
+        void AddRowToTable(PdfPTable table, string label, string value)
+        {
+            PdfPCell labelCell = new PdfPCell(new Phrase(label));
+            labelCell.Border = PdfPCell.NO_BORDER;  
+            PdfPCell valueCell = new PdfPCell(new Phrase(value));
+            valueCell.Border = PdfPCell.NO_BORDER;
+            table.AddCell(labelCell);
+            table.AddCell(valueCell);
+        }
+
+        protected void exportasPdf_Click(object sender, EventArgs e)
+        {
+
+            // Create a new MemoryStream to hold the PDF
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Create a new Document
+                using (Document doc = new Document())
+                {
+                    PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+
+                    // Open the Document for writing
+                    doc.Open();
+
+                    //travel arrangement header
+                    BaseColor customColor = new BaseColor(9, 66, 106);
+                    BaseColor whiteColor = BaseColor.WHITE;
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, whiteColor);
+
+
+                    // Add content to the Document
+                    AddSectionSeparatorHeader(doc, "Travel Arrangement for " + employeeName.Text, headerFont, customColor);
+                    AddHeaderSection(doc);
+
+                    //SPACE PURPOSES
+                    Font headerSpace = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.WHITE);
+                    AddEmptySeparator(doc, "Travel Arrangement for " + employeeName.Text, headerSpace);
+                    EmptySeparatorforSpace(doc);
+
+                    // Add content to the Document
+                    AddSectionSeparator(doc, "Employee Information");
+                    AddEmployeeInformationSection(doc);
+
+                    AddSectionSeparator(doc, "Hotel Accommodations");
+                    AddHotelAccommodationsSection(doc);
+
+                    AddSectionSeparator(doc, "Flight Details");
+                    AddFlightDetailsSection(doc);
+
+                    AddSectionSeparator(doc, "Car/Airport Transfers");
+                    AddTransfersSection(doc);
+
+                    AddSectionSeparator(doc, "Others");
+                    AddOthersSection(doc);
+
+                    // Close the Document
+                    doc.Close();
+                }
+
+                // Convert the MemoryStream to a byte array
+                byte[] pdfBytes = ms.ToArray();
+
+                // Retrieve ID and name for filename
+                string ID = Session["clickedRequest"].ToString();
+                string name = employeeName.Text;
+
+                // Construct filename
+                string filename = name + "_" + ID + ".pdf";
+
+                // Clear the response
+                Response.Clear();
+
+                // Set content type and header for file download
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + filename);
+
+                // Write the PDF bytes to the response
+                Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
+
+                // End the response
+                Response.End();
+            }
+        }
+
+        // Helper method to add a section separator with a title
+        private void AddSectionSeparator(Document doc, string sectionTitle)
+        {
+            PdfPTable separatorTable = new PdfPTable(1);
+            separatorTable.WidthPercentage = 100;
+            PdfPCell cell = new PdfPCell(new Phrase(sectionTitle));
+            cell.BackgroundColor = new BaseColor(200, 200, 200); // Adjust color as needed
+            cell.Padding = 5;
+            separatorTable.AddCell(cell);
+            doc.Add(separatorTable);
+        }
+        private void AddSectionSeparatorHeader(Document doc, string sectionTitle, Font font, BaseColor customColor)
+        {
+            PdfPTable separatorTable = new PdfPTable(1);
+            separatorTable.WidthPercentage = 100;
+            PdfPCell cell = new PdfPCell(new Phrase(sectionTitle, font)); // Use custom font
+            cell.BackgroundColor = customColor; // Use custom color
+            cell.HorizontalAlignment = Element.ALIGN_CENTER; // Center-align text
+            cell.Padding = 5;
+            separatorTable.AddCell(cell);
+            doc.Add(separatorTable);
+        }
+        private void AddHeaderSection(Document doc)
+        {
+
+        }
+        private void AddEmptySeparator(Document doc, string title, Font font)
+        {
+            PdfPTable emptySeparatorTable = new PdfPTable(1);
+            emptySeparatorTable.WidthPercentage = 100;
+            PdfPCell cell = new PdfPCell(new Phrase(title, font)); // Use the provided font
+            BaseColor whiteColor = BaseColor.WHITE; // Define white color
+            cell.BackgroundColor = whiteColor; // Set cell background color to white
+            cell.BorderColor = whiteColor; // Set cell border color to white
+            cell.Padding = 5; // Adjust padding as needed
+            emptySeparatorTable.AddCell(cell);
+            doc.Add(emptySeparatorTable);
+        }
+
+        private void EmptySeparatorforSpace(Document doc)
+        {
+
+        }
+
+
+        private void AddEmployeeInformationSection(Document doc)
+        {
+            // Add employee information section content// Add employee details
+            PdfPTable employeeTable = new PdfPTable(2);
+            employeeTable.TotalWidth = 500f; // Adjust width as needed
+            employeeTable.LockedWidth = true;
+            employeeTable.SpacingBefore = 10f;
+            employeeTable.SpacingAfter = 10f;
+            employeeTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+            // Add rows for employee details
+            AddRowToTable(employeeTable, "Traveller Name:", employeeName.Text);
+            AddRowToTable(employeeTable, "Employee ID:", employeeID.Text);
+            AddRowToTable(employeeTable, "Level:", employeeLevel.Text);
+            AddRowToTable(employeeTable, "Home Facility:", homeFacility.Text);
+            AddRowToTable(employeeTable, "Mobile Number:", employeePhone.Text);
+
+            // Add employee table to document
+            doc.Add(employeeTable);
+        }
+
+        private void AddHotelAccommodationsSection(Document doc)
+        {
+            //Add hotel accommodations details
+            PdfPTable hotelAccommodationsTable = new PdfPTable(2);
+            hotelAccommodationsTable.TotalWidth = 500f; // Adjust width as needed
+            hotelAccommodationsTable.LockedWidth = true;
+            hotelAccommodationsTable.SpacingBefore = 10f;
+            hotelAccommodationsTable.SpacingAfter = 10f;
+            hotelAccommodationsTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+            // Add rows for hotel accommodations details
+            AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
+            AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
+            AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
+            AddRowToTable(hotelAccommodationsTable, "Hotel Duration:", durationFrom.Text + " - " + durationTo.Text);
+
+            // Add hotel accommodations table to document
+            doc.Add(hotelAccommodationsTable);
+        }
+
+        private void AddFlightDetailsSection(Document doc)
+        {
+            // Add flight details
+            PdfPTable flightDetailsTable = new PdfPTable(1);
+            flightDetailsTable.TotalWidth = 300f; // Adjust width as needed
+            flightDetailsTable.LockedWidth = true;
+            flightDetailsTable.SpacingBefore = 7f;
+            flightDetailsTable.SpacingAfter = 7f;
+            flightDetailsTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+            // Add rows for flight details
+            AddRowToTable(flightDetailsTable, "Airline:", bookedairline.Text);
+            // Add rows for flight schedule details
+            AddRowToTable(flightDetailsTable, "Flight Schedule:",
+                $"{r1FromDate.Text} ({r1From.Text} {r1To.Text})");
+
+            // Add additional flight schedule details if available
+            if (additional2routeFields.Visible)
+            {
+                AddRowToTable(flightDetailsTable, "",
+                    $"{r2FromDate.Text} ({r2From.Text} {r2To.Text})");
+            }
+            if (additional3routeFields.Visible)
+            {
+                AddRowToTable(flightDetailsTable, "",
+                    $"{r3FromDate.Text} ({r3From.Text} {r3To.Text})");
+            }
+            else
+            {
+
+            }
+            if (additional4routeFields.Visible)
+            {
+                AddRowToTable(flightDetailsTable, "",
+                   $"{r4FromDate.Text} ({r4From.Text} {r4To.Text})");
+            }
+            else
+            {
+
+            }
+            if (additional5routeFields.Visible)
+            {
+                AddRowToTable(flightDetailsTable, "",
+                   $"{r5FromDate.Text} ({r5From.Text} {r5To.Text})");
+            }
+            else
+            {
+
+            }
+            // Add more if needed for additional routes
+
+            // Add flight details table to document
+            doc.Add(flightDetailsTable);
+        }
+
+        private void AddTransfersSection(Document doc)
+        {
+            // Add transfers details
+            PdfPTable transfersTable = new PdfPTable(1);
+            transfersTable.TotalWidth = 500f; // Adjust width as needed
+            transfersTable.LockedWidth = true;
+            transfersTable.SpacingBefore = 10f;
+            transfersTable.SpacingAfter = 10f;
+            transfersTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+            // Add rows for transfers details
+            AddRowToTable(transfersTable, "", transfer1.Text + " (" + transfer1Date.Text + ")");
+            // Add more if needed for additional transfers
+
+            // Add transfers table to document
+            doc.Add(transfersTable);
+
+            
+        }
+
+        private void AddOthersSection(Document doc)
+        {
+            // Add others details
+            PdfPTable othersTable = new PdfPTable(1);
+            othersTable.TotalWidth = 500f; // Adjust width as needed
+            othersTable.LockedWidth = true;
+            othersTable.SpacingBefore = 10f;
+            othersTable.SpacingAfter = 10f;
+            othersTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+            // Add rows for others details
+            AddRowToTable(othersTable, "Travel Requirements:", requirements.Text);
+            AddRowToTable(othersTable, "Additional Notes:", additionalNotes.Text);
+
+            // Add others table to document
+            doc.Add(othersTable);
+        }
+
+
     }
 }

@@ -154,7 +154,9 @@
                                                                 <asp:Label ID="Label1" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
                                                                 <asp:TextBox ID="hotel" runat="server" Width="300px" Style="margin-left: 50px;" CssClass="textboxes"></asp:TextBox>
                                                                 <asp:Label ID="Label4" runat="server" Text="Address" Style="margin-left: 50px;" > </asp:Label>
-                                                                <asp:TextBox ID="hotelAddress" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox> <br /> <br />
+                                                                <asp:TextBox ID="hotelAddress" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox>
+                                                                <asp:Label ID="Label67" runat="server" Text="Contact Number" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="hotelPhone" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox> <br /> <br />
                                                                 <asp:Label ID="Label9" runat="server" Text="Hotel Duration" Style="margin-left: 40px;"></asp:Label> <br />
                                                                 <asp:Label ID="Label10" runat="server" Text="From:" Style="margin-left: 150px;"></asp:Label> 
                                                                 <asp:TextBox ID="durationFrom" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
@@ -179,7 +181,6 @@
                                                                                                     <asp:TextBox ID="r1From" runat="server" PlaceHolder="From" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
                                                                                                     <asp:TextBox ID="r1FromDate" runat="server" Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                     <asp:TextBox ID="r1To" runat="server" PlaceHolder="To" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
-                                                                                                    <asp:TextBox ID="r1ToDate" runat="server"  Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                     <asp:Button runat="server" ID="add2nd" class="btn btn-primary" Text="+" OnClientClick="add2Route();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
                                                                                                 </div>
@@ -187,7 +188,6 @@
                                                                                                     <asp:TextBox ID="r2From" runat="server" PlaceHolder="From" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
                                                                                                     <asp:TextBox ID="r2FromDate" runat="server" Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                     <asp:TextBox ID="r2To" runat="server" PlaceHolder="To" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
-                                                                                                    <asp:TextBox ID="r2ToDate" runat="server"  Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                      <asp:Button runat="server" ID="add3rd" class="btn btn-primary" Text="+" OnClientClick="add3Route();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
                                                                                                 </div>
@@ -195,7 +195,6 @@
                                                                                                     <asp:TextBox ID="r3From" runat="server" PlaceHolder="From" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
                                                                                                     <asp:TextBox ID="r3FromDate" runat="server" Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                     <asp:TextBox ID="r3To" runat="server" PlaceHolder="To" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
-                                                                                                    <asp:TextBox ID="r3ToDate" runat="server"  Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                      <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4Route();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
                                                                                                 </div>
@@ -203,7 +202,6 @@
                                                                                                     <asp:TextBox ID="r4From" runat="server" PlaceHolder="From" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
                                                                                                     <asp:TextBox ID="r4FromDate" runat="server" Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                     <asp:TextBox ID="r4To" runat="server" PlaceHolder="To" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
-                                                                                                    <asp:TextBox ID="r4ToDate" runat="server"  Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                      <asp:Button runat="server" ID="add5th" class="btn btn-primary" Text="+" OnClientClick="add5Route();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
                                                                                                 </div>
@@ -211,7 +209,6 @@
                                                                                                       <asp:TextBox ID="r5From" runat="server" PlaceHolder="From" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
                                                                                                     <asp:TextBox ID="r5FromDate" runat="server" Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                     <asp:TextBox ID="r5To" runat="server" PlaceHolder="To" Width="100px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
-                                                                                                    <asp:TextBox ID="r5ToDate" runat="server"  Width="120px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
 
                                                                                                 </div>
                                                                                

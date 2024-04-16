@@ -510,9 +510,9 @@ namespace TravelDesk.Admin
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = "INSERT INTO TravelArrangement (arrangeID, arrangeUserID, arrangeTravelID, arrangeAirline, arrangeAccomodations, arrangeHotelName , arrangeHotelAdd, arrangeHotelFrom, arrangeHotelTo, " +
                                 "arrangeTransfer1, arrangeTransfer1Date, arrangeTransfer2, arrangeTransfer2Date, arrangeTransfer3, arrangeTransfer3Date, arrangeTransfer4, arrangeTransfer4Date, arrangeTransfer5, arrangeTransfer5Date, " +
-                                "arrangeRequirements, arrangeNotes, arrangeDateCreated, routeM1From, routeM1FromDate, routeM1To, routeM1ToDate, routeM2From, routeM2FromDate, routeM2To, routeM2ToDate, routeM3From, routeM3FromDate, routeM3To, routeM3ToDate, routeM4From, routeM4FromDate, routeM4To, routeM4ToDate, routeM5From, routeM5FromDate, routeM5To, routeM5ToDate)"
+                                "arrangeRequirements, arrangeNotes, arrangeDateCreated, routeM1From, routeM1FromDate, routeM1To, routeM2From, routeM2FromDate, routeM2To, routeM3From, routeM3FromDate, routeM3To, routeM4From, routeM4FromDate, routeM4To, routeM5From, routeM5FromDate, routeM5To)"
                                 + "VALUES (@ID, @userID, @travelID, @airline, @accomodations, @hotelName, @hotelAddress, @hotelFrom, @hotelTo, @transfer1, @transfer1Date, @transfer2, @transfer2Date, @transfer3, @transfer3Date, @transfer4, @transfer4Date, @transfer5, @transfer5Date, @requirements, @notes, @dateCreated," +
-                                "@r1From, @r1FromDate, @r1To, @r1ToDate, @r2From, @r2FromDate, @r2To, @r2ToDate, @r3From, @r3FromDate, @r3To, @r3ToDate, @r4From, @r4FromDate, @r4To, @r4ToDate, @r5From, @r5FromDate, @r5To, @r5ToDate)";
+                                "@r1From, @r1FromDate, @r1To, @r2From, @r2FromDate, @r2To, @r3From, @r3FromDate, @r3To, @r4From, @r4FromDate, @r4To, @r5From, @r5FromDate, @r5To)";
 
                             cmd.Parameters.AddWithValue("@ID", ID);
                             cmd.Parameters.AddWithValue("@userID", userID);
@@ -539,23 +539,23 @@ namespace TravelDesk.Admin
                             cmd.Parameters.AddWithValue("@r1From", r1From.Text);
                             cmd.Parameters.AddWithValue("@r1FromDate", string.IsNullOrEmpty(r1FromDate.Text) ? (object)DBNull.Value : r1FromDate.Text);
                             cmd.Parameters.AddWithValue("@r1To", r1To.Text);
-                            cmd.Parameters.AddWithValue("@r1ToDate", string.IsNullOrEmpty(r1ToDate.Text) ? (object)DBNull.Value : r1ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r1ToDate", string.IsNullOrEmpty(r1ToDate.Text) ? (object)DBNull.Value : r1ToDate.Text);
                             cmd.Parameters.AddWithValue("@r2From", r2From.Text);
                             cmd.Parameters.AddWithValue("@r2FromDate", string.IsNullOrEmpty(r2FromDate.Text) ? (object)DBNull.Value : r2FromDate.Text);
                             cmd.Parameters.AddWithValue("@r2To", r2To.Text);
-                            cmd.Parameters.AddWithValue("@r2ToDate", string.IsNullOrEmpty(r2ToDate.Text) ? (object)DBNull.Value : r2ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r2ToDate", string.IsNullOrEmpty(r2ToDate.Text) ? (object)DBNull.Value : r2ToDate.Text);
                             cmd.Parameters.AddWithValue("@r3From", r3From.Text);
                             cmd.Parameters.AddWithValue("@r3FromDate", string.IsNullOrEmpty(r3FromDate.Text) ? (object)DBNull.Value : r3FromDate.Text);
                             cmd.Parameters.AddWithValue("@r3To", r3To.Text);
-                            cmd.Parameters.AddWithValue("@r3ToDate", string.IsNullOrEmpty(r3ToDate.Text) ? (object)DBNull.Value : r3ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r3ToDate", string.IsNullOrEmpty(r3ToDate.Text) ? (object)DBNull.Value : r3ToDate.Text);
                             cmd.Parameters.AddWithValue("@r4From", r4From.Text);
                             cmd.Parameters.AddWithValue("@r4FromDate", string.IsNullOrEmpty(r4FromDate.Text) ? (object)DBNull.Value : r4FromDate.Text);
                             cmd.Parameters.AddWithValue("@r4To", r4To.Text);
-                            cmd.Parameters.AddWithValue("@r4ToDate", string.IsNullOrEmpty(r4ToDate.Text) ? (object)DBNull.Value : r4ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r4ToDate", string.IsNullOrEmpty(r4ToDate.Text) ? (object)DBNull.Value : r4ToDate.Text);
                             cmd.Parameters.AddWithValue("@r5From", r5From.Text);
                             cmd.Parameters.AddWithValue("@r5FromDate", string.IsNullOrEmpty(r5FromDate.Text) ? (object)DBNull.Value : r5FromDate.Text);
                             cmd.Parameters.AddWithValue("@r5To", r5To.Text);
-                            cmd.Parameters.AddWithValue("@r5ToDate", string.IsNullOrEmpty(r5ToDate.Text) ? (object)DBNull.Value : r5ToDate.Text);
+                            ////cmd.Parameters.AddWithValue("@r5ToDate", string.IsNullOrEmpty(r5ToDate.Text) ? (object)DBNull.Value : r5ToDate.Text);
 
 
                             //for the REQUIREMENTS
@@ -647,23 +647,23 @@ namespace TravelDesk.Admin
                             cmd.Parameters.AddWithValue("@r1From", r1From.Text);
                             cmd.Parameters.AddWithValue("@r1FromDate", string.IsNullOrEmpty(r1FromDate.Text) ? (object)DBNull.Value : r1FromDate.Text);
                             cmd.Parameters.AddWithValue("@r1To", r1To.Text);
-                            cmd.Parameters.AddWithValue("@r1ToDate", string.IsNullOrEmpty(r1ToDate.Text) ? (object)DBNull.Value : r1ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r1ToDate", string.IsNullOrEmpty(r1ToDate.Text) ? (object)DBNull.Value : r1ToDate.Text);
                             cmd.Parameters.AddWithValue("@r2From", r2From.Text);
                             cmd.Parameters.AddWithValue("@r2FromDate", string.IsNullOrEmpty(r2FromDate.Text) ? (object)DBNull.Value : r2FromDate.Text);
                             cmd.Parameters.AddWithValue("@r2To", r2To.Text);
-                            cmd.Parameters.AddWithValue("@r2ToDate", string.IsNullOrEmpty(r2ToDate.Text) ? (object)DBNull.Value : r2ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r2ToDate", string.IsNullOrEmpty(r2ToDate.Text) ? (object)DBNull.Value : r2ToDate.Text);
                             cmd.Parameters.AddWithValue("@r3From", r3From.Text);
                             cmd.Parameters.AddWithValue("@r3FromDate", string.IsNullOrEmpty(r3FromDate.Text) ? (object)DBNull.Value : r3FromDate.Text);
                             cmd.Parameters.AddWithValue("@r3To", r3To.Text);
-                            cmd.Parameters.AddWithValue("@r3ToDate", string.IsNullOrEmpty(r3ToDate.Text) ? (object)DBNull.Value : r3ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r3ToDate", string.IsNullOrEmpty(r3ToDate.Text) ? (object)DBNull.Value : r3ToDate.Text);
                             cmd.Parameters.AddWithValue("@r4From", r4From.Text);
                             cmd.Parameters.AddWithValue("@r4FromDate", string.IsNullOrEmpty(r4FromDate.Text) ? (object)DBNull.Value : r4FromDate.Text);
                             cmd.Parameters.AddWithValue("@r4To", r4To.Text);
-                            cmd.Parameters.AddWithValue("@r4ToDate", string.IsNullOrEmpty(r4ToDate.Text) ? (object)DBNull.Value : r4ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r4ToDate", string.IsNullOrEmpty(r4ToDate.Text) ? (object)DBNull.Value : r4ToDate.Text);
                             cmd.Parameters.AddWithValue("@r5From", r5From.Text);
                             cmd.Parameters.AddWithValue("@r5FromDate", string.IsNullOrEmpty(r5FromDate.Text) ? (object)DBNull.Value : r5FromDate.Text);
                             cmd.Parameters.AddWithValue("@r5To", r5To.Text);
-                            cmd.Parameters.AddWithValue("@r5ToDate", string.IsNullOrEmpty(r5ToDate.Text) ? (object)DBNull.Value : r5ToDate.Text);
+                            //cmd.Parameters.AddWithValue("@r5ToDate", string.IsNullOrEmpty(r5ToDate.Text) ? (object)DBNull.Value : r5ToDate.Text);
 
 
                             // Execute the update query
