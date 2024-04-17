@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="arrangedRequest.aspx.cs" Inherits="TravelDesk.Admin.arrangedRequest" EnableEventValidation="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="arrangedRequest.aspx.cs" Inherits="TravelDesk.Admin.arrangedRequest" EnableEventValidation="false" Async="true"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .textboxes {
@@ -8,36 +8,15 @@
         }
         
     </style>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script type="text/javascript">
 
     function showModal() {
         $('#requestModal').modal('show');
         return false; // Prevents the default behavior of the button click event
     }
-    //function captureScreenshotAndSubmit() {
-    //    // Specify the element to capture
-    //    var elementToCapture = document.getElementById('arrangementBlock');
 
-    //    // Capture screenshot of the specified element
-    //    html2canvas(elementToCapture).then(function (canvas) {
-    //        // Convert the screenshot to a data URL
-    //        var screenshotDataUrl = canvas.toDataURL("image/png");
-
-    //        // Send the screenshot data to the server using AJAX
-    //        var xhr = new XMLHttpRequest();
-    //        xhr.open("POST", "CaptureScreenshot.aspx", true);
-    //        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    //        xhr.onreadystatechange = function () {
-    //            if (xhr.readyState === 4 && xhr.status === 200) {
-    //                // Screenshot captured successfully
-    //                alert("Screenshot captured!");
-    //            }
-    //        };
-    //        xhr.send("screenshotData=" + encodeURIComponent(screenshotDataUrl));
-    //    });
-    //}
 </script>
 
 </asp:Content>
@@ -79,7 +58,9 @@
                                                     </div>      
                                                                                      
                                                     <div class="card-block">
-                                                         <asp:Button runat="server" class="btn btn-primary" Text="Open Request" ID="openRequest" OnClientClick="return showModal();" />
+<%--                                                         <asp:Button runat="server" class="btn btn-primary" Text="Open Request" ID="openRequest" OnClientClick="return showModal();" /> --%>
+                                                         <asp:Button runat="server" class="btn btn-primary" Text="Export as PDF" ID="exportasPdf" OnClick="exportasPdf_Click"/>
+
                                                     </div>
                                                             <!--EMPLOYEE DETAILS-->
                                                             <div class="card-block">
@@ -230,7 +211,7 @@
                                                                                          </div>
                                            </div>
                                                                 <!--MODAL FOR REQUEST DETAILS -->
-                                                                <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<%--                                                                <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-lg" role="document" style="max-width: 1500px;">>
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
@@ -438,10 +419,9 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div> 
+                                                                </div> --%>
 
-                                             <asp:Button runat="server" class="btn btn-primary" Text="Proceed" ID="confirmArrangement" OnClick="confirmArrangement_Click" />
-                                                <asp:Button runat="server" class="btn btn-primary" Text="Export" ID="exportasPdf" OnClick="exportasPdf_Click"/>
+                                             <asp:Button runat="server" class="btn btn-primary" Text="Proceed to Billing" ID="confirmArrangement" OnClick="confirmArrangement_Click" />
                                  
                                     <!-- Page-body end -->
                                          </div>

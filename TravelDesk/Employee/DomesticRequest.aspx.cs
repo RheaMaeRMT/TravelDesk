@@ -54,8 +54,8 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname , travelLevel, travelMobilenum, travelProjectCode, travelFrom, travelDeparture, travelReturn, travelPurpose, travelReqStatus, travelManager, travelRemarks, travelTo, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @level, @mobile, @projCode, @from, @departure, @return, @purpose, @reqStatus, @manager, @remarks, @destination, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname , travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelFrom, travelDeparture, travelReturn, travelPurpose, travelReqStatus, travelManager, travelRemarks, travelTo, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empEmail, @level, @mobile, @projCode, @from, @departure, @return, @purpose, @reqStatus, @manager, @remarks, @destination, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
                             cmd.Parameters.AddWithValue("@ID", ID);
                             cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
@@ -63,6 +63,7 @@ namespace TravelDesk.Employee
                             cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
                             cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
                             cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
+                            cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
                             cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
                             cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
                             cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);

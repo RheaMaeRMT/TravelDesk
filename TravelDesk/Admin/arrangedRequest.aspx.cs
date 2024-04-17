@@ -1,21 +1,20 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
-using iTextSharp.text;
-using iTextSharp.text.html.simpleparser;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using iTextSharp.tool.xml;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Web;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Net.Mail;
+using Newtonsoft.Json;
+using System.Text;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TravelDesk.Admin
 {
@@ -80,7 +79,7 @@ namespace TravelDesk.Admin
                                     string userID = reader["travelUserID"].ToString();
                                     string mobile = reader["travelMobilenum"].ToString();
                                     string level = reader["travelLevel"].ToString();
-
+                                    string email = reader["travelEmail"].ToString();
                                     // Retrieve other request details as needed
 
                                     // Display or use the retrieved request details
@@ -89,6 +88,8 @@ namespace TravelDesk.Admin
                                     homeFacility.Text = facility;
                                     employeePhone.Text = mobile;
                                     employeeLevel.Text = level;
+
+                                    Session["userEmail"] = email;
 
                                     // Assign other request details to corresponding controls
                                 }
@@ -1175,6 +1176,11 @@ namespace TravelDesk.Admin
         protected void exportasPdf_Click(object sender, EventArgs e)
         {
 
+            Page.RegisterAsyncTask(new PageAsyncTask(exportasPdfAsync));
+        }
+
+        protected async Task exportasPdfAsync()
+        {
             // Create a new MemoryStream to hold the PDF
             using (MemoryStream ms = new MemoryStream())
             {
@@ -1191,8 +1197,9 @@ namespace TravelDesk.Admin
                     BaseColor whiteColor = BaseColor.WHITE;
                     Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, whiteColor);
 
+                    Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 12, whiteColor);
 
-                    // Add content to the Document
+                    // HEADER
                     AddSectionSeparatorHeader(doc, "Travel Arrangement for " + employeeName.Text, headerFont, customColor);
                     AddHeaderSection(doc);
 
@@ -1217,6 +1224,17 @@ namespace TravelDesk.Admin
                     AddSectionSeparator(doc, "Others");
                     AddOthersSection(doc);
 
+                    //SPACE PURPOSES
+                    Font footerSpace = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.WHITE);
+                    AddEmptySeparator(doc, "Travel Arrangement for " + employeeName.Text, footerSpace);
+                    EmptySeparatorforSpace(doc);
+                    AddEmptySeparator(doc, "Travel Arrangement for " + employeeName.Text, footerSpace);
+                    EmptySeparatorforSpace(doc);
+
+                    //FOOTER
+                    AddSectionFooter(doc, "Feel free to provide feedback for any concerns. Have a safe trip!", footerFont, customColor);
+                    AddFooter(doc);
+
                     // Close the Document
                     doc.Close();
                 }
@@ -1226,6 +1244,7 @@ namespace TravelDesk.Admin
 
                 // Retrieve ID and name for filename
                 string ID = Session["clickedRequest"].ToString();
+                string recipientEmail = Session["userEmail"].ToString();
                 string name = employeeName.Text;
 
                 // Construct filename
@@ -1242,7 +1261,101 @@ namespace TravelDesk.Admin
                 Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
 
                 // End the response
-                Response.End();
+                Response.Flush();
+
+                // After sending the PDF for download, send it via email
+                await SendPdfByEmail(filename, pdfBytes, recipientEmail);
+
+            }
+        }
+        public static async Task SendPdfByEmail(string pdfFileName, byte[] pdfBytes, string recipientEmail)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                // EmailJS endpoint URL
+                string emailJsEndpoint = "https://api.emailjs.com/api/v1.0/email/send";
+
+                //// EmailJS user ID (replace with your actual EmailJS user ID)
+                //string emailJsUserId = "Vpn9etH0X1UpOj3u_";
+
+                //// EmailJS service ID (replace with your actual EmailJS service ID)
+                //string emailJsServiceId = "service_4y9m0rv";
+
+                //// EmailJS template ID (replace with your actual EmailJS template ID)
+                //string emailJsTemplateId = "template_j5shg1l";
+
+                // Prepare the email data
+                // Convert the PDF bytes to a base64 string
+                string pdfBase64 = Convert.ToBase64String(pdfBytes);
+
+                // Prepare the email data
+                var emailData = new Dictionary<string, object>
+                {
+                    { "service_id", "service_4y9m0rv" },
+                    { "template_id", "template_j5shg1l" },
+                    { "user_id", "Vpn9etH0X1UpOj3u_" },
+                    { "recipient_email", recipientEmail }
+                    //{ "attachment", new
+                    //    {
+                    //        content = pdfBase64,
+                    //        type = "application/pdf",
+                    //        name = pdfFileName
+                    //    }
+                    //}
+                };
+
+                // Serialize email data to JSON
+                var jsonContent = JsonConvert.SerializeObject(emailData);
+
+                // Create the request content
+                var requestContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                // Send the email using EmailJS
+                HttpResponseMessage response = await httpClient.PostAsync(emailJsEndpoint, requestContent);
+
+                // Check if the email was sent successfully
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("Email sent successfully!");
+                }
+                else
+                {
+                    // Handle error
+                    string errorMessage = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Error sending email. Status code: {response.StatusCode}, Reason phrase: {response.ReasonPhrase}, Error message: {errorMessage}");
+
+                    // Check if the error message contains information about the specific parameter
+                    if (errorMessage.Contains("parameter"))
+                    {
+                        // If the error message contains information about a parameter, extract and log it
+                        int startIndex = errorMessage.IndexOf("parameter");
+                        int endIndex = errorMessage.IndexOf(".", startIndex);
+                        if (startIndex != -1 && endIndex != -1)
+                        {
+                            string parameterError = errorMessage.Substring(startIndex, endIndex - startIndex);
+                            Debug.WriteLine("Parameter error: " + parameterError);
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Unable to extract parameter error information.");
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        // Helper class for representing a file parameter in a multipart/form-data request
+        public class FileParameter
+        {
+            public byte[] File { get; private set; }
+            public string FileName { get; private set; }
+
+            public FileParameter(byte[] file, string fileName)
+            {
+                File = file;
+                FileName = fileName;
             }
         }
 
@@ -1335,62 +1448,52 @@ namespace TravelDesk.Admin
         private void AddFlightDetailsSection(Document doc)
         {
             // Add flight details
-            PdfPTable flightDetailsTable = new PdfPTable(1);
-            flightDetailsTable.TotalWidth = 300f; // Adjust width as needed
+            PdfPTable flightDetailsTable = new PdfPTable(2);
+            flightDetailsTable.TotalWidth = 500f; // Adjust width as needed
             flightDetailsTable.LockedWidth = true;
-            flightDetailsTable.SpacingBefore = 7f;
-            flightDetailsTable.SpacingAfter = 7f;
+            flightDetailsTable.SpacingBefore = 10f;
+            flightDetailsTable.SpacingAfter = 10f;
             flightDetailsTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
             // Add rows for flight details
             AddRowToTable(flightDetailsTable, "Airline:", bookedairline.Text);
             // Add rows for flight schedule details
-            AddRowToTable(flightDetailsTable, "Flight Schedule:",
-                $"{r1FromDate.Text} ({r1From.Text} {r1To.Text})");
+            AddFlightScheduleRow(flightDetailsTable, "Flight Schedule:", r1FromDate.Text, r1From.Text, r1To.Text);
 
             // Add additional flight schedule details if available
             if (additional2routeFields.Visible)
             {
-                AddRowToTable(flightDetailsTable, "",
-                    $"{r2FromDate.Text} ({r2From.Text} {r2To.Text})");
+                AddFlightScheduleRow(flightDetailsTable, "", r2FromDate.Text, r2From.Text, r2To.Text);
             }
             if (additional3routeFields.Visible)
             {
-                AddRowToTable(flightDetailsTable, "",
-                    $"{r3FromDate.Text} ({r3From.Text} {r3To.Text})");
-            }
-            else
-            {
-
+                AddFlightScheduleRow(flightDetailsTable, "", r3FromDate.Text, r3From.Text, r3To.Text);
             }
             if (additional4routeFields.Visible)
             {
-                AddRowToTable(flightDetailsTable, "",
-                   $"{r4FromDate.Text} ({r4From.Text} {r4To.Text})");
-            }
-            else
-            {
-
+                AddFlightScheduleRow(flightDetailsTable, "", r4FromDate.Text, r4From.Text, r4To.Text);
             }
             if (additional5routeFields.Visible)
             {
-                AddRowToTable(flightDetailsTable, "",
-                   $"{r5FromDate.Text} ({r5From.Text} {r5To.Text})");
+                AddFlightScheduleRow(flightDetailsTable, "", r5FromDate.Text, r5From.Text, r5To.Text);
             }
-            else
+                // Add flight details table to document
+                doc.Add(flightDetailsTable);
+        }
+
+        // Helper method to add flight schedule row with conditional dash
+        private void AddFlightScheduleRow(PdfPTable table, string label, string fromDate, string from, string to)
+        {
+            if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(from) && !string.IsNullOrEmpty(to))
             {
-
+                AddRowToTable(table, label, $"{fromDate} {from} {to}");
             }
-            // Add more if needed for additional routes
-
-            // Add flight details table to document
-            doc.Add(flightDetailsTable);
         }
 
         private void AddTransfersSection(Document doc)
         {
             // Add transfers details
-            PdfPTable transfersTable = new PdfPTable(1);
+            PdfPTable transfersTable = new PdfPTable(2);
             transfersTable.TotalWidth = 500f; // Adjust width as needed
             transfersTable.LockedWidth = true;
             transfersTable.SpacingBefore = 10f;
@@ -1398,7 +1501,7 @@ namespace TravelDesk.Admin
             transfersTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
             // Add rows for transfers details
-            AddRowToTable(transfersTable, "", transfer1.Text + " (" + transfer1Date.Text + ")");
+            AddRowToTable(transfersTable, "", transfer1Date.Text + " " + transfer1.Text + "");
             // Add more if needed for additional transfers
 
             // Add transfers table to document
@@ -1410,7 +1513,7 @@ namespace TravelDesk.Admin
         private void AddOthersSection(Document doc)
         {
             // Add others details
-            PdfPTable othersTable = new PdfPTable(1);
+            PdfPTable othersTable = new PdfPTable(2);
             othersTable.TotalWidth = 500f; // Adjust width as needed
             othersTable.LockedWidth = true;
             othersTable.SpacingBefore = 10f;
@@ -1423,6 +1526,116 @@ namespace TravelDesk.Admin
 
             // Add others table to document
             doc.Add(othersTable);
+        }
+
+        private void AddSectionFooter(Document doc, string sectionTitle, Font font, BaseColor customColor)
+        {
+            PdfPTable separatorTable = new PdfPTable(1);
+            separatorTable.WidthPercentage = 100;
+            PdfPCell cell = new PdfPCell(new Phrase(sectionTitle, font)); // Use custom font
+            cell.BackgroundColor = customColor; // Use custom color
+            cell.HorizontalAlignment = Element.ALIGN_CENTER; // Center-align text
+            cell.Padding = 5;
+            separatorTable.AddCell(cell);
+            doc.Add(separatorTable);
+        }
+        private void AddFooter(Document doc)
+        {
+
+        }
+
+
+
+        private void SendPdfByEmail(byte[] pdfBytes, string filename, string recipientEmail)
+        {
+            try
+            {
+                string fromEmail = "trinidadarheamae28@gmail.com";
+                string fromPass = "sjhe ppyy myvz xyid";
+
+                Debug.WriteLine($"email: {fromEmail}");
+
+
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(fromEmail);
+                mail.To.Add(recipientEmail);
+                mail.Subject = "Travel Arrangement Copy";
+                mail.Body = "Please find your travel arrangement PDF attached.";
+                mail.IsBodyHtml = true;
+
+                Debug.WriteLine($"SUBJECT: {mail.Subject}");
+
+                Attachment attachment = new Attachment(new MemoryStream(pdfBytes), filename);
+                mail.Attachments.Add(attachment);
+
+                Debug.WriteLine($"FILE: {attachment}");
+
+                var smtpClient = new SmtpClient("smtp.gmail.com")
+                {
+                    Port = 587,
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromEmail, fromPass),
+                };
+               
+
+                try
+                {
+                    smtpClient.Send(mail);
+                    Debug.WriteLine($"SENT: {mail}");
+
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception
+                    Debug.WriteLine("Error sending email: " + ex.ToString());
+                    Response.Write("<script>alert('Error sending email. Please try again later.');</script>");
+                }
+
+
+                // Alert the user
+                Response.Write("<script>alert('Travel Arrangement has been sent.')</script>");
+
+                // Dispose resources
+                mail.Dispose();
+                attachment.Dispose();
+
+               
+            }
+            catch (SmtpException smtpEx)
+            {
+                // Log the exception message and stack trace
+                Console.WriteLine("SMTP Exception occurred: " + smtpEx.Message);
+                Console.WriteLine("Stack Trace: " + smtpEx.StackTrace);
+
+                // Check if the SmtpStatusCode property is ava  ilable
+                if (smtpEx.StatusCode != null)
+                {
+                    // Log the SMTP status code and associated error message
+                    Console.WriteLine("SMTP Status Code: " + smtpEx.StatusCode);
+                    Console.WriteLine("SMTP Error Message: " + smtpEx.Message);
+                }
+
+                // Check if the InnerException is present and log its details
+                if (smtpEx.InnerException != null)
+                {
+                    Console.WriteLine("Inner Exception: " + smtpEx.InnerException.Message);
+                }
+
+                // Alert the user about the error
+                Response.Write("<script>alert('Error sending email. Please try again later.');</script>");
+            }
+            catch (Exception ex)
+            {
+                // Log any other exceptions
+                Console.WriteLine("An error occurred: " + ex.Message);
+                Console.WriteLine("Stack Trace: " + ex.StackTrace);
+
+                // Alert the user about the error
+                Response.Write("<script>alert('Error sending email. Please try again later.');</script>");
+            }
+
+
         }
 
 
