@@ -15,6 +15,7 @@ using System.Net.Mail;
 using Newtonsoft.Json;
 using System.Text;
 using System.Web.UI;
+using MimeKit;
 
 namespace TravelDesk.Admin
 {
@@ -1264,87 +1265,87 @@ namespace TravelDesk.Admin
                 Response.Flush();
 
                 // After sending the PDF for download, send it via email
-                await SendPdfByEmail(filename, pdfBytes, recipientEmail);
+                await SendPdfByEmail(pdfBytes, filename, recipientEmail);
 
             }
         }
-        public static async Task SendPdfByEmail(string pdfFileName, byte[] pdfBytes, string recipientEmail)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                // EmailJS endpoint URL
-                string emailJsEndpoint = "https://api.emailjs.com/api/v1.0/email/send";
+        //public static async Task SendPdfByEmail(string pdfFileName, byte[] pdfBytes, string recipientEmail)
+        //{
+        //    using (var httpClient = new HttpClient())
+        //    {
+        //        // EmailJS endpoint URL
+        //        string emailJsEndpoint = "https://api.emailjs.com/api/v1.0/email/send";
 
-                //// EmailJS user ID (replace with your actual EmailJS user ID)
-                //string emailJsUserId = "Vpn9etH0X1UpOj3u_";
+        //        //// EmailJS user ID (replace with your actual EmailJS user ID)
+        //        //string emailJsUserId = "Vpn9etH0X1UpOj3u_";
 
-                //// EmailJS service ID (replace with your actual EmailJS service ID)
-                //string emailJsServiceId = "service_4y9m0rv";
+        //        //// EmailJS service ID (replace with your actual EmailJS service ID)
+        //        //string emailJsServiceId = "service_4y9m0rv";
 
-                //// EmailJS template ID (replace with your actual EmailJS template ID)
-                //string emailJsTemplateId = "template_j5shg1l";
+        //        //// EmailJS template ID (replace with your actual EmailJS template ID)
+        //        //string emailJsTemplateId = "template_j5shg1l";
 
-                // Prepare the email data
-                // Convert the PDF bytes to a base64 string
-                string pdfBase64 = Convert.ToBase64String(pdfBytes);
+        //        // Prepare the email data
+        //        // Convert the PDF bytes to a base64 string
+        //        string pdfBase64 = Convert.ToBase64String(pdfBytes);
 
-                // Prepare the email data
-                var emailData = new Dictionary<string, object>
-                {
-                    { "service_id", "service_4y9m0rv" },
-                    { "template_id", "template_j5shg1l" },
-                    { "user_id", "Vpn9etH0X1UpOj3u_" },
-                    { "recipient_email", recipientEmail }
-                    //{ "attachment", new
-                    //    {
-                    //        content = pdfBase64,
-                    //        type = "application/pdf",
-                    //        name = pdfFileName
-                    //    }
-                    //}
-                };
+        //        // Prepare the email data
+        //        var emailData = new Dictionary<string, object>
+        //        {
+        //            { "service_id", "service_4y9m0rv" },
+        //            { "template_id", "template_j5shg1l" },
+        //            { "user_id", "Vpn9etH0X1UpOj3u_" },
+        //            { "recipient_email", recipientEmail },
+        //            { "attachment", new
+        //                {
+        //                    content = pdfBase64,
+        //                    type = "application/pdf",
+        //                    name = pdfFileName
+        //                }
+        //            }
+        //        };
 
-                // Serialize email data to JSON
-                var jsonContent = JsonConvert.SerializeObject(emailData);
+        //        // Serialize email data to JSON
+        //        var jsonContent = JsonConvert.SerializeObject(emailData);
 
-                // Create the request content
-                var requestContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+        //        // Create the request content
+        //        var requestContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-                // Send the email using EmailJS
-                HttpResponseMessage response = await httpClient.PostAsync(emailJsEndpoint, requestContent);
+        //        // Send the email using EmailJS
+        //        HttpResponseMessage response = await httpClient.PostAsync(emailJsEndpoint, requestContent);
 
-                // Check if the email was sent successfully
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine("Email sent successfully!");
-                }
-                else
-                {
-                    // Handle error
-                    string errorMessage = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine($"Error sending email. Status code: {response.StatusCode}, Reason phrase: {response.ReasonPhrase}, Error message: {errorMessage}");
+        //        // Check if the email was sent successfully
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            Debug.WriteLine("Email sent successfully!");
+        //        }
+        //        else
+        //        {
+        //            // Handle error
+        //            string errorMessage = await response.Content.ReadAsStringAsync();
+        //            Debug.WriteLine($"Error sending email. Status code: {response.StatusCode}, Reason phrase: {response.ReasonPhrase}, Error message: {errorMessage}");
 
-                    // Check if the error message contains information about the specific parameter
-                    if (errorMessage.Contains("parameter"))
-                    {
-                        // If the error message contains information about a parameter, extract and log it
-                        int startIndex = errorMessage.IndexOf("parameter");
-                        int endIndex = errorMessage.IndexOf(".", startIndex);
-                        if (startIndex != -1 && endIndex != -1)
-                        {
-                            string parameterError = errorMessage.Substring(startIndex, endIndex - startIndex);
-                            Debug.WriteLine("Parameter error: " + parameterError);
-                        }
-                        else
-                        {
-                            Debug.WriteLine("Unable to extract parameter error information.");
-                        }
-                    }
+        //            // Check if the error message contains information about the specific parameter
+        //            if (errorMessage.Contains("parameter"))
+        //            {
+        //                // If the error message contains information about a parameter, extract and log it
+        //                int startIndex = errorMessage.IndexOf("parameter");
+        //                int endIndex = errorMessage.IndexOf(".", startIndex);
+        //                if (startIndex != -1 && endIndex != -1)
+        //                {
+        //                    string parameterError = errorMessage.Substring(startIndex, endIndex - startIndex);
+        //                    Debug.WriteLine("Parameter error: " + parameterError);
+        //                }
+        //                else
+        //                {
+        //                    Debug.WriteLine("Unable to extract parameter error information.");
+        //                }
+        //            }
 
-                }
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
         // Helper class for representing a file parameter in a multipart/form-data request
         public class FileParameter
@@ -1545,99 +1546,97 @@ namespace TravelDesk.Admin
         }
 
 
-
-        private void SendPdfByEmail(byte[] pdfBytes, string filename, string recipientEmail)
+        //SMTP
+        private async Task SendPdfByEmail(byte[] pdfBytes, string filename, string recipientEmail)
         {
+
             try
             {
                 string fromEmail = "trinidadarheamae28@gmail.com";
-                string fromPass = "sjhe ppyy myvz xyid";
-
-                Debug.WriteLine($"email: {fromEmail}");
-
+                string fromPass = "sjheppyymyvzxyid";
+                string receiver = "CRosalejos@innodata.com";
 
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(fromEmail);
-                mail.To.Add(recipientEmail);
+                mail.To.Add(receiver);
                 mail.Subject = "Travel Arrangement Copy";
                 mail.Body = "Please find your travel arrangement PDF attached.";
                 mail.IsBodyHtml = true;
 
-                Debug.WriteLine($"SUBJECT: {mail.Subject}");
-
                 Attachment attachment = new Attachment(new MemoryStream(pdfBytes), filename);
                 mail.Attachments.Add(attachment);
 
-                Debug.WriteLine($"FILE: {attachment}");
-
-                var smtpClient = new SmtpClient("smtp.gmail.com")
+                using (var smtpClient = new SmtpClient("smtp.gmail.com"))
                 {
-                    Port = 587,
-                    EnableSsl = true,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(fromEmail, fromPass),
-                };
-               
+                    smtpClient.Port = 587;
+                    smtpClient.EnableSsl = true;
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = new NetworkCredential(fromEmail, fromPass);
 
-                try
-                {
-                    smtpClient.Send(mail);
-                    Debug.WriteLine($"SENT: {mail}");
-
+                    await smtpClient.SendMailAsync(mail);
                 }
-                catch (Exception ex)
-                {
-                    // Log the exception
-                    Debug.WriteLine("Error sending email: " + ex.ToString());
-                    Response.Write("<script>alert('Error sending email. Please try again later.');</script>");
-                }
-
 
                 // Alert the user
                 Response.Write("<script>alert('Travel Arrangement has been sent.')</script>");
-
-                // Dispose resources
-                mail.Dispose();
-                attachment.Dispose();
-
-               
             }
             catch (SmtpException smtpEx)
             {
-                // Log the exception message and stack trace
-                Console.WriteLine("SMTP Exception occurred: " + smtpEx.Message);
-                Console.WriteLine("Stack Trace: " + smtpEx.StackTrace);
-
-                // Check if the SmtpStatusCode property is ava  ilable
-                if (smtpEx.StatusCode != null)
-                {
-                    // Log the SMTP status code and associated error message
-                    Console.WriteLine("SMTP Status Code: " + smtpEx.StatusCode);
-                    Console.WriteLine("SMTP Error Message: " + smtpEx.Message);
-                }
-
-                // Check if the InnerException is present and log its details
-                if (smtpEx.InnerException != null)
-                {
-                    Console.WriteLine("Inner Exception: " + smtpEx.InnerException.Message);
-                }
-
-                // Alert the user about the error
+                // Handle SmtpException
+                Debug.WriteLine("SMTP Exception occurred: " + smtpEx.Message);
+                // Log other details...
                 Response.Write("<script>alert('Error sending email. Please try again later.');</script>");
             }
             catch (Exception ex)
             {
-                // Log any other exceptions
-                Console.WriteLine("An error occurred: " + ex.Message);
-                Console.WriteLine("Stack Trace: " + ex.StackTrace);
-
-                // Alert the user about the error
+                // Handle other exceptions
+                Debug.WriteLine("An error occurred: " + ex.Message);
+                // Log other details...
                 Response.Write("<script>alert('Error sending email. Please try again later.');</script>");
             }
 
 
         }
 
+        protected void sendtoEmail_Click(object sender, EventArgs e)
+        {
+            
 
+            try
+            {
+                string receiver = "trinidadarheamae28@gmail.com";
+
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("rheawithmaebizz@gmail.com", "Travel Desk");
+                mail.Subject = "Your Travel Arrangement is Ready";
+                mail.Body = "Please find your travel arrangement PDF attached.";
+                mail.IsBodyHtml = true;
+
+                mail.To.Add(new MailAddress(receiver));
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Credentials = new System.Net.NetworkCredential("rheawithmaebizz@gmail.com", "pbpeufnnkmaghitp");
+                smtp.Send(mail);
+
+                Response.Write("EMAIL SENT SUCCESSFULLY");
+            }
+            catch (SmtpException ex)
+            {
+                // Log the SMTP exception
+                Debug.WriteLine("SMTP Exception: " + ex.Message);
+
+                // If there is an inner exception, log it as well
+                if (ex.InnerException != null)
+                {
+                    Debug.WriteLine("Inner Exception: " + ex.InnerException.Message);
+                }
+
+                // Handle the exception as needed
+            }
+
+        }
     }
 }
