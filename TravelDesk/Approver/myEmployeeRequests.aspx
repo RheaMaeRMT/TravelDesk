@@ -42,14 +42,11 @@
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
-                                                    <asp:BoundField DataField="travelApprovalStat" HeaderText="Status" SortExpression="travelApprovalStat" />  
                                                     <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" SortExpression="travelRequestID" />
                                                     <asp:BoundField DataField="travelType" HeaderText="Travel" SortExpression="travelType" /> 
-                                                    <asp:BoundField DataField="travelDestination" HeaderText="Destination" SortExpression="travelDestination" />          
                                                     <asp:BoundField DataField="travelDeparture" HeaderText="Departure date" SortExpression="travelDeparture" DataFormatString="{0:d}"  />
                                                     <asp:BoundField DataField="travelReturn" HeaderText="Return date" SortExpression="travelReturn" DataFormatString="{0:d}"  />
                                                     <asp:BoundField DataField="travelPurpose" HeaderText="Purpose" SortExpression="travelPurpose" />
-                                                    <asp:BoundField DataField="travelDesignation" HeaderText="Designation" SortExpression="travelDesignation" />
                                                 </Columns>
                 
                                                 <FooterStyle BackColor="#CCCCCC" />
@@ -63,7 +60,7 @@
                                                 <SortedDescendingHeaderStyle BackColor="#383838" />
                                             </asp:GridView>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_TravelDesk %>" 
-                                                SelectCommand="SELECT travelRequest.travelApprovalStat, travelRequest.travelRequestID, travelRequest.travelType, travelRequest.travelDestination, travelRequest.travelDeparture, travelRequest.travelReturn, travelRequest.travelPurpose, travelRequest.travelDesignation FROM travelRequest WHERE (travelRequest.travelManager = @userName)">
+                                                SelectCommand="SELECT travelRequest.travelRequestID, travelRequest.travelType, travelRequest.travelDeparture, travelRequest.travelReturn, travelRequest.travelPurpose FROM travelRequest WHERE (travelRequest.travelManager = @userName)">
                                                 <SelectParameters>
                                                     <asp:SessionParameter Name="userName" SessionField="userName" />
                                                 </SelectParameters>

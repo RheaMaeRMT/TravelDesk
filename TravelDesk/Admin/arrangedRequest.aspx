@@ -60,7 +60,7 @@
                                                     <div class="card-block">
 <%--                                                         <asp:Button runat="server" class="btn btn-primary" Text="Open Request" ID="openRequest" OnClientClick="return showModal();" /> --%>
                                                          <asp:Button runat="server" class="btn btn-primary" Text="Export as PDF" ID="exportasPdf" OnClick="exportasPdf_Click"/>
-                                                         <asp:Button runat="server" class="btn btn-primary" Text="Send" ID="sendtoEmail" OnClick="sendtoEmail_Click"/>
+<%--                                                         <asp:Button runat="server" class="btn btn-primary" Text="Send" ID="sendtoEmail" OnClick="sendtoEmail_Click"/>--%>
 
                                                     </div>
                                                             <!--EMPLOYEE DETAILS-->

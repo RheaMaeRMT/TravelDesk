@@ -46,7 +46,6 @@ namespace TravelDesk.Employee
                     string filename = Session["filename"].ToString();
                     string imgPath = Session["pdfPath"].ToString();
                     string userID = Session["userID"].ToString();
-                    string type = Session["travelType"].ToString();
 
                     using (var db = new SqlConnection(connectionString))
                     {
@@ -54,29 +53,38 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname , travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelFrom, travelDeparture, travelReturn, travelPurpose, travelReqStatus, travelManager, travelRemarks, travelTo, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empEmail, @level, @mobile, @projCode, @from, @departure, @return, @purpose, @reqStatus, @manager, @remarks, @destination, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @from, @departure, @return, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
                             cmd.Parameters.AddWithValue("@ID", ID);
-                            cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+
+                            // Check if the textbox with ID "othersFacility" is displayed
+                            if (othersFacility.Style["display"] != "none")
+                            {
+                                // If displayed, use its value as @location
+                                cmd.Parameters.AddWithValue("@location", othersFacility.Text);
+                            }
+                            else
+                            {
+                                // If hidden, use the selected item in the homeFacility dropdown
+                                cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+                            }
+
                             cmd.Parameters.AddWithValue("@empID", employeeID.Text);
                             cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
                             cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
                             cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
+                            cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
+                            cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
                             cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
                             cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
                             cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
                             cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
-                            cmd.Parameters.AddWithValue("@from", employeeFrom.Text);
-                            cmd.Parameters.AddWithValue("@departure", employeeDepartureDate.Text);
-                            cmd.Parameters.AddWithValue("@return", employeeArrivalDate.Text);
                             cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
                             cmd.Parameters.AddWithValue("@reqStatus", "Approved");
-                            cmd.Parameters.AddWithValue("@manager", employeeManager.Text);
                             cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
-                            cmd.Parameters.AddWithValue("@destination", employeeTo.Text);
                             cmd.Parameters.AddWithValue("@others", otherspecified.Text);
-                            cmd.Parameters.AddWithValue("@type", type);
+                            cmd.Parameters.AddWithValue("@type", "Domestic");
                             cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
                             cmd.Parameters.AddWithValue("@userID", userID);
                             cmd.Parameters.AddWithValue("@proofname", filename);
@@ -88,6 +96,20 @@ namespace TravelDesk.Employee
 
                             if (ctr >= 1)
                             {
+                                string levelText = employeeLevel.Text;
+                                int level;
+                                if (int.TryParse(levelText, out level))
+                                {
+                                    if (level <= 9)
+                                    {
+                                        RequiredFieldValidator29.Enabled = true;
+                                    }
+                                    else
+                                    {
+                                        RequiredFieldValidator29.Enabled = false;
+                                    }
+                                }
+
                                 insertRoute(ID);
                             }
                             else
@@ -116,27 +138,6 @@ namespace TravelDesk.Employee
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
-
-        }
-        private void ClearScreen()
-        {
-            homeFacility.Text = string.Empty;
-            employeeID.Text = string.Empty;
-            employeeFName.Text = string.Empty;
-            employeeMName.Text = string.Empty;
-            employeeLevel.Text = string.Empty;
-            employeeLName.Text = string.Empty;
-            employeePhone.Text = string.Empty;
-            employeeProjCode.Text = string.Empty;
-            employeeDepartureDate.Text = string.Empty;
-            employeeFrom.Text = string.Empty;
-            employeePurpose.Text = string.Empty;
-            employeeApproval.ClearSelection();
-            employeeManager.Text = string.Empty;
-            employeeRemarks.Text = string.Empty;
-            employeeTo.Text = string.Empty;
-            otherspecified.Text = string.Empty;
-
 
         }
 
@@ -235,65 +236,68 @@ namespace TravelDesk.Employee
                         }
                         else
                         {
-                            if (extension == ".pdf") // Allow only PDF files
+                            ////if (extension == ".pdf") // Allow only PDF files
+                            ////{
+                               
+                            ////}
+                            ////else
+                            ////{
+                            ////    Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
+                            ////    uploadBlock.Style["display"] = "block";
+
+                            ////}
+                            if (filesize < 4100000)
                             {
-                                if (filesize < 4100000)
+                                string savePath = System.IO.Path.Combine(saveDIR, filename);
+
+                                // Save the uploaded file
+                                employeeUpload.SaveAs(savePath);
+
+                                // Store file path in session
+                                Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
+                                Session["filename"] = filename;
+
+                                string pdfPath = Session["pdfPath"].ToString();
+
+                                // Check if the uploaded PDF contains the required keywords
+                                if (CheckKeywordsInPDF(savePath))
                                 {
-                                    string savePath = System.IO.Path.Combine(saveDIR, filename);
+                                    // Show the PDF viewer
+                                    pdfViewer.Attributes["src"] = pdfPath;
+                                    pdfBlock.Style["display"] = "block";
 
-                                    // Save the uploaded file
-                                    employeeUpload.SaveAs(savePath);
+                                    Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
 
-                                    // Store file path in session
-                                    Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
-                                    Session["filename"] = filename;
-
-                                    // Check if the uploaded PDF contains the required keywords
-                                    if (CheckKeywordsInPDF(savePath))
-                                    {
-                                        // Show the PDF viewer
-                                        pdfViewer.Attributes["src"] = Session["pdfPath"].ToString();
-                                        pdfBlock.Style["display"] = "block";
-
-                                        Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
-
-                                        string path = Session["pdfPath"].ToString();
-                                        Session["filePath"] = path;
-                                    }
-                                    else
-                                    {
-                                        // Delete the invalid file
-                                        File.Delete(savePath);
-
-                                        Response.Write("<script>alert('It seems like your uploaded file is not valid. Please try again.')</script>");
-                                        uploadBlock.Style["display"] = "block";
-                                    }
-
-                                    // Log success message to the console
-                                    Console.WriteLine("File uploaded successfully: " + filename);
-                                    Console.WriteLine("PDF path: " + Session["imgPath"]);
-
-                                    // Display contents after successful upload
-                                    displayContents();
+                                    string path = Session["pdfPath"].ToString();
+                                    Session["filePath"] = path;
                                 }
                                 else
                                 {
-                                    Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
+                                    // Delete the invalid file
+                                    File.Delete(savePath);
+
+                                    Response.Write("<script>alert('It seems like your uploaded file is not valid. Please try again.')</script>");
                                     uploadBlock.Style["display"] = "block";
                                 }
+
+                                // Log success message to the console
+                                Console.WriteLine("File uploaded successfully: " + filename);
+                                Console.WriteLine("PDF path: " + Session["imgPath"]);
+
+                                // Display contents after successful upload
+                                displayContents();
                             }
                             else
                             {
-                                Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
-                                uploadBlock.Style["dipsplay"] = "block";
-
+                                Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
+                                uploadBlock.Style["display"] = "block";
                             }
                         }
                     }
                     else
                     {
                         Response.Write("<script>alert('Upload failed: No file selected.')</script>");
-                        uploadBlock.Style["dipsplay"] = "block";
+                        uploadBlock.Style["display"] = "block";
 
                     }
 
@@ -365,36 +369,76 @@ namespace TravelDesk.Employee
                     {
                         cmd.Parameters.Clear();
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO route (routeID, routeTravelID, routeOFrom, routeOTo, routeR1From, routeR1To, routeR2From, routeR2To, routeM1From, routeM1To, routeM1FromDate, routeM1ToDate, routeM2From, routeM2To, routeM2FromDate, routeM2ToDate, routeM3From, routeM3To, routeM3FromDate, routeM3ToDate,  routeM4From, routeM4To, routeM4FromDate, routeM4ToDate,  routeM5From, routeM5To,  routeM5FromDate, routeM5ToDate )"
-                            + "VALUES (@ID, @routeTravelID, @onewayFrom, @onewayTo, @round1From, @round1To, @round2From, @round2To, @mul1From, @mul1To, @mul1FromDate, @mul1ToDate,  @mul2From, @mul2To, @mul2FromDate, @mul2ToDate,  @mul3From, @mul3To, @mul3FromDate, @mul3ToDate,  @mul4From, @mul4To, @mul4FromDate, @mul4ToDate,  @mul5From, @mul5To, @mul5FromDate, @mul5ToDate )";
+                        cmd.CommandText = "INSERT INTO route (routeID, routeTravelID, routeOFrom, routeOTo, routeODate, routeR1From, routeR1To, routeRdepart, routeRreturn, routeM1From, routeM1To, routeM1ToDate, routeM2From, routeM2To, routeM2ToDate, routeM3From, routeM3To, routeM3ToDate,  routeM4From, routeM4To, routeM4ToDate,  routeM5From, routeM5To, routeM5ToDate )"
+                            + "VALUES (@ID, @routeTravelID, @onewayFrom, @onewayTo, @onewayDate, @round1From, @round1To, @departDate, @returnDate, @mul1From, @mul1To, @mul1ToDate,  @mul2From, @mul2To, @mul2ToDate,  @mul3From, @mul3To, @mul3ToDate,  @mul4From, @mul4To, @mul4ToDate,  @mul5From, @mul5To, @mul5ToDate )";
 
                         cmd.Parameters.AddWithValue("@ID", "R" + random);
                         cmd.Parameters.AddWithValue("@routeTravelID", ID);
+
+                        if(oneWaynput.Style["display"] == "none")
+                        {
+                            //DISABLE THE VALIDATORS SINCE ONE WAY IS NOT CHOSEN
+                            RequiredFieldValidator13.Enabled = false;
+                            RequiredFieldValidator4.Enabled = false;
+                            RequiredFieldValidator6.Enabled = false;
+                        }
+                        if(roundTripInput.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator17.Enabled = false;
+                            RequiredFieldValidator18.Enabled = false;
+                            RequiredFieldValidator8.Enabled = false;
+                            RequiredFieldValidator7.Enabled = false;
+                        }
+                        if (multipleInput.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator21.Enabled = false;
+                            RequiredFieldValidator22.Enabled = false;
+                            RequiredFieldValidator26.Enabled = false;
+                        }
+                        if(additionalFields.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator50.Enabled = false;
+                            RequiredFieldValidator32.Enabled = false;
+                            RequiredFieldValidator9.Enabled = false;
+                            RequiredFieldValidator10.Enabled = false;
+                            RequiredFieldValidator11.Enabled = false;
+                            RequiredFieldValidator12.Enabled = false;
+                            RequiredFieldValidator14.Enabled = false;
+                            RequiredFieldValidator15.Enabled = false;
+                            RequiredFieldValidator19.Enabled = false;
+
+                        }
+
+                        //ONE WAY
                         cmd.Parameters.AddWithValue("@onewayFrom", onewayFrom.Text);
                         cmd.Parameters.AddWithValue("@onewayTo", onewayTo.Text);
+                        cmd.Parameters.AddWithValue("@onewayDate", onewayDate.Text);
+
+                        //ROUND TRIP
                         cmd.Parameters.AddWithValue("@round1From", round1From.Text);
                         cmd.Parameters.AddWithValue("@round1To", round1To.Text);
-                        cmd.Parameters.AddWithValue("@round2From", round2From.Text);
-                        cmd.Parameters.AddWithValue("@round2To", round2To.Text);
+                        cmd.Parameters.AddWithValue("@departDate", roundDepart.Text);
+                        cmd.Parameters.AddWithValue("@returnDate", roundReturn.Text);
+
+                        //MULTIPLE
                         cmd.Parameters.AddWithValue("@mul1From", TextBox7.Text);
                         cmd.Parameters.AddWithValue("@mul1To", TextBox8.Text);
-                        cmd.Parameters.AddWithValue("@mul1FromDate", string.IsNullOrEmpty(TextBox11.Text) ? (object)DBNull.Value : TextBox11.Text);
                         cmd.Parameters.AddWithValue("@mul1ToDate", string.IsNullOrEmpty(TextBox12.Text) ? (object)DBNull.Value : TextBox12.Text);
+
                         cmd.Parameters.AddWithValue("@mul2From", TextBox9.Text);
                         cmd.Parameters.AddWithValue("@mul2To", TextBox10.Text);
-                        cmd.Parameters.AddWithValue("@mul2FromDate", string.IsNullOrEmpty(TextBox13.Text) ? (object)DBNull.Value : TextBox13.Text);
                         cmd.Parameters.AddWithValue("@mul2ToDate", string.IsNullOrEmpty(TextBox14.Text) ? (object)DBNull.Value : TextBox14.Text);
+
                         cmd.Parameters.AddWithValue("@mul3From", TextBox15.Text);
                         cmd.Parameters.AddWithValue("@mul3To", TextBox17.Text);
-                        cmd.Parameters.AddWithValue("@mul3FromDate", string.IsNullOrEmpty(TextBox16.Text) ? (object)DBNull.Value : TextBox16.Text);
                         cmd.Parameters.AddWithValue("@mul3ToDate", string.IsNullOrEmpty(TextBox18.Text) ? (object)DBNull.Value : TextBox18.Text);
+
                         cmd.Parameters.AddWithValue("@mul4From", TextBox27.Text);
                         cmd.Parameters.AddWithValue("@mul4To", TextBox29.Text);
-                        cmd.Parameters.AddWithValue("@mul4FromDate", string.IsNullOrEmpty(TextBox28.Text) ? (object)DBNull.Value : TextBox28.Text);
                         cmd.Parameters.AddWithValue("@mul4ToDate", string.IsNullOrEmpty(TextBox30.Text) ? (object)DBNull.Value : TextBox30.Text);
+
                         cmd.Parameters.AddWithValue("@mul5From", TextBox19.Text);
                         cmd.Parameters.AddWithValue("@mul5To", TextBox21.Text);
-                        cmd.Parameters.AddWithValue("@mul5FromDate", string.IsNullOrEmpty(TextBox20.Text) ? (object)DBNull.Value : TextBox20.Text);
                         cmd.Parameters.AddWithValue("@mul5ToDate", string.IsNullOrEmpty(TextBox22.Text) ? (object)DBNull.Value : TextBox22.Text);
 
 
@@ -483,6 +527,8 @@ namespace TravelDesk.Employee
 
         protected void saveAsDraft_Click(object sender, EventArgs e)
         {
+            DisableAllRequiredFieldValidators(Page);
+
             Random rand = new Random();
             int random = rand.Next(100000, 999999);
             string ID = "TR" + random;
@@ -504,32 +550,42 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname , travelLevel, travelMobilenum, travelProjectCode, travelFrom, travelDeparture, travelReturn, travelPurpose, travelReqStatus, travelManager, travelRemarks, travelTo, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @level, @mobile, @projCode, @from, @departure, @return, @purpose, @reqStatus, @manager, @remarks, @destination, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @from, @departure, @return, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
                             cmd.Parameters.AddWithValue("@ID", ID);
-                            cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+
+                            // Check if the textbox with ID "othersFacility" is displayed
+                            if (othersFacility.Style["display"] != "none")
+                            {
+                                // If displayed, use its value as @location
+                                cmd.Parameters.AddWithValue("@location", othersFacility.Text);
+                            }
+                            else
+                            {
+                                // If hidden, use the selected item in the homeFacility dropdown
+                                cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+                            }
+
                             cmd.Parameters.AddWithValue("@empID", employeeID.Text);
                             cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
                             cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
                             cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
+                            cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
+                            cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
+                            cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
                             cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
                             cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
                             cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
-                            cmd.Parameters.AddWithValue("@from", employeeFrom.Text);
-                            cmd.Parameters.AddWithValue("@departure", employeeDepartureDate.Text);
-                            cmd.Parameters.AddWithValue("@return", employeeArrivalDate.Text);
                             cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
-                            cmd.Parameters.AddWithValue("@reqStatus", "Draft");
-                            cmd.Parameters.AddWithValue("@manager", employeeManager.Text);
+                            cmd.Parameters.AddWithValue("@reqStatus", "Approved");
                             cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
-                            cmd.Parameters.AddWithValue("@destination", employeeTo.Text);
                             cmd.Parameters.AddWithValue("@others", otherspecified.Text);
                             cmd.Parameters.AddWithValue("@type", "Domestic");
                             cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
                             cmd.Parameters.AddWithValue("@userID", userID);
-                            cmd.Parameters.AddWithValue("@proofname", filename != null ? filename : (object)DBNull.Value);
-                            cmd.Parameters.AddWithValue("@proofpath", imgPath != null ? imgPath : (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@proofname", filename);
+                            cmd.Parameters.AddWithValue("@proofpath", imgPath);
                             cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
                             cmd.Parameters.AddWithValue("@draftStat", "Yes");
 
@@ -567,6 +623,21 @@ namespace TravelDesk.Employee
             }
         }
 
+        protected void DisableAllRequiredFieldValidators(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (control is RequiredFieldValidator)
+                {
+                    ((RequiredFieldValidator)control).Enabled = false;
+                }
+                else if (control.HasControls())
+                {
+                    DisableAllRequiredFieldValidators(control);
+                }
+            }
+        }
+
         private void insertDraftRoute(string ID)
         {
             Random ranID = new Random();
@@ -583,36 +654,76 @@ namespace TravelDesk.Employee
                     {
                         cmd.Parameters.Clear();
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO route (routeID, routeTravelID, routeOFrom, routeOTo, routeR1From, routeR1To, routeR2From, routeR2To, routeM1From, routeM1To, routeM1FromDate, routeM1ToDate, routeM2From, routeM2To, routeM2FromDate, routeM2ToDate, routeM3From, routeM3To, routeM3FromDate, routeM3ToDate,  routeM4From, routeM4To, routeM4FromDate, routeM4ToDate,  routeM5From, routeM5To,  routeM5FromDate, routeM5ToDate )"
-                            + "VALUES (@ID, @routeTravelID, @onewayFrom, @onewayTo, @round1From, @round1To, @round2From, @round2To, @mul1From, @mul1To, @mul1FromDate, @mul1ToDate,  @mul2From, @mul2To, @mul2FromDate, @mul2ToDate,  @mul3From, @mul3To, @mul3FromDate, @mul3ToDate,  @mul4From, @mul4To, @mul4FromDate, @mul4ToDate,  @mul5From, @mul5To, @mul5FromDate, @mul5ToDate )";
+                        cmd.CommandText = "INSERT INTO route (routeID, routeTravelID, routeOFrom, routeOTo, routeODate, routeR1From, routeR1To, routeRdepart, routeRreturn, routeM1From, routeM1To, routeM1ToDate, routeM2From, routeM2To, routeM2ToDate, routeM3From, routeM3To, routeM3ToDate,  routeM4From, routeM4To, routeM4ToDate,  routeM5From, routeM5To, routeM5ToDate )"
+                            + "VALUES (@ID, @routeTravelID, @onewayFrom, @onewayTo, @onewayDate, @round1From, @round1To, @departDate, @returnDate, @mul1From, @mul1To, @mul1ToDate,  @mul2From, @mul2To, @mul2ToDate,  @mul3From, @mul3To, @mul3ToDate,  @mul4From, @mul4To, @mul4ToDate,  @mul5From, @mul5To, @mul5ToDate )";
 
                         cmd.Parameters.AddWithValue("@ID", "R" + random);
                         cmd.Parameters.AddWithValue("@routeTravelID", ID);
+
+                        if (oneWaynput.Style["display"] == "none")
+                        {
+                            //DISABLE THE VALIDATORS SINCE ONE WAY IS NOT CHOSEN
+                            RequiredFieldValidator13.Enabled = false;
+                            RequiredFieldValidator4.Enabled = false;
+                            RequiredFieldValidator6.Enabled = false;
+                        }
+                        if (roundTripInput.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator17.Enabled = false;
+                            RequiredFieldValidator18.Enabled = false;
+                            RequiredFieldValidator8.Enabled = false;
+                            RequiredFieldValidator7.Enabled = false;
+                        }
+                        if (multipleInput.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator21.Enabled = false;
+                            RequiredFieldValidator22.Enabled = false;
+                            RequiredFieldValidator26.Enabled = false;
+                        }
+                        if (additionalFields.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator50.Enabled = false;
+                            RequiredFieldValidator32.Enabled = false;
+                            RequiredFieldValidator9.Enabled = false;
+                            RequiredFieldValidator10.Enabled = false;
+                            RequiredFieldValidator11.Enabled = false;
+                            RequiredFieldValidator12.Enabled = false;
+                            RequiredFieldValidator14.Enabled = false;
+                            RequiredFieldValidator15.Enabled = false;
+                            RequiredFieldValidator19.Enabled = false;
+
+                        }
+
+                        //ONE WAY
                         cmd.Parameters.AddWithValue("@onewayFrom", onewayFrom.Text);
                         cmd.Parameters.AddWithValue("@onewayTo", onewayTo.Text);
+                        cmd.Parameters.AddWithValue("@onewayDate", onewayDate.Text);
+
+                        //ROUND TRIP
                         cmd.Parameters.AddWithValue("@round1From", round1From.Text);
                         cmd.Parameters.AddWithValue("@round1To", round1To.Text);
-                        cmd.Parameters.AddWithValue("@round2From", round2From.Text);
-                        cmd.Parameters.AddWithValue("@round2To", round2To.Text);
+                        cmd.Parameters.AddWithValue("@departDate", roundDepart.Text);
+                        cmd.Parameters.AddWithValue("@returnDate", roundReturn.Text);
+
+                        //MULTIPLE
                         cmd.Parameters.AddWithValue("@mul1From", TextBox7.Text);
                         cmd.Parameters.AddWithValue("@mul1To", TextBox8.Text);
-                        cmd.Parameters.AddWithValue("@mul1FromDate", string.IsNullOrEmpty(TextBox11.Text) ? (object)DBNull.Value : TextBox11.Text);
                         cmd.Parameters.AddWithValue("@mul1ToDate", string.IsNullOrEmpty(TextBox12.Text) ? (object)DBNull.Value : TextBox12.Text);
+
                         cmd.Parameters.AddWithValue("@mul2From", TextBox9.Text);
                         cmd.Parameters.AddWithValue("@mul2To", TextBox10.Text);
-                        cmd.Parameters.AddWithValue("@mul2FromDate", string.IsNullOrEmpty(TextBox13.Text) ? (object)DBNull.Value : TextBox13.Text);
                         cmd.Parameters.AddWithValue("@mul2ToDate", string.IsNullOrEmpty(TextBox14.Text) ? (object)DBNull.Value : TextBox14.Text);
+
                         cmd.Parameters.AddWithValue("@mul3From", TextBox15.Text);
                         cmd.Parameters.AddWithValue("@mul3To", TextBox17.Text);
-                        cmd.Parameters.AddWithValue("@mul3FromDate", string.IsNullOrEmpty(TextBox16.Text) ? (object)DBNull.Value : TextBox16.Text);
                         cmd.Parameters.AddWithValue("@mul3ToDate", string.IsNullOrEmpty(TextBox18.Text) ? (object)DBNull.Value : TextBox18.Text);
+
                         cmd.Parameters.AddWithValue("@mul4From", TextBox27.Text);
                         cmd.Parameters.AddWithValue("@mul4To", TextBox29.Text);
-                        cmd.Parameters.AddWithValue("@mul4FromDate", string.IsNullOrEmpty(TextBox28.Text) ? (object)DBNull.Value : TextBox28.Text);
                         cmd.Parameters.AddWithValue("@mul4ToDate", string.IsNullOrEmpty(TextBox30.Text) ? (object)DBNull.Value : TextBox30.Text);
+
                         cmd.Parameters.AddWithValue("@mul5From", TextBox19.Text);
                         cmd.Parameters.AddWithValue("@mul5To", TextBox21.Text);
-                        cmd.Parameters.AddWithValue("@mul5FromDate", string.IsNullOrEmpty(TextBox20.Text) ? (object)DBNull.Value : TextBox20.Text);
                         cmd.Parameters.AddWithValue("@mul5ToDate", string.IsNullOrEmpty(TextBox22.Text) ? (object)DBNull.Value : TextBox22.Text);
 
 

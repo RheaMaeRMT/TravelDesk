@@ -16,6 +16,18 @@
                                                                         othersTextbox.style.display = 'none';
                                                                     }
                                     }
+                                    function showOthersFacility(dropdown) {
+                                        var othersLabel = document.getElementById('<%= facOthersLbl.ClientID %>');
+                                        var othersTextbox = document.getElementById('<%= othersFacility.ClientID %>');
+
+                                        if (dropdown.value === "Others") {
+                                            othersLabel.style.display = 'block';
+                                            othersTextbox.style.display = 'block';
+                                        } else {
+                                            othersLabel.style.display = 'none';
+                                            othersTextbox.style.display = 'none';
+                                        }
+                                    }
                                     function flightSelection() {
                                         // Flight options dropdown
                                         var flightOptions = document.getElementById('<%= flightOptions.ClientID %>');
@@ -36,25 +48,6 @@
 
                                         }
                                     }
-                                    function checkSelection() {
-                                        // Approval dropdown
-                                        var ddl = document.getElementById('<%= employeeApproval.ClientID %>');
-                                        var selectedValue = ddl ? ddl.options[ddl.selectedIndex].value : null;
-
-
-                                        // Approval
-                                        if (selectedValue === "0") {
-                                            // Display the NO modal
-                                            $('#noModal').modal('show');
-                                            document.getElementById('<%=uploadBlock.ClientID%>').style.display = 'none';                                  
-                                        } else if (selectedValue == "1") {
-                                            // Display YES modal
-                                            $('#yesModal').modal('show');
-                                            document.getElementById('<%=uploadBlock.ClientID%>').style.display = 'block';
-                                        }
-
-                                    }
-
                                     function add3rd(button) {
                                         document.getElementById('<%= additionalFields.ClientID %>').style.display = 'block';
                                         document.getElementById('<%= add3rd.ClientID %>').style.display = 'none';
@@ -156,16 +149,20 @@
                                                 <div class="card" style="color:black;">
                                                     <div class="card-header" style="background-color:#09426a">
                                                         <h5 style="color:white">Domestic Travel Request Form</h5>
-                                                    </div>                                                            .
+                                                    </div>                                                            
                                                             <div class="card-block">
                                                             <asp:Label ID="Label11" runat="server" Text="Home Facility"></asp:Label>
-                                                            <asp:DropDownList ID="homeFacility" runat="server" Style="margin-left: 80px" Width="345px">
+                                                            <asp:DropDownList ID="homeFacility" runat="server" Style="margin-left: 80px" Width="345px"  onchange="showOthersFacility(this)">
                                                                 <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True" />
-                                                                <asp:ListItem>Legazpi</asp:ListItem>
-                                                                <asp:ListItem>Mandaue</asp:ListItem>
-                                                                <asp:ListItem>Manila</asp:ListItem>
-                                                            </asp:DropDownList>                                                               
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="homeFacility"></asp:RequiredFieldValidator>--%>
+                                                                <asp:ListItem Value="Legazpi">Legazpi</asp:ListItem>
+                                                                <asp:ListItem Value="Mandaue">Mandaue</asp:ListItem>
+                                                                <asp:ListItem Value="Manila">Manila</asp:ListItem>
+                                                                <asp:ListItem Text="Others" Value="Others" />
+                                                            </asp:DropDownList>   
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="homeFacility"></asp:RequiredFieldValidator>
+                                                                <br /> <br />
+                                                                <asp:Label ID="facOthersLbl" runat="server" Text="Others, please specify... " Style="display: none;"></asp:Label>
+                                                                <asp:TextBox ID="othersFacility" runat="server" Width="320px" TextMode="MultiLine" Style="margin-left: 170px; display: none"></asp:TextBox>
                                                             </div>
                                                             <!--EMPLOYEE DETAILS-->
                                                             <div class="card-block">
@@ -174,36 +171,44 @@
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label2" runat="server" Text="Employee ID" ></asp:Label>
                                                                 <asp:TextBox ID="employeeID" runat="server" style="margin-left:40px"  Width="300px"></asp:TextBox> 
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeID"></asp:RequiredFieldValidator>--%>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeID"></asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Label1" runat="server" Text="Project Code" Style="margin-left: 40px"></asp:Label>
                                                                 <asp:TextBox ID="employeeProjCode" runat="server" Width="300px" Style="margin-left: 40px"></asp:TextBox>
-<%--                                                               <asp:RequiredFieldValidator ID="RequiredFieldValidator88" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeProjCode"></asp:RequiredFieldValidator>--%>
+                                                               <asp:RequiredFieldValidator ID="RequiredFieldValidator88" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeProjCode"></asp:RequiredFieldValidator>
                                                               
                                                                 <asp:Label ID="Label8" runat="server" Text="Level"  style="padding-left:60px"></asp:Label>
-                                                                <asp:TextBox ID="employeeLevel" runat="server"   Style="margin-left: 40px" Width="260px"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeLevel"></asp:RequiredFieldValidator>--%>
-     
+                                                                <asp:TextBox ID="employeeLevel" runat="server"   Style="margin-left: 40px" Width="80px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeLevel"></asp:RequiredFieldValidator>
+                                                               
+                                                                <asp:Label ID="Label9" runat="server" Text="Department Unit"  style="padding-left:60px"></asp:Label>
+                                                                <asp:TextBox ID="employeeDU" runat="server"   Style="margin-left: 40px" Width="80px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDU"></asp:RequiredFieldValidator>
+
                                                                 </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label7" runat="server" Text="First Name"></asp:Label>
                                                                 <asp:TextBox ID="employeeFName" runat="server" Width="300px" Style="margin-left: 50px"></asp:TextBox>
-                                                                <%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFName"></asp:RequiredFieldValidator>--%>
+                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeFName"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label19" runat="server" Text="Middle Name" Style="padding-left: 40px"></asp:Label>
                                                                 <asp:TextBox ID="employeeMName" runat="server" Width="300px" Style="margin-left: 35px"></asp:TextBox>
 
                                                                 <asp:Label ID="Label20" runat="server" Text="Last Name" Style="padding-left: 40px"></asp:Label>
                                                                 <asp:TextBox ID="employeeLName" runat="server" Width="300px" Style="margin-left: 30px"></asp:TextBox>
-                                                                <%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeLName"></asp:RequiredFieldValidator>--%>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeLName"></asp:RequiredFieldValidator>
                                                             </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label3" runat="server" Text="Mobile Number"></asp:Label>
                                                                 <asp:TextBox ID="employeePhone" runat="server" Width="300px" Style="margin-left: 20px"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator57" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePhone"></asp:RequiredFieldValidator>--%>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator57" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePhone"></asp:RequiredFieldValidator>
                                                                
                                                                 <asp:Label ID="Label46" runat="server" Text="Employee Email" Style="padding-left: 40px"></asp:Label>
                                                                 <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 25px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeEmail"></asp:RequiredFieldValidator>
 
+                                                                <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 40px"></asp:Label>
+                                                                <asp:TextBox ID="employeeBdate" runat="server" TextMode="Date" Width="300px" Style="margin-left: 25px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeBdate"></asp:RequiredFieldValidator>
 
 
                                                             </div>
@@ -222,41 +227,11 @@
                                                                     <asp:ListItem Text="Audit" Value="Audit" />
                                                                     <asp:ListItem Text="Client Visit" Value="Client Visit" />
                                                                     <asp:ListItem Text="Others" Value="Others" />
-                                                                </asp:DropDownList>    
-
-                                                                 <asp:Label ID="Label6" runat="server" Text="Date of Departure" Style="padding-left: 100px"></asp:Label>
-                                                                <asp:TextBox ID="employeeDepartureDate" TextMode="Date" runat="server" Width="120px" Style="margin-left: 30px"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDepartureDate"></asp:RequiredFieldValidator>--%>
-
-                                                                <asp:Label ID="Label5" runat="server" Text="Date of Return" Style="padding-left: 100px"></asp:Label>
-                                                                <asp:TextBox ID="employeeArrivalDate" runat="server" TextMode="Date" Width="120px" Style="margin-left: 30px"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeArrivalDate"></asp:RequiredFieldValidator>--%>
-                                                               
+                                                                </asp:DropDownList>                                                                   
                                                                 <br /><br />
                                                                 <asp:Label ID="Label14" runat="server" Text="Others, please specify... " Style="display: none;"></asp:Label>
                                                                 <asp:TextBox ID="otherspecified" runat="server" Width="320px" TextMode="MultiLine" Style="margin-left: 170px; display: none"></asp:TextBox>
                                                             </div>
-
-                                                            <div class="card-block">
-                                                                <asp:Label ID="Label4" runat="server" Text="Departing From"></asp:Label>
-                                                                <asp:TextBox ID="employeeFrom" runat="server" Width="343px" Style="margin-left: 55px"></asp:TextBox>
-                                                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDeparture"></asp:RequiredFieldValidator>--%>
-
-                                                                <asp:Label ID="Label9" runat="server" Text="Arriving To" Style="padding-left: 110px"></asp:Label>
-                                                                <asp:TextBox ID="employeeTo" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-                                                                <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeArrival"></asp:RequiredFieldValidator>--%>
-                                                            </div>
-
-                                                            <div class="card-block">
-
-
-                                                            </div>
-
-                                        <!--FLIGHT INFORMATION-->
-
-                                        <div class="card-block">
-                                            <p style="font-size: 18px; color: white; background-color: #808080; padding-top: 5px; padding-left: 5px">Flight Information</p>
-                                        </div>
                                         <div class="card-block">
                                             <asp:Label ID="Label10" runat="server" Text="Flight Options"></asp:Label>
                                             <asp:DropDownList ID="flightOptions" runat="server" CssClass="m-l-50" Width="343px" onchange="flightSelection()" Style="margin-left: 70px">
@@ -269,29 +244,34 @@
                                         <div class="card-block" style="display: none" id="oneWaynput" runat="server">
                                             <asp:Label ID="Label12" runat="server" Text="Departing From"></asp:Label>
                                             <asp:TextBox ID="onewayFrom" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-<%--                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayFrom"></asp:RequiredFieldValidator>--%>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayFrom"></asp:RequiredFieldValidator>
 
-                                            <asp:Label ID="Label21" runat="server" Text="Departing To" Style="padding-left: 150px"></asp:Label>
+                                            <asp:Label ID="Label21" runat="server" Text="To" Style="padding-left: 150px"></asp:Label>
                                             <asp:TextBox ID="onewayTo" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-<%--                                   <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayTo"></asp:RequiredFieldValidator>--%>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayTo"></asp:RequiredFieldValidator>
+                                                    
+                                            <asp:Label ID="Label4" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
+                                            <asp:TextBox ID="onewayDate" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayDate"></asp:RequiredFieldValidator>
+                                        
                                         </div>
                                         <div class="card-block" style="display: none" id="roundTripInput" runat="server">
-                                            <asp:Label ID="Label22" runat="server" Text="1. Departing From"></asp:Label>
+                                            <asp:Label ID="Label22" runat="server" Text="Departing From"></asp:Label>
                                             <asp:TextBox ID="round1From" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-<%--                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round1From"></asp:RequiredFieldValidator>--%>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round1From"></asp:RequiredFieldValidator>
 
-                                            <asp:Label ID="Label23" runat="server" Text="1. Departing To" Style="padding-left: 150px"></asp:Label>
+                                            <asp:Label ID="Label23" runat="server" Text="To" Style="padding-left: 50px"></asp:Label>
                                             <asp:TextBox ID="round1To" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-<%--                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round1To"></asp:RequiredFieldValidator>--%>
-                                            <br />
-                                            <br />
-                                            <asp:Label ID="Label24" runat="server" Text="2. Departing From"></asp:Label>
-                                            <asp:TextBox ID="round2From" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-<%--                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round2From"></asp:RequiredFieldValidator>--%>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round1To"></asp:RequiredFieldValidator>
+                                                    <asp:Label ID="Label5" runat="server" Text="Departure Date" Style="margin-left: 30px"></asp:Label>
+                                                    <asp:TextBox ID="roundDepart" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="roundDepart"></asp:RequiredFieldValidator>
 
-                                            <asp:Label ID="Label25" runat="server" Text="2. Departing To" Style="padding-left: 150px"></asp:Label>
-                                            <asp:TextBox ID="round2To" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
-<%--                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round2To"></asp:RequiredFieldValidator>--%>
+                                            <asp:Label ID="Label6" runat="server" Text="Return Date" Style="margin-left: 30px"></asp:Label>
+                                                    <asp:TextBox ID="roundReturn" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="roundReturn"></asp:RequiredFieldValidator>
+
+                                            <br />
                                         </div>
                                           <div class="card-block" id="multipleInput" style="display: none;" runat="server">
                                             <!-- Multiple destinations flight input fields -->
@@ -301,35 +281,30 @@
                                                     <asp:Label ID="Label34" runat="server" Text="1st Destination:"></asp:Label><br />
                                                     <asp:Label ID="Label26" runat="server" Text="1. Departing From"></asp:Label>
                                                     <asp:TextBox ID="TextBox7" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-<%--                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox7"></asp:RequiredFieldValidator>--%>
-                                                   
-                                                    <asp:Label ID="Label30" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox11" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox11"></asp:RequiredFieldValidator>--%>
-                                                    
-                                                    <asp:Label ID="Label27" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
+                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox7"></asp:RequiredFieldValidator>
+                                                                                                     
+                                                    <asp:Label ID="Label27" runat="server" Text="To" Style="padding-left: 50px"></asp:Label>
                                                     <asp:TextBox ID="TextBox8" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox8"></asp:RequiredFieldValidator>--%>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox8"></asp:RequiredFieldValidator>
+                                                   
                                                     <asp:Label ID="Label31" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                     <asp:TextBox ID="TextBox12" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox12"></asp:RequiredFieldValidator>--%>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox12"></asp:RequiredFieldValidator>
                                                  </div>   <br />
                                                 <div id="destination2">
                                                     <!--SECOND DESTINATION-->
                                                     <asp:Label ID="Label35" runat="server" Text="2nd Destination:"></asp:Label><br />
                                                     <asp:Label ID="Label28" runat="server" Text="2. Departing From"></asp:Label>
                                                     <asp:TextBox ID="TextBox9" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox9"></asp:RequiredFieldValidator>--%>
-                                                    <asp:Label ID="Label32" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox13" TextMode="Date" runat="server" Width="100px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox13"></asp:RequiredFieldValidator>--%>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox9"></asp:RequiredFieldValidator>
 
-                                                    <asp:Label ID="Label29" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
+                                                    <asp:Label ID="Label29" runat="server" Text=" To" Style="padding-left: 50px"></asp:Label>
                                                     <asp:TextBox ID="TextBox10" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox10"></asp:RequiredFieldValidator>--%>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox10"></asp:RequiredFieldValidator>
+
                                                     <asp:Label ID="Label33" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                     <asp:TextBox ID="TextBox14" TextMode="Date" runat="server" Width="100px"></asp:TextBox>
-<%--                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox14"></asp:RequiredFieldValidator>--%>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox14"></asp:RequiredFieldValidator>
                                                     <asp:Button runat="server" ID="add3rd" class="btn btn-primary" Text="+"  OnClientClick="add3rd(); return false;" CausesValidation="False" />
 
                                                 </div>                                                   
@@ -340,17 +315,16 @@
                                                                 <asp:Label ID="Label36" runat="server" Text="3rd Destination:"></asp:Label><br />
                                                                 <asp:Label ID="Label37" runat="server" Text="3. Departing From"></asp:Label>
                                                                 <asp:TextBox ID="TextBox15" runat="server" Width="260px" CssClass="auto-style11"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox15"></asp:RequiredFieldValidator>--%>
-                                                                <asp:Label ID="Label38" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
-                                                                <asp:TextBox ID="TextBox16" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox16"></asp:RequiredFieldValidator>--%>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator50" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox15"></asp:RequiredFieldValidator>
 
-                                                                <asp:Label ID="Label39" runat="server" Text="Departing To" Style="padding-left: 50px"></asp:Label>
+                                                                <asp:Label ID="Label39" runat="server" Text= "To" Style="padding-left: 50px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox17" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator32" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox17"></asp:RequiredFieldValidator>--%>
-                                                                <asp:Label ID="Label40" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator32" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox17"></asp:RequiredFieldValidator>
+                                                               
+                                                                 <asp:Label ID="Label40" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox18" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
                                                                  <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox18"></asp:RequiredFieldValidator>
 
                                                                 </div>
                                                              <div id="destination4" style="display:none"> <br />
@@ -358,29 +332,32 @@
                                                                             <asp:Label ID="Label51" runat="server" Text="4th Destination:"></asp:Label><br />
                                                                             <asp:Label ID="Label52" runat="server" Text="4. Departing From"></asp:Label>
                                                                             <asp:TextBox ID="TextBox27" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox27"></asp:RequiredFieldValidator>
 
-                                                                            <asp:Label ID="Label53" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
-                                                                            <asp:TextBox ID="TextBox28" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-
-                                                                            <asp:Label ID="Label54" runat="server" Text="Departing To" Style="padding-left: 60px"></asp:Label>
+                                                                            <asp:Label ID="Label54" runat="server" Text=" To" Style="padding-left: 60px"></asp:Label>
                                                                             <asp:TextBox ID="TextBox29" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
-                                                                            <asp:Label ID="Label55" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox29"></asp:RequiredFieldValidator>
+                                                                            
+                                                                 <asp:Label ID="Label55" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
                                                                             <asp:TextBox ID="TextBox30" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
                                                                             <asp:Button runat="server" ID="add5th" class="btn btn-primary" Text="+" OnClientClick="add5th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
-
-                                                                </div>                                             
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox30"></asp:RequiredFieldValidator>
+                                                               
+                                                                 </div>                                             
                                                              <div id="destination5" style="display:none"> <br />
                                                                         <!--FIFTH DESTINATION-->
                                                                         <asp:Label ID="Label41" runat="server" Text="5th Destination:"></asp:Label><br />
                                                                         <asp:Label ID="Label42" runat="server" Text="5. Departing From"></asp:Label>
                                                                         <asp:TextBox ID="TextBox19" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
-                                                                        <asp:Label ID="Label43" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
-                                                                        <asp:TextBox ID="TextBox20" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox19"></asp:RequiredFieldValidator>
 
-                                                                        <asp:Label ID="Label44" runat="server" Text="Departing To" Style="padding-left: 60px"></asp:Label>
+                                                                        <asp:Label ID="Label44" runat="server" Text=" To" Style="padding-left: 60px"></asp:Label>
                                                                         <asp:TextBox ID="TextBox21" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox21"></asp:RequiredFieldValidator>
+
                                                                         <asp:Label ID="Label45" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
                                                                         <asp:TextBox ID="TextBox22" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox22"></asp:RequiredFieldValidator>
 
                                                                 </div>   
 
@@ -392,65 +369,11 @@
                                                             <div class="card-block">
                                                                 <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Approval</p>
                                                             </div>
-                                                            <div class="card-block">
-                                                                <asp:Label ID="Label16" runat="server" Text="Manager Approval"></asp:Label>
-                                                                <asp:DropDownList ID="employeeApproval" runat="server" CssClass="m-l-50" Width="343px" onchange="checkSelection()">
-                                                                    <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True"/>
-                                                                    <asp:ListItem Text="YES" Value="1" />
-                                                                    <asp:ListItem Text="NO" Value="0" />
-                                                                </asp:DropDownList>
-
-                                                                <!--MODAL FOR THE NO OPTION -->
-                                                                <div class="modal fade" id="noModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="noModalLabel">Manager Approval</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <!-- Your modal content goes here -->
-                                                                                Manager Approval <strong> auto approves  </strong>your travel request. <br /> Requests with no prior manager approval needs to be <strong> manually approved</strong> by the manager. <br /> <br />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                        
-                                                                <!--MODAL FOR THE YES OPTION -->
-                                                                <div class="modal fade" id="yesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="yesModalLabel">Manager Approval</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <!-- Your modal content goes here -->
-                                                                                Please upload an Attachment:<strong>Proof of Manager Approval </strong> 
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                 <asp:Button runat="server" class="btn btn-secondary" style="background-color:green" data-dismiss="modal" Text="Proceed" OnClientClick="return false;"/>
-                                                                       
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- manager name should auto-populate based on the manager assigned of the employees department -->
-                                                                <asp:Label ID="Label17" runat="server" Text="Manager Name" style="padding-left:150px" ></asp:Label>
-                                                                <asp:TextBox ID="employeeManager" runat="server"  Width="236px" CssClass="auto-style13"></asp:TextBox>
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeManager"></asp:RequiredFieldValidator>--%>
-
-                                                            </div>
-                                                            <div class="card-block" id="uploadBlock" style="display:none" runat="server">
-                                                                <asp:Label ID="Label15" runat="server" Text="Approval Proof"></asp:Label>
-
+                                                            <div class="card-block" id="uploadBlock" runat="server">
+                                                                <asp:Label ID="Label15" runat="server" Text="Attach Email Approval"></asp:Label>
                                                                <asp:FileUpload ID="employeeUpload" type="file" runat="server" CssClass="auto-style12" Width="348px" />
                                                                 <asp:Button class="form-control btn btn-primary btn-sm"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" />
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeUpload"></asp:RequiredFieldValidator>
 
                                                             </div> <br />
                                                                 <div class="col-md-5" style="display:none" id="pdfBlock" runat="server">
@@ -462,7 +385,6 @@
                                                             <div class="card-block">
                                                                  <asp:Label ID="Label18" runat="server" Text="Remarks"></asp:Label> <br />
                                                                 <asp:TextBox ID="employeeRemarks" runat="server"  Width="896px" CssClass="auto-style10" TextMode="MultiLine" Height="91px"></asp:TextBox> 
-<%--                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeRemarks"></asp:RequiredFieldValidator>--%>
                                                                 
                                                             </div>
                                                  </div>
