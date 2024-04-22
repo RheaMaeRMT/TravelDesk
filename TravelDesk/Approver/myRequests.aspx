@@ -42,14 +42,15 @@
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
-                                                    <asp:BoundField DataField="travelApprovalStat" HeaderText="Status" SortExpression="travelApprovalStat" />  
+                                                    <asp:BoundField DataField="travelReqStatus" HeaderText="Status" SortExpression="travelReqStatus" />  
                                                     <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" SortExpression="travelRequestID" />
                                                     <asp:BoundField DataField="travelType" HeaderText="Travel" SortExpression="travelType" /> 
-                                                    <asp:BoundField DataField="travelDestination" HeaderText="Destination" SortExpression="travelDestination" />          
-                                                    <asp:BoundField DataField="travelDeparture" HeaderText="Departure date" SortExpression="travelDeparture" DataFormatString="{0:d}"  />
-                                                    <asp:BoundField DataField="travelReturn" HeaderText="Return date" SortExpression="travelReturn" DataFormatString="{0:d}"  />
+                                                    <asp:BoundField DataField="FullName" HeaderText="Name" SortExpression="FullName" />          
                                                     <asp:BoundField DataField="travelPurpose" HeaderText="Purpose" SortExpression="travelPurpose" />
-                                                    <asp:BoundField DataField="travelDesignation" HeaderText="Designation" SortExpression="travelDesignation" />
+                                                    <asp:BoundField DataField="travelDU" HeaderText="Designation" SortExpression="travelDU" />
+                                                    <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" SortExpression="travelProjectCode" />
+                                                    <asp:BoundField DataField="travelHomeFacility" HeaderText="Home Facility" SortExpression="travelHomeFacility" />
+
                                                 </Columns>
                 
                                                 <FooterStyle BackColor="#CCCCCC" />
@@ -63,7 +64,7 @@
                                                 <SortedDescendingHeaderStyle BackColor="#383838" />
                                             </asp:GridView>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DB_TravelDesk %>" 
-                                                SelectCommand="SELECT travelRequest.travelApprovalStat, travelRequest.travelRequestID, travelRequest.travelType, travelRequest.travelDestination, travelRequest.travelDeparture, travelRequest.travelReturn, travelRequest.travelPurpose, travelRequest.travelDesignation FROM travelRequest WHERE (travelRequest.travelUserID = @userID)">
+                                                SelectCommand="SELECT travelRequest.travelReqStatus, travelRequest.travelRequestID, travelRequest.travelType,travelRequest.travelFname + ' ' + ISNULL(travelRequest.travelMname, '') + ' ' + travelRequest.travelLname AS FullName, travelRequest.travelPurpose, travelRequest.travelDU, travel.travelProjectCode, travel.travelHomeFacility FROM travelRequest WHERE (travelRequest.travelUserID = @userID)">
                                                 <SelectParameters>
                                                     <asp:SessionParameter Name="userID" SessionField="userID" />
                                                 </SelectParameters>

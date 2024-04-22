@@ -45,8 +45,7 @@
                                                     <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
                                                     <asp:BoundField DataField="travelHomeFacility" HeaderText="Home Facility" />
                                                     <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
-                                                    <asp:BoundField DataField="travelFrom" HeaderText="Origin" />
-                                                    <asp:BoundField DataField="travelTo" HeaderText="Destination" />
+                                                    <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
                                                 </Columns>
 
                                                 <FooterStyle BackColor="#CCCCCC" />

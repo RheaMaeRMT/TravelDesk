@@ -41,7 +41,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelDU FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -70,7 +70,7 @@ namespace TravelDesk.Employee
                     {
                         // Log the exception or display a user-friendly error message
                         // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                        Response.Write("<script>alert('An error occurred during route request enrollment. Please try again.')</script>");
+                        Response.Write("<script>alert('An error occurred during retrieval of Travel Request records. Please try again.')</script>");
                         // Log additional information from the SQL exception
                         for (int i = 0; i < ex.Errors.Count; i++)
                         {
@@ -91,7 +91,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(userID))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelUserID = @UserID AND travelDraftStat = 'No'";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelDU FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))

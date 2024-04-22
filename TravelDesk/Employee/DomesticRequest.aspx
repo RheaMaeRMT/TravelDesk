@@ -4,6 +4,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--javascript for the dropdown: manager approval options-->
                                 <script type="text/javascript">
+                                    // Attach event listener to the button
+                                    document.getElementById('<%= saveAsDraft.ClientID %>').addEventListener('click', function () {
+                                        disableValidators();
+
                                     function showHideOthers(dropdown) {
                                         var othersLabel = document.getElementById('<%= Label14.ClientID %>');
                                                                     var othersTextbox = document.getElementById('<%= otherspecified.ClientID %>');
@@ -28,34 +32,158 @@
                                             othersTextbox.style.display = 'none';
                                         }
                                     }
+
                                     function flightSelection() {
-                                        // Flight options dropdown
-                                        var flightOptions = document.getElementById('<%= flightOptions.ClientID %>');
-                                        var selectedOption = flightOptions ? flightOptions.options[flightOptions.selectedIndex].value : null;
+                                        var selectedOption = document.getElementById('<%= flightOptions.ClientID %>').value;
+
+                                        // Hide all blocks initially
+                                        document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'none';
+                                        document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'none';
+                                        document.getElementById('<%= multipleInput.ClientID %>').style.display = 'none';
+                                        document.getElementById('<%= additionalFields.ClientID %>').style.display = 'none';
+
+                                        // Disable all validators initially
+                                        disableAllValidators();
+
+                                        // Determine which block to display based on the selected option
                                         if (selectedOption === "One Way") {
                                             document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'block';
-                                            document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'none';
-                                            document.getElementById('<%= multipleInput.ClientID %>').style.display = 'none'
+                                            enableValidators('<%= RequiredFieldValidator13.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator4.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator6.ClientID %>');
+
+                                            // DISABLE the validators associated with the multiple block
+                                            document.getElementById('<%= RequiredFieldValidator21.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator22.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator26.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator23.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator24.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator28.ClientID %>').enabled = false;
+
+                                            // Enable the validators associated with the roundtrip block
+                                            document.getElementById('<%= RequiredFieldValidator17.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator18.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator8.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator7.ClientID %>').enabled = false;
+
+                                            // DISABLE the validators associated with the additional fields block
+                                            document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
+
+
+                                            document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
+
+                                            document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
+
+
+
                                         } else if (selectedOption === "Roundtrip") {
-                                            document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'none';
                                             document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'block';
-                                            document.getElementById('<%= multipleInput.ClientID %>').style.display = 'none';
+
+                                            // disable the validators associated for the one-way block
+                                            document.getElementById('<%= RequiredFieldValidator13.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator4.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
+
+                                            // DISABLE the validators associated with the multiple block
+                                            document.getElementById('<%= RequiredFieldValidator21.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator22.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator26.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator23.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator24.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator28.ClientID %>').enabled = false;
+
+                                            enableValidators('<%= RequiredFieldValidator17.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator18.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator8.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator7.ClientID %>');
+
+                                            // DISABLE the validators associated with the additional fields block
+                                            document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
+
+
+                                            document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
+
+                                            document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
+
+
+
                                         } else if (selectedOption === "multiple") {
-                                            document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'none';
-                                            document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'none';
                                             document.getElementById('<%= multipleInput.ClientID %>').style.display = 'block';
+                                            enableValidators('<%= RequiredFieldValidator21.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator22.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator26.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator23.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator24.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator28.ClientID %>');
+
+                                            enableValidators('<%= RequiredFieldValidator50.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator32.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator9.ClientID %>');
+
+                                            enableValidators('<%= RequiredFieldValidator10.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator11.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator12.ClientID %>');
+
+                                            enableValidators('<%= RequiredFieldValidator14.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator15.ClientID %>');
+                                            enableValidators('<%= RequiredFieldValidator19.ClientID %>');
+
+                                            document.getElementById('<%= add3rd.ClientID %>').style.display = 'block';
+
+                                            // Hide additional fields and buttons
+                                            document.getElementById('destination4').style.display = 'none';
+                                            document.getElementById('destination5').style.display = 'none';
+                                            document.getElementById('<%= add4th.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= add5th.ClientID %>').style.display = 'none';
+
+                                            // disable the validators associated for the one-way block
+                                            document.getElementById('<%= RequiredFieldValidator13.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator4.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
+                                            // disable the validators associated with the roundtrip block
+                                            document.getElementById('<%= RequiredFieldValidator17.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator18.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator8.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator7.ClientID %>').enabled = false;
 
 
                                         }
                                     }
+
+                                    function enableValidators(validatorId) {
+                                        document.getElementById(validatorId).disabled = false;
+                                    }
+
+                                    function disableAllValidators() {
+                                        var validators = document.querySelectorAll('.validator');
+                                        validators.forEach(function (validator) {
+                                            validator.disabled = true; // Use disabled property to disable the validator
+                                        });
+                                    }
+
+
                                     function add3rd(button) {
                                         document.getElementById('<%= additionalFields.ClientID %>').style.display = 'block';
+                                        document.getElementById('<%= add4th.ClientID %>').style.display = 'block';
                                         document.getElementById('<%= add3rd.ClientID %>').style.display = 'none';
 
                                     }
                                     function add4th(button) {
                                         document.getElementById('destination4').style.display = 'block';
                                         document.getElementById('<%= add4th.ClientID %>').style.display = 'none';
+                                        document.getElementById('<%= add5th.ClientID %>').style.display = 'block';
 
                                     }
                                     function add5th(button) {
@@ -64,7 +192,55 @@
                                         document.getElementById('<%= add5th.ClientID %>').style.display = 'none';
 
                                     }
+                                    
+                                    function toggleValidatorBasedOnLevel() {
+                                        var levelText = document.getElementById('<%= employeeLevel.ClientID %>').value;
+                                            var level = parseInt(levelText);
+                                            if (!isNaN(level)) {
+                                            var validator = document.getElementById('<%= RequiredFieldValidator29.ClientID %>');
+                                            if (level <= 9) {
+                                                validator.enabled = true;
+                                            } else {
+                                                validator.enabled = false;
+                                            }
+                                        }
+                                    }
+                                    //FOR DRAFT PURPOSES
+                                    function disableValidators() {
 
+                                        // Enable the validators associated with the additional fields block
+                                        document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator29.ClientID%>').enabled = false;
+
+
+                                        document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
+
+                                        document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
+
+                                        // disable the validators associated for the one-way block
+                                        document.getElementById('<%= RequiredFieldValidator13.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator4.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
+                                            // disable the validators associated with the roundtrip block
+                                            document.getElementById('<%= RequiredFieldValidator17.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator18.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator8.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator7.ClientID %>').enabled = false;
+                                            // DISABLE the validators associated with the multiple block
+                                            document.getElementById('<%= RequiredFieldValidator21.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator22.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator26.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator23.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator24.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator28.ClientID %>').enabled = false;
+
+                                    }
 
                                 </script>
 
@@ -112,6 +288,7 @@
             color:red;
             font-size:14px;
         }
+        
     </style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
@@ -176,12 +353,12 @@
                                                                 <asp:TextBox ID="employeeProjCode" runat="server" Width="300px" Style="margin-left: 40px"></asp:TextBox>
                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator88" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeProjCode"></asp:RequiredFieldValidator>
                                                               
-                                                                <asp:Label ID="Label8" runat="server" Text="Level"  style="padding-left:60px"></asp:Label>
-                                                                <asp:TextBox ID="employeeLevel" runat="server"   Style="margin-left: 40px" Width="80px"></asp:TextBox>
+                                                                <asp:Label ID="Label8" runat="server" Text="Level"  style="padding-left:40px"></asp:Label>
+                                                                <asp:TextBox ID="employeeLevel" runat="server"   Style="margin-left: 40px" Width="80px" onchange="toggleValidatorBasedOnLevel()"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeLevel"></asp:RequiredFieldValidator>
                                                                
-                                                                <asp:Label ID="Label9" runat="server" Text="Department Unit"  style="padding-left:60px"></asp:Label>
-                                                                <asp:TextBox ID="employeeDU" runat="server"   Style="margin-left: 40px" Width="80px"></asp:TextBox>
+                                                                <asp:Label ID="Label9" runat="server" Text="Department Unit"  style="padding-left:40px"></asp:Label>
+                                                                <asp:TextBox ID="employeeDU" runat="server"   Style="margin-left: 40px" Width="200px" ></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDU"></asp:RequiredFieldValidator>
 
                                                                 </div>
@@ -193,8 +370,8 @@
                                                                 <asp:Label ID="Label19" runat="server" Text="Middle Name" Style="padding-left: 40px"></asp:Label>
                                                                 <asp:TextBox ID="employeeMName" runat="server" Width="300px" Style="margin-left: 35px"></asp:TextBox>
 
-                                                                <asp:Label ID="Label20" runat="server" Text="Last Name" Style="padding-left: 40px"></asp:Label>
-                                                                <asp:TextBox ID="employeeLName" runat="server" Width="300px" Style="margin-left: 30px"></asp:TextBox>
+                                                                <asp:Label ID="Label20" runat="server" Text="Last Name" Style="padding-left: 50px"></asp:Label>
+                                                                <asp:TextBox ID="employeeLName" runat="server" Width="300px" Style="margin-left: 10px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeLName"></asp:RequiredFieldValidator>
                                                             </div>
                                                             <div class="card-block">
@@ -207,7 +384,7 @@
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeEmail"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 40px"></asp:Label>
-                                                                <asp:TextBox ID="employeeBdate" runat="server" TextMode="Date" Width="300px" Style="margin-left: 25px"></asp:TextBox>
+                                                                <asp:TextBox ID="employeeBdate" runat="server" TextMode="Date" Width="150px" Style="margin-left: 25px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeBdate"></asp:RequiredFieldValidator>
 
 
@@ -243,32 +420,32 @@
                                         </div>
                                         <div class="card-block" style="display: none" id="oneWaynput" runat="server">
                                             <asp:Label ID="Label12" runat="server" Text="Departing From"></asp:Label>
-                                            <asp:TextBox ID="onewayFrom" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
+                                            <asp:TextBox ID="onewayFrom" runat="server"  Width="260px" Style="margin-left: 60px"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayFrom"></asp:RequiredFieldValidator>
 
-                                            <asp:Label ID="Label21" runat="server" Text="To" Style="padding-left: 150px"></asp:Label>
-                                            <asp:TextBox ID="onewayTo" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
+                                            <asp:Label ID="Label21" runat="server" Text="To" Style="padding-left: 50px"></asp:Label>
+                                            <asp:TextBox ID="onewayTo" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayTo"></asp:RequiredFieldValidator>
                                                     
                                             <asp:Label ID="Label4" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                            <asp:TextBox ID="onewayDate" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                            <asp:TextBox ID="onewayDate" TextMode="Date" runat="server"  Width="120px"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="onewayDate"></asp:RequiredFieldValidator>
                                         
                                         </div>
                                         <div class="card-block" style="display: none" id="roundTripInput" runat="server">
                                             <asp:Label ID="Label22" runat="server" Text="Departing From"></asp:Label>
-                                            <asp:TextBox ID="round1From" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
+                                            <asp:TextBox ID="round1From" runat="server"  Width="260px" Style="margin-left: 60px"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round1From"></asp:RequiredFieldValidator>
 
                                             <asp:Label ID="Label23" runat="server" Text="To" Style="padding-left: 50px"></asp:Label>
-                                            <asp:TextBox ID="round1To" runat="server" Width="260px" Style="margin-left: 80px"></asp:TextBox>
+                                            <asp:TextBox ID="round1To" runat="server" Width="260px" Style="margin-left: 40px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="round1To"></asp:RequiredFieldValidator>
                                                     <asp:Label ID="Label5" runat="server" Text="Departure Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="roundDepart" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                    <asp:TextBox ID="roundDepart" TextMode="Date" runat="server"  Width="120px" Style="margin-left: 30px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="roundDepart"></asp:RequiredFieldValidator>
 
                                             <asp:Label ID="Label6" runat="server" Text="Return Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="roundReturn" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                    <asp:TextBox ID="roundReturn" TextMode="Date" runat="server"  Width="120px" Style="margin-left: 30px"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="roundReturn"></asp:RequiredFieldValidator>
 
                                             <br />
@@ -279,7 +456,7 @@
                                                 <div id="destination1">
                                                     <!--FIRST DESTINATION-->
                                                     <asp:Label ID="Label34" runat="server" Text="1st Destination:"></asp:Label><br />
-                                                    <asp:Label ID="Label26" runat="server" Text="1. Departing From"></asp:Label>
+                                                    <asp:Label ID="Label26" runat="server" Text="1. Departing From" Style="margin-left: 10px"></asp:Label>
                                                     <asp:TextBox ID="TextBox7" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
                                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator21" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox7"></asp:RequiredFieldValidator>
                                                                                                      
@@ -288,13 +465,13 @@
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox8"></asp:RequiredFieldValidator>
                                                    
                                                     <asp:Label ID="Label31" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox12" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                    <asp:TextBox ID="TextBox12" TextMode="Date" runat="server"  Width="100px" Style="margin-left: 20px"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox12"></asp:RequiredFieldValidator>
                                                  </div>   <br />
                                                 <div id="destination2">
                                                     <!--SECOND DESTINATION-->
-                                                    <asp:Label ID="Label35" runat="server" Text="2nd Destination:"></asp:Label><br />
-                                                    <asp:Label ID="Label28" runat="server" Text="2. Departing From"></asp:Label>
+                                                    <asp:Label ID="Label35" runat="server" Text="2nd Destination:"></asp:Label> <br />
+                                                    <asp:Label ID="Label28" runat="server" Text="2. Departing From" Style="margin-left: 10px"></asp:Label>
                                                     <asp:TextBox ID="TextBox9" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator23" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox9"></asp:RequiredFieldValidator>
 
@@ -303,9 +480,9 @@
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator24" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox10"></asp:RequiredFieldValidator>
 
                                                     <asp:Label ID="Label33" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                    <asp:TextBox ID="TextBox14" TextMode="Date" runat="server" Width="100px"></asp:TextBox>
+                                                    <asp:TextBox ID="TextBox14" TextMode="Date" runat="server" Width="100px" Style="margin-left: 20px"></asp:TextBox>
+                                                    <asp:Button runat="server" ID="add3rd" class="btn btn-primary" Text="+"  OnClientClick="add3rd(); return false;" CausesValidation="False"/>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox14"></asp:RequiredFieldValidator>
-                                                    <asp:Button runat="server" ID="add3rd" class="btn btn-primary" Text="+"  OnClientClick="add3rd(); return false;" CausesValidation="False" />
 
                                                 </div>                                                   
                                             </div>
@@ -313,7 +490,7 @@
                                                              <div id="destination3">
                                                                  <!--THIRD DESTINATION-->
                                                                 <asp:Label ID="Label36" runat="server" Text="3rd Destination:"></asp:Label><br />
-                                                                <asp:Label ID="Label37" runat="server" Text="3. Departing From"></asp:Label>
+                                                                <asp:Label ID="Label37" runat="server" Text="3. Departing From" Style="margin-left: 10px"></asp:Label>
                                                                 <asp:TextBox ID="TextBox15" runat="server" Width="260px" CssClass="auto-style11"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator50" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox15"></asp:RequiredFieldValidator>
 
@@ -322,41 +499,41 @@
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator32" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox17"></asp:RequiredFieldValidator>
                                                                
                                                                  <asp:Label ID="Label40" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                <asp:TextBox ID="TextBox18" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                                 <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
+                                                                <asp:TextBox ID="TextBox18" TextMode="Date" runat="server"  Width="100px" Style="margin-left: 20px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox18"></asp:RequiredFieldValidator>
+                                                                 <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4th();  return false;"  CausesValidation="False"/>
 
                                                                 </div>
                                                              <div id="destination4" style="display:none"> <br />
                                                                             <!--FOURTH DESTINATION-->
                                                                             <asp:Label ID="Label51" runat="server" Text="4th Destination:"></asp:Label><br />
-                                                                            <asp:Label ID="Label52" runat="server" Text="4. Departing From"></asp:Label>
+                                                                            <asp:Label ID="Label52" runat="server" Text="4. Departing From" Style="margin-left: 10px"></asp:Label>
                                                                             <asp:TextBox ID="TextBox27" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox27"></asp:RequiredFieldValidator>
 
-                                                                            <asp:Label ID="Label54" runat="server" Text=" To" Style="padding-left: 60px"></asp:Label>
+                                                                            <asp:Label ID="Label54" runat="server" Text=" To" Style="padding-left: 50px"></asp:Label>
                                                                             <asp:TextBox ID="TextBox29" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox29"></asp:RequiredFieldValidator>
                                                                             
-                                                                 <asp:Label ID="Label55" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
-                                                                            <asp:TextBox ID="TextBox30" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
-                                                                            <asp:Button runat="server" ID="add5th" class="btn btn-primary" Text="+" OnClientClick="add5th();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
+                                                                 <asp:Label ID="Label55" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
+                                                                            <asp:TextBox ID="TextBox30" TextMode="Date" runat="server"  Width="100px" Style="margin-left: 20px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox30"></asp:RequiredFieldValidator>
+                                                                 <asp:Button runat="server" ID="add5th" class="btn btn-primary" Text="+" OnClientClick="add5th();  return false;"  CausesValidation="False" />
                                                                
                                                                  </div>                                             
                                                              <div id="destination5" style="display:none"> <br />
                                                                         <!--FIFTH DESTINATION-->
                                                                         <asp:Label ID="Label41" runat="server" Text="5th Destination:"></asp:Label><br />
-                                                                        <asp:Label ID="Label42" runat="server" Text="5. Departing From"></asp:Label>
+                                                                        <asp:Label ID="Label42" runat="server" Text="5. Departing From" Style="margin-left: 10px"></asp:Label>
                                                                         <asp:TextBox ID="TextBox19" runat="server"  Width="260px" CssClass="auto-style11"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox19"></asp:RequiredFieldValidator>
 
-                                                                        <asp:Label ID="Label44" runat="server" Text=" To" Style="padding-left: 60px"></asp:Label>
+                                                                        <asp:Label ID="Label44" runat="server" Text=" To" Style="padding-left: 50px"></asp:Label>
                                                                         <asp:TextBox ID="TextBox21" runat="server" Width="260px" Style="margin-left: 50px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox21"></asp:RequiredFieldValidator>
 
-                                                                        <asp:Label ID="Label45" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
-                                                                        <asp:TextBox ID="TextBox22" TextMode="Date" runat="server"  Width="100px"></asp:TextBox>
+                                                                        <asp:Label ID="Label45" runat="server" Text="Date" Style="margin-left: 30px" ></asp:Label>
+                                                                        <asp:TextBox ID="TextBox22" TextMode="Date" runat="server"  Width="100px" Style="margin-left: 20px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox22"></asp:RequiredFieldValidator>
 
                                                                 </div>   
@@ -392,7 +569,7 @@
 
                                            </div>
                                                              <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn" OnClick="submitRequestbtn_Click"/>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="saveAsDraft" OnClick="saveAsDraft_Click"/>
+                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="saveAsDraft" OnClientClick = "disableValidators();"  OnClick="saveAsDraft_Click"  />
 
                                     
                                     <!-- Page-body end -->

@@ -36,95 +36,181 @@ namespace TravelDesk.Employee
             int random = rand.Next(100000, 999999);
             string ID = "TR" + random;
 
-
             try
             {
-
-                if (Session["filename"] != null && Session["userID"] != null && Session["travelType"] != null)
+                string levelText = employeeLevel.Text;
+                int level;
+                if (int.TryParse(levelText, out level))
                 {
-                    // Session values are not null, proceed with inserting into the database
-                    string filename = Session["filename"].ToString();
-                    string imgPath = Session["pdfPath"].ToString();
-                    string userID = Session["userID"].ToString();
-
-                    using (var db = new SqlConnection(connectionString))
+                    if (level <= 9)
                     {
-                        db.Open();
-                        using (var cmd = db.CreateCommand())
+                        //FILENAME IS NEEDED SINCE LEVEL IS <9 
+                        if (Session["filename"] != null)
                         {
-                            cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @from, @departure, @return, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
-
-                            cmd.Parameters.AddWithValue("@ID", ID);
-
-                            // Check if the textbox with ID "othersFacility" is displayed
-                            if (othersFacility.Style["display"] != "none")
+                            if (Session["userID"] != null)
                             {
-                                // If displayed, use its value as @location
-                                cmd.Parameters.AddWithValue("@location", othersFacility.Text);
-                            }
-                            else
-                            {
-                                // If hidden, use the selected item in the homeFacility dropdown
-                                cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
-                            }
+                                // Session values are not null, proceed with inserting into the database
+                                string filename = Session["filename"].ToString();
+                                string imgPath = Session["pdfPath"].ToString();
+                                string userID = Session["userID"].ToString();
 
-                            cmd.Parameters.AddWithValue("@empID", employeeID.Text);
-                            cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
-                            cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
-                            cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
-                            cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
-                            cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
-                            cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
-                            cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
-                            cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
-                            cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
-                            cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
-                            cmd.Parameters.AddWithValue("@reqStatus", "Approved");
-                            cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
-                            cmd.Parameters.AddWithValue("@others", otherspecified.Text);
-                            cmd.Parameters.AddWithValue("@type", "Domestic");
-                            cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
-                            cmd.Parameters.AddWithValue("@userID", userID);
-                            cmd.Parameters.AddWithValue("@proofname", filename);
-                            cmd.Parameters.AddWithValue("@proofpath", imgPath);
-                            cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
-                            cmd.Parameters.AddWithValue("@draftStat", "Yes");
-
-                            var ctr = cmd.ExecuteNonQuery();
-
-                            if (ctr >= 1)
-                            {
-                                string levelText = employeeLevel.Text;
-                                int level;
-                                if (int.TryParse(levelText, out level))
+                                using (var db = new SqlConnection(connectionString))
                                 {
-                                    if (level <= 9)
+                                    db.Open();
+                                    using (var cmd = db.CreateCommand())
                                     {
-                                        RequiredFieldValidator29.Enabled = true;
-                                    }
-                                    else
-                                    {
-                                        RequiredFieldValidator29.Enabled = false;
+                                        cmd.CommandType = CommandType.Text;
+                                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                            + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+
+                                        cmd.Parameters.AddWithValue("@ID", ID);
+
+                                        string location = homeFacility.Text;
+
+                                        // Check if the textbox with ID "othersFacility" is displayed
+                                        if (location == "Others")
+                                        {
+                                            // If displayed, use its value as @location
+                                            cmd.Parameters.AddWithValue("@location", othersFacility.Text);
+                                        }
+                                        else
+                                        {
+                                            // If hidden, use the selected item in the homeFacility dropdown
+                                            cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+                                        }
+
+                                        cmd.Parameters.AddWithValue("@empID", employeeID.Text);
+                                        cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
+                                        cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
+                                        cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
+                                        cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
+                                        cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
+                                        cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
+                                        cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
+                                        cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
+                                        cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
+                                        cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+                                        cmd.Parameters.AddWithValue("@reqStatus", "Approved");
+                                        cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
+                                        cmd.Parameters.AddWithValue("@others", otherspecified.Text);
+                                        cmd.Parameters.AddWithValue("@type", "Domestic");
+                                        cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
+                                        cmd.Parameters.AddWithValue("@userID", userID);
+                                        cmd.Parameters.AddWithValue("@proofname", filename);
+                                        cmd.Parameters.AddWithValue("@proofpath", imgPath);
+                                        cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
+                                        cmd.Parameters.AddWithValue("@draftStat", "No");
+
+                                        var ctr = cmd.ExecuteNonQuery();
+
+                                        if (ctr >= 1)
+                                        {
+
+                                            insertRoute(ID);
+                                        }
+                                        else
+                                        {
+                                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                        }
                                     }
                                 }
 
-                                insertRoute(ID);
                             }
                             else
                             {
-                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                // Session values are null
+                                Response.Write("<script>alert('Session Expired! Please login again.')</script>");
+
                             }
+                        }
+                        else
+                        {
+                            // Session values are null
+                            Response.Write("<script>alert('Invalid File upload. Please try again')</script>");
+                        }
+                    }
+                    //PROCEED WITH INSERTION WITHOUT FILE UPLOAD
+                    else
+                    {
+                        if (Session["userID"] != null)
+                        {
+                            // Session values are not null, proceed with inserting into the database
+                            string filename = Session["filename"] != null ? Session["filename"].ToString() : string.Empty;
+                            string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : string.Empty;
+                            string userID = Session["userID"].ToString();
+
+                            using (var db = new SqlConnection(connectionString))
+                            {
+                                db.Open();
+                                using (var cmd = db.CreateCommand())
+                                {
+                                    cmd.CommandType = CommandType.Text;
+                                    cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                        + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+
+                                    cmd.Parameters.AddWithValue("@ID", ID);
+
+                                    string location = homeFacility.Text;
+
+                                    // Check if the textbox with ID "othersFacility" is displayed
+                                    if (location == "Others")
+                                    {
+                                        // If displayed, use its value as @location
+                                        cmd.Parameters.AddWithValue("@location", othersFacility.Text);
+                                    }
+                                    else
+                                    {
+                                        // If hidden, use the selected item in the homeFacility dropdown
+                                        cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+                                    }
+
+                                    cmd.Parameters.AddWithValue("@empID", employeeID.Text);
+                                    cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
+                                    cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
+                                    cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
+                                    cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
+                                    cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
+                                    cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
+                                    cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
+                                    cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
+                                    cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
+                                    cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+                                    cmd.Parameters.AddWithValue("@reqStatus", "Approved");
+                                    cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
+                                    cmd.Parameters.AddWithValue("@others", otherspecified.Text);
+                                    cmd.Parameters.AddWithValue("@type", "Domestic");
+                                    cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
+                                    cmd.Parameters.AddWithValue("@userID", userID);
+                                    cmd.Parameters.AddWithValue("@proofname", filename);
+                                    cmd.Parameters.AddWithValue("@proofpath", imgPath);
+                                    cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
+                                    cmd.Parameters.AddWithValue("@draftStat", "Yes");
+
+                                    var ctr = cmd.ExecuteNonQuery();
+
+                                    if (ctr >= 1)
+                                    {
+
+                                        insertRoute(ID);
+                                    }
+                                    else
+                                    {
+                                        Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Session values are null
+                            Response.Write("<script>alert('Session Expired! Please login again.')</script>");
                         }
                     }
                 }
                 else
                 {
-                    // Session values are null
-                    Response.Write("<script>alert('Session Expired! Please login again.')</script>");
-                }
 
+                }
 
             }
             catch (SqlException ex)
@@ -220,11 +306,12 @@ namespace TravelDesk.Employee
             {
                 if (Session["userName"] != null)
                 {
-                    string name = Session["userName"].ToString();
+
+                    string name = employeeFName.Text + employeeLName.Text;
 
                     if (employeeUpload.HasFile)
                     {
-                        string filename = Server.HtmlEncode(employeeUpload.FileName) + name;
+                        string filename = Server.HtmlEncode(name + "_" + employeeUpload.FileName);
                         string extension = System.IO.Path.GetExtension(filename).ToLower(); // Convert extension to lowercase for comparison
                         int filesize = employeeUpload.PostedFile.ContentLength;
                         if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
@@ -236,62 +323,67 @@ namespace TravelDesk.Employee
                         }
                         else
                         {
-                            ////if (extension == ".pdf") // Allow only PDF files
-                            ////{
-                               
-                            ////}
-                            ////else
-                            ////{
-                            ////    Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
-                            ////    uploadBlock.Style["display"] = "block";
-
-                            ////}
-                            if (filesize < 4100000)
+                            if (extension == ".pdf") // Allow only PDF files
                             {
-                                string savePath = System.IO.Path.Combine(saveDIR, filename);
-
-                                // Save the uploaded file
-                                employeeUpload.SaveAs(savePath);
-
-                                // Store file path in session
-                                Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
-                                Session["filename"] = filename;
-
-                                string pdfPath = Session["pdfPath"].ToString();
-
-                                // Check if the uploaded PDF contains the required keywords
-                                if (CheckKeywordsInPDF(savePath))
+                                if (filesize < 4100000)
                                 {
-                                    // Show the PDF viewer
-                                    pdfViewer.Attributes["src"] = pdfPath;
-                                    pdfBlock.Style["display"] = "block";
+                                    string savePath = System.IO.Path.Combine(saveDIR, filename);
 
-                                    Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+                                    // Save the uploaded file
+                                    employeeUpload.SaveAs(savePath);
 
-                                    string path = Session["pdfPath"].ToString();
-                                    Session["filePath"] = path;
+                                    // Store file path in session
+                                    Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
+                                    Session["filename"] = filename;
+
+                                    string pdfPath = Session["pdfPath"].ToString();
+
+                                    // Check if the uploaded PDF contains the required keywords
+                                    if (CheckKeywordsInPDF(savePath))
+                                    {
+                                        // Show the PDF viewer
+                                        pdfViewer.Attributes["src"] = pdfPath;
+                                        pdfBlock.Style["display"] = "block";
+
+                                        // Disable the RequiredFieldValidator
+                                        RequiredFieldValidator29.Enabled = false;
+                                        DisableRouteRequiredFieldValidators();
+
+                                        Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+
+
+                                        string path = Session["pdfPath"].ToString();
+                                        Session["filePath"] = path;
+                                    }
+                                    else
+                                    {
+                                        // Delete the invalid file
+                                        File.Delete(savePath);
+
+                                        Response.Write("<script>alert('It seems like your uploaded file is not valid. Please try again.')</script>");
+                                        uploadBlock.Style["display"] = "block";
+                                    }
+
+                                    // Log success message to the console
+                                    Console.WriteLine("File uploaded successfully: " + filename);
+                                    Console.WriteLine("PDF path: " + Session["imgPath"]);
+
+                                    // Display contents after successful upload
+                                    displayContents();
                                 }
                                 else
                                 {
-                                    // Delete the invalid file
-                                    File.Delete(savePath);
-
-                                    Response.Write("<script>alert('It seems like your uploaded file is not valid. Please try again.')</script>");
+                                    Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
                                     uploadBlock.Style["display"] = "block";
                                 }
-
-                                // Log success message to the console
-                                Console.WriteLine("File uploaded successfully: " + filename);
-                                Console.WriteLine("PDF path: " + Session["imgPath"]);
-
-                                // Display contents after successful upload
-                                displayContents();
                             }
                             else
                             {
-                                Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
+                                Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
                                 uploadBlock.Style["display"] = "block";
+
                             }
+
                         }
                     }
                     else
@@ -375,39 +467,6 @@ namespace TravelDesk.Employee
                         cmd.Parameters.AddWithValue("@ID", "R" + random);
                         cmd.Parameters.AddWithValue("@routeTravelID", ID);
 
-                        if(oneWaynput.Style["display"] == "none")
-                        {
-                            //DISABLE THE VALIDATORS SINCE ONE WAY IS NOT CHOSEN
-                            RequiredFieldValidator13.Enabled = false;
-                            RequiredFieldValidator4.Enabled = false;
-                            RequiredFieldValidator6.Enabled = false;
-                        }
-                        if(roundTripInput.Style["display"] == "none")
-                        {
-                            RequiredFieldValidator17.Enabled = false;
-                            RequiredFieldValidator18.Enabled = false;
-                            RequiredFieldValidator8.Enabled = false;
-                            RequiredFieldValidator7.Enabled = false;
-                        }
-                        if (multipleInput.Style["display"] == "none")
-                        {
-                            RequiredFieldValidator21.Enabled = false;
-                            RequiredFieldValidator22.Enabled = false;
-                            RequiredFieldValidator26.Enabled = false;
-                        }
-                        if(additionalFields.Style["display"] == "none")
-                        {
-                            RequiredFieldValidator50.Enabled = false;
-                            RequiredFieldValidator32.Enabled = false;
-                            RequiredFieldValidator9.Enabled = false;
-                            RequiredFieldValidator10.Enabled = false;
-                            RequiredFieldValidator11.Enabled = false;
-                            RequiredFieldValidator12.Enabled = false;
-                            RequiredFieldValidator14.Enabled = false;
-                            RequiredFieldValidator15.Enabled = false;
-                            RequiredFieldValidator19.Enabled = false;
-
-                        }
 
                         //ONE WAY
                         cmd.Parameters.AddWithValue("@onewayFrom", onewayFrom.Text);
@@ -527,7 +586,7 @@ namespace TravelDesk.Employee
 
         protected void saveAsDraft_Click(object sender, EventArgs e)
         {
-            DisableAllRequiredFieldValidators(Page);
+            DisableAllRequiredFieldValidators();
 
             Random rand = new Random();
             int random = rand.Next(100000, 999999);
@@ -551,12 +610,14 @@ namespace TravelDesk.Employee
                         {
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @from, @departure, @return, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
                             cmd.Parameters.AddWithValue("@ID", ID);
 
+                            string location = homeFacility.Text;
+
                             // Check if the textbox with ID "othersFacility" is displayed
-                            if (othersFacility.Style["display"] != "none")
+                            if (location == "Others")
                             {
                                 // If displayed, use its value as @location
                                 cmd.Parameters.AddWithValue("@location", othersFacility.Text);
@@ -622,20 +683,53 @@ namespace TravelDesk.Employee
                 }
             }
         }
-
-        protected void DisableAllRequiredFieldValidators(Control parent)
+        protected void DisableAllRequiredFieldValidators()
         {
-            foreach (Control control in parent.Controls)
-            {
-                if (control is RequiredFieldValidator)
-                {
-                    ((RequiredFieldValidator)control).Enabled = false;
-                }
-                else if (control.HasControls())
-                {
-                    DisableAllRequiredFieldValidators(control);
-                }
-            }
+            RequiredFieldValidator30.Enabled = false;
+            RequiredFieldValidator2.Enabled = false;
+            RequiredFieldValidator88.Enabled = false;
+            RequiredFieldValidator5.Enabled = false;
+            RequiredFieldValidator20.Enabled = false;
+            RequiredFieldValidator16.Enabled = false;
+            RequiredFieldValidator3.Enabled = false;
+            RequiredFieldValidator57.Enabled = false;
+            RequiredFieldValidator25.Enabled = false;
+            RequiredFieldValidator27.Enabled = false;
+
+            DisableRouteRequiredFieldValidators();
+        }
+
+        protected void DisableRouteRequiredFieldValidators()
+        {
+            // Enable validators associated with additional fields block
+            RequiredFieldValidator50.Enabled = false;
+            RequiredFieldValidator32.Enabled = false;
+            RequiredFieldValidator9.Enabled = false;
+            RequiredFieldValidator10.Enabled = false;
+            RequiredFieldValidator11.Enabled = false;
+            RequiredFieldValidator12.Enabled = false;
+            RequiredFieldValidator14.Enabled = false;
+            RequiredFieldValidator15.Enabled = false;
+            RequiredFieldValidator19.Enabled = false;
+
+            // Disable validators associated with one-way block
+            RequiredFieldValidator13.Enabled = false;
+            RequiredFieldValidator4.Enabled = false;
+            RequiredFieldValidator6.Enabled = false;
+
+            // Disable validators associated with roundtrip block
+            RequiredFieldValidator17.Enabled = false;
+            RequiredFieldValidator18.Enabled = false;
+            RequiredFieldValidator8.Enabled = false;
+            RequiredFieldValidator7.Enabled = false;
+
+            // Disable validators associated with multiple block
+            RequiredFieldValidator21.Enabled = false;
+            RequiredFieldValidator22.Enabled = false;
+            RequiredFieldValidator26.Enabled = false;
+            RequiredFieldValidator23.Enabled = false;
+            RequiredFieldValidator24.Enabled = false;
+            RequiredFieldValidator28.Enabled = false;
         }
 
         private void insertDraftRoute(string ID)
