@@ -546,6 +546,7 @@
     <Content Include="assets\images\auth\Thumbs.db" />
     <Content Include="assets\images\Thumbs.db" />
     <Content Include="ApproverSite.Master" />
+    <Content Include="images\bgImage.jpg" />
     <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\2ndLogoTD.png" />

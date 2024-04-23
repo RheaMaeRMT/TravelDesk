@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -34,7 +35,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateCreated, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Draft'";
+                string query = "SELECT travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Draft'";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -77,5 +78,58 @@ namespace TravelDesk.Employee
             }
         }
 
+        protected void viewDetails_Click(object sender, EventArgs e)
+        {
+            //Get the GridViewRow that contains the clicked button
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+
+            //Get the order ID from the first cell in the row
+            string requestID = row.Cells[2].Text;
+
+            Console.WriteLine(requestID);
+
+            Session["clickedRequest"] = requestID;
+
+            if (!string.IsNullOrEmpty(requestID))
+            {
+                // Query the database to retrieve the request details based on the ID
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM travelRequest WHERE travelRequestID = @RequestId";
+                        cmd.Parameters.AddWithValue("@RequestId", requestID);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Retrieve the request details from the reader
+                                string status = reader["travelReqStatus"].ToString();
+
+                                //check the status
+                                if (status == "Draft")
+                                {
+                                    //redirect to the details page after clicking the view button
+                                    Response.Redirect("domesticRequestDetails.aspx");
+                                }
+                                else 
+                                {
+                                    Response.Write("<script>alert('An error occured while retrieving your draft. Please try again.')</script>");
+                                }
+                            }
+                            else
+                            {
+                                // Handle the case where no request with the given ID is found
+                                Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -4,10 +4,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--javascript for the dropdown: manager approval options-->
                                 <script type="text/javascript">
-                                    // Attach event listener to the button
-                                    document.getElementById('<%= saveAsDraft.ClientID %>').addEventListener('click', function () {
-                                        disableValidators();
-
                                     function showHideOthers(dropdown) {
                                         var othersLabel = document.getElementById('<%= Label14.ClientID %>');
                                                                     var othersTextbox = document.getElementById('<%= otherspecified.ClientID %>');
@@ -40,84 +36,55 @@
                                         document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'none';
                                         document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'none';
                                         document.getElementById('<%= multipleInput.ClientID %>').style.display = 'none';
-                                        document.getElementById('<%= additionalFields.ClientID %>').style.display = 'none';
+                                        document.getElementById('<%= destination3.ClientID %>').style.display = 'none';
+                                        document.getElementById('<%= destination4.ClientID %>').style.display = 'none';
+                                        document.getElementById('<%= destination5.ClientID %>').style.display = 'none';
 
                                         // Disable all validators initially
                                         disableAllValidators();
 
                                         // Determine which block to display based on the selected option
                                         if (selectedOption === "One Way") {
+                                            disableMultiple();
+                                            disableRound();
                                             document.getElementById('<%= oneWaynput.ClientID %>').style.display = 'block';
+                                            document.getElementById('<%= destination3.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= destination4.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= destination5.ClientID %>').style.display = 'none';
+
                                             enableValidators('<%= RequiredFieldValidator13.ClientID %>');
                                             enableValidators('<%= RequiredFieldValidator4.ClientID %>');
                                             enableValidators('<%= RequiredFieldValidator6.ClientID %>');
 
                                             // DISABLE the validators associated with the multiple block
-                                            document.getElementById('<%= RequiredFieldValidator21.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator22.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator26.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator23.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator24.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator28.ClientID %>').enabled = false;
+                                            disableMultiple();
 
                                             // Enable the validators associated with the roundtrip block
-                                            document.getElementById('<%= RequiredFieldValidator17.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator18.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator8.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator7.ClientID %>').enabled = false;
-
-                                            // DISABLE the validators associated with the additional fields block
-                                            document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
-
-
-                                            document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
-
-                                            document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
+                                            disableRound();
+                                            
 
 
 
                                         } else if (selectedOption === "Roundtrip") {
+
+                                            disableOneway();
+                                            disableMultiple();
+
                                             document.getElementById('<%= roundTripInput.ClientID %>').style.display = 'block';
+                                            document.getElementById('<%= destination3.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= destination4.ClientID %>').style.display = 'none';
+                                            document.getElementById('<%= destination5.ClientID %>').style.display = 'none';
 
                                             // disable the validators associated for the one-way block
-                                            document.getElementById('<%= RequiredFieldValidator13.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator4.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
+                                            disableOneway();
 
                                             // DISABLE the validators associated with the multiple block
-                                            document.getElementById('<%= RequiredFieldValidator21.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator22.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator26.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator23.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator24.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator28.ClientID %>').enabled = false;
+                                            disableMultiple();
 
                                             enableValidators('<%= RequiredFieldValidator17.ClientID %>');
                                             enableValidators('<%= RequiredFieldValidator18.ClientID %>');
                                             enableValidators('<%= RequiredFieldValidator8.ClientID %>');
                                             enableValidators('<%= RequiredFieldValidator7.ClientID %>');
-
-                                            // DISABLE the validators associated with the additional fields block
-                                            document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
-
-
-                                            document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
-
-                                            document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
-
-
 
                                         } else if (selectedOption === "multiple") {
                                             document.getElementById('<%= multipleInput.ClientID %>').style.display = 'block';
@@ -142,21 +109,11 @@
 
                                             document.getElementById('<%= add3rd.ClientID %>').style.display = 'block';
 
-                                            // Hide additional fields and buttons
-                                            document.getElementById('destination4').style.display = 'none';
-                                            document.getElementById('destination5').style.display = 'none';
-                                            document.getElementById('<%= add4th.ClientID %>').style.display = 'none';
-                                            document.getElementById('<%= add5th.ClientID %>').style.display = 'none';
-
+                                            
                                             // disable the validators associated for the one-way block
-                                            document.getElementById('<%= RequiredFieldValidator13.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator4.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
+                                            disableOneway();
                                             // disable the validators associated with the roundtrip block
-                                            document.getElementById('<%= RequiredFieldValidator17.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator18.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator8.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator7.ClientID %>').enabled = false;
+                                            disableRound();
 
 
                                         }
@@ -175,22 +132,56 @@
 
 
                                     function add3rd(button) {
-                                        document.getElementById('<%= additionalFields.ClientID %>').style.display = 'block';
+                                        document.getElementById('<%= destination3.ClientID %>').style.display = 'block';
                                         document.getElementById('<%= add4th.ClientID %>').style.display = 'block';
                                         document.getElementById('<%= add3rd.ClientID %>').style.display = 'none';
 
+                                        //ENABLE 3RD DESTINATION VALIDATORS
+                                        document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = true;
+                                        document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = true;
+                                        document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = true;
+
+                                        //DISABLE 4TH DESTINATION VALIDATORS
+                                        document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
+
+                                        //DISABLE 5TH DESTINATION VALIDATORS
+                                            document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
+
+
                                     }
                                     function add4th(button) {
-                                        document.getElementById('destination4').style.display = 'block';
+                                        document.getElementById('<%= destination4.ClientID %>').style.display = 'block';
                                         document.getElementById('<%= add4th.ClientID %>').style.display = 'none';
                                         document.getElementById('<%= add5th.ClientID %>').style.display = 'block';
+
+                                        //ENABLE 4TH DESTINATION VALIDATORS
+                                        document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = true;
+                                        document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = true;
+                                        document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = true;
+
+                                        //DISABLE 3RD DESTINATION VALIDATORS
+                                        document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
+                                        //DISABLE 5TH DESTINATION VALIDATORS
+                                        document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
 
                                     }
                                     function add5th(button) {
 
-                                        document.getElementById('destination5').style.display = 'block';
+                                        document.getElementById('<%= destination5.ClientID %>').style.display = 'block';
                                         document.getElementById('<%= add5th.ClientID %>').style.display = 'none';
 
+                                        //DISABLE 5TH DESTINATION VALIDATORS
+                                        document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = true;
+                                        document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = true;
+                                        document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = true;
                                     }
                                     
                                     function toggleValidatorBasedOnLevel() {
@@ -205,44 +196,93 @@
                                             }
                                         }
                                     }
+                                    function disableOneway() {
+                                        // disable the validators associated for the one-way block
+                                        document.getElementById('<%= RequiredFieldValidator13.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator4.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
+                                    }
+                                    function disableRound() {
+                                        // disable the validators associated with the roundtrip block
+                                        document.getElementById('<%= RequiredFieldValidator17.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator18.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator8.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator7.ClientID %>').enabled = false;
+                                    }
+                                   function disableMultiple(){
+                                        // DISABLE the validators associated with the multiple block
+                                        document.getElementById('<%= RequiredFieldValidator21.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator22.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator26.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator23.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator24.ClientID %>').enabled = false;
+                                       document.getElementById('<%= RequiredFieldValidator28.ClientID %>').enabled = false;
+
+                                       document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
+                                       document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
+                                       document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
+
+
+                                       document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
+                                       document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
+
+                                            document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
+                                            document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
+                                       document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
+                                    }
                                     //FOR DRAFT PURPOSES
                                     function disableValidators() {
 
                                         // Enable the validators associated with the additional fields block
-                                        document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator29.ClientID%>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator50.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator32.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator9.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator29.ClientID%>').enabled = false;
 
 
-                                        document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator10.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator11.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator12.ClientID %>').enabled = false;
 
-                                        document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator14.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator15.ClientID %>').enabled = false;
+                                           document.getElementById('<%= RequiredFieldValidator19.ClientID %>').enabled = false;
 
                                         // disable the validators associated for the one-way block
                                         document.getElementById('<%= RequiredFieldValidator13.ClientID %>').enabled = false;
                                         document.getElementById('<%= RequiredFieldValidator4.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
-                                            // disable the validators associated with the roundtrip block
-                                            document.getElementById('<%= RequiredFieldValidator17.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator18.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator8.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator7.ClientID %>').enabled = false;
-                                            // DISABLE the validators associated with the multiple block
-                                            document.getElementById('<%= RequiredFieldValidator21.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator22.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator26.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator23.ClientID %>').enabled = false;
-                                            document.getElementById('<%= RequiredFieldValidator24.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
+                                        // disable the validators associated with the roundtrip block
+                                        document.getElementById('<%= RequiredFieldValidator17.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator18.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator8.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator7.ClientID %>').enabled = false;
+                                        // DISABLE the validators associated with the multiple block
+                                        document.getElementById('<%= RequiredFieldValidator21.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator22.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator26.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator23.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator24.ClientID %>').enabled = false;
                                         document.getElementById('<%= RequiredFieldValidator28.ClientID %>').enabled = false;
 
-                                    }
+                                        //EMPLOYEE INFORMATION
+                                        document.getElementById('<%= RequiredFieldValidator30.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator2.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator88.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator5.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator20.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator3.ClientID %>').enabled = false;
+					                    document.getElementById('<%= RequiredFieldValidator16.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator57.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator25.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator27.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator29.ClientID %>').enabled = false;
 
+
+                                       }
                                 </script>
+
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -379,8 +419,8 @@
                                                                 <asp:TextBox ID="employeePhone" runat="server" Width="300px" Style="margin-left: 20px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator57" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePhone"></asp:RequiredFieldValidator>
                                                                
-                                                                <asp:Label ID="Label46" runat="server" Text="Employee Email" Style="padding-left: 40px"></asp:Label>
-                                                                <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 25px"></asp:TextBox>
+                                                                <asp:Label ID="Label46" runat="server" Text="Email" Style="padding-left: 50px"></asp:Label>
+                                                                <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 50px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeEmail"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 40px"></asp:Label>
@@ -486,8 +526,7 @@
 
                                                 </div>                                                   
                                             </div>
-                                                    <div class="card-block" style="display:none" id="additionalFields" runat="server"> <hr /> 
-                                                             <div id="destination3">
+                                                             <div id="destination3" runat="server" class="card-block" style="display:none">
                                                                  <!--THIRD DESTINATION-->
                                                                 <asp:Label ID="Label36" runat="server" Text="3rd Destination:"></asp:Label><br />
                                                                 <asp:Label ID="Label37" runat="server" Text="3. Departing From" Style="margin-left: 10px"></asp:Label>
@@ -503,8 +542,9 @@
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox18"></asp:RequiredFieldValidator>
                                                                  <asp:Button runat="server" ID="add4th" class="btn btn-primary" Text="+" OnClientClick="add4th();  return false;"  CausesValidation="False"/>
 
-                                                                </div>
-                                                             <div id="destination4" style="display:none"> <br />
+                                                              </div>
+
+                                                             <div id="destination4" style="display:none" runat="server" class="card-block"> <br />
                                                                             <!--FOURTH DESTINATION-->
                                                                             <asp:Label ID="Label51" runat="server" Text="4th Destination:"></asp:Label><br />
                                                                             <asp:Label ID="Label52" runat="server" Text="4. Departing From" Style="margin-left: 10px"></asp:Label>
@@ -520,8 +560,9 @@
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox30"></asp:RequiredFieldValidator>
                                                                  <asp:Button runat="server" ID="add5th" class="btn btn-primary" Text="+" OnClientClick="add5th();  return false;"  CausesValidation="False" />
                                                                
-                                                                 </div>                                             
-                                                             <div id="destination5" style="display:none"> <br />
+                                                                 </div>              
+                                                    
+                                                             <div id="destination5" style="display:none" runat="server" class="card-block"> <br />
                                                                         <!--FIFTH DESTINATION-->
                                                                         <asp:Label ID="Label41" runat="server" Text="5th Destination:"></asp:Label><br />
                                                                         <asp:Label ID="Label42" runat="server" Text="5. Departing From" Style="margin-left: 10px"></asp:Label>
@@ -537,6 +578,8 @@
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="TextBox22"></asp:RequiredFieldValidator>
 
                                                                 </div>   
+                                                    <div class="card-block" style="display:none" id="additionalFields" runat="server"> <hr /> 
+
 
                                                     </div>
 
@@ -569,9 +612,8 @@
 
                                            </div>
                                                              <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn" OnClick="submitRequestbtn_Click"/>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="saveAsDraft" OnClientClick = "disableValidators();"  OnClick="saveAsDraft_Click"  />
+                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="saveAsDraft" OnClientClick = "disableValidators();" OnClick="saveAsDraft_Click" />
 
-                                    
                                     <!-- Page-body end -->
                                 </div>
                                 <div id="styleSelector"> </div>

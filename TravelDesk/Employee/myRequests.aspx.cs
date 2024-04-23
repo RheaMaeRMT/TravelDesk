@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -41,7 +42,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelDU FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -91,7 +92,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(userID))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelDU FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -134,6 +135,69 @@ namespace TravelDesk.Employee
         {
             Response.Write("<script>window.location.href = 'myDraftRequests.aspx'; </script>");
 
+        }
+
+        protected void viewDetails_Click(object sender, EventArgs e)
+        {
+            //Get the GridViewRow that contains the clicked button
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+
+            //Get the order ID from the first cell in the row
+            string requestID = row.Cells[3].Text;
+
+            Console.WriteLine(requestID);
+
+            Session["clickedRequest"] = requestID;
+
+            if (!string.IsNullOrEmpty(requestID))
+            {
+                // Query the database to retrieve the request details based on the ID
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM travelRequest WHERE travelRequestID = @RequestId";
+                        cmd.Parameters.AddWithValue("@RequestId", requestID);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Retrieve the request details from the reader
+                                string status = reader["travelReqStatus"].ToString();
+
+                                //check the status
+                                if (status == "Processing")
+                                {
+                                    Session["status"] = status;
+                                    //if processing, the page should redirect to the travel arrangement generated from Admin
+                                    Response.Redirect("TravelArrangements.aspx");
+                                }
+                                else if (status == "Arranged")
+                                {
+                                    Response.Redirect("arrangedRequest.aspx");
+
+                                }
+                                else
+                                {
+                                    //redirect to the next page after clicking the view button
+                                    Response.Redirect("domesticRequestDetails.aspx");
+                                }
+
+
+                            }
+                            else
+                            {
+                                // Handle the case where no request with the given ID is found
+                                Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

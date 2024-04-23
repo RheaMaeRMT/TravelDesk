@@ -780,13 +780,13 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator28;
 
         /// <summary>
-        /// additionalFields control.
+        /// destination3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl additionalFields;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl destination3;
 
         /// <summary>
         /// Label36 control.
@@ -888,6 +888,15 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Button add4th;
 
         /// <summary>
+        /// destination4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl destination4;
+
+        /// <summary>
         /// Label51 control.
         /// </summary>
         /// <remarks>
@@ -987,6 +996,15 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Button add5th;
 
         /// <summary>
+        /// destination5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl destination5;
+
+        /// <summary>
         /// Label41 control.
         /// </summary>
         /// <remarks>
@@ -1075,6 +1093,15 @@ namespace TravelDesk.Employee
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator19;
+
+        /// <summary>
+        /// additionalFields control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl additionalFields;
 
         /// <summary>
         /// uploadBlock control.

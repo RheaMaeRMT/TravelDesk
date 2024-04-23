@@ -60,8 +60,8 @@ namespace TravelDesk.Employee
                                     using (var cmd = db.CreateCommand())
                                     {
                                         cmd.CommandType = CommandType.Text;
-                                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                            + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+                                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                            + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
                                         cmd.Parameters.AddWithValue("@ID", ID);
 
@@ -89,10 +89,19 @@ namespace TravelDesk.Employee
                                         cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
                                         cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
                                         cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
-                                        cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+                                        string purpose = employeePurpose.Text;
+                                        if (purpose == "Others")
+                                        {
+                                            cmd.Parameters.AddWithValue("@purpose", otherspecified.Text);
+
+                                        }
+                                        else
+                                        {
+                                            cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+
+                                        }
                                         cmd.Parameters.AddWithValue("@reqStatus", "Approved");
-                                        cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
-                                        cmd.Parameters.AddWithValue("@others", otherspecified.Text);
+                                        cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);                                       
                                         cmd.Parameters.AddWithValue("@type", "Domestic");
                                         cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
                                         cmd.Parameters.AddWithValue("@userID", userID);
@@ -145,8 +154,8 @@ namespace TravelDesk.Employee
                                 using (var cmd = db.CreateCommand())
                                 {
                                     cmd.CommandType = CommandType.Text;
-                                    cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                        + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+                                    cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                        + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
                                     cmd.Parameters.AddWithValue("@ID", ID);
 
@@ -174,10 +183,20 @@ namespace TravelDesk.Employee
                                     cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
                                     cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
                                     cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
-                                    cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+
+                                    string purpose = employeePurpose.Text;
+                                    if (purpose == "Others")
+                                    {
+                                        cmd.Parameters.AddWithValue("@purpose", otherspecified.Text);
+
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+
+                                    }
                                     cmd.Parameters.AddWithValue("@reqStatus", "Approved");
                                     cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
-                                    cmd.Parameters.AddWithValue("@others", otherspecified.Text);
                                     cmd.Parameters.AddWithValue("@type", "Domestic");
                                     cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
                                     cmd.Parameters.AddWithValue("@userID", userID);
@@ -586,7 +605,6 @@ namespace TravelDesk.Employee
 
         protected void saveAsDraft_Click(object sender, EventArgs e)
         {
-            DisableAllRequiredFieldValidators();
 
             Random rand = new Random();
             int random = rand.Next(100000, 999999);
@@ -628,26 +646,26 @@ namespace TravelDesk.Employee
                                 cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
                             }
 
-                            cmd.Parameters.AddWithValue("@empID", employeeID.Text);
-                            cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
-                            cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
-                            cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
-                            cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
-                            cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
-                            cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
-                            cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
-                            cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
-                            cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
-                            cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
-                            cmd.Parameters.AddWithValue("@reqStatus", "Approved");
-                            cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
-                            cmd.Parameters.AddWithValue("@others", otherspecified.Text);
+                            cmd.Parameters.AddWithValue("@empID", string.IsNullOrEmpty(employeeID.Text) ? DBNull.Value : (object)employeeID.Text);
+                            cmd.Parameters.AddWithValue("@empFName", string.IsNullOrEmpty(employeeFName.Text) ? DBNull.Value : (object)employeeFName.Text);
+                            cmd.Parameters.AddWithValue("@empMName", string.IsNullOrEmpty(employeeMName.Text) ? DBNull.Value : (object)employeeMName.Text);
+                            cmd.Parameters.AddWithValue("@empLName", string.IsNullOrEmpty(employeeLName.Text) ? DBNull.Value : (object)employeeLName.Text);
+                            cmd.Parameters.AddWithValue("@empBdate", string.IsNullOrEmpty(employeeBdate.Text) ? DBNull.Value : (object)employeeBdate.Text);
+                            cmd.Parameters.AddWithValue("@empDu", string.IsNullOrEmpty(employeeDU.Text) ? DBNull.Value : (object)employeeDU.Text);
+                            cmd.Parameters.AddWithValue("@empEmail", string.IsNullOrEmpty(employeeEmail.Text) ? DBNull.Value : (object)employeeEmail.Text);
+                            cmd.Parameters.AddWithValue("@level", string.IsNullOrEmpty(employeeLevel.Text) ? DBNull.Value : (object)employeeLevel.Text);
+                            cmd.Parameters.AddWithValue("@mobile", string.IsNullOrEmpty(employeePhone.Text) ? DBNull.Value : (object)employeePhone.Text);
+                            cmd.Parameters.AddWithValue("@projCode", string.IsNullOrEmpty(employeeProjCode.Text) ? DBNull.Value : (object)employeeProjCode.Text);
+                            cmd.Parameters.AddWithValue("@purpose", string.IsNullOrEmpty(employeePurpose.Text) ? DBNull.Value : (object)employeePurpose.Text);
+                            cmd.Parameters.AddWithValue("@reqStatus", "Draft");
+                            cmd.Parameters.AddWithValue("@remarks", string.IsNullOrEmpty(employeeRemarks.Text) ? DBNull.Value : (object)employeeRemarks.Text);
+                            cmd.Parameters.AddWithValue("@others", string.IsNullOrEmpty(otherspecified.Text) ? DBNull.Value : (object)otherspecified.Text);
                             cmd.Parameters.AddWithValue("@type", "Domestic");
-                            cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
-                            cmd.Parameters.AddWithValue("@userID", userID);
-                            cmd.Parameters.AddWithValue("@proofname", filename);
-                            cmd.Parameters.AddWithValue("@proofpath", imgPath);
-                            cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
+                            cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem == null ? DBNull.Value : (object)flightOptions.SelectedItem.Text);
+                            cmd.Parameters.AddWithValue("@userID", string.IsNullOrEmpty(userID) ? DBNull.Value : (object)userID);
+                            cmd.Parameters.AddWithValue("@proofname", string.IsNullOrEmpty(filename) ? DBNull.Value : (object)filename);
+                            cmd.Parameters.AddWithValue("@proofpath", string.IsNullOrEmpty(imgPath) ? DBNull.Value : (object)imgPath);
+                            cmd.Parameters.AddWithValue("@created", DateTime.Now); // Always add the current datetime
                             cmd.Parameters.AddWithValue("@draftStat", "Yes");
 
                             var ctr = cmd.ExecuteNonQuery();
@@ -695,6 +713,7 @@ namespace TravelDesk.Employee
             RequiredFieldValidator57.Enabled = false;
             RequiredFieldValidator25.Enabled = false;
             RequiredFieldValidator27.Enabled = false;
+            RequiredFieldValidator29.Enabled = false;
 
             DisableRouteRequiredFieldValidators();
         }
