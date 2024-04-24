@@ -320,7 +320,7 @@ namespace TravelDesk.Employee
         
         protected void btnUpload_Click(object sender, EventArgs e) //UPLOAD PDF
         {
-            string saveDIR = Server.MapPath("/approvalProofs");
+            string saveDIR = Server.MapPath("/PDFs/approvalProofs");
             try
             {
                 if (Session["userName"] != null)
@@ -352,36 +352,26 @@ namespace TravelDesk.Employee
                                     employeeUpload.SaveAs(savePath);
 
                                     // Store file path in session
-                                    Session["pdfPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
+                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/approvalProofs/", filename);
                                     Session["filename"] = filename;
 
                                     string pdfPath = Session["pdfPath"].ToString();
 
-                                    // Check if the uploaded PDF contains the required keywords
-                                    if (CheckKeywordsInPDF(savePath))
-                                    {
-                                        // Show the PDF viewer
-                                        pdfViewer.Attributes["src"] = pdfPath;
-                                        pdfBlock.Style["display"] = "block";
+                                    // Show the PDF viewer
+                                    pdfViewer.Attributes["src"] = pdfPath;
+                                    pdfBlock.Style["display"] = "block";
 
-                                        // Disable the RequiredFieldValidator
-                                        RequiredFieldValidator29.Enabled = false;
-                                        DisableRouteRequiredFieldValidators();
+                                    // Disable the RequiredFieldValidator
+                                    RequiredFieldValidator29.Enabled = false;
+                                    DisableRouteRequiredFieldValidators();
 
-                                        Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+                                    Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+                                    uploadBlock.Style["display"] = "none";
 
+                                    string path = Session["pdfPath"].ToString();
+                                    Session["filePath"] = path;
 
-                                        string path = Session["pdfPath"].ToString();
-                                        Session["filePath"] = path;
-                                    }
-                                    else
-                                    {
-                                        // Delete the invalid file
-                                        File.Delete(savePath);
-
-                                        Response.Write("<script>alert('It seems like your uploaded file is not valid. Please try again.')</script>");
-                                        uploadBlock.Style["display"] = "block";
-                                    }
+                                    
 
                                     // Log success message to the console
                                     Console.WriteLine("File uploaded successfully: " + filename);
@@ -627,8 +617,8 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelOthers, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @others, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
                             cmd.Parameters.AddWithValue("@ID", ID);
 
@@ -656,10 +646,19 @@ namespace TravelDesk.Employee
                             cmd.Parameters.AddWithValue("@level", string.IsNullOrEmpty(employeeLevel.Text) ? DBNull.Value : (object)employeeLevel.Text);
                             cmd.Parameters.AddWithValue("@mobile", string.IsNullOrEmpty(employeePhone.Text) ? DBNull.Value : (object)employeePhone.Text);
                             cmd.Parameters.AddWithValue("@projCode", string.IsNullOrEmpty(employeeProjCode.Text) ? DBNull.Value : (object)employeeProjCode.Text);
-                            cmd.Parameters.AddWithValue("@purpose", string.IsNullOrEmpty(employeePurpose.Text) ? DBNull.Value : (object)employeePurpose.Text);
+                            string purpose = employeePurpose.Text;
+                            if (purpose == "Others")
+                            {
+                                cmd.Parameters.AddWithValue("@purpose", otherspecified.Text);
+
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+
+                            }
                             cmd.Parameters.AddWithValue("@reqStatus", "Draft");
                             cmd.Parameters.AddWithValue("@remarks", string.IsNullOrEmpty(employeeRemarks.Text) ? DBNull.Value : (object)employeeRemarks.Text);
-                            cmd.Parameters.AddWithValue("@others", string.IsNullOrEmpty(otherspecified.Text) ? DBNull.Value : (object)otherspecified.Text);
                             cmd.Parameters.AddWithValue("@type", "Domestic");
                             cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem == null ? DBNull.Value : (object)flightOptions.SelectedItem.Text);
                             cmd.Parameters.AddWithValue("@userID", string.IsNullOrEmpty(userID) ? DBNull.Value : (object)userID);
@@ -749,6 +748,7 @@ namespace TravelDesk.Employee
             RequiredFieldValidator23.Enabled = false;
             RequiredFieldValidator24.Enabled = false;
             RequiredFieldValidator28.Enabled = false;
+
         }
 
         private void insertDraftRoute(string ID)

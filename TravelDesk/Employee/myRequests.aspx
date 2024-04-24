@@ -36,11 +36,11 @@
                                                     <div class="card-block">
                                                         <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br />
                                                     </div> <br />
-                                            <asp:GridView CssClass="table container" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
+                                            <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
                                                 <Columns>   
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 16px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
+                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>

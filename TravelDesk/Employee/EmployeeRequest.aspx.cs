@@ -25,7 +25,7 @@ namespace TravelDesk.Employee
             string type = "International";
             Session["travelType"] = type;
 
-            Response.Write("<script>window.location.href = 'DomesticRequest.aspx'; </script>");
+            Response.Write("<script>window.location.href = 'InternationalRequest.aspx'; </script>");
         }
 
         protected void domestic_Click(object sender, EventArgs e)

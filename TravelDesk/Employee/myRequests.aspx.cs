@@ -80,10 +80,8 @@ namespace TravelDesk.Employee
                     }
                 }
             }
-            else
-            {
-
-            }
+            // Remove the reqStatus session variable after displaying the requests
+            Session.Remove("reqStatus");
         }
         private void DisplayAllRequests()
         {
@@ -92,7 +90,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(userID))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus != 'Draft' ";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -133,6 +131,7 @@ namespace TravelDesk.Employee
         }
         protected void viewDrafts_Click(object sender, EventArgs e)
         {
+            Session["reqStatus"] = "Draft";
             Response.Write("<script>window.location.href = 'myDraftRequests.aspx'; </script>");
 
         }
@@ -166,27 +165,20 @@ namespace TravelDesk.Employee
                         {
                             if (reader.Read())
                             {
-                                // Retrieve the request details from the reader
-                                string status = reader["travelReqStatus"].ToString();
+                                string type = reader["travelType"].ToString();
 
-                                //check the status
-                                if (status == "Processing")
-                                {
-                                    Session["status"] = status;
-                                    //if processing, the page should redirect to the travel arrangement generated from Admin
-                                    Response.Redirect("TravelArrangements.aspx");
-                                }
-                                else if (status == "Arranged")
-                                {
-                                    Response.Redirect("arrangedRequest.aspx");
-
-                                }
-                                else
+                                if (type == "Domestic")
                                 {
                                     //redirect to the next page after clicking the view button
                                     Response.Redirect("domesticRequestDetails.aspx");
                                 }
-
+                                else if (type == "International")
+                                {
+                                    //redirect to the next page after clicking the view button
+                                    Response.Redirect("internationalRequestDetails.aspx");
+                                }
+                              
+                                
 
                             }
                             else

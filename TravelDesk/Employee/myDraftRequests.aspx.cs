@@ -35,7 +35,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Draft'";
+                string query = "SELECT travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @status ";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -43,6 +43,7 @@ namespace TravelDesk.Employee
                 {
                     // Add parameters
                     command.Parameters.AddWithValue("@UserID", userID);
+                    command.Parameters.AddWithValue("@status", status);
 
                     try
                     {
@@ -74,7 +75,7 @@ namespace TravelDesk.Employee
             }
             else
             {
-
+                Response.Write("<script>alert('Something went wrong. Please try again.')</script>");
             }
         }
 
@@ -109,10 +110,12 @@ namespace TravelDesk.Employee
                             {
                                 // Retrieve the request details from the reader
                                 string status = reader["travelReqStatus"].ToString();
+                                
 
                                 //check the status
                                 if (status == "Draft")
                                 {
+                                    Session["clickedRequest"] = requestID;
                                     //redirect to the details page after clicking the view button
                                     Response.Redirect("domesticRequestDetails.aspx");
                                 }

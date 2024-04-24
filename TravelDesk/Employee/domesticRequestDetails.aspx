@@ -50,6 +50,66 @@
             background-color:transparent;
            
         }
+        .tracker {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px auto;
+            width: 80%;
+        }
+
+        .stage {
+            text-align: center;
+            position: relative;
+        }
+
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ccc; /* Default color for uncompleted stages */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .completed {
+            background-color: #33D176; /* Green color for completed stages */
+
+        }
+
+        .text {
+            margin-top: 10px;
+        }
+
+        .line {
+            flex: 1;
+           background-color: #ccc;
+            height: 5px; /* Adjust line thickness */
+        }
+
+        .line.completed {
+            background-color: #33D176; /* Change color for completed line */
+        }
+        .circle:hover::after {
+            content: attr(data-hover-message); /* Display the hover message */
+            position: absolute;
+             top: -40px; /* Position the hover message above the circle */
+            left: calc(50% + 5px); /* Position the hover message to the right of the circle */
+            padding: 5px;
+            text-align:center;
+            width: 200px;
+            background-color:lightgrey; /* Background color of the hover message */
+            color: black; /* Text color of the hover message */
+            font-size: 12px;
+            border-radius: 5px;
+            z-index: 999; /* Ensure the hover message appears above other elements */
+        }
+
+
     </style>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
@@ -97,7 +157,7 @@
                                                                         <!-- Nav tabs -->
                                                                         <ul class="nav nav-tabs md-tabs " role="tablist">
                                                                          <li class="nav-item">
-                                                                                <a class="nav-link active" data-toggle="tab" href="#messages7" role="tab"><i class="icofont icofont-ui-message"></i>Request Tracking</a>
+                                                                                <a class="nav-link active" data-toggle="tab" href="#requestTracking" role="tab"><i class="icofont icofont-ui-message"></i>Request Tracking</a>
                                                                                 <div class="slide"></div>
                                                                             </li>
                                                                             <li class="nav-item">
@@ -113,8 +173,31 @@
                                                                         </ul>
                                                                         <!-- Tab panes -->
                                                                         <div class="tab-content card-block">
-                                                                            <div class="tab-pane active" id="messages7" role="tabpanel">
-                                                                                <p class="m-0">3. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                                                            <div class="tab-pane active" id="requestTracking" role="tabpanel">
+                                                                                <asp:Label runat="server" style="font-size:16px" >Current Status:
+                                                                                </asp:Label>
+                                                                                <asp:Label runat="server" ID="currentStatus" style="color:#4CAF50;font-size:18px;margin-left:10px"></asp:Label>
+                                                                                <div class="tracker">
+                                                                                    <div class="stage">
+                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="Requests that has been submitted and auto-approved."><span>1</span></div>
+                                                                                        <div class="text">Approved</div>
+                                                                                    </div>
+                                                                                    <div class="line"></div>
+                                                                                    <div class="stage">
+                                                                                        <div class="circle" id="processingCircle" data-hover-message="Requests that has been accepted for travel arrangement processing."><span>2</span></div>
+                                                                                        <div class="text">Processing</div>
+                                                                                    </div>
+                                                                                    <div class="line"></div>
+                                                                                    <div class="stage">
+                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Requests that completed the travel arrangement process."><span>3</span></div>
+                                                                                        <div class="text">Arranged</div>
+                                                                                    </div>
+                                                                                    <div class="line"></div>
+                                                                                    <div class="stage">
+                                                                                        <div class="circle" id="completedCircle" data-hover-message="Requests that completed the travel arrangement and billing process"><span>4</span></div>
+                                                                                        <div class="text">Completed</div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                             <div class="tab-pane" id="requestDetails" role="tabpanel">
 
@@ -289,8 +372,7 @@
 
                                                                         </div>
                                                                     </div>
-
-                                                            </div>
+                                                          </div>
                                                         </div>
                                                         <!-- Tab variant tab card start -->
                                                     </div>

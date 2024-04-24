@@ -595,12 +595,12 @@
                                                                 <asp:Button class="form-control btn btn-primary btn-sm"  ID="Button1" runat="server" Text="Upload" OnClick="btnUpload_Click" Width="150px" style="margin-left:10px" CausesValidation="False" />
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator29" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeUpload"></asp:RequiredFieldValidator>
 
-                                                            </div> <br />
+                                                            </div>
                                                                 <div class="col-md-5" style="display:none" id="pdfBlock" runat="server">
-                                                                    
+                                                                  <asp:Label ID="Label17" runat="server" Text="Manager Email Approval"></asp:Label>     <br />  <br />                                                           
                                                                         <asp:Button runat="server" class="btn btn-danger" Text="Delete" ID="Delete" OnClick="reUpload_Click" CausesValidation="False" /> 
-                                                                    <br />
-                                                                        <iframe id="pdfViewer" runat="server" style="width:100%; height:600px" frameborder="0"></iframe>
+                                                                    <br /> <br />
+                                                                        <iframe id="pdfViewer" runat="server" style="width:100%; height:600px;margin-left:150px" frameborder="0"></iframe>
                                                             
                                                             <div class="card-block">
                                                                  <asp:Label ID="Label18" runat="server" Text="Remarks"></asp:Label> <br />
