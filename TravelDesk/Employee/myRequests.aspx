@@ -33,44 +33,59 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                        <div class="page-body">
-                                                    <div class="card-block">
-                                                        <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br />
-                                                    </div> <br />
-                                            <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
-                                                <Columns>   
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
-                                                        </ItemTemplate>
+                                           <section class="login-block">
+                                            <!-- Container-fluid starts -->
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-sm-6" >
+                                                        <a class="btnk">
+                                                        <!-- First Box -->
+                                                        <div class="md-float-material form-material">
+                                                            <div class="text-center">
+                                                            </div>
+                                                            <div class="auth-box card">
+                                                                <div class="card-block" style="background-color:#09426a">
+                                                                    <div class="row m-b-20">
+                                                                        <div class="col-md-12 pcoded-micon" style="text-align:center"><br />
+                                                                             <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png"> <br />
+                                                                            <asp:LinkButton runat="server" ID="visaRequests" Text ="VISA REQUEST" CssClass="text-center" style="color:white;font-size:30px" OnClick="visaRequests_Click"></asp:LinkButton>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </a>
+                                                        <!-- end of first form -->
+                                                    </div>
 
-                                                    </asp:TemplateField>
+                                                    <!-- Second Box -->
+                                                    <div class="col-sm-6"  style="margin-left: -30px; margin-right: -10px;">
+                                                         <a class="btnk">
+                                                            <div class="md-float-material form-material">
+                                                            <div class="text-center">
+                        
+                                                            </div>
+                                                            <div class="auth-box card">
+                                                                <div class="card-block" style="background-color:#09426a">
+                                                                    <div class="row m-b-20">
+                                                                        <div class="col-md-12" style="text-align:center"><br />
+                                                                             <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png"> <br />
+                                                                            <asp:LinkButton runat="server" ID="travelRequests" Text ="TRAVEL REQUEST" CssClass="text-center" style="color:white;font-size:30px" OnClick="travelRequests_Click"></asp:LinkButton>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                         </a>
+                                                        <!-- end of second form -->
+                                                    </div>
 
-                                                    <asp:BoundField DataField="travelReqStatus" HeaderText="Request Status" />
-                                                    <asp:BoundField DataField="travelType" HeaderText="Travel Type" />
-                                                    <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" />
-                                                    <asp:BoundField DataField="FullName" HeaderText="Traveller Name" />
-                                                    <asp:BoundField DataField="travelHomeFacility" HeaderText="Home Facility" />
-                                                    <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
-                                                    <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
-                                                    <asp:BoundField DataField="travelRemarks" HeaderText="Remarks" />
-                                                    <asp:BoundField DataField="travelOptions" HeaderText="Flight Option" />
-                                                    <asp:BoundField DataField="travelPurpose" HeaderText="Purpose" />
-                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
+                                                    <!-- end of col-sm-12 -->
 
-
-                                                    
-                                                </Columns>
-
-                                                <FooterStyle BackColor="#CCCCCC" />
-                                                <HeaderStyle BackColor="#003366" Font-Bold="True" ForeColor="White" />                                                
-                                                <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
-                                                <RowStyle BackColor="White" />
-                                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                                <SortedAscendingHeaderStyle BackColor="#808080" />
-                                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                                <SortedDescendingHeaderStyle BackColor="#383838" />
-                                            </asp:GridView>
+                                                </div>
+                                                <!-- end of row -->
+                                            </div>
+                              </section>
                                        </div>
 
                                     <!-- Page-body end -->

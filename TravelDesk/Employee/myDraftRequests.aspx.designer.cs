@@ -15,12 +15,21 @@ namespace TravelDesk.Employee
     {
 
         /// <summary>
-        /// travelRequests control.
+        /// visaRequests control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView travelRequests;
+        protected global::System.Web.UI.WebControls.LinkButton visaRequests;
+
+        /// <summary>
+        /// traveldraftRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton traveldraftRequests;
     }
 }

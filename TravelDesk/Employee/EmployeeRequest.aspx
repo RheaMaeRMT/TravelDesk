@@ -95,7 +95,7 @@
                                                                     <div class="row m-b-20">
                                                                         <div class="col-md-12" style="text-align:center"><br />
                                                                              <img src="/images/icons8-plane-50.png" style="width: 50px; padding-top: 5px;" alt="planeIcon.png"> <br />
-                                                                            <asp:LinkButton runat="server" ID="LinkButton2" Text ="MY TRAVEL REQUESTS" CssClass="text-center" style="color:white;font-size:30px" OnClick="viewRequests_Click"></asp:LinkButton>
+                                                                            <asp:LinkButton runat="server" ID="visaRequest" Text ="REQUEST FOR VISA" CssClass="text-center" style="color:white;font-size:30px" OnClick="visaRequest_Click"></asp:LinkButton>
                                                                         </div>
                                                                     </div>
                                                                 </div>

@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace TravelDesk.Employee
 {
-    public partial class myRequests : System.Web.UI.Page
+    public partial class myTravelRequests : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DB_TravelDesk"].ConnectionString;
 
@@ -28,25 +28,14 @@ namespace TravelDesk.Employee
                 {
                     if (status == "Draft")
                     {
-                        string clickedDraft = Session["clickedDraft"]?.ToString();
-                        
-                        if (!string.IsNullOrEmpty(clickedDraft))
-                        {
-                            if (clickedDraft == "travelRequests")
-                            {
-                                Console.WriteLine("STATUS", status);
-                                DisplayRequests();
-                            }
-                            else if (clickedDraft == "visaRequests")
-                            {
-                                Response.Write("<script>window.location.href = 'myDraftVisaRequests.aspx'; </script>");
-                            }
-                        }
-                    }
-                    else
-                    {
+                        Console.WriteLine("STATUS", status);
                         DisplayRequests();
                     }
+                    else if (status == "visaRequests")
+                    {
+                        Response.Write("<script>window.location.href = 'myDraftVisaRequests.aspx'; </script>");
+                    }
+
                 }
                 else
                 {
@@ -54,59 +43,13 @@ namespace TravelDesk.Employee
                 }
             }
         }
-        private void displayVisaDrafts()
-        {
-            string userID = Session["userID"]?.ToString();
-            string status = Session["reqStatus"]?.ToString();
 
-            if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
-            {
-                // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT  visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaFname AS FullName, visaEmail, visaDU, visaPurpose, visaDestination, visaEstTravelDate, visaReqCreated FROM travelVisa WHERE visaUserID = @UserID AND visaReqStatus = @Status";
-
-                // Set up the database connection and command
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    // Add parameters
-                    command.Parameters.AddWithValue("@UserID", userID);
-                    command.Parameters.AddWithValue("@Status", status);
-
-                    try
-                    {
-                        // Open the connection
-                        connection.Open();
-
-                        // Execute the query
-                        SqlDataReader reader = command.ExecuteReader();
-
-                        //// Bind the reader result to the GridView
-                        //travelRequests.DataSource = reader;
-                        //travelRequests.DataBind();
-
-                        // Close the reader
-                        reader.Close();
-                    }
-                    catch (SqlException ex)
-                    {
-                        // Log the exception or display a user-friendly error message
-                        // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                        Response.Write("<script>alert('An error occurred during retrieval of Draft Visa Request records. Please try again.')</script>");
-                        // Log additional information from the SQL exception
-                        for (int i = 0; i < ex.Errors.Count; i++)
-                        {
-                            Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
-                        }
-                    }
-                }
-            }
-            // Remove the reqStatus session variable after displaying the requests
-            Session.Remove("reqStatus");
-        }
         private void DisplayRequests()
         {
             string userID = Session["userID"]?.ToString();
             string status = Session["reqStatus"]?.ToString();
+
+            viewDrafts.Style["display"] = "none";
 
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
@@ -129,9 +72,9 @@ namespace TravelDesk.Employee
                         // Execute the query
                         SqlDataReader reader = command.ExecuteReader();
 
-                        //// Bind the reader result to the GridView
-                        //travelRequests.DataSource = reader;
-                        //travelRequests.DataBind();
+                        // Bind the reader result to the GridView
+                        travelRequests.DataSource = reader;
+                        travelRequests.DataBind();
 
                         // Close the reader
                         reader.Close();
@@ -176,9 +119,9 @@ namespace TravelDesk.Employee
                         // Execute the query
                         SqlDataReader reader = command.ExecuteReader();
 
-                        //// Bind the reader result to the GridView
-                        //travelRequests.DataSource = reader;
-                        //travelRequests.DataBind();
+                        // Bind the reader result to the GridView
+                        travelRequests.DataSource = reader;
+                        travelRequests.DataBind();
 
                         // Close the reader
                         reader.Close();
@@ -246,8 +189,8 @@ namespace TravelDesk.Employee
                                     //redirect to the next page after clicking the view button
                                     Response.Redirect("internationalRequestDetails.aspx");
                                 }
-                              
-                                
+
+
 
                             }
                             else
@@ -259,16 +202,6 @@ namespace TravelDesk.Employee
                     }
                 }
             }
-        }
-
-        protected void visaRequests_Click(object sender, EventArgs e)
-        {
-            Response.Write("<script>window.location.href = 'myVisaRequests.aspx'; </script>");
-        }
-
-        protected void travelRequests_Click(object sender, EventArgs e)
-        {
-            Response.Write("<script>window.location.href = 'myTravelRequests.aspx'; </script>");
         }
     }
 }

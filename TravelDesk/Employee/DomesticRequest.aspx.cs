@@ -29,17 +29,22 @@ namespace TravelDesk.Employee
 
 
         }
+
+
+
         protected void submitRequestbtn_Click(object sender, EventArgs e)
         {
-
             Random rand = new Random();
-            int random = rand.Next(100000, 999999);
-            string ID = "TR" + random;
+            int random = rand.Next(50, 999);
 
             try
             {
+
+
+
                 string levelText = employeeLevel.Text;
                 int level;
+
                 if (int.TryParse(levelText, out level))
                 {
                     if (level <= 9)
@@ -63,6 +68,20 @@ namespace TravelDesk.Employee
                                         cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
                                             + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
+
+                                        //FOR THE UNIQUE REQUEST ID
+                                        string fname = employeeFName.Text;
+                                        string lname = employeeLName.Text;
+                                        string emp = employeeID.Text;
+                                        // using the first letter of employeeFName and employeeLName
+                                        char firstNameInitial = fname[0];
+                                        char lastNameInitial = lname[0];
+                                        char lastID = emp[2];
+
+                                        // Concatenate the first initials into a string
+                                        string Name = firstNameInitial.ToString() + lastNameInitial.ToString() + lastID.ToString();
+
+                                        string ID = "DR" + levelText + random + Name;
                                         cmd.Parameters.AddWithValue("@ID", ID);
 
                                         string location = homeFacility.Text;
@@ -157,6 +176,19 @@ namespace TravelDesk.Employee
                                     cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
                                         + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
+                                    //FOR THE UNIQUE REQUEST ID
+                                    string fname = employeeFName.Text;
+                                    string lname = employeeLName.Text;
+                                    string emp = employeeID.Text;
+                                    // using the first letter of employeeFName and employeeLName
+                                    char firstNameInitial = fname[0];
+                                    char lastNameInitial = lname[0];
+                                    char lastID = emp[2];
+
+                                    // Concatenate the first initials into a string
+                                    string Name = firstNameInitial.ToString() + lastNameInitial.ToString() + lastID.ToString();
+
+                                    string ID = "DR" + levelText + random + Name;
                                     cmd.Parameters.AddWithValue("@ID", ID);
 
                                     string location = homeFacility.Text;
@@ -597,8 +629,7 @@ namespace TravelDesk.Employee
         {
 
             Random rand = new Random();
-            int random = rand.Next(100000, 999999);
-            string ID = "TR" + random;
+            int random = rand.Next(50, 999);
 
 
             try
@@ -611,6 +642,7 @@ namespace TravelDesk.Employee
                     string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : null;
                     string userID = Session["userID"].ToString();
 
+                    string levelText = employeeLevel.Text;
                     using (var db = new SqlConnection(connectionString))
                     {
                         db.Open();
@@ -620,6 +652,8 @@ namespace TravelDesk.Employee
                             cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
                                 + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
 
+
+                            string ID = "DR" + random + "DRAFT";
                             cmd.Parameters.AddWithValue("@ID", ID);
 
                             string location = homeFacility.Text;

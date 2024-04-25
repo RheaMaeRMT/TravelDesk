@@ -491,7 +491,11 @@
     <Content Include="Employee\ListofRequests.aspx" />
     <Content Include="Employee\modifyDomesticRequests.aspx" />
     <Content Include="Employee\myDraftRequests.aspx" />
+    <Content Include="Employee\myDraftVisaRequests.aspx" />
     <Content Include="Employee\myRequests.aspx" />
+    <Content Include="Employee\myTravelRequests.aspx" />
+    <Content Include="Employee\myVisaRequests.aspx" />
+    <Content Include="Employee\VisaRequest.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -839,12 +843,40 @@
     <Compile Include="Employee\myDraftRequests.aspx.designer.cs">
       <DependentUpon>myDraftRequests.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Employee\myDraftVisaRequests.aspx.cs">
+      <DependentUpon>myDraftVisaRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\myDraftVisaRequests.aspx.designer.cs">
+      <DependentUpon>myDraftVisaRequests.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Employee\myRequests.aspx.cs">
       <DependentUpon>myRequests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Employee\myRequests.aspx.designer.cs">
       <DependentUpon>myRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\myTravelRequests.aspx.cs">
+      <DependentUpon>myTravelRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\myTravelRequests.aspx.designer.cs">
+      <DependentUpon>myTravelRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\myVisaRequests.aspx.cs">
+      <DependentUpon>myVisaRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\myVisaRequests.aspx.designer.cs">
+      <DependentUpon>myVisaRequests.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\VisaRequest.aspx.cs">
+      <DependentUpon>VisaRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\VisaRequest.aspx.designer.cs">
+      <DependentUpon>VisaRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -899,6 +931,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="PDFs\approvalProofs\" />
     <Folder Include="PDFs\employeePassports\" />
+    <Folder Include="PDFs\VisaRequest\approvalProofs\" />
+    <Folder Include="PDFs\VisaRequest\employeePassports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

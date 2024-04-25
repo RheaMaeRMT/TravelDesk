@@ -36,5 +36,12 @@ namespace TravelDesk.Employee
             Response.Write("<script>window.location.href = 'DomesticRequest.aspx'; </script>");
 
         }
+
+
+        protected void visaRequest_Click(object sender, EventArgs e)
+        {
+            Response.Write("<script>window.location.href = 'VisaRequest.aspx'; </script>");
+
+        }
     }
 }

@@ -53,9 +53,9 @@ namespace TravelDesk.Employee
                         // Execute the query
                         SqlDataReader reader = command.ExecuteReader();
 
-                        // Bind the reader result to the GridView
-                        travelRequests.DataSource = reader;
-                        travelRequests.DataBind();
+                        //// Bind the reader result to the GridView
+                        //travelRequests.DataSource = reader;
+                        //travelRequests.DataBind();
 
                         // Close the reader
                         reader.Close();
@@ -133,6 +133,27 @@ namespace TravelDesk.Employee
                     }
                 }
             }
+        }
+
+        protected void travelRequests_Click(object sender, EventArgs e)
+        {
+            string clickedDraft = "travelRequests";
+            Session["clickedDraft"] = clickedDraft;
+
+            string status = "Draft";
+            Session["reqStatus"] = status;
+            Response.Write("<script>window.location.href = 'myTravelRequests.aspx'; </script>");
+
+        }
+
+        protected void visaRequests_Click(object sender, EventArgs e)
+        {
+            string clickedDraft = "visaRequests";
+            Session["clickedDraft"] = clickedDraft;
+
+            string status = "Draft";
+            Session["reqStatus"] = status;
+            Response.Write("<script>window.location.href = 'myVisaRequests.aspx'; </script>");
         }
     }
 }
