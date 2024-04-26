@@ -45,7 +45,7 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT  visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaFname AS FullName, visaEmail, visaDU, visaPurpose, visaDestination, visaEstTravelDate, visaReqCreated FROM travelVisa WHERE visaUserID = @UserID AND visaReqStatus = @Status";
+                string query = "SELECT  visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaLname AS FullName, visaEmail, visaDU, visaPurpose, visaDestination, visaEstTravelDate, visaReqCreated FROM travelVisa WHERE visaUserID = @UserID AND visaReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -66,6 +66,8 @@ namespace TravelDesk.Employee
                         // Bind the reader result to the GridView
                         visaRequests.DataSource = reader;
                         visaRequests.DataBind();
+
+                        viewDrafts.Style["display"] = "none";
 
                         // Close the reader
                         reader.Close();

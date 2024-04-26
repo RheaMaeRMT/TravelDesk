@@ -356,7 +356,7 @@ namespace TravelDesk.Employee
 
         protected void btnUpload_Click(object sender, EventArgs e) //UPLOAD PDF
         {
-            string saveDIR = Server.MapPath("/PDFs/approvalProofs");
+            string saveDIR = Server.MapPath("/PDFs/TravelRequest/approvalProofs");
             try
             {
                 if (Session["userName"] != null)
@@ -388,7 +388,7 @@ namespace TravelDesk.Employee
                                     employeeUpload.SaveAs(savePath);
 
                                     // Store file path in session
-                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/approvalProofs/", filename);
+                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", filename);
                                     Session["filename"] = filename;
 
                                     string pdfPath = Session["pdfPath"].ToString();
@@ -975,7 +975,7 @@ namespace TravelDesk.Employee
 
         protected void uploadPassportbtn_Click(object sender, EventArgs e)
         {
-            string saveDIR = Server.MapPath("/PDFs/employeePassports");
+            string saveDIR = Server.MapPath("/PDFs/TravelRequest/employeePassports");
             try
             {
                 if (Session["userName"] != null)
@@ -1007,7 +1007,7 @@ namespace TravelDesk.Employee
                                     passportUpload.SaveAs(savePath);
 
                                     // Store file path in session
-                                    Session["passportPath"] = System.IO.Path.Combine("/PDFs/employeePassports/", filename);
+                                    Session["passportPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/employeePassports/", filename);
                                     Session["passportName"] = filename;
 
                                     string pdfPath = Session["passportPath"].ToString();

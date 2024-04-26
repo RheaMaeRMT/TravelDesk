@@ -45,12 +45,17 @@
                                                     <asp:BoundField DataField="travelReqStatus" HeaderText="Request Status" />
                                                     <asp:BoundField DataField="travelType" HeaderText="Travel Type" />
                                                     <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" />
-                                                    <asp:BoundField DataField="travelUserID" HeaderText="User ID" />
-                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
-                                                    <asp:BoundField DataField="travelHomeFacility" HeaderText="Home Facility" />
+                                                    <asp:BoundField DataField="FullName" HeaderText="Traveller Name" />
                                                     <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
-                                                    <asp:BoundField DataField="travelFrom" HeaderText="Origin" />
-                                                    <asp:BoundField DataField="travelTo" HeaderText="Destination" />
+                                                    <asp:BoundField DataField="travelPurpose" HeaderText="Travel Purpose" />
+                                                    <asp:BoundField DataField="travelHomeFacility" HeaderText="Home Facility" />
+                                                    <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
+                                                    <asp:BoundField DataField="travelEmail" HeaderText="Traveller Email" />
+                                                    <asp:BoundField DataField="travelRemarks" HeaderText="Request Remarks" />
+                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
+
+
+
                                                 </Columns>
 
                                                 <FooterStyle BackColor="#CCCCCC" />

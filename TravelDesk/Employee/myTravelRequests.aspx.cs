@@ -26,7 +26,7 @@ namespace TravelDesk.Employee
                 string status = Session["reqStatus"]?.ToString();
                 if (!string.IsNullOrEmpty(status))
                 {
-                    if (status == "Draft")
+                    if (status != null)
                     {
                         Console.WriteLine("STATUS", status);
                         DisplayRequests();

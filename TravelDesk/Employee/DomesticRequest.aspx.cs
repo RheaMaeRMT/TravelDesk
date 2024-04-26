@@ -352,7 +352,7 @@ namespace TravelDesk.Employee
         
         protected void btnUpload_Click(object sender, EventArgs e) //UPLOAD PDF
         {
-            string saveDIR = Server.MapPath("/PDFs/approvalProofs");
+            string saveDIR = Server.MapPath("/PDFs/TravelRequest/approvalProofs");
             try
             {
                 if (Session["userName"] != null)
@@ -384,7 +384,7 @@ namespace TravelDesk.Employee
                                     employeeUpload.SaveAs(savePath);
 
                                     // Store file path in session
-                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/approvalProofs/", filename);
+                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", filename);
                                     Session["filename"] = filename;
 
                                     string pdfPath = Session["pdfPath"].ToString();

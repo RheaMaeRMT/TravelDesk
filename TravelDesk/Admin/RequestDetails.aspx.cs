@@ -18,21 +18,14 @@ namespace TravelDesk.Admin
         {
             if (Session["userID"] == null && Session["userName"] == null)
             {
-                Response.Write("<script> window.location.href = '../LoginPage.aspx'; </script>");
+                Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
 
             }
-            if (!IsPostBack)
+            else
             {
-                string request = Session["clickedRequest"].ToString();
-                if (!string.IsNullOrEmpty(request))
-                {
-                    DisplayRequest();
-                }
-                else
-                {
-
-                }
+                DisplayRequest();
             }
+
         }
         private void DisplayRequest()
         {
@@ -52,19 +45,14 @@ namespace TravelDesk.Admin
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = @"
                                         SELECT tr.*, 
-                                            rt.routeOFrom, rt.routeOTo, 
-                                            rt.routeR1From, rt.routeR1To,
-                                            rt.routeR2From, rt.routeR2To, 
-                                            rt.routeM1From, rt.routeM1FromDate, 
-                                            rt.routeM1To, rt.routeM1ToDate, 
-                                            rt.routeM2From, rt.routeM2FromDate, 
-                                            rt.routeM2To, rt.routeM2ToDate, 
-                                            rt.routeM3From, rt.routeM3FromDate, 
-                                            rt.routeM3To, rt.routeM3ToDate,
-                                            rt.routeM4From, rt.routeM4FromDate, 
-                                            rt.routeM4To, rt.routeM4ToDate, 
-                                            rt.routeM5From, rt.routeM5FromDate, 
-                                            rt.routeM5To, rt.routeM5ToDate
+                                            rt.routeOFrom, rt.routeOTo, rt.routeODate,
+                                            rt.routeR1From, rt.routeR1To, 
+                                            rt.routeRdepart, rt.routeRreturn,
+                                            rt.routeM1From, rt.routeM1To, rt.routeM1ToDate, 
+                                            rt.routeM2From, rt.routeM2To, rt.routeM2ToDate, 
+                                            rt.routeM3From, rt.routeM3To, rt.routeM3ToDate,
+                                            rt.routeM4From, rt.routeM4To, rt.routeM4ToDate, 
+                                            rt.routeM5From, rt.routeM5To, rt.routeM5ToDate
                                                                                                                                    
                                           FROM travelRequest tr
                                           LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
@@ -77,7 +65,6 @@ namespace TravelDesk.Admin
                             {
                                 if (reader.Read())
                                 {
-                                    approvalBlock.Style["display"] = "block";
                                     uploadBlock.Style["display"] = "block";
                                     pdfViewer.Style["display"] = "block";
 
@@ -88,45 +75,48 @@ namespace TravelDesk.Admin
                                     string empFname = reader["travelFname"].ToString();
                                     string empMname = reader["travelMname"].ToString();
                                     string empLname = reader["travelLname"].ToString();
+                                    string empEmail = reader["travelEmail"].ToString();
+                                    string empBdate = reader["travelBdate"].ToString();
+                                    string empDU = reader["travelDU"].ToString();
                                     string empProjCode = reader["travelProjectCode"].ToString();
                                     string empPhone = reader["travelMobilenum"].ToString();
                                     string empLevel = reader["travelLevel"].ToString();
                                     string travelPurpose = reader["travelPurpose"].ToString();
-                                    string travelDepartureDate = reader["travelDeparture"].ToString();
-                                    string travelArrivalDate = reader["travelReturn"].ToString();
-                                    string travelFrom = reader["travelFrom"].ToString();
-                                    string travelTo = reader["travelTo"].ToString();
                                     string flight = reader["travelOptions"].ToString();
-                                    string manager = reader["travelManager"].ToString();
+
                                     string proof = reader["travelProofPath"].ToString();
                                     string remarks = reader["travelRemarks"].ToString();
+
 
 
                                     //FOR FLIGHT DETAILS - ROUTE
                                     string oneFrom = reader["routeOFrom"] != DBNull.Value ? reader["routeOFrom"].ToString() : "";
                                     string oneTo = reader["routeOTo"] != DBNull.Value ? reader["routeOTo"].ToString() : "";
+                                    string oneDate = reader["routeODate"] != DBNull.Value ? reader["routeODate"].ToString() : "";
+
                                     string r1From = reader["routeR1From"] != DBNull.Value ? reader["routeR1From"].ToString() : "";
                                     string r1To = reader["routeR1To"] != DBNull.Value ? reader["routeR1To"].ToString() : "";
-                                    string r2From = reader["routeR2From"] != DBNull.Value ? reader["routeR2From"].ToString() : "";
-                                    string r2To = reader["routeR2To"] != DBNull.Value ? reader["routeR2To"].ToString() : "";
+                                    string r1depart = reader["routeRdepart"] != DBNull.Value ? reader["routeRdepart"].ToString() : "";
+                                    string r1return = reader["routeRreturn"] != DBNull.Value ? reader["routeRreturn"].ToString() : "";
+
+
                                     string mul1From = reader["routeM1From"] != DBNull.Value ? reader["routeM1From"].ToString() : "";
-                                    string mul1FromDate = reader["routeM1FromDate"] != DBNull.Value ? reader["routeM1FromDate"].ToString() : "";
                                     string mul1To = reader["routeM1To"] != DBNull.Value ? reader["routeM1To"].ToString() : "";
                                     string mul1ToDate = reader["routeM1ToDate"] != DBNull.Value ? reader["routeM1ToDate"].ToString() : "";
+
                                     string mul2From = reader["routeM2From"] != DBNull.Value ? reader["routeM2From"].ToString() : "";
-                                    string mul2FromDate = reader["routeM2FromDate"] != DBNull.Value ? reader["routeM2FromDate"].ToString() : "";
                                     string mul2To = reader["routeM2To"] != DBNull.Value ? reader["routeM2To"].ToString() : "";
                                     string mul2ToDate = reader["routeM2ToDate"] != DBNull.Value ? reader["routeM2ToDate"].ToString() : "";
+
                                     string mul3From = reader["routeM3From"] != DBNull.Value ? reader["routeM3From"].ToString() : "";
-                                    string mul3FromDate = reader["routeM3FromDate"] != DBNull.Value ? reader["routeM3FromDate"].ToString() : "";
                                     string mul3To = reader["routeM3To"] != DBNull.Value ? reader["routeM3To"].ToString() : "";
                                     string mul3ToDate = reader["routeM3ToDate"] != DBNull.Value ? reader["routeM3ToDate"].ToString() : "";
+
                                     string mul4From = reader["routeM4From"] != DBNull.Value ? reader["routeM4From"].ToString() : "";
-                                    string mul4FromDate = reader["routeM4FromDate"] != DBNull.Value ? reader["routeM4FromDate"].ToString() : "";
                                     string mul4To = reader["routeM4To"] != DBNull.Value ? reader["routeM4To"].ToString() : "";
                                     string mul4ToDate = reader["routeM4ToDate"] != DBNull.Value ? reader["routeM4ToDate"].ToString() : "";
+
                                     string mul5From = reader["routeM5From"] != DBNull.Value ? reader["routeM5From"].ToString() : "";
-                                    string mul5FromDate = reader["routeM5FromDate"] != DBNull.Value ? reader["routeM5FromDate"].ToString() : "";
                                     string mul5To = reader["routeM5To"] != DBNull.Value ? reader["routeM5To"].ToString() : "";
                                     string mul5ToDate = reader["routeM5ToDate"] != DBNull.Value ? reader["routeM5ToDate"].ToString() : "";
 
@@ -136,61 +126,83 @@ namespace TravelDesk.Admin
                                     employeeFName.Text = empFname;
                                     employeeMName.Text = empMname;
                                     employeeLName.Text = empLname;
+                                    employeeEmail.Text = empEmail;
+                                    employeeDU.Text = empDU;
                                     employeeProjCode.Text = empProjCode;
                                     employeePhone.Text = empPhone;
                                     employeeLevel.Text = empLevel;
-                                    employeeManager.Text = manager;
                                     pdfViewer.Src = proof;
                                     flightOptions.Text = flight;
                                     employeePurpose.Text = travelPurpose;
-                                    employeeFrom.Text = travelFrom;
-                                    employeeTo.Text = travelTo;
                                     employeeRemarks.Text = remarks;
 
-                                    if (!string.IsNullOrEmpty(travelArrivalDate))
+                                    if (!string.IsNullOrEmpty(empBdate))
                                     {
                                         // Parse the date string into a DateTime object
                                         DateTime arrivalDateTime;
-                                        if (DateTime.TryParse(travelArrivalDate, out arrivalDateTime))
+                                        if (DateTime.TryParse(empBdate, out arrivalDateTime))
                                         {
                                             // Format the DateTime object into the desired format
                                             string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
 
                                             // Assign the formatted date to the TextBox
-                                            employeeArrivalDate.Text = formattedArrivalDate;
+                                            employeeBdate.Text = formattedArrivalDate;
                                         }
                                     }
-                                    if (!string.IsNullOrEmpty(travelDepartureDate))
-                                    {
-                                        // Parse the date string into a DateTime object
-                                        DateTime arrivalDateTime;
-                                        if (DateTime.TryParse(travelDepartureDate, out arrivalDateTime))
-                                        {
-                                            // Format the DateTime object into the desired format
-                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                            // Assign the formatted date to the TextBox
-                                            employeeDepartureDate.Text = formattedArrivalDate;
-                                        }
-                                    }
-
-
-
-
                                     if (!string.IsNullOrEmpty(oneFrom))
                                     {
                                         oneWaynput.Style["display"] = "block";
                                         onewayFrom.Text = oneFrom;
                                         onewayTo.Text = oneTo;
+
+                                        if (!string.IsNullOrEmpty(oneDate))
+                                        {
+                                            // Parse the date string into a DateTime object
+                                            DateTime arrivalDateTime;
+                                            if (DateTime.TryParse(oneDate, out arrivalDateTime))
+                                            {
+                                                // Format the DateTime object into the desired format
+                                                string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+
+                                                // Assign the formatted date to the TextBox
+                                                onewayDate.Text = formattedArrivalDate;
+                                            }
+                                        }
                                     }
                                     else if (!string.IsNullOrEmpty(r1From))
                                     {
                                         roundTripInput.Style["display"] = "block";
                                         round1From.Text = r1From;
                                         round1To.Text = r1To;
-                                        round2From.Text = r2From;
-                                        round2To.Text = r2To;
-                                    } else if (!string.IsNullOrEmpty(mul1From) && (!string.IsNullOrEmpty(mul1To)))
+
+                                        if (!string.IsNullOrEmpty(r1return))
+                                        {
+                                            // Parse the date string into a DateTime object
+                                            DateTime arrivalDateTime;
+                                            if (DateTime.TryParse(r1return, out arrivalDateTime))
+                                            {
+                                                // Format the DateTime object into the desired format
+                                                string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+
+                                                // Assign the formatted date to the TextBox
+                                                round2return.Text = formattedArrivalDate;
+                                            }
+                                        }
+                                        if (!string.IsNullOrEmpty(r1depart))
+                                        {
+                                            // Parse the date string into a DateTime object
+                                            DateTime arrivalDateTime;
+                                            if (DateTime.TryParse(r1depart, out arrivalDateTime))
+                                            {
+                                                // Format the DateTime object into the desired format
+                                                string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+
+                                                // Assign the formatted date to the TextBox
+                                                round2departure.Text = formattedArrivalDate;
+                                            }
+                                        }
+                                    }
+                                    else if (!string.IsNullOrEmpty(mul1From) && (!string.IsNullOrEmpty(mul1To)))
                                     {
                                         multipleInput.Style["display"] = "block";
                                         if (!string.IsNullOrEmpty(mul2From) && (!string.IsNullOrEmpty(mul2To)))
@@ -204,19 +216,6 @@ namespace TravelDesk.Admin
                                             TextBox10.Text = mul2To;
                                             //TextBox14.Text = mul2ToDate;
 
-                                            if (!string.IsNullOrEmpty(mul1FromDate))
-                                            {
-                                                // Parse the date string into a DateTime object
-                                                DateTime arrivalDateTime;
-                                                if (DateTime.TryParse(mul1FromDate, out arrivalDateTime))
-                                                {
-                                                    // Format the DateTime object into the desired format
-                                                    string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                                    // Assign the formatted date to the TextBox
-                                                    TextBox11.Text = formattedArrivalDate;
-                                                }
-                                            }
                                             if (!string.IsNullOrEmpty(mul1ToDate))
                                             {
                                                 // Parse the date string into a DateTime object
@@ -230,19 +229,7 @@ namespace TravelDesk.Admin
                                                     TextBox12.Text = formattedArrivalDate;
                                                 }
                                             }
-                                            if (!string.IsNullOrEmpty(mul2FromDate))
-                                            {
-                                                // Parse the date string into a DateTime object
-                                                DateTime arrivalDateTime;
-                                                if (DateTime.TryParse(mul2FromDate, out arrivalDateTime))
-                                                {
-                                                    // Format the DateTime object into the desired format
-                                                    string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
 
-                                                    // Assign the formatted date to the TextBox
-                                                    TextBox10.Text = formattedArrivalDate;
-                                                }
-                                            }
                                             if (!string.IsNullOrEmpty(mul2ToDate))
                                             {
                                                 // Parse the date string into a DateTime object
@@ -266,19 +253,7 @@ namespace TravelDesk.Admin
                                                 TextBox17.Text = mul3To;
                                                 //TextBox18.Text = mul3ToDate;
 
-                                                if (!string.IsNullOrEmpty(mul3FromDate))
-                                                {
-                                                    // Parse the date string into a DateTime object
-                                                    DateTime arrivalDateTime;
-                                                    if (DateTime.TryParse(mul3FromDate, out arrivalDateTime))
-                                                    {
-                                                        // Format the DateTime object into the desired format
-                                                        string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
 
-                                                        // Assign the formatted date to the TextBox
-                                                        TextBox16.Text = formattedArrivalDate;
-                                                    }
-                                                }
                                                 if (!string.IsNullOrEmpty(mul3ToDate))
                                                 {
                                                     // Parse the date string into a DateTime object
@@ -302,24 +277,11 @@ namespace TravelDesk.Admin
                                                     TextBox29.Text = mul4To;
                                                     //TextBox30.Text = mul4ToDate;
 
-                                                    if (!string.IsNullOrEmpty(mul4FromDate))
+                                                    if (!string.IsNullOrEmpty(mul4ToDate))
                                                     {
                                                         // Parse the date string into a DateTime object
                                                         DateTime arrivalDateTime;
-                                                        if (DateTime.TryParse(mul4FromDate, out arrivalDateTime))
-                                                        {
-                                                            // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                                            // Assign the formatted date to the TextBox
-                                                            TextBox28.Text = formattedArrivalDate;
-                                                        }
-                                                    }
-                                                    if (!string.IsNullOrEmpty(mul4To))
-                                                    {
-                                                        // Parse the date string into a DateTime object
-                                                        DateTime arrivalDateTime;
-                                                        if (DateTime.TryParse(mul4To, out arrivalDateTime))
+                                                        if (DateTime.TryParse(mul4ToDate, out arrivalDateTime))
                                                         {
                                                             // Format the DateTime object into the desired format
                                                             string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
@@ -338,19 +300,6 @@ namespace TravelDesk.Admin
                                                     TextBox21.Text = mul5To;
                                                     //TextBox22.Text = mul5ToDate;
 
-                                                    if (!string.IsNullOrEmpty(mul5FromDate))
-                                                    {
-                                                        // Parse the date string into a DateTime object
-                                                        DateTime arrivalDateTime;
-                                                        if (DateTime.TryParse(mul5FromDate, out arrivalDateTime))
-                                                        {
-                                                            // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                                            // Assign the formatted date to the TextBox
-                                                            TextBox20.Text = formattedArrivalDate;
-                                                        }
-                                                    }
                                                     if (!string.IsNullOrEmpty(mul5ToDate))
                                                     {
                                                         // Parse the date string into a DateTime object
@@ -371,9 +320,15 @@ namespace TravelDesk.Admin
                                             }
 
                                         }
-                                    } 
+                                    }
 
-                                    // Assign other request details to corresponding controls
+
+                                    string status = reader["travelReqStatus"].ToString();
+
+                                    Session["currentStatus"] = status;
+
+                                    //PROCEED TO GET THE STATUS AND DISPLAY IN TRACKING
+                                    getTrackingStatus();
                                 }
                                 else
                                 {
@@ -401,6 +356,58 @@ namespace TravelDesk.Admin
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
+        }
+
+        private void getTrackingStatus()
+        {
+            string currentStat = Session["currentStatus"].ToString();
+            currentStatus.Text = currentStat;
+
+            // Set boolean variables based on the value of currentStat
+            bool requestSubmitted = currentStat == "Approved";
+            bool processing = currentStat == "Processing";
+            bool arranged = currentStat == "Arranged";
+            bool completed = currentStat == "Completed";
+
+            // Generate the script block with the values
+            string script = @"
+        <script>
+            // Set the status of each stage (true for completed, false for uncompleted)
+            var approved = " + requestSubmitted.ToString().ToLower() + @"; // Set value from server-side
+            var processing = " + processing.ToString().ToLower() + @"; // Set value from server-side
+            var arranged = " + arranged.ToString().ToLower() + @"; // Set value from server-side
+            var completed = " + completed.ToString().ToLower() + @"; // Set value from server-side
+
+            // Update the appearance of circles based on the status
+            if (approved) {
+                document.getElementById('requestSubmittedCircle').classList.add('completed');
+            }
+            if (processing) {
+                document.getElementById('requestSubmittedCircle').classList.add('completed');
+                document.getElementById('processingCircle').classList.add('completed');
+                document.querySelectorAll('.line')[0].classList.add('completed');
+            }
+            if (arranged) {
+                document.getElementById('requestSubmittedCircle').classList.add('completed');
+                document.getElementById('processingCircle').classList.add('completed');
+                document.querySelectorAll('.line')[0].classList.add('completed');
+                document.querySelectorAll('.line')[1].classList.add('completed');
+                document.getElementById('arrangedCircle').classList.add('completed');
+            }
+            if (completed) {
+                document.getElementById('requestSubmittedCircle').classList.add('completed');
+                document.getElementById('processingCircle').classList.add('completed');
+                document.querySelectorAll('.line')[0].classList.add('completed');
+                document.querySelectorAll('.line')[1].classList.add('completed');
+                document.getElementById('arrangedCircle').classList.add('completed');
+                document.querySelectorAll('.line')[2].classList.add('completed');
+                document.getElementById('completedCircle').classList.add('completed');
+            }
+        </script>
+    ";
+
+            // Inject the script into the page
+            ClientScript.RegisterStartupScript(this.GetType(), "trackingStatus", script);
         }
 
         protected void processRequest_Click(object sender, EventArgs e)
@@ -454,8 +461,6 @@ namespace TravelDesk.Admin
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
-
-
 
         }
     }

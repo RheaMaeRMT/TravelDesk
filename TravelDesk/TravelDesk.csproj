@@ -929,8 +929,9 @@
   <ItemGroup>
     <Folder Include="Admin\Reports\" />
     <Folder Include="App_Data\" />
-    <Folder Include="PDFs\approvalProofs\" />
-    <Folder Include="PDFs\employeePassports\" />
+    <Folder Include="PDFs\travelArrangements\" />
+    <Folder Include="PDFs\TravelRequest\approvalProofs\" />
+    <Folder Include="PDFs\TravelRequest\employeePassports\" />
     <Folder Include="PDFs\VisaRequest\approvalProofs\" />
     <Folder Include="PDFs\VisaRequest\employeePassports\" />
   </ItemGroup>

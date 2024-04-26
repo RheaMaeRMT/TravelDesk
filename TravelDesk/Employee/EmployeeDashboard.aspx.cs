@@ -311,7 +311,8 @@ namespace TravelDesk.Employee
                 string status = clicked;
                 Session["reqStatus"] = status;
 
-                Response.Write("<script> window.location.href = 'myRequests.aspx'; </script>");
+
+                Response.Write("<script> window.location.href = 'myTravelRequests.aspx'; </script>");
 
 
             }
@@ -320,7 +321,7 @@ namespace TravelDesk.Employee
                 string status = clicked;
                 Session["reqStatus"] = status;
 
-                Response.Write("<script> window.location.href = 'myRequests.aspx'; </script>");
+                Response.Write("<script> window.location.href = 'myTravelRequests.aspx'; </script>");
 
             }
             else if (clicked == "Processing")
@@ -328,7 +329,7 @@ namespace TravelDesk.Employee
                 string status = clicked;
                 Session["reqStatus"] = status;
 
-                Response.Write("<script>window.location.href = 'myRequests.aspx'; </script>");
+                Response.Write("<script>window.location.href = 'myTravelRequests.aspx'; </script>");
 
             }
             else if (clicked == "Arranged")
@@ -336,7 +337,7 @@ namespace TravelDesk.Employee
                 string status = clicked;
                 Session["reqStatus"] = status;
 
-                Response.Write("<script> window.location.href = 'myRequests.aspx'; </script>");
+                Response.Write("<script> window.location.href = 'myTravelRequests.aspx'; </script>");
 
             }
 

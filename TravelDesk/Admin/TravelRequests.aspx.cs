@@ -44,7 +44,7 @@ namespace TravelDesk.Admin
             if (!string.IsNullOrEmpty(status))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelReqStatus = @Status";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName, travelProjectCode, travelPurpose, travelHomeFacility, travelDU,  travelEmail, travelRemarks, travelDateSubmitted FROM travelRequest WHERE travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -72,7 +72,7 @@ namespace TravelDesk.Admin
                     {
                         // Log the exception or display a user-friendly error message
                         // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                        Response.Write("<script>alert('An error occurred during route request enrollment. Please try again.')</script>");
+                        Response.Write("<script>alert('An error occurred in retrieving the data based on status. Please try again.')</script>");
                         // Log additional information from the SQL exception
                         for (int i = 0; i < ex.Errors.Count; i++)
                         {
@@ -80,6 +80,10 @@ namespace TravelDesk.Admin
                         }
                     }
                 }
+            }
+            else
+            {
+                Response.Write("<script>alert('Session Expired. Please login again.'); window.location.href = '../LoginPage.aspx';</script>");
             }
             // Remove the reqStatus session variable after displaying the requests
             Session.Remove("reqStatus");
@@ -92,7 +96,7 @@ namespace TravelDesk.Admin
             if (!string.IsNullOrEmpty(userID))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelDateSubmitted, travelHomeFacility, travelProjectCode, travelFrom, travelTo FROM travelRequest WHERE travelDraftStat = 'No'";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName, travelProjectCode, travelPurpose, travelHomeFacility, travelDU,  travelEmail, travelRemarks, travelDateSubmitted FROM travelRequest WHERE travelReqStatus != 'Draft' ";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -120,7 +124,7 @@ namespace TravelDesk.Admin
                     {
                         // Log the exception or display a user-friendly error message
                         // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                        Response.Write("<script>alert('An error occurred during route request enrollment. Please try again.')</script>");
+                        Response.Write("<script>alert('An error occurred retrieving all travel request data. Please try again.')</script>");
                         // Log additional information from the SQL exception
                         for (int i = 0; i < ex.Errors.Count; i++)
                         {
@@ -128,6 +132,11 @@ namespace TravelDesk.Admin
                         }
                     }
                 }
+            }
+            else
+            {
+                // Handle the case where no request with the given ID is found
+                Response.Write("<script>alert('Session Expired. Please login again.'); window.location.href = '../LoginPage.aspx';</script>");
             }
 
         }
@@ -185,16 +194,12 @@ namespace TravelDesk.Admin
                             else
                             {
                                 // Handle the case where no request with the given ID is found
-                                Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                                Response.Write("<script>alert('No request found with the specified ID.'); </script>");
                             }
                         }
                     }
                 }
             }
-
-            
-
-           
         }
     }
 }

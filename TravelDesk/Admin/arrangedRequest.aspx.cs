@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Web.UI;
 using MimeKit;
+using System.Text.RegularExpressions;
 
 namespace TravelDesk.Admin
 {
@@ -32,18 +33,18 @@ namespace TravelDesk.Admin
             }
             if (!IsPostBack)
             {
-                if (Session["clickedRequest"].ToString() != null)
-                {
+                // Check if the session variable "clickedRequest" is not null
+                if (Session["clickedRequest"] != null)
+                { 
+                    // Access the session variable and convert it to a string
                     string request = Session["clickedRequest"].ToString();
 
                     if (!string.IsNullOrEmpty(request))
                     {
                         populateEmployeeDetails();
                         DisplayArrangement();
-                        //displayRequestModal();
-
                     }
-                }
+                }             
                 else
                 {
                     Response.Write("<script> window.location.href = '../LoginPage.aspx'; </script>");
@@ -199,7 +200,14 @@ namespace TravelDesk.Admin
 
 
                                     // Display or use the retrieved request details
+
                                     accomodations.Text = accomodation;
+
+                                    if (accomodation == "c/o Traveller")
+                                    {
+                                        careofEmployee.Style["display"] = "block";
+                                        employeeHotel.Text = Name;
+                                    }
                                     bookedairline.Text = airline;
                                     requirements.Text = travelrequirements;
                                     additionalNotes.Text = noted;
@@ -218,19 +226,6 @@ namespace TravelDesk.Admin
 
                                             // Assign the formatted date to the TextBox
                                             r1FromDate.Text = formattedArrivalDate;
-                                        }
-                                    }
-                                    if (!string.IsNullOrEmpty(mul1ToDate))
-                                    {
-                                        // Parse the date string into a DateTime object
-                                        DateTime arrivalDateTime;
-                                        if (DateTime.TryParse(mul1ToDate, out arrivalDateTime))
-                                        {
-                                            // Format the DateTime object into the desired format
-                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                            // Assign the formatted date to the TextBox
-                                            r1ToDate.Text = formattedArrivalDate;
                                         }
                                     }
 
@@ -296,19 +291,6 @@ namespace TravelDesk.Admin
                                                     r2FromDate.Text = formattedArrivalDate;
                                                 }
                                             }
-                                            if (!string.IsNullOrEmpty(mul2ToDate))
-                                            {
-                                                // Parse the date string into a DateTime object
-                                                DateTime arrivalDateTime;
-                                                if (DateTime.TryParse(mul2ToDate, out arrivalDateTime))
-                                                {
-                                                    // Format the DateTime object into the desired format
-                                                    string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                                    // Assign the formatted date to the TextBox
-                                                    r2ToDate.Text = formattedArrivalDate;
-                                                }
-                                            }
 
 
                                             if (!string.IsNullOrEmpty(mul3From) && (!string.IsNullOrEmpty(mul3To)))
@@ -330,19 +312,6 @@ namespace TravelDesk.Admin
 
                                                         // Assign the formatted date to the TextBox
                                                         r3FromDate.Text = formattedArrivalDate;
-                                                    }
-                                                }
-                                                if (!string.IsNullOrEmpty(mul3ToDate))
-                                                {
-                                                    // Parse the date string into a DateTime object
-                                                    DateTime arrivalDateTime;
-                                                    if (DateTime.TryParse(mul3ToDate, out arrivalDateTime))
-                                                    {
-                                                        // Format the DateTime object into the desired format
-                                                        string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                                        // Assign the formatted date to the TextBox
-                                                        r3ToDate.Text = formattedArrivalDate;
                                                     }
                                                 }
 
@@ -368,19 +337,6 @@ namespace TravelDesk.Admin
                                                             r4FromDate.Text = formattedArrivalDate;
                                                         }
                                                     }
-                                                    if (!string.IsNullOrEmpty(mul4To))
-                                                    {
-                                                        // Parse the date string into a DateTime object
-                                                        DateTime arrivalDateTime;
-                                                        if (DateTime.TryParse(mul4To, out arrivalDateTime))
-                                                        {
-                                                            // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                                            // Assign the formatted date to the TextBox
-                                                            r4ToDate.Text = formattedArrivalDate;
-                                                        }
-                                                    }
 
                                                 }
                                                 if (!string.IsNullOrEmpty(mul5From) && (!string.IsNullOrEmpty(mul5To)))
@@ -402,19 +358,6 @@ namespace TravelDesk.Admin
 
                                                             // Assign the formatted date to the TextBox
                                                             r5FromDate.Text = formattedArrivalDate;
-                                                        }
-                                                    }
-                                                    if (!string.IsNullOrEmpty(mul5ToDate))
-                                                    {
-                                                        // Parse the date string into a DateTime object
-                                                        DateTime arrivalDateTime;
-                                                        if (DateTime.TryParse(mul5ToDate, out arrivalDateTime))
-                                                        {
-                                                            // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                                            // Assign the formatted date to the TextBox
-                                                            r5ToDate.Text = formattedArrivalDate;
                                                         }
                                                     }
 
@@ -1251,6 +1194,15 @@ namespace TravelDesk.Admin
                 // Construct filename
                 string filename = name + "_" + ID + ".pdf";
 
+                // Save the PDF to the folder /PDFs/travelArrangements
+                string folderPath = Server.MapPath("~/PDFs/travelArrangements");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string filePath = Path.Combine(folderPath, filename);
+                File.WriteAllBytes(filePath, pdfBytes);
+
                 // Clear the response
                 Response.Clear();
 
@@ -1258,17 +1210,21 @@ namespace TravelDesk.Admin
                 Response.ContentType = "application/pdf";
                 Response.AddHeader("Content-Disposition", "attachment; filename=" + filename);
 
+                Session["arrangementPath"] = folderPath;
+
                 // Write the PDF bytes to the response
                 Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
 
                 // End the response
                 Response.Flush();
 
+
                 // After sending the PDF for download, send it via email
                 await SendPdfByEmail(pdfBytes, filename, recipientEmail);
 
             }
         }
+        
         //public static async Task SendPdfByEmail(string pdfFileName, byte[] pdfBytes, string recipientEmail)
         //{
         //    using (var httpClient = new HttpClient())
@@ -1436,11 +1392,18 @@ namespace TravelDesk.Admin
             hotelAccommodationsTable.SpacingAfter = 10f;
             hotelAccommodationsTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
-            // Add rows for hotel accommodations details
-            AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
-            AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
-            AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
-            AddRowToTable(hotelAccommodationsTable, "Hotel Duration:", durationFrom.Text + " - " + durationTo.Text);
+            // Add rows for hotel accommodations details if they are not null or empty
+            if (!string.IsNullOrEmpty(hotel.Text))
+                AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
+
+            if (!string.IsNullOrEmpty(hotelAddress.Text))
+                AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
+
+            if (!string.IsNullOrEmpty(hotelContact.Text))
+                AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
+
+            if (!string.IsNullOrEmpty(durationFrom.Text) && !string.IsNullOrEmpty(durationTo.Text))
+                AddRowToTable(hotelAccommodationsTable, "Hotel Duration:", durationFrom.Text + " - " + durationTo.Text);
 
             // Add hotel accommodations table to document
             doc.Add(hotelAccommodationsTable);
@@ -1523,10 +1486,22 @@ namespace TravelDesk.Admin
 
             // Add rows for others details
             AddRowToTable(othersTable, "Travel Requirements:", requirements.Text);
-            AddRowToTable(othersTable, "Additional Notes:", additionalNotes.Text);
+            AddRowToTable(othersTable, "Additional Notes:", ParseTextWithLinks(additionalNotes.Text));
 
             // Add others table to document
             doc.Add(othersTable);
+        }
+
+        // Method to parse text with hyperlinks
+        private string ParseTextWithLinks(string text)
+        {
+            // Regex pattern to match URLs
+            string pattern = @"((http|https):\/\/[^\s]+)";
+
+            // Replace URLs with clickable links
+            string formattedText = Regex.Replace(text, pattern, "$1");
+
+            return formattedText;
         }
 
         private void AddSectionFooter(Document doc, string sectionTitle, Font font, BaseColor customColor)
@@ -1597,45 +1572,49 @@ namespace TravelDesk.Admin
 
         }
 
-        protected void sendtoEmail_Click(object sender, EventArgs e)
+        protected async void sendtoEmail_Click(object sender, EventArgs e)
         {
-            
 
-            try
+            // Retrieve the PDF file path from the session
+            string filePath = Session["arrangementPath"].ToString();
+
+            // Retrieve recipient email from the session
+            string recipientEmail = Session["userEmail"].ToString();
+
+            // Send the PDF via email
+            await SendPdfByEmail(filePath, recipientEmail);
+
+
+        }
+
+        protected async Task SendPdfByEmail(string filePath, string recipientEmail)
+        {
+            // Email sending code using SMTP
+            // You can use libraries like System.Net.Mail or MailKit for sending emails
+
+            // Example using System.Net.Mail:
+            using (SmtpClient smtpClient = new SmtpClient("smtp.example.com"))
             {
-                string receiver = "trinidadarheamae28@gmail.com";
+                // Configure SMTP client settings
 
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("rheawithmaebizz@gmail.com", "Travel Desk");
-                mail.Subject = "Your Travel Arrangement is Ready";
-                mail.Body = "Please find your travel arrangement PDF attached.";
-                mail.IsBodyHtml = true;
-
-                mail.To.Add(new MailAddress(receiver));
-
-                SmtpClient smtp = new SmtpClient();
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                smtp.UseDefaultCredentials = false;
-                smtp.Host = "smtp.gmail.com";
-                smtp.Credentials = new System.Net.NetworkCredential("rheawithmaebizz@gmail.com", "pbpeufnnkmaghitp");
-                smtp.Send(mail);
-
-                Response.Write("EMAIL SENT SUCCESSFULLY");
-            }
-            catch (SmtpException ex)
-            {
-                // Log the SMTP exception
-                Debug.WriteLine("SMTP Exception: " + ex.Message);
-
-                // If there is an inner exception, log it as well
-                if (ex.InnerException != null)
+                using (MailMessage mailMessage = new MailMessage())
                 {
-                    Debug.WriteLine("Inner Exception: " + ex.InnerException.Message);
-                }
+                    mailMessage.From = new MailAddress("rheawithmaebizz@gmail.com");
+                    mailMessage.To.Add(recipientEmail);
+                    mailMessage.Subject = "Travel Arrangement PDF";
+                    mailMessage.Body = "Please find the attached PDF for your travel arrangement.";
 
-                // Handle the exception as needed
+                    // Attach the PDF file
+                    Attachment attachment = new Attachment(filePath);
+                    mailMessage.Attachments.Add(attachment);
+
+                    await smtpClient.SendMailAsync(mailMessage);
+                }
             }
+        }
+
+        protected void sendFile_Click(object sender, EventArgs e)
+        {
 
         }
     }
