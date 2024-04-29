@@ -312,22 +312,76 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label Label13;
 
         /// <summary>
-        /// Label14 control.
+        /// Label19 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label14;
+        protected global::System.Web.UI.WebControls.Label Label19;
 
         /// <summary>
-        /// r1From control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox r1From;
+        protected global::System.Web.UI.WebControls.Label TextBox1;
+
+        /// <summary>
+        /// TextBox2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TextBox2;
+
+        /// <summary>
+        /// TextBox3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TextBox3;
+
+        /// <summary>
+        /// TextBox4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TextBox4;
+
+        /// <summary>
+        /// Label20 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label20;
+
+        /// <summary>
+        /// Label21 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label21;
+
+        /// <summary>
+        /// r1Flight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r1Flight;
 
         /// <summary>
         /// r1FromDate control.
@@ -339,6 +393,15 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox r1FromDate;
 
         /// <summary>
+        /// r1From control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r1From;
+
+        /// <summary>
         /// r1To control.
         /// </summary>
         /// <remarks>
@@ -346,6 +409,24 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox r1To;
+
+        /// <summary>
+        /// r1ETD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r1ETD;
+
+        /// <summary>
+        /// r1ETA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r1ETA;
 
         /// <summary>
         /// additional2routeFields control.
@@ -357,13 +438,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl additional2routeFields;
 
         /// <summary>
-        /// r2From control.
+        /// r2Flight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox r2From;
+        protected global::System.Web.UI.WebControls.TextBox r2Flight;
 
         /// <summary>
         /// r2FromDate control.
@@ -375,6 +456,15 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox r2FromDate;
 
         /// <summary>
+        /// r2From control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r2From;
+
+        /// <summary>
         /// r2To control.
         /// </summary>
         /// <remarks>
@@ -382,6 +472,24 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox r2To;
+
+        /// <summary>
+        /// r2ETD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r2ETD;
+
+        /// <summary>
+        /// r2ETA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r2ETA;
 
         /// <summary>
         /// additional3routeFields control.
@@ -393,13 +501,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl additional3routeFields;
 
         /// <summary>
-        /// r3From control.
+        /// r3Flight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox r3From;
+        protected global::System.Web.UI.WebControls.TextBox r3Flight;
 
         /// <summary>
         /// r3FromDate control.
@@ -411,6 +519,15 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox r3FromDate;
 
         /// <summary>
+        /// r3From control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r3From;
+
+        /// <summary>
         /// r3To control.
         /// </summary>
         /// <remarks>
@@ -418,6 +535,24 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox r3To;
+
+        /// <summary>
+        /// r3ETD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r3ETD;
+
+        /// <summary>
+        /// r3ETA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r3ETA;
 
         /// <summary>
         /// additional4routeFields control.
@@ -429,13 +564,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl additional4routeFields;
 
         /// <summary>
-        /// r4From control.
+        /// r4Flight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox r4From;
+        protected global::System.Web.UI.WebControls.TextBox r4Flight;
 
         /// <summary>
         /// r4FromDate control.
@@ -447,6 +582,15 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox r4FromDate;
 
         /// <summary>
+        /// r4From control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r4From;
+
+        /// <summary>
         /// r4To control.
         /// </summary>
         /// <remarks>
@@ -454,6 +598,24 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox r4To;
+
+        /// <summary>
+        /// r4ETD control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r4ETD;
+
+        /// <summary>
+        /// r4ETA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r4ETA;
 
         /// <summary>
         /// additional5routeFields control.
@@ -465,13 +627,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl additional5routeFields;
 
         /// <summary>
-        /// r5From control.
+        /// r5Flight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox r5From;
+        protected global::System.Web.UI.WebControls.TextBox r5Flight;
 
         /// <summary>
         /// r5FromDate control.
@@ -483,6 +645,15 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox r5FromDate;
 
         /// <summary>
+        /// r5From control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r5From;
+
+        /// <summary>
         /// r5To control.
         /// </summary>
         /// <remarks>
@@ -492,13 +663,22 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox r5To;
 
         /// <summary>
-        /// tranfersBlock control.
+        /// r5ETD control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tranfersBlock;
+        protected global::System.Web.UI.WebControls.TextBox r5ETD;
+
+        /// <summary>
+        /// r5ETA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox r5ETA;
 
         /// <summary>
         /// Label15 control.
@@ -510,13 +690,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label Label15;
 
         /// <summary>
-        /// transferInstructions control.
+        /// transfers1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl transferInstructions;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl transfers1;
 
         /// <summary>
         /// transfer1 control.
@@ -690,13 +870,22 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label Label18;
 
         /// <summary>
-        /// arrangementFile control.
+        /// label control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload arrangementFile;
+        protected global::System.Web.UI.WebControls.Label label;
+
+        /// <summary>
+        /// employeeEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label employeeEmail;
 
         /// <summary>
         /// sendFile control.

@@ -43,6 +43,16 @@ namespace TravelDesk.Admin
                     {
                         populateEmployeeDetails();
                         DisplayArrangement();
+
+                        Session["arrangementPath"]?.ToString();
+                        if (Session["arrangementPath"] != null)
+                        {
+                            string pdf = Session["arrangementPath"].ToString();
+                            if (!string.IsNullOrEmpty(pdf))
+                            {
+                            }
+                        }
+                        
                     }
                 }             
                 else
@@ -78,7 +88,7 @@ namespace TravelDesk.Admin
                                     // Retrieve the request details from the reader
                                     string facility = reader["travelHomeFacility"].ToString();
                                     string name = reader["travelFname"].ToString() + " " + reader["travelMname"].ToString() + " " + reader["travelLname"].ToString();
-                                    string userID = reader["travelUserID"].ToString();
+                                    string userID = reader["travelEmpID"].ToString();
                                     string mobile = reader["travelMobilenum"].ToString();
                                     string level = reader["travelLevel"].ToString();
                                     string email = reader["travelEmail"].ToString();
@@ -90,6 +100,7 @@ namespace TravelDesk.Admin
                                     homeFacility.Text = facility;
                                     employeePhone.Text = mobile;
                                     employeeLevel.Text = level;
+                                    employeeEmail.Text = email + "?";
 
                                     Session["userEmail"] = email;
 
@@ -177,27 +188,40 @@ namespace TravelDesk.Admin
                                     string t5 = reader["arrangeTransfer5"] != DBNull.Value ? reader["arrangeTransfer5"].ToString() : "";
                                     string t5Date = reader["arrangeTransfer5Date"] != DBNull.Value ? reader["arrangeTransfer5Date"].ToString() : "";
 
+                                    string mul1Flight = reader["routeM1Flight"] != DBNull.Value ? reader["routeM1Flight"].ToString() : "";
                                     string mul1From = reader["routeM1From"] != DBNull.Value ? reader["routeM1From"].ToString() : "";
                                     string mul1FromDate = reader["routeM1FromDate"] != DBNull.Value ? reader["routeM1FromDate"].ToString() : "";
                                     string mul1To = reader["routeM1To"] != DBNull.Value ? reader["routeM1To"].ToString() : "";
-                                    string mul1ToDate = reader["routeM1ToDate"] != DBNull.Value ? reader["routeM1ToDate"].ToString() : "";
+                                    string mul1ETD = reader["routeM1ETD"] != DBNull.Value ? reader["routeM1ETD"].ToString() : "";
+                                    string mul1ETA = reader["routeM1ETA"] != DBNull.Value ? reader["routeM1ETA"].ToString() : "";
+
+                                    string mul2Flight = reader["routeM2Flight"] != DBNull.Value ? reader["routeM2Flight"].ToString() : "";
                                     string mul2From = reader["routeM2From"] != DBNull.Value ? reader["routeM2From"].ToString() : "";
                                     string mul2FromDate = reader["routeM2FromDate"] != DBNull.Value ? reader["routeM2FromDate"].ToString() : "";
                                     string mul2To = reader["routeM2To"] != DBNull.Value ? reader["routeM2To"].ToString() : "";
-                                    string mul2ToDate = reader["routeM2ToDate"] != DBNull.Value ? reader["routeM2ToDate"].ToString() : "";
+                                    string mul2ETD = reader["routeM2ETD"] != DBNull.Value ? reader["routeM2ETD"].ToString() : "";
+                                    string mul2ETA = reader["routeM2ETA"] != DBNull.Value ? reader["routeM2ETA"].ToString() : "";
+
+                                    string mul3Flight = reader["routeM3Flight"] != DBNull.Value ? reader["routeM3Flight"].ToString() : "";
                                     string mul3From = reader["routeM3From"] != DBNull.Value ? reader["routeM3From"].ToString() : "";
                                     string mul3FromDate = reader["routeM3FromDate"] != DBNull.Value ? reader["routeM3FromDate"].ToString() : "";
                                     string mul3To = reader["routeM3To"] != DBNull.Value ? reader["routeM3To"].ToString() : "";
-                                    string mul3ToDate = reader["routeM3ToDate"] != DBNull.Value ? reader["routeM3ToDate"].ToString() : "";
+                                    string mul3ETD = reader["routeM3ETD"] != DBNull.Value ? reader["routeM3ETD"].ToString() : "";
+                                    string mul3ETA = reader["routeM3ETA"] != DBNull.Value ? reader["routeM3ETA"].ToString() : "";
+
+                                    string mul4Flight = reader["routeM4Flight"] != DBNull.Value ? reader["routeM4Flight"].ToString() : "";
                                     string mul4From = reader["routeM4From"] != DBNull.Value ? reader["routeM4From"].ToString() : "";
                                     string mul4FromDate = reader["routeM4FromDate"] != DBNull.Value ? reader["routeM4FromDate"].ToString() : "";
                                     string mul4To = reader["routeM4To"] != DBNull.Value ? reader["routeM4To"].ToString() : "";
-                                    string mul4ToDate = reader["routeM4ToDate"] != DBNull.Value ? reader["routeM4ToDate"].ToString() : "";
+                                    string mul4ETD = reader["routeM4ETD"] != DBNull.Value ? reader["routeM4ETD"].ToString() : "";
+                                    string mul4ETA = reader["routeM4ETA"] != DBNull.Value ? reader["routeM4ETA"].ToString() : "";
+
+                                    string mul5Flight = reader["routeM5Flight"] != DBNull.Value ? reader["routeM5Flight"].ToString() : "";
                                     string mul5From = reader["routeM5From"] != DBNull.Value ? reader["routeM5From"].ToString() : "";
                                     string mul5FromDate = reader["routeM5FromDate"] != DBNull.Value ? reader["routeM5FromDate"].ToString() : "";
                                     string mul5To = reader["routeM5To"] != DBNull.Value ? reader["routeM5To"].ToString() : "";
-                                    string mul5ToDate = reader["routeM5ToDate"] != DBNull.Value ? reader["routeM5ToDate"].ToString() : "";
-
+                                    string mul5ETD = reader["routeM5ETD"] != DBNull.Value ? reader["routeM5ETD"].ToString() : "";
+                                    string mul5ETA = reader["routeM5ETA"] != DBNull.Value ? reader["routeM5ETA"].ToString() : "";
 
                                     // Display or use the retrieved request details
 
@@ -215,6 +239,9 @@ namespace TravelDesk.Admin
                                     //ROUTE DEFAULT 1
                                     r1From.Text = mul1From;
                                     r1To.Text = mul1To;
+                                    r1Flight.Text = mul1Flight;
+                                    r1ETA.Text = mul1ETA;
+                                    r1ETD.Text = mul1ETD;
                                     if (!string.IsNullOrEmpty(mul1FromDate))
                                     {
                                         // Parse the date string into a DateTime object
@@ -276,6 +303,9 @@ namespace TravelDesk.Admin
                                         {
                                             r2From.Text = mul2From;
                                             r2To.Text = mul2To;
+                                            r2Flight.Text = mul2Flight;
+                                            r2ETA.Text = mul2ETA;
+                                            r2ETD.Text = mul2ETD;
                                             //TextBox14.Text = mul2ToDate;
 
                                             if (!string.IsNullOrEmpty(mul2FromDate))
@@ -299,7 +329,9 @@ namespace TravelDesk.Admin
                                                 r3From.Text = mul3From;
                                                 //TextBox16.Text = mul3FromDate;
                                                 r3To.Text = mul3To;
-                                                //TextBox18.Text = mul3ToDate;
+                                                r3Flight.Text = mul3Flight;
+                                                r3ETA.Text = mul3ETA;
+                                                r3ETD.Text = mul3ETD;
 
                                                 if (!string.IsNullOrEmpty(mul3FromDate))
                                                 {
@@ -322,7 +354,9 @@ namespace TravelDesk.Admin
                                                     r4From.Text = mul4From;
                                                     //TextBox28.Text = mul4FromDate;
                                                     r4To.Text = mul4To;
-                                                    //TextBox30.Text = mul4ToDate;
+                                                    r4Flight.Text = mul4Flight;
+                                                    r4ETA.Text = mul4ETA;
+                                                    r4ETD.Text = mul4ETD;
 
                                                     if (!string.IsNullOrEmpty(mul4FromDate))
                                                     {
@@ -345,7 +379,9 @@ namespace TravelDesk.Admin
                                                     r5From.Text = mul5From;
                                                     //TextBox20.Text = mul5FromDate;
                                                     r5To.Text = mul5To;
-                                                    //TextBox22.Text = mul5ToDate;
+                                                    r5Flight.Text = mul1Flight;
+                                                    r5ETA.Text = mul5ETA;
+                                                    r5ETD.Text = mul5ETD;
 
                                                     if (!string.IsNullOrEmpty(mul5FromDate))
                                                     {
@@ -484,10 +520,7 @@ namespace TravelDesk.Admin
                                         }
 
                                     }
-                                    else
-                                    {
-                                        tranfersBlock.Style["display"] = "none";
-                                    }
+
                                 }
                                 else
                                 {
@@ -517,6 +550,7 @@ namespace TravelDesk.Admin
             }
 
         }
+
         //private void displayRequestModal()
         //{
         //    try
@@ -893,220 +927,6 @@ namespace TravelDesk.Admin
             Response.Write("<script> window.location.href = 'billingInformation.aspx'; </script>");
         }
 
-
-        //protected void exportasPdf_Click(object sender, EventArgs e)
-        //{
-        //    // Receive the screenshot data from the client
-        //    string screenshotData = Request.Form["screenshotData"];
-
-        //    if (!string.IsNullOrEmpty(screenshotData))
-        //    {
-        //        // Convert the screenshot data from base64 string to byte array
-        //        byte[] screenshotBytes = Convert.FromBase64String(screenshotData.Split(',')[1]);
-
-        //        // Convert the byte array to an image
-        //        iTextSharp.text.Image screenshotImage;
-        //        using (MemoryStream ms = new MemoryStream(screenshotBytes))
-        //        {
-        //            screenshotImage = iTextSharp.text.Image.GetInstance(ms);
-        //        }
-
-        //        // Create a PDF document
-        //        Document document = new Document();
-        //        string outputPath = Server.MapPath("~/screenshot.pdf");
-
-        //        // Initialize the PDF writer
-        //        PdfWriter.GetInstance(document, new FileStream(outputPath, FileMode.Create));
-
-        //        // Open the document
-        //        document.Open();
-
-        //        // Add the screenshot image to the PDF document
-        //        document.Add(screenshotImage);
-
-        //        // Close the document
-        //        document.Close();
-
-        //        // Send a response to the client
-        //        Response.ContentType = "text/plain";
-        //        Response.Write("Screenshot saved as PDF: " + outputPath);
-        //        Response.End();
-        //    }
-
-        //}
-
-
-        //protected void exportasPdf_Click(object sender, EventArgs e)
-        //{
-        //    // Create a new MemoryStream to hold the PDF
-        //    using (MemoryStream ms = new MemoryStream())
-        //    {
-        //        // Create a new Document
-        //        Document doc = new Document();
-        //        PdfWriter writer = PdfWriter.GetInstance(doc, ms);
-
-        //        // Open the Document for writing
-        //        doc.Open();
-
-        //        BaseColor customColor = new BaseColor(9, 66, 106);
-
-        //        // Add header
-        //        Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, customColor);
-        //        Chunk headerChunk = new Chunk("Travel Arrangement", headerFont);
-        //        //Chunk chunk = headerChunk.SetBackground(customColor); // Set background color
-        //        Paragraph header = new Paragraph(headerChunk);
-        //        header.Alignment = Element.ALIGN_CENTER;
-        //        doc.Add(header);
-
-        //        // Add employee information
-        //        Chunk employeeInfoTitle = new Chunk("Employee Information", headerFont);
-        //        //Chunk chunkEmp = employeeInfoTitle.SetBackground(customColor);
-        //        employeeInfoTitle.Font.Color = customColor; // White font color
-        //        doc.Add(employeeInfoTitle);
-
-        //        // Add employee details
-        //        PdfPTable employeeTable = new PdfPTable(2);
-        //        employeeTable.TotalWidth = 500f; // Adjust width as needed
-        //        employeeTable.LockedWidth = true;
-        //        employeeTable.SpacingBefore = 10f;
-        //        employeeTable.SpacingAfter = 10f;
-        //        employeeTable.HorizontalAlignment = Element.ALIGN_LEFT;
-
-        //        // Add rows for employee details
-        //        AddRowToTable(employeeTable, "Traveller Name:", employeeName.Text);
-        //        AddRowToTable(employeeTable, "Employee ID:", employeeID.Text);
-        //        AddRowToTable(employeeTable, "Level:", employeeLevel.Text);
-        //        AddRowToTable(employeeTable, "Home Facility:", homeFacility.Text);
-        //        AddRowToTable(employeeTable, "Mobile Number:", employeePhone.Text);
-
-        //        // Add employee table to document
-        //        doc.Add(employeeTable);
-
-               
-
-        //        // Add hotel accommodations section
-        //        Chunk hotelAccommodationsTitle = new Chunk("Hotel Accommodations", headerFont);
-        //        //Chunk chunkHotel = hotelAccommodationsTitle.SetBackground(customColor); // Gray background
-        //        hotelAccommodationsTitle.Font.Color = customColor; // White font color
-        //        doc.Add(hotelAccommodationsTitle);
-
-        //        // Add hotel accommodations details
-        //        PdfPTable hotelAccommodationsTable = new PdfPTable(2);
-        //        hotelAccommodationsTable.TotalWidth = 500f; // Adjust width as needed
-        //        hotelAccommodationsTable.LockedWidth = true;
-        //        hotelAccommodationsTable.SpacingBefore = 10f;
-        //        hotelAccommodationsTable.SpacingAfter = 10f;
-        //        hotelAccommodationsTable.HorizontalAlignment = Element.ALIGN_LEFT;
-
-        //        // Add rows for hotel accommodations details
-        //        AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
-        //        AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
-        //        AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
-        //        AddRowToTable(hotelAccommodationsTable, "Hotel Duration:", durationFrom.Text + " - " + durationTo.Text);
-
-        //        // Add hotel accommodations table to document
-        //        doc.Add(hotelAccommodationsTable);
-
-        //        // Add flight details section
-        //        Chunk flightDetailsTitle = new Chunk("Flight Details", headerFont);
-        //        //Chunk chunk1 = flightDetailsTitle.SetBackground(customColor); // Gray background
-        //        flightDetailsTitle.Font.Color = customColor; // White font color
-        //        doc.Add(flightDetailsTitle);
-
-        //        // Add flight details
-        //        PdfPTable flightDetailsTable = new PdfPTable(1);
-        //        flightDetailsTable.TotalWidth = 300f; // Adjust width as needed
-        //        flightDetailsTable.LockedWidth = true;
-        //        flightDetailsTable.SpacingBefore = 7f;
-        //        flightDetailsTable.SpacingAfter = 7f;
-        //        flightDetailsTable.HorizontalAlignment = Element.ALIGN_LEFT;
-
-        //        // Add rows for flight details
-        //        AddRowToTable(flightDetailsTable, "Airline:", bookedairline.Text);
-        //        // Add rows for flight schedule details
-        //        AddRowToTable(flightDetailsTable, "Flight Schedule:",
-        //            $"{r1From.Text} - {r1To.Text} ({r1FromDate.Text} - {r1ToDate.Text})");
-        //        // Add additional flight schedule details if available
-        //        if (additional2routeFields.Visible)
-        //        {
-        //            AddRowToTable(flightDetailsTable, "",
-        //                $"{r2From.Text} - {r2To.Text} ({r2FromDate.Text} - {r2ToDate.Text})");
-        //        }
-        //        if (additional3routeFields.Visible)
-        //        {
-        //            AddRowToTable(flightDetailsTable, "",
-        //                $"{r3From.Text} - {r3To.Text} ({r3FromDate.Text} - {r3ToDate.Text})");
-        //        }
-        //        // Add more if needed for additional routes
-
-        //        // Add flight details table to document
-        //        doc.Add(flightDetailsTable);
-
-        //        // Add transfers section
-        //        Chunk transfersTitle = new Chunk("Car/Airport Transfers", headerFont);
-        //        //Chunk chunk2 = transfersTitle.SetBackground(customColor); // Gray background
-        //        transfersTitle.Font.Color = customColor; // White font color
-        //        doc.Add(transfersTitle);
-
-        //        // Add transfers details
-        //        PdfPTable transfersTable = new PdfPTable(1);
-        //        transfersTable.TotalWidth = 500f; // Adjust width as needed
-        //        transfersTable.LockedWidth = true;
-        //        transfersTable.SpacingBefore = 10f;
-        //        transfersTable.SpacingAfter = 10f;
-        //        transfersTable.HorizontalAlignment = Element.ALIGN_LEFT;
-
-        //        // Add rows for transfers details
-        //        AddRowToTable(transfersTable, "", transfer1.Text + " (" + transfer1Date.Text + ")");
-        //        // Add more if needed for additional transfers
-
-        //        // Add transfers table to document
-        //        doc.Add(transfersTable);
-
-        //        // Add others section
-        //        Chunk othersTitle = new Chunk("Others", headerFont);
-        //        //Chunk chunk3 = othersTitle.SetBackground(customColor); // Gray background
-        //        othersTitle.Font.Color = customColor; // White font color
-        //        doc.Add(othersTitle);
-
-        //        // Add others details
-        //        PdfPTable othersTable = new PdfPTable(1);
-        //        othersTable.TotalWidth = 500f; // Adjust width as needed
-        //        othersTable.LockedWidth = true;
-        //        othersTable.SpacingBefore = 10f;
-        //        othersTable.SpacingAfter = 10f;
-        //        othersTable.HorizontalAlignment = Element.ALIGN_LEFT;
-
-        //        // Add rows for others details
-        //        AddRowToTable(othersTable, "Travel Requirements:", requirements.Text);
-        //        AddRowToTable(othersTable, "Additional Notes:", additionalNotes.Text);
-
-        //        // Add others table to document
-        //        doc.Add(othersTable);
-
-        //        // Close the Document
-        //        doc.Close();
-
-        //        // Convert the MemoryStream to a byte array
-        //        byte[] pdfBytes = ms.ToArray();
-
-        //        if (Session["clickedRequest"] != null)
-        //        {
-        //            string ID = Session["clickedRequest"].ToString();
-        //            string name = employeeName.Text;
-        //            string filename = name + "_" + ID + ".pdf";
-
-        //            // Send the PDF to the user for download
-        //            Response.Clear();
-        //            Response.ContentType = "application/pdf";
-        //            Response.AddHeader("Content-Disposition", "attachment; filename=" + filename);
-        //            Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
-        //            Response.End();
-        //        }
-        //    }
-        //}
-
-        //Helper method to add a row to a PdfPTable
         void AddRowToTable(PdfPTable table, string label, string value)
         {
             PdfPCell labelCell = new PdfPCell(new Phrase(label));
@@ -1117,6 +937,7 @@ namespace TravelDesk.Admin
             table.AddCell(valueCell);
         }
 
+        //START OF PDF FOR ARRANGEMENT
         protected void exportasPdf_Click(object sender, EventArgs e)
         {
 
@@ -1210,7 +1031,7 @@ namespace TravelDesk.Admin
                 Response.ContentType = "application/pdf";
                 Response.AddHeader("Content-Disposition", "attachment; filename=" + filename);
 
-                Session["arrangementPath"] = folderPath;
+                Session["arrangementPath"] = filePath;
 
                 // Write the PDF bytes to the response
                 Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
@@ -1219,91 +1040,15 @@ namespace TravelDesk.Admin
                 Response.Flush();
 
 
-                // After sending the PDF for download, send it via email
-                await SendPdfByEmail(pdfBytes, filename, recipientEmail);
+                //After sending the PDF for download, send it via email
+
+               await SendPdfByEmail(pdfBytes, filename, recipientEmail);
+
+
 
             }
         }
         
-        //public static async Task SendPdfByEmail(string pdfFileName, byte[] pdfBytes, string recipientEmail)
-        //{
-        //    using (var httpClient = new HttpClient())
-        //    {
-        //        // EmailJS endpoint URL
-        //        string emailJsEndpoint = "https://api.emailjs.com/api/v1.0/email/send";
-
-        //        //// EmailJS user ID (replace with your actual EmailJS user ID)
-        //        //string emailJsUserId = "Vpn9etH0X1UpOj3u_";
-
-        //        //// EmailJS service ID (replace with your actual EmailJS service ID)
-        //        //string emailJsServiceId = "service_4y9m0rv";
-
-        //        //// EmailJS template ID (replace with your actual EmailJS template ID)
-        //        //string emailJsTemplateId = "template_j5shg1l";
-
-        //        // Prepare the email data
-        //        // Convert the PDF bytes to a base64 string
-        //        string pdfBase64 = Convert.ToBase64String(pdfBytes);
-
-        //        // Prepare the email data
-        //        var emailData = new Dictionary<string, object>
-        //        {
-        //            { "service_id", "service_4y9m0rv" },
-        //            { "template_id", "template_j5shg1l" },
-        //            { "user_id", "Vpn9etH0X1UpOj3u_" },
-        //            { "recipient_email", recipientEmail },
-        //            { "attachment", new
-        //                {
-        //                    content = pdfBase64,
-        //                    type = "application/pdf",
-        //                    name = pdfFileName
-        //                }
-        //            }
-        //        };
-
-        //        // Serialize email data to JSON
-        //        var jsonContent = JsonConvert.SerializeObject(emailData);
-
-        //        // Create the request content
-        //        var requestContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-        //        // Send the email using EmailJS
-        //        HttpResponseMessage response = await httpClient.PostAsync(emailJsEndpoint, requestContent);
-
-        //        // Check if the email was sent successfully
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            Debug.WriteLine("Email sent successfully!");
-        //        }
-        //        else
-        //        {
-        //            // Handle error
-        //            string errorMessage = await response.Content.ReadAsStringAsync();
-        //            Debug.WriteLine($"Error sending email. Status code: {response.StatusCode}, Reason phrase: {response.ReasonPhrase}, Error message: {errorMessage}");
-
-        //            // Check if the error message contains information about the specific parameter
-        //            if (errorMessage.Contains("parameter"))
-        //            {
-        //                // If the error message contains information about a parameter, extract and log it
-        //                int startIndex = errorMessage.IndexOf("parameter");
-        //                int endIndex = errorMessage.IndexOf(".", startIndex);
-        //                if (startIndex != -1 && endIndex != -1)
-        //                {
-        //                    string parameterError = errorMessage.Substring(startIndex, endIndex - startIndex);
-        //                    Debug.WriteLine("Parameter error: " + parameterError);
-        //                }
-        //                else
-        //                {
-        //                    Debug.WriteLine("Unable to extract parameter error information.");
-        //                }
-        //            }
-
-        //        }
-
-        //    }
-        //}
-
-        // Helper class for representing a file parameter in a multipart/form-data request
         public class FileParameter
         {
             public byte[] File { get; private set; }
@@ -1396,6 +1141,9 @@ namespace TravelDesk.Admin
             if (!string.IsNullOrEmpty(hotel.Text))
                 AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
 
+            if (!string.IsNullOrEmpty(employeeHotel.Text))
+                AddRowToTable(hotelAccommodationsTable, "Hotel Name:", employeeHotel.Text);
+
             if (!string.IsNullOrEmpty(hotelAddress.Text))
                 AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
 
@@ -1453,7 +1201,7 @@ namespace TravelDesk.Admin
                 AddRowToTable(table, label, $"{fromDate} {from} {to}");
             }
         }
-
+        
         private void AddTransfersSection(Document doc)
         {
             // Add transfers details
@@ -1464,14 +1212,36 @@ namespace TravelDesk.Admin
             transfersTable.SpacingAfter = 10f;
             transfersTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
-            // Add rows for transfers details
-            AddRowToTable(transfersTable, "", transfer1Date.Text + " " + transfer1.Text + "");
-            // Add more if needed for additional transfers
+            AddTransfersRow(transfersTable, "Transfers:", transfer1Date.Text , transfer1.Text);
 
-            // Add transfers table to document
+
+            if (transfers2.Visible)
+            {
+                AddTransfersRow(transfersTable, "", transfer2Date.Text, transfer2.Text);
+            }
+            if (transfers3.Visible)
+            {
+                AddTransfersRow(transfersTable, "", transfer3Date.Text, transfer3.Text);
+            }
+            if (transfers4.Visible)
+            {
+                AddTransfersRow(transfersTable, "", transfer4Date.Text, transfer4.Text);
+            }
+            if (transfers5.Visible)
+            {
+                AddTransfersRow(transfersTable, "", transfer5Date.Text, transfer5.Text);
+            }
+
+
             doc.Add(transfersTable);
-
-            
+     
+        }
+        private void AddTransfersRow(PdfPTable table, string label, string date, string instruction)
+        {
+            if (!string.IsNullOrEmpty(date) && !string.IsNullOrEmpty(instruction))
+            {
+                AddRowToTable(table, label, $"{date} {instruction} ");
+            }
         }
 
         private void AddOthersSection(Document doc)
@@ -1519,6 +1289,9 @@ namespace TravelDesk.Admin
         {
 
         }
+        //END OF PDF FOR ARRANGEMENT
+
+
 
 
         //SMTP
@@ -1572,20 +1345,6 @@ namespace TravelDesk.Admin
 
         }
 
-        protected async void sendtoEmail_Click(object sender, EventArgs e)
-        {
-
-            // Retrieve the PDF file path from the session
-            string filePath = Session["arrangementPath"].ToString();
-
-            // Retrieve recipient email from the session
-            string recipientEmail = Session["userEmail"].ToString();
-
-            // Send the PDF via email
-            await SendPdfByEmail(filePath, recipientEmail);
-
-
-        }
 
         protected async Task SendPdfByEmail(string filePath, string recipientEmail)
         {
@@ -1615,7 +1374,162 @@ namespace TravelDesk.Admin
 
         protected void sendFile_Click(object sender, EventArgs e)
         {
+            // Get the file path from Session
+            string filePath = Session["arrangementPath"] as string;
 
+            // Check if filePath is not null and the file exists
+            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            {
+                // Read the file content
+                byte[] fileBytes = File.ReadAllBytes(filePath);
+                string base64File = Convert.ToBase64String(fileBytes);
+
+                // Construct the email data
+                var emailData = new
+                {
+                    service_id = "service_c83sdsd",
+                    template_id = "template_j5shg1l",
+                    user_id = "Vpn9etH0X1UpOj3u_",
+                    template_params = new
+                    {
+                        to_email = employeeEmail.Text,
+                        subject = "Travel Arrangement",
+                        message = "Safe Travels " + employeeName + "!<br>Your travel request has been arranged and processed. Please see attached file for a copy of your travel arrangement.",
+                        attachment = base64File, // Base64 encoded file content
+                        attachmentFileName = "travel_arrangement.pdf" // Name of the attached file
+                    }
+                };
+
+                // Convert the email data to JSON
+                var jsonData = JsonConvert.SerializeObject(emailData);
+
+                // Make HTTP POST request to EmailJS API endpoint
+                using (var client = new HttpClient())
+                {
+                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    var response = client.PostAsync("https://api.emailjs.com/api/v1.0/email/send", content).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Email sent successfully
+                        Response.Write("<script>alert('Email sent successfully.');</script>");
+                    }
+                    else
+                    {
+                        // Failed to send email
+                        Response.Write("<script>alert('Error sending email. Please try again later.');</script>");
+                    }
+                }
+            }
+            else
+            {
+                // Handle case when file path is not valid or file does not exist
+                Response.Write("<script>alert('Invalid file path. Please try again.');</script>");
+            }
+
+
+            ////SMTP
+            //string fromMail = "rheawithmaebizz@gmail.com";
+            //string fromPassword = "cufuftiioimiyagy";
+
+            //// Get the file path from Session
+            //string filePath = Session["arrangementPath"] as string;
+
+            //// Check if filePath is not null and the file exists
+            //if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            //{
+            //    MailMessage message = new MailMessage();
+            //    message.From = new MailAddress(fromMail);
+            //    message.Subject = "Travel Arrangement";
+            //    message.To.Add(new MailAddress(employeeEmail.Text));
+
+            //    // Construct HTML email body
+            //    string body = "<html><title>Verify your Identity</title><body>Safe Travels " + employeeName + "!<br>Your travel request has been arranged and processed. Please see attached file for a copy of your travel arrangement.</body></html>";
+            //    message.Body = body;
+            //    message.IsBodyHtml = true;
+
+            //    // Attach the PDF file
+            //    Attachment attachment = new Attachment(filePath);
+            //    message.Attachments.Add(attachment);
+
+            //    var smtpClient = new SmtpClient("smtp.gmail.com")
+            //    {
+            //        Port = 587,
+            //        Credentials = new NetworkCredential(fromMail, fromPassword),
+            //        EnableSsl = true,
+            //    };
+
+            //    try
+            //    {
+            //        smtpClient.Send(message);
+            //        // Success message
+            //        Response.Write("<script>alert('Email sent successfully.');</script>");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        // Log the exception for debugging
+            //        Debug.WriteLine("Error sending email: " + ex.ToString());
+            //        // Show user-friendly error message
+            //        Response.Write("<script>alert('Error sending email. Please try again later.');</script>");
+            //    }
+            //}
+            //else
+            //{
+            //    // Handle case when file path is not valid or file does not exist
+            //    Response.Write("<script>alert('Invalid file path. Please try again.');</script>");
+            //}
         }
+
+        //protected void sendFile_Click(object sender, EventArgs e)
+        //{
+        //    if (Session["arrangementPath"] != null)
+        //    {
+        //        Retrieve the file path from the session
+
+        //       string filePath = Session["arrangementPath"].ToString();
+
+        //        Get the employee's email address from the label
+        //        string receiver = employeeEmail.Text;
+
+        //        Create a new MailMessage object
+        //       MailMessage mail = new MailMessage();
+
+        //        Set the sender's email address
+        //        mail.From = new MailAddress("rheawithmaebizz@gmail.com");
+
+        //        Set the recipient's email address (the employee's email)
+        //        mail.To.Add(receiver);
+
+        //        Set the subject of the email
+        //        mail.Subject = "Travel Arrangement PDF";
+
+        //        Set the body of the email
+        //        mail.Body = "Please find attached the travel arrangement PDF.";
+
+        //        Create an attachment from the file path
+        //       Attachment attachment = new Attachment(filePath);
+
+        //        Add the attachment to the email
+        //        mail.Attachments.Add(attachment);
+
+        //        Create an SMTP client to send the email
+        //        SmtpClient smtpClient = new SmtpClient("smtp.yourserver.com");
+
+        //        Specify your SMTP credentials if required
+        //        smtpClient.Credentials = new System.Net.NetworkCredential("rheawithmaebizz@gmail.com", "cufuftiioimiyagy");
+
+        //        Specify the SMTP port(e.g., 587)
+        //        smtpClient.Port = 587;
+
+        //        Send the email
+        //        smtpClient.Send(mail);
+
+        //        Dispose the attachment
+        //        attachment.Dispose();
+
+        //        Optionally, you can show a success message or perform other actions after sending the email
+        //        Response.Write("Email sent successfully!");
+        //    }
+        //}
     }
 }
