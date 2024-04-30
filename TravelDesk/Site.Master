@@ -212,13 +212,13 @@
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-<%--                                    <li>
-                                        <a href="/Admin/Managers" class="waves-effect waves-dark active">
+                                    <li>
+                                        <a href="/Admin/VisaApplication" class="waves-effect waves-dark active">
                                             <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">VISA Request</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">VISA Requests</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
-                                    </li>--%>
+                                    </li>
                                 </ul>
 
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms">REPORTS</div>
