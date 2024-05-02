@@ -144,7 +144,7 @@ namespace TravelDesk.Employee
         protected void viewDrafts_Click(object sender, EventArgs e)
         {
             Session["reqStatus"] = "Draft";
-            Response.Write("<script>window.location.href = 'myDraftRequests.aspx'; </script>");
+            Response.Write("<script>window.location.href = 'myDraftTravelRequests.aspx'; </script>");
 
         }
 

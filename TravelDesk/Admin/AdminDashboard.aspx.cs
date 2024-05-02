@@ -24,6 +24,7 @@ namespace TravelDesk
 
             if (!IsPostBack)
             {
+                //POPULATE NUMBERS FOR TRAVEL REQUESTS
                 int approvedCount = populateDashboardApproved();
                 Approved.Text = approvedCount.ToString();
 
@@ -35,13 +36,203 @@ namespace TravelDesk
 
                 int processingCount = populateDashboardArranged();
                 Arranged.Text = processingCount.ToString();
+
+                //POPULATE NUMBERS FOR VISA REQUESTS
+                int visaPendingCount = populateVisaPending();
+                visaPending.Text = visaPendingCount.ToString();
+
+                int visaProcessingCount = populateVisaProcessing();
+                visaProcessing.Text = visaPendingCount.ToString();
+
+                int visaCompletedCount = populateVisaCompleted();
+                visaCompleted.Text = visaCompletedCount.ToString();
+
+                int visaGrantedCount = populateVisaGranted();
+                visaGranted.Text = visaGrantedCount.ToString();
+
             }
 
 
         }
 
+        //POPULATE NUMBERS IN THE DASHBOARD - VISA REQUEST
+        private int populateVisaPending()
+        {
 
-        //POPULATE NUMBERS IN THE DASHBOARD
+            int countApproved = 0;
+
+            try
+            {
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelVisa WHERE visaReqStatus = 'Pending'";
+
+                            object result = cmd.ExecuteScalar();
+                            if (result != null)
+                            {
+                                countApproved = Convert.ToInt32(result);
+                            }
+                        }
+                    }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during visa requests enrollment. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+
+            return countApproved;
+
+
+
+        }
+        private int populateVisaProcessing()
+        {
+
+            int countApproved = 0;
+
+            try
+            {
+
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT COUNT(*) FROM travelVisa WHERE visaReqStatus = 'Processing'";
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            countApproved = Convert.ToInt32(result);
+                        }
+                    }
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during visa requests enrollment. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+
+            return countApproved;
+
+
+
+        }
+        private int populateVisaCompleted()
+        {
+            int countApproved = 0;
+
+            try
+            {
+
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT COUNT(*) FROM travelVisa WHERE visaReqStatus = 'Completed'";
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            countApproved = Convert.ToInt32(result);
+                        }
+                    }
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during visa requests enrollment. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+
+            return countApproved;
+        }
+        private int populateVisaGranted()
+        {
+
+            int countApproved = 0;
+
+            try
+            {
+
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT COUNT(*) FROM travelVisa WHERE visaReqStatus = 'Granted'";
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            countApproved = Convert.ToInt32(result);
+                        }
+                    }
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during visa requests enrollment. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+
+            return countApproved;
+
+
+
+        }
+
+
+
+
+        //POPULATE NUMBERS IN THE DASHBOARD - TRAVEL REQUEST
         private int populateDashboardApproved()
         {
 

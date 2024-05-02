@@ -11,25 +11,25 @@ namespace TravelDesk.Employee
 {
 
 
-    public partial class myDraftRequests
+    public partial class myDraftTravelRequests
     {
 
         /// <summary>
-        /// visaRequests control.
+        /// viewDrafts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton visaRequests;
+        protected global::System.Web.UI.WebControls.LinkButton viewDrafts;
 
         /// <summary>
-        /// traveldraftRequests control.
+        /// travelRequests control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton traveldraftRequests;
+        protected global::System.Web.UI.WebControls.GridView travelRequests;
     }
 }

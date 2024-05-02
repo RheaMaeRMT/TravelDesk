@@ -6,27 +6,15 @@
               <div class="pcoded-wrapper">
                   <div class="pcoded-content">
                       <!-- Page-header start -->
-                      <div class="page-header">
-                          <div class="page-block">
-                              <div class="row align-items-center">
-                                  <div class="col-md-8">
-                                      <div class="page-header-title">
-                                          <h5 class="m-b-10">TRAVEL REQUESTS</h5>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                      <ul class="breadcrumb-title">
-                                          <li class="breadcrumb-item">
-                                              <a href="index.html"> <i class="fa fa-home"></i> </a>
-                                          </li>
-                                          <li class="breadcrumb-item"><a href="AdminDashboard.aspx">Dashboard</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
+                      <div style="background-color:white">
+                                 <div>
+                                    <img src="/images/visaRequests.png" style="width: 250px;" alt="logo.png">
+
+                                </div>
+
                       </div>
                       <!-- Page-header end -->
+
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
@@ -37,7 +25,7 @@
                                                 <Columns> 
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 16px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
+                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 16px;" class="active btn waves-effect text-center" ID="viewDetails"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
@@ -48,6 +36,7 @@
                                                     <asp:BoundField DataField="visaPurpose" HeaderText="Purpose" />
                                                     <asp:BoundField DataField="visaDestination" HeaderText="Destination" />
                                                     <asp:BoundField DataField="visaEstTravelDate" HeaderText="est. Travel Date" />
+                                                    <asp:BoundField DataField="visaDU" HeaderText="Department Unit" />
                                                     <asp:BoundField DataField="visaBdate" HeaderText="Birthdate" />
                                                     <asp:BoundField DataField="visaEmail" HeaderText="Traveller Email" />
                                                     <asp:BoundField DataField="visaLevel" HeaderText="Level" />

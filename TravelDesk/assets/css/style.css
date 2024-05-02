@@ -6855,7 +6855,7 @@ table tbody .border-bottom-info td {
 .pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu .pcoded-submenu li > a .pcoded-mtext:before {
   font-style: normal;
   padding-right: 4px;
-  font-size: 10px;
+  font-size: 20px;
   position: relative;
   left: 0;
   top: 0;
@@ -7878,7 +7878,8 @@ body[themebg-pattern="theme6"] {
 .pcoded .pcoded-navbar[navbar-theme="themelight1"] .pcoded-item > li > a {
     color: #09426a !important; font-size:16px} /*sidebar items - DASHBOARD etc.*/
 .pcoded .pcoded-navbar[navbar-theme="themelight1"] .pcoded-item > li.active > a {
-  color: #FFF; }
+    color: #09426a;
+}
 .pcoded .pcoded-navbar[navbar-theme="themelight1"] .pcoded-item > li > a {
   border-bottom-color: #fff; }
 .pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item li .pcoded-submenu li.active > a,
@@ -7918,7 +7919,7 @@ body[themebg-pattern="theme6"] {
     border-left-color: transparent; }
 .pcoded .pcoded-navbar[active-item-theme="theme2"] .pcoded-item > li.active > a {
   background: #b71c1c;
-  color: #fff !important; }
+  color: #09426a !important; }
   .pcoded .pcoded-navbar[active-item-theme="theme2"] .pcoded-item > li.active > a .pcoded-micon {
     color: #fff !important; }
   .pcoded .pcoded-navbar[active-item-theme="theme2"] .pcoded-item > li.active > a:before {

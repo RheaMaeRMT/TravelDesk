@@ -22,7 +22,7 @@ namespace TravelDesk.Employee
             }
             if (!IsPostBack)
             {
-                string status = Session["reqStatus"]?.ToString();
+                string status = Session["VreqStatus"]?.ToString();
                 if (!string.IsNullOrEmpty(status))
                 {
                     if (status == "Draft")
@@ -41,7 +41,7 @@ namespace TravelDesk.Employee
         private void DisplayVisaRequests()
         {
             string userID = Session["userID"]?.ToString();
-            string status = Session["reqStatus"]?.ToString();
+            string status = Session["VreqStatus"]?.ToString();
 
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
@@ -85,12 +85,12 @@ namespace TravelDesk.Employee
                 }
             }
             // Remove the reqStatus session variable after displaying the requests
-            Session.Remove("reqStatus");
+            Session.Remove("VreqStatus");
         }
         private void DisplayAllVisaRequests()
         {
             string userID = Session["userID"]?.ToString();
-            string status = Session["reqStatus"]?.ToString();
+            string status = Session["VreqStatus"]?.ToString();
 
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
@@ -134,7 +134,7 @@ namespace TravelDesk.Employee
                 }
             }
             // Remove the reqStatus session variable after displaying the requests
-            Session.Remove("reqStatus");
+            Session.Remove("VreqStatus");
         }
 
         protected void viewDetails_Click(object sender, EventArgs e)

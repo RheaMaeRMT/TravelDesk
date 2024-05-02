@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace TravelDesk.Employee
 {
-    public partial class myDraftRequests : System.Web.UI.Page
+    public partial class myDraftTravelRequests : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DB_TravelDesk"].ConnectionString;
 
@@ -23,19 +23,29 @@ namespace TravelDesk.Employee
             }
             if (!IsPostBack)
             {
-                DisplayRequests();
+                string status = Session["reqStatus"]?.ToString();
+                if (!string.IsNullOrEmpty(status))
+                {
+                    if (status != null)
+                    {
+                        Console.WriteLine("STATUS", status);
+                        DisplayRequests();
+                    }
+                }
             }
-
         }
+
         private void DisplayRequests()
         {
             string userID = Session["userID"]?.ToString();
             string status = Session["reqStatus"]?.ToString();
 
+            viewDrafts.Style["display"] = "none";
+
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @status ";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -43,7 +53,7 @@ namespace TravelDesk.Employee
                 {
                     // Add parameters
                     command.Parameters.AddWithValue("@UserID", userID);
-                    command.Parameters.AddWithValue("@status", status);
+                    command.Parameters.AddWithValue("@Status", "Draft");
 
                     try
                     {
@@ -53,9 +63,9 @@ namespace TravelDesk.Employee
                         // Execute the query
                         SqlDataReader reader = command.ExecuteReader();
 
-                        //// Bind the reader result to the GridView
-                        //travelRequests.DataSource = reader;
-                        //travelRequests.DataBind();
+                        // Bind the reader result to the GridView
+                        travelRequests.DataSource = reader;
+                        travelRequests.DataBind();
 
                         // Close the reader
                         reader.Close();
@@ -64,7 +74,7 @@ namespace TravelDesk.Employee
                     {
                         // Log the exception or display a user-friendly error message
                         // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                        Response.Write("<script>alert('An error occurred during route request enrollment. Please try again.')</script>");
+                        Response.Write("<script>alert('An error occurred during retrieval of Travel Request records. Please try again.')</script>");
                         // Log additional information from the SQL exception
                         for (int i = 0; i < ex.Errors.Count; i++)
                         {
@@ -73,10 +83,14 @@ namespace TravelDesk.Employee
                     }
                 }
             }
-            else
-            {
-                Response.Write("<script>alert('Something went wrong. Please try again.')</script>");
-            }
+            // Remove the reqStatus session variable after displaying the requests
+            Session.Remove("reqStatus");
+        }
+        protected void viewDrafts_Click(object sender, EventArgs e)
+        {
+            Session["reqStatus"] = "Draft";
+            Response.Write("<script>window.location.href = 'myDraftRequests.aspx'; </script>");
+
         }
 
         protected void viewDetails_Click(object sender, EventArgs e)
@@ -86,7 +100,7 @@ namespace TravelDesk.Employee
             GridViewRow row = (GridViewRow)btn.NamingContainer;
 
             //Get the order ID from the first cell in the row
-            string requestID = row.Cells[2].Text;
+            string requestID = row.Cells[3].Text;
 
             Console.WriteLine(requestID);
 
@@ -108,21 +122,21 @@ namespace TravelDesk.Employee
                         {
                             if (reader.Read())
                             {
-                                // Retrieve the request details from the reader
-                                string status = reader["travelReqStatus"].ToString();
-                                
+                                string type = reader["travelType"].ToString();
 
-                                //check the status
-                                if (status == "Draft")
+                                if (type == "Domestic")
                                 {
-                                    Session["clickedRequest"] = requestID;
-                                    //redirect to the details page after clicking the view button
+                                    //redirect to the next page after clicking the view button
                                     Response.Redirect("domesticRequestDetails.aspx");
                                 }
-                                else 
+                                else if (type == "International")
                                 {
-                                    Response.Write("<script>alert('An error occured while retrieving your draft. Please try again.')</script>");
+                                    //redirect to the next page after clicking the view button
+                                    Response.Redirect("internationalRequestDetails.aspx");
                                 }
+
+
+
                             }
                             else
                             {
@@ -133,27 +147,6 @@ namespace TravelDesk.Employee
                     }
                 }
             }
-        }
-
-        protected void travelRequests_Click(object sender, EventArgs e)
-        {
-            string clickedDraft = "travelRequests";
-            Session["clickedDraft"] = clickedDraft;
-
-            string status = "Draft";
-            Session["reqStatus"] = status;
-            Response.Write("<script>window.location.href = 'myTravelRequests.aspx'; </script>");
-
-        }
-
-        protected void visaRequests_Click(object sender, EventArgs e)
-        {
-            string clickedDraft = "visaRequests";
-            Session["clickedDraft"] = clickedDraft;
-
-            string status = "Draft";
-            Session["reqStatus"] = status;
-            Response.Write("<script>window.location.href = 'myVisaRequests.aspx'; </script>");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="myVisaRequests.aspx.cs" Inherits="TravelDesk.Employee.myVisaRequests" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteEmployee.Master" AutoEventWireup="true" CodeBehind="myDraftTravelRequests.aspx.cs" Inherits="TravelDesk.Employee.myDraftTravelRequests" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -8,7 +8,7 @@
                       <!-- Page-header start -->
                       <div style="background-color:white">
                                  <div>
-                                    <img src="/images/visaRequests.png" style="width: 250px;" alt="logo.png">
+                                    <img src="/images/travelRequests.png" style="width: 250px;" alt="logo.png">
 
                                 </div>
 
@@ -19,30 +19,30 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
-                                       <div class="page-body">                                                   
-                                           <div class="card-block">
+                                       <div class="page-body">
+                                                    <div class="card-block">
                                                         <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br />
                                                     </div> <br />
-                                            <asp:GridView CssClass="table container" class="table-hover" ID="visaRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
+                                            <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
                                                 <Columns>   
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="viewDetails" />
+                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
 
-                                                    <asp:BoundField DataField="visaReqStatus" HeaderText="Request Status" />
-                                                    <asp:BoundField DataField="visaReqID" HeaderText="Request ID" />
+                                                    <asp:BoundField DataField="travelReqStatus" HeaderText="Request Status" />
+                                                    <asp:BoundField DataField="travelType" HeaderText="Travel Type" />
+                                                    <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" />
                                                     <asp:BoundField DataField="FullName" HeaderText="Traveller Name" />
-                                                    <asp:BoundField DataField="visaPurpose" HeaderText="Purpose" />
-                                                    <asp:BoundField DataField="visaDestination" HeaderText="Destination" />
-                                                    <asp:BoundField DataField="visaEstTravelDate" HeaderText="est. Travel Date" />
-                                                    <asp:BoundField DataField="visaDU" HeaderText="Department Unit" />
-                                                    <asp:BoundField DataField="visaBdate" HeaderText="Birthdate" />
-                                                    <asp:BoundField DataField="visaEmail" HeaderText="Traveller Email" />
-                                                    <asp:BoundField DataField="visaLevel" HeaderText="Level" />
-                                                    <asp:BoundField DataField="visaReqSubmitted" HeaderText="Date Submitted" />
+                                                    <asp:BoundField DataField="travelHomeFacility" HeaderText="Home Facility" />
+                                                    <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
+                                                    <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
+                                                    <asp:BoundField DataField="travelRemarks" HeaderText="Remarks" />
+                                                    <asp:BoundField DataField="travelOptions" HeaderText="Flight Option" />
+                                                    <asp:BoundField DataField="travelPurpose" HeaderText="Purpose" />
+                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
 
 
                                                     
@@ -70,4 +70,3 @@
             </div>
 
 </asp:Content>
-

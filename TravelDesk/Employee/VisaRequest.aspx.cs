@@ -41,88 +41,96 @@ namespace TravelDesk.Employee
                         //FILENAME IS NEEDED SINCE LEVEL IS <9 
                         if (Session["filename"] != null)
                         {
-                            if (Session["userID"] != null)
+                            if (Session["passportName"] != null)
                             {
-                                // Session values are not null, proceed with inserting into the database
-                                string filename = Session["filename"].ToString();
-                                string imgPath = Session["pdfPath"].ToString();
-                                string passportName = Session["passportName"].ToString();
-                                string passportPath = Session["passportPath"].ToString();
-                                string userID = Session["userID"].ToString();
-
-                                using (var db = new SqlConnection(connectionString))
+                                if (Session["userID"] != null)
                                 {
-                                    db.Open();
-                                    using (var cmd = db.CreateCommand())
+                                    // Session values are not null, proceed with inserting into the database
+                                    string filename = Session["filename"].ToString();
+                                    string imgPath = Session["pdfPath"].ToString();
+                                    string passportName = Session["passportName"].ToString();
+                                    string passportPath = Session["passportPath"].ToString();
+                                    string userID = Session["userID"].ToString();
+
+                                    using (var db = new SqlConnection(connectionString))
                                     {
-                                        cmd.CommandType = CommandType.Text;
-                                        cmd.CommandText = "INSERT INTO travelVisa (visaReqID, visaEmpID, visaFname, visaLname,  visaMname, visaBdate, visaDU, visaEmail, visaLevel, visaMobile, visaPurpose, visaDestination, visaEstTravelDate, visaReqStatus, visaApprovalPath, visaApprovalName, visaPassportPath, visaPassportName, visaUserID, visaReqCreated, visaReqSubmitted, visaDraftStat)"
-                                            + "VALUES (@ID, @empID, @empFName, @empLName,  @empMName, @empBdate, @empDu, @empEmail, @level, @mobile, @purpose, @destination, @estDate, @reqStatus, @proofpath, @proofname, @passportPath, @passportName, @userID, @created, @submitted, @draftStat)";
-
-                                        //FOR THE UNIQUE REQUEST ID
-                                        string fname = employeeFName.Text;
-                                        string lname = employeeLName.Text;
-                                        string emp = employeeID.Text;
-                                        // using the first letter of employeeFName and employeeLName
-                                        char firstNameInitial = fname[0];
-                                        char lastNameInitial = lname[0];
-                                        char lastID = emp[2];
-
-                                        // Concatenate the first initials into a string
-                                        string Name = firstNameInitial.ToString() + lastNameInitial.ToString() + lastID.ToString();
-
-                                        string ID = "VR" + levelText + random + Name;
-                                        cmd.Parameters.AddWithValue("@ID", ID);
-
-
-                                        cmd.Parameters.AddWithValue("@empID", employeeID.Text);
-                                        cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
-                                        cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
-                                        cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
-                                        cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
-                                        cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
-                                        cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
-                                        cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
-                                        cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
-                                        cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
-                                        cmd.Parameters.AddWithValue("@destination", destination.Text);
-                                        cmd.Parameters.AddWithValue("@estDate", estTravelDate.Text);
-                                        cmd.Parameters.AddWithValue("@reqStatus", "Approved");
-                                        cmd.Parameters.AddWithValue("@proofpath", imgPath);
-                                        cmd.Parameters.AddWithValue("@proofname", filename);
-                                        cmd.Parameters.AddWithValue("@passportPath", passportPath);
-                                        cmd.Parameters.AddWithValue("@passportName", passportName);
-                                        cmd.Parameters.AddWithValue("@userID", userID);
-                                        cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
-                                        cmd.Parameters.AddWithValue("@submitted", DateTime.Now); //date the request is submitted
-                                        cmd.Parameters.AddWithValue("@draftStat", "No");
-
-                                        var ctr = cmd.ExecuteNonQuery();
-
-                                        if (ctr >= 1)
+                                        db.Open();
+                                        using (var cmd = db.CreateCommand())
                                         {
-                                            Response.Write("<script>alert ('Request for VISA successfully Submitted!'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
+                                            cmd.CommandType = CommandType.Text;
+                                            cmd.CommandText = "INSERT INTO travelVisa (visaReqID, visaEmpID, visaFname, visaLname,  visaMname, visaBdate, visaDU, visaEmail, visaLevel, visaMobile, visaPurpose, visaDestination, visaEstTravelDate, visaReqStatus, visaApprovalPath, visaApprovalName, visaPassportPath, visaPassportName, visaUserID, visaReqCreated, visaReqSubmitted, visaDraftStat)"
+                                                + "VALUES (@ID, @empID, @empFName, @empLName,  @empMName, @empBdate, @empDu, @empEmail, @level, @mobile, @purpose, @destination, @estDate, @reqStatus, @proofpath, @proofname, @passportPath, @passportName, @userID, @created, @submitted, @draftStat)";
 
-                                        }
-                                        else
-                                        {
-                                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                            //FOR THE UNIQUE REQUEST ID
+                                            string fname = employeeFName.Text;
+                                            string lname = employeeLName.Text;
+                                            string emp = employeeID.Text;
+                                            // using the first letter of employeeFName and employeeLName
+                                            char firstNameInitial = fname[0];
+                                            char lastNameInitial = lname[0];
+                                            char lastID = emp[2];
+
+                                            // Concatenate the first initials into a string
+                                            string Name = firstNameInitial.ToString() + lastNameInitial.ToString() + lastID.ToString();
+
+                                            string ID = "VR" + levelText + random + Name;
+                                            cmd.Parameters.AddWithValue("@ID", ID);
+
+
+                                            cmd.Parameters.AddWithValue("@empID", employeeID.Text);
+                                            cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
+                                            cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
+                                            cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
+                                            cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
+                                            cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
+                                            cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
+                                            cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
+                                            cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
+                                            cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+                                            cmd.Parameters.AddWithValue("@destination", destination.Text);
+                                            cmd.Parameters.AddWithValue("@estDate", estTravelDate.Text);
+                                            cmd.Parameters.AddWithValue("@reqStatus", "Pending");
+                                            cmd.Parameters.AddWithValue("@proofpath", imgPath);
+                                            cmd.Parameters.AddWithValue("@proofname", filename);
+                                            cmd.Parameters.AddWithValue("@passportPath", passportPath);
+                                            cmd.Parameters.AddWithValue("@passportName", passportName);
+                                            cmd.Parameters.AddWithValue("@userID", userID);
+                                            cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
+                                            cmd.Parameters.AddWithValue("@submitted", DateTime.Now); //date the request is submitted
+                                            cmd.Parameters.AddWithValue("@draftStat", "No");
+
+                                            var ctr = cmd.ExecuteNonQuery();
+
+                                            if (ctr >= 1)
+                                            {
+                                                Response.Write("<script>alert ('Request for VISA successfully Submitted!'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
+
+                                            }
+                                            else
+                                            {
+                                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                            }
                                         }
                                     }
+
+                                }
+                                else
+                                {
+                                    // Session values are null
+                                    Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+
                                 }
 
                             }
                             else
                             {
-                                // Session values are null
-                                Response.Write("<script>alert('Something went wrong. Please review the form and submit again.')</script>");
-
+                                Response.Write("<script>alert('Something went wrong while retrieving your passport file. Please ensure that you uploaded a valid PDF of your passport and try again.')</script>");
                             }
                         }
                         else
                         {
                             // Session values are null
-                            Response.Write("<script>alert('Invalid File upload. Please try again')</script>");
+                            Response.Write("<script>alert('Something went wrong while retrieving your manager approval. Please ensure that you uploaded a valid PDF of your manager approval and try again.')</script>");
                         }
                     }
                     //PROCEED WITH INSERTION WITHOUT FILE UPLOAD
@@ -175,7 +183,7 @@ namespace TravelDesk.Employee
                                     cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
                                     cmd.Parameters.AddWithValue("@destination", destination.Text);
                                     cmd.Parameters.AddWithValue("@estDate", estTravelDate.Text);
-                                    cmd.Parameters.AddWithValue("@reqStatus", "Approved");
+                                    cmd.Parameters.AddWithValue("@reqStatus", "Pending");
                                     cmd.Parameters.AddWithValue("@proofpath", imgPath);
                                     cmd.Parameters.AddWithValue("@proofname", filename);
                                     cmd.Parameters.AddWithValue("@passportPath", passportPath);
@@ -202,7 +210,7 @@ namespace TravelDesk.Employee
                         else
                         {
                             // Session values are null
-                            Response.Write("<script>alert('Session Expired! Please login again.')</script>");
+                            Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
                         }
                     }
                 }

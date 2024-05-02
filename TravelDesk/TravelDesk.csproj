@@ -491,7 +491,7 @@
     <Content Include="Employee\internationalRequestDetails.aspx" />
     <Content Include="Employee\ListofRequests.aspx" />
     <Content Include="Employee\modifyDomesticRequests.aspx" />
-    <Content Include="Employee\myDraftRequests.aspx" />
+    <Content Include="Employee\myDraftTravelRequests.aspx" />
     <Content Include="Employee\myDraftVisaRequests.aspx" />
     <Content Include="Employee\myRequests.aspx" />
     <Content Include="Employee\myTravelRequests.aspx" />
@@ -551,7 +551,13 @@
     <Content Include="assets\images\auth\Thumbs.db" />
     <Content Include="assets\images\Thumbs.db" />
     <Content Include="ApproverSite.Master" />
+    <Content Include="images\activityLogs.png" />
     <Content Include="images\bgImage.jpg" />
+    <Content Include="images\dashboard.png" />
+    <Content Include="images\employeeReport.png" />
+    <Content Include="images\travelReport.png" />
+    <Content Include="images\travelRequests.png" />
+    <Content Include="images\visaRequests.png" />
     <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\2ndLogoTD.png" />
@@ -844,12 +850,12 @@
     <Compile Include="Employee\modifyDomesticRequests.aspx.designer.cs">
       <DependentUpon>modifyDomesticRequests.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Employee\myDraftRequests.aspx.cs">
-      <DependentUpon>myDraftRequests.aspx</DependentUpon>
+    <Compile Include="Employee\myDraftTravelRequests.aspx.cs">
+      <DependentUpon>myDraftTravelRequests.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Employee\myDraftRequests.aspx.designer.cs">
-      <DependentUpon>myDraftRequests.aspx</DependentUpon>
+    <Compile Include="Employee\myDraftTravelRequests.aspx.designer.cs">
+      <DependentUpon>myDraftTravelRequests.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee\myDraftVisaRequests.aspx.cs">
       <DependentUpon>myDraftVisaRequests.aspx</DependentUpon>

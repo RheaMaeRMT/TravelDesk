@@ -22,7 +22,7 @@ namespace TravelDesk.Employee
             }
             if (!IsPostBack)
             {
-                string status = Session["reqStatus"]?.ToString();
+                string status = Session["VreqStatus"]?.ToString();
                 if (!string.IsNullOrEmpty(status))
                 {
                     if (status == "Draft")
@@ -40,12 +40,12 @@ namespace TravelDesk.Employee
         private void DisplayRequest()
         {
             string userID = Session["userID"]?.ToString();
-            string status = Session["reqStatus"]?.ToString();
+            string status = Session["VreqStatus"]?.ToString();
 
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT  visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaLname AS FullName, visaEmail, visaDU, visaPurpose, visaDestination, visaEstTravelDate, visaReqCreated FROM travelVisa WHERE visaUserID = @UserID AND visaReqStatus = @Status";
+                string query = "SELECT visaReqStatus, visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaLname AS FullName, visaPurpose, visaDestination, visaEstTravelDate, visaDU, visaBdate, visaEmail, visaLevel, visaReqCreated FROM travelVisa WHERE visaUserID = @UserID AND visaReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -86,7 +86,7 @@ namespace TravelDesk.Employee
                 }
             }
             // Remove the reqStatus session variable after displaying the requests
-            Session.Remove("reqStatus");
+            Session.Remove("VreqStatus");
         }
         private void DisplayAllRequests()
         {
@@ -95,7 +95,7 @@ namespace TravelDesk.Employee
             if ((!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaFname AS FullName, visaEmail, visaDU, visaPurpose, visaDestination, visaEstTravelDate, visaReqCreated FROM travelVisa WHERE visaUserID = @UserID AND visaReqStatus != 'Draft' ";
+                string query = "SELECT visaReqStatus, visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaLname AS FullName, visaPurpose, visaDestination, visaEstTravelDate, visaDU, visaBdate, visaEmail, visaLevel, visaReqSubmitted FROM travelVisa WHERE visaUserID = @UserID AND visaReqStatus != 'Draft' ";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -133,13 +133,13 @@ namespace TravelDesk.Employee
                 }
             }
             // Remove the reqStatus session variable after displaying the requests
-            Session.Remove("reqStatus");
+            Session.Remove("VreqStatus");
         }
 
         protected void viewDrafts_Click(object sender, EventArgs e)
         {
-            Session["reqStatus"] = "Draft";
-            Response.Write("<script>window.location.href = 'myDraftRequests.aspx'; </script>");
+            Session["VreqStatus"] = "Draft";
+            Response.Write("<script>window.location.href = 'myDraftVisaRequests.aspx'; </script>");
 
         }
     }

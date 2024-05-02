@@ -104,7 +104,7 @@
                                         <ul class="show-notification profile-notification" id="dropdownContent" style="display: none;">
                                             <li class="waves-effect waves-light">
                                                 <a>
-                                                    <asp:LinkButton runat="server" class="ti-layout-sidebar-left" id="logout" style="font-size:20px;color:black" OnClick="btnLogout_Click"> Logout  </asp:LinkButton>
+                                                    <asp:LinkButton runat="server" class="ti-layout-sidebar-left" id="logout" style="font-size:20px;color:black" OnClick="btnLogout_Click" AccessKey> Logout  </asp:LinkButton>
                                                </a>
                                             </li>
                                         </ul>
@@ -151,19 +151,52 @@
                                 </ul>
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms">MANAGEMENT</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                     <li>
-                                        <a href="/Employee/EmployeeRequest" class="waves-effect waves-dark">
+                                     <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Travel Request</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Create Request</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
+                                          <ul class="pcoded-submenu" style="margin-left:50px;">
+                                              <li class=" ">
+                                                  <a href="/Employee/EmployeeRequest" class="waves-effect waves-dark">
+                                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                      <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Travel Request</span>
+                                                      <span class="pcoded-mcaret"></span>
+                                                  </a>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/Employee/VisaRequest" class="waves-effect waves-dark">
+                                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                      <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">VISA Request</span>
+                                                      <span class="pcoded-mcaret"></span>
+                                                  </a>
+                                              </li>                
+                                          </ul>
+
                                     </li>
-                                     <li>
-                                        <a href="/Employee/myRequests" class="waves-effect waves-dark">
+                                     <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
                                             <span class="pcoded-mtext" data-i18n="nav.form-components.main">My Requests</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
+                                          <ul class="pcoded-submenu" style="margin-left:50px;">
+                                              <li class=" ">
+                                                  <a href="/Employee/myTravelRequests" class="waves-effect waves-dark">
+                                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                      <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Travel Requests</span>
+                                                      <span class="pcoded-mcaret"></span>
+                                                  </a>
+                                              </li>
+                                              <li class=" ">
+                                                  <a href="/Employee/myVisaRequests" class="waves-effect waves-dark">
+                                                      <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                      <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">VISA Requests</span>
+                                                      <span class="pcoded-mcaret"></span>
+                                                  </a>
+                                              </li>                
+                                          </ul>
                                     </li>
                                 </ul>
 
