@@ -42,7 +42,7 @@ namespace TravelDesk
                 visaPending.Text = visaPendingCount.ToString();
 
                 int visaProcessingCount = populateVisaProcessing();
-                visaProcessing.Text = visaPendingCount.ToString();
+                visaProcessing.Text = visaProcessingCount.ToString();
 
                 int visaCompletedCount = populateVisaCompleted();
                 visaCompleted.Text = visaCompletedCount.ToString();
@@ -536,5 +536,48 @@ namespace TravelDesk
 
         }
 
+        protected void visaPending_Click(object sender, EventArgs e)
+        {
+            // Cast the sender object to a Button
+            Button clickedButton = (Button)sender;
+
+            string clicked = clickedButton.ID;
+
+
+            if (clicked == "visaPending")
+            {
+                string status = "Pending";
+                Session["reqStatus"] = status;
+
+                Response.Write("<script> window.location.href = 'VisaRequests.aspx'; </script>");
+
+
+            }
+            else if (clicked == "visaProcessing")
+            {
+                string status = "Processing";
+                Session["reqStatus"] = status;
+
+                Response.Write("<script>window.location.href = 'VisaRequests.aspx'; </script>");
+
+            }
+            else if (clicked == "visaCompleted")
+            {
+                string status = "Completed";
+                Session["reqStatus"] = status;
+
+                Response.Write("<script>window.location.href = 'VisaRequests.aspx'; </script>");
+
+            }
+            else if (clicked == "visaGranted")
+            {
+                string status = "Granted";
+                Session["reqStatus"] = status;
+
+                Response.Write("<script>window.location.href = 'VisaRequests.aspx'; </script>");
+
+            }
+
+        }
     }
 }
