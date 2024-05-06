@@ -15,6 +15,15 @@ namespace TravelDesk.Admin
     {
 
         /// <summary>
+        /// travellerName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label travellerName;
+
+        /// <summary>
         /// exportasPdf control.
         /// </summary>
         /// <remarks>

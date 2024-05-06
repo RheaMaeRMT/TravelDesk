@@ -42,7 +42,7 @@
                                          <div class="page-body" style="color:black;font-size:16px;">
                                                 <div class="card" style="color:black;background-color:white" ID="arrangementBlock">
                                                     <div class="card-header" style="background-color:#09426a">
-                                                        <h5 style="color:white">Travel Arrangement</h5>
+                                                                <asp:Label runat="server" style="color:white; font-size:16px;margin-left:10px;" CssClass="h5" ID="travellerName"></asp:Label>
                                                     </div>      
                                                                                      
                                                     <div class="card-block">
@@ -274,6 +274,6 @@
                     </div>
                 </div>
             </div>
-            </div>
+
 
 </asp:Content>

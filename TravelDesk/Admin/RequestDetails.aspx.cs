@@ -83,7 +83,7 @@ namespace TravelDesk.Admin
                                     string empLevel = reader["travelLevel"].ToString();
                                     string travelPurpose = reader["travelPurpose"].ToString();
                                     string flight = reader["travelOptions"].ToString();
-
+                                    string type = reader["travelType"].ToString();
                                     string proof = reader["travelProofPath"].ToString();
                                     string remarks = reader["travelRemarks"].ToString();
 
@@ -121,6 +121,7 @@ namespace TravelDesk.Admin
                                     string mul5ToDate = reader["routeM5ToDate"] != DBNull.Value ? reader["routeM5ToDate"].ToString() : "";
 
                                     // Display or use the retrieved request details
+                                    travellerName.Text = empFname + " " + empMname + " " + empLname + " - " + type + " Travel Request";
                                     homeFacility.Text = travelFacility;
                                     employeeID.Text = empID;
                                     employeeFName.Text = empFname;
@@ -356,6 +357,8 @@ namespace TravelDesk.Admin
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
+            Session.Remove("currentStatus");
+
         }
 
         private void getTrackingStatus()

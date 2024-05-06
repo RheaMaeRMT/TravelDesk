@@ -73,48 +73,52 @@ namespace TravelDesk.Admin
                                 {
                                     // Retrieve the request details from the reader
                                     string travelFacility = reader["travelHomeFacility"].ToString();
-                                    string empID = reader["travelEmpID"].ToString();
-                                    string empFname = reader["travelFname"].ToString();
-                                    string empMname = reader["travelMname"].ToString();
-                                    string empLname = reader["travelLname"].ToString();
-                                    string empProjCode = reader["travelProjectCode"].ToString();
-                                    string empPhone = reader["travelMobilenum"].ToString();
-                                    string empLevel = reader["travelLevel"].ToString();
+                                    string employeeID = reader["travelEmpID"].ToString();
+                                    string employeeFname = reader["travelFname"].ToString();
+                                    string employeeMname = reader["travelMname"].ToString();
+                                    string employeeLname = reader["travelLname"].ToString();
+                                    string employeeProjCode = reader["travelProjectCode"].ToString();
+                                    string employeePhone = reader["travelMobilenum"].ToString();
+                                    string employeeLevel = reader["travelLevel"].ToString();
                                     string travelPurpose = reader["travelPurpose"].ToString();
                                     string proof = reader["travelProofPath"].ToString();
                                     string remarks = reader["travelRemarks"].ToString();
-                                    string empBirth = reader["travelBdate"].ToString();
+                                    string employeeBirth = reader["travelBdate"].ToString();
                                     string flight = reader["travelOptions"].ToString();
                                     string email = reader["travelEmail"].ToString();
                                     string DU = reader["travelDU"].ToString();
 
                                     // Display or use the retrieved request details
-                                    facility.Text = travelFacility;
-                                    ID.Text = empID;
-                                    employeeFName.Text = empFname;
-                                    employeeMName.Text = empMname;
-                                    employeeLName.Text = empLname;
-                                    employeeProjCode.Text = empProjCode;
-                                    Mobile.Text = empPhone;
-                                    Level.Text = empLevel;
+                                    
+                                    empID.Text = "Employee ID: " + " " + employeeID;
+                                    empFName.Text = employeeFname + " " + " " + employeeMname + " " + employeeLname ;
+                                    empLevel.Text = "Level: " + " " + employeeLevel;
+
+                                    empEmail.Text = "Email:" + " " + email;
+                                    empMobile.Text = "Mobile:" + " " + employeePhone;
+
+                                    empCode.Text = "Project Code:" + " " + employeeProjCode;
+                                    empFacility.Text = "Home Facility:" + " " + travelFacility;
+                                    empDeptUnit.Text = "Department Unit:" + " " + DU;
+
                                     pdfViewer.Src = proof;
                                     employeePurpose.Text = travelPurpose;
                                     employeeRemarks.Text = remarks;
                                     flightOptions.Text = flight;
-                                    employeeEmail.Text = email;
-                                    employeeDU.Text = DU;
 
-                                    if (!string.IsNullOrEmpty(empBirth))
+
+
+                                    if (!string.IsNullOrEmpty(employeeBirth))
                                     {
-                                        // Parse the date string into a DateTime object
-                                        DateTime arrivalDateTime;
-                                        if (DateTime.TryParse(empBirth, out arrivalDateTime))
+                                        //Parse the date string into a DateTime object
+                                       DateTime arrivalDateTime;
+                                        if (DateTime.TryParse(employeeBirth, out arrivalDateTime))
                                         {
-                                            // Format the DateTime object into the desired format
+                                            //Format the DateTime object into the desired format
                                             string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
 
-                                            // Assign the formatted date to the TextBox
-                                            Bdate.Text = formattedArrivalDate;
+                                            //Assign the formatted date to the TextBox
+                                            empBdate.Text = "Birthdate: "+ " " + formattedArrivalDate;
                                         }
                                     }
 

@@ -101,6 +101,7 @@ namespace TravelDesk.Admin
                                     employeePhone.Text = mobile;
                                     employeeLevel.Text = level;
                                     employeeEmail.Text = email + "?";
+                                    travellerName.Text = name + " - Arranged Travel Arrangement";
 
                                     Session["userEmail"] = email;
 

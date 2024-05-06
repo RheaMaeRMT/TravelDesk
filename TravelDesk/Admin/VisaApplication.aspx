@@ -25,7 +25,7 @@
                                                 <Columns> 
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 16px;" class="active btn waves-effect text-center" ID="viewDetails"/>
+                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 16px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>

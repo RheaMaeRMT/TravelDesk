@@ -547,34 +547,34 @@ namespace TravelDesk
             if (clicked == "visaPending")
             {
                 string status = "Pending";
-                Session["reqStatus"] = status;
+                Session["VreqStatus"] = status;
 
-                Response.Write("<script> window.location.href = 'VisaRequests.aspx'; </script>");
+                Response.Write("<script> window.location.href = 'VisaApplication.aspx'; </script>");
 
 
             }
             else if (clicked == "visaProcessing")
             {
                 string status = "Processing";
-                Session["reqStatus"] = status;
+                Session["VreqStatus"] = status;
 
-                Response.Write("<script>window.location.href = 'VisaRequests.aspx'; </script>");
+                Response.Write("<script>window.location.href = 'VisaApplication.aspx'; </script>");
 
             }
             else if (clicked == "visaCompleted")
             {
                 string status = "Completed";
-                Session["reqStatus"] = status;
+                Session["VreqStatus"] = status;
 
-                Response.Write("<script>window.location.href = 'VisaRequests.aspx'; </script>");
+                Response.Write("<script>window.location.href = 'VisaApplication.aspx'; </script>");
 
             }
             else if (clicked == "visaGranted")
             {
                 string status = "Granted";
-                Session["reqStatus"] = status;
+                Session["VreqStatus"] = status;
 
-                Response.Write("<script>window.location.href = 'VisaRequests.aspx'; </script>");
+                Response.Write("<script>window.location.href = 'VisaApplication.aspx'; </script>");
 
             }
 

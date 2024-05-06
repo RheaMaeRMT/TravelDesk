@@ -136,8 +136,13 @@
                                                         <!-- Tab variant tab card start -->
                                                         <div class="card" style="background-image:url('images/bgImage.jpg')">
                                                             <div class="card-header" style="background-color:#09426a">
-                                                                <h5 style="color:white">Domestic Travel Request</h5>
+                                                               
+                                                                <asp:Label runat="server" style="color:white; font-size:16px;margin-left:10px;" CssClass="h5" ID="travellerName"></asp:Label>
+
+                                                               
+                                                                
                                                             </div>
+
                                                             <div class="card-block tab-icon">
                                                                     <div class="col-lg-12 ">
 <%--                                                                        <div class="sub-title">Tab With Icon</div>--%>
@@ -161,7 +166,7 @@
                                                                         <!-- Tab panes -->
                                                                         <div class="tab-content card-block">
                                                                             <div class="tab-pane active" id="requestTracking" role="tabpanel">
-                                                                                <asp:Label runat="server" style="font-size:16px" >Current Status:
+                                                                                <asp:Label runat="server" style="font-size:16px">Current Status:
                                                                                 </asp:Label>
                                                                                 <asp:Label runat="server" ID="currentStatus" style="color:#4CAF50;font-size:18px;margin-left:10px"></asp:Label>
                                                                                 <div class="tracker">
@@ -192,13 +197,6 @@
                                                                                 <div class="card-block">
                                                                                     <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Employee Information</p>
                                                                                 </div>
-                                                                                <div class="card-block">
-                                                                                <asp:Label ID="Label11" runat="server" Text="Home Facility"></asp:Label>
-                                                                                <asp:TextBox  ID="homeFacility" runat="server" Width="300px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>                                                               
-                                                                                    <asp:Label ID="Label1" runat="server" Text="Project Code"  Style="margin-left: 40px"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeProjCode" runat="server" Width="300px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                        
-                                                                                    </div>
                                                                                 <div class="card-block">
                                                                                     <asp:Label ID="Label2" runat="server" Text="Employee ID" ></asp:Label>
                                                                                     <asp:TextBox ID="employeeID" runat="server" style="margin-left:20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"  Width="300px"></asp:TextBox> 
@@ -232,13 +230,35 @@
                                                                                     <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 50px"></asp:Label>
                                                                                     <asp:TextBox ID="employeeBdate" runat="server" Width="150px" Style="margin-left: 30px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
 
-                                                                                </div>           
+                                                                                </div>   
+                                                                                 <div class="card-block">
+
+                                                                                    <asp:Label ID="Label1" runat="server" Text="Purpose of Travel"></asp:Label>
+                                                                                    <asp:TextBox ID="employeePurpose" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
+                                                                
+                                                                                    <asp:Label ID="Label4" runat="server" Text="Destination" Style="padding-left: 60px"></asp:Label>
+                                                                                    <asp:TextBox ID="empDestination" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false" ></asp:TextBox>
+
+                                                                                    <asp:Label ID="Label10" runat="server" Text="Estimated Travel Date" Style="padding-left: 50px"></asp:Label>
+                                                                                    <asp:TextBox ID="EmpestTravelDate" runat="server" Width="150px" Style="margin-left: 30px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
+
+                                                                                </div>                                                                                 
                                                                             </div>
                                                                             <div class="tab-pane" id="pdfFiles" role="tabpanel">
-                                                                                <div class="card-block" id="uploadBlock" style="display:none" runat="server">
-                                                                                    <iframe id="pdfViewer"  runat="server" style="width:100%; display:none; height:600px" frameborder="0"></iframe>
-
-                                                                                </div>                                                                            
+                                                                                        <div class="row">
+                                                                                            <div class="col-lg-12 col-xl-6">
+                                                                                                <div class="card-block" id="uploadBlock" runat="server">
+                                                                                                    <asp:Label ID="Label6" runat="server" Text="Email Approval" Style="margin-left: 20px"></asp:Label> <br /> <br />
+                                                                                                    <iframe id="pdfViewer"  runat="server" style="width:100%; height:600px" frameborder="0"></iframe>
+                                                                                                </div>   
+                                                                                            </div>
+                                                                                            <div class="col-lg-12 col-xl-6">
+                                                                                                 <div class="card-block" id="Div1" runat="server">
+                                                                                                    <asp:Label ID="Label9" runat="server" Text="Scanned Passport" Style="margin-left: 20px"></asp:Label> <br /> <br />
+                                                                                                     <iframe id="passportViewer"  runat="server" style="width:100%; height:600px" frameborder="0"></iframe>
+                                                                                                </div>   
+                                                                                            </div>
+                                                                                        </div>
                                                                             </div>
 
                                                                         </div>
@@ -246,7 +266,7 @@
                                                           </div>
 
                                                         </div>
-                                                            <asp:Button runat="server" class="btn btn-primary" Text="Process Request" ID="processRequest" OnClick="processRequest_Click"/>
+                                                            <asp:Button runat="server" class="btn btn-primary" Text="Process Request" ID="processRequest"/>
                                                     </div>
                                                 </div>
                                     <!-- Page-body end -->
