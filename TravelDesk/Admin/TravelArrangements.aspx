@@ -94,76 +94,13 @@
                                 <div class="page-wrapper" >
                                     <!-- Page-body start -->
                                          <div class="page-body" style="color:black;font-size:16px;">
-                                                 <div class="card-block accordion-block">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true">
-                                                            <div class="accordion-panel">
-                                                                <div class="card-header" role="tab" id="headingOne"  style="background-color:#09426a">
-                                                                    <h5 class="card-title accordion-title">
-                                                                        <a class="accordion-msg waves-effect waves-dark" data-toggle="collapse"
-                                                                        data-parent="#accordion" href="#collapseOne"
-                                                                        aria-expanded="true" aria-controls="collapseOne" style="color:white;font-size:16px">
-                                                                       Traveller Information
-                                                                    </a>
-                                                                 </h5>
-                                                            </div>
-                                                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                                                <div class="accordion-content accordion-desc"> <br />
-                                                                                <div class="row" style="place-content:center">
-                                                                                    <div class="col-md-4">
-                                                                                        <div class="card-block" style="text-align:center;">
-                                                                                            <i class="ti-user" style="font-size:20px"></i> <br />
-                                                                                            <asp:Label runat="server" ID="empFName" style="font-size:22px;"></asp:Label> <br />
-                                                                                            <asp:Label runat="server" ID="empID" style="font-size:20px;"></asp:Label> <br />
-                                                                                            <asp:Label ID="empLevel" runat="server" style="font-size:18px;"></asp:Label>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                </div> <br />
-                                                                                <div class="row" style="place-content:center">
-                                                                                     <div class="col-xl-4 col-md-12">
-                                                                                         <div class="card">
-                                                                                             <div class="card-header">
-                                                                                                 <h5>Contact Information</h5>
-                                                                                             </div>
-                                                                                             <div class="card-block" style="text-align:left;">
-                                                                                                  <asp:Label ID="empEmail" runat="server"></asp:Label> <br />
-                                                                                                 <asp:Label ID="empMobile" runat="server"></asp:Label> <br />
-                                                                                                 <asp:Label ID="empBdate" runat="server"></asp:Label>
-                                                                                             </div>
-                                                                                         </div>
-
-                                                                                    </div>
-                                                                                     <div class="col-xl-4 col-md-12">
-                                                                                         <div class="card">
-                                                                                             <div class="card-header">
-                                                                                                 <h5>Company Information</h5>
-                                                                                             </div>
-                                                                                             <div class="card-block" style="text-align:left;">
-                                                                                               <asp:Label runat="server" ID="empFacility"></asp:Label> <br />
-                                                                                               <asp:Label runat="server" ID="empDeptUnit"></asp:Label> <br />
-                                                                                               <asp:Label runat="server" ID="empCode"></asp:Label>
-                                                                                             </div>
-                                                                                         </div>
-
-                                                                                    </div>
-
-                                                                                </div> <br />  
-                                                                </div>
-                                                            </div>
-
-                                                  </div>
-
-
-                                                        </div> <br />
-                                                    </div>
-
                                              <div  class="card" style="color:black;background-color:white"> 
                                                     <div class="card-header" style="background-color:#09426a">
                                                         <h5 style="color:white">Travel Arrangement Form</h5>
                                                     </div> 
                                                                                      
                                                     <div class="card-block">
-                                                         <asp:Button runat="server" class="btn btn-primary" Text="Travel Request" ID="openRequest" OnClientClick="return showModal();" />
+                                                        <asp:LinkButton runat="server" Text="Open Request Details" style="font-size:16px;color:dodgerblue" Font-Underline="true" ID="openRequestDetails" OnClientClick="return showModal();"></asp:LinkButton>
 
                                                     </div>
                                                             <!--ARRANGEMENTS -->
@@ -331,145 +268,207 @@
                                                                             <div class="modal-body">
                                                                                 <!-- Your modal content goes here -->
                                                                               <div class="card-block tab-icon">
-                                                                    <div class="col-lg-12 ">
-<%--                                                                        <div class="sub-title">Tab With Icon</div>--%>
-                                                                        <!-- Nav tabs -->
-                                                                        <ul class="nav nav-tabs md-tabs " role="tablist">
-                                                                            <li class="nav-item">
-                                                                                <a class="nav-link active" data-toggle="tab" href="#requestDetails" role="tab"><i class="icofont icofont-home"></i>Travel Information</a>
-                                                                                <div class="slide"></div>
-                                                                            </li>
-                                                                            <li class="nav-item">
-                                                                                <a class="nav-link" data-toggle="tab" href="#managerApproval" role="tab"><i class="icofont icofont-ui-user "></i>Manager Email Approval</a>
-                                                                                <div class="slide"></div>
-                                                                            </li>
+                                                                                <div class="col-lg-12 ">
+            <%--                                                                        <div class="sub-title">Tab With Icon</div>--%>
+                                                                                    <!-- Nav tabs -->
+                                                                                    <ul class="nav nav-tabs md-tabs " role="tablist">
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link active" data-toggle="tab" href="#employeeDetails" role="tab"><i class="icofont icofont-home"></i>Traveller Information</a>
+                                                                                            <div class="slide"></div>
+                                                                                        </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link" data-toggle="tab" href="#emprequestDetails" role="tab"><i class="icofont icofont-home"></i>Travel Information</a>
+                                                                                            <div class="slide"></div>
+                                                                                        </li>
+                                                                                        <li class="nav-item">
+                                                                                            <a class="nav-link" data-toggle="tab" href="#managerApproval" role="tab"><i class="icofont icofont-ui-user "></i>Manager Email Approval</a>
+                                                                                            <div class="slide"></div>
+                                                                                        </li>
    
                                                                             
-                                                                        </ul>
-                                                                        <!-- Tab panes -->
-                                                                        <div class="tab-content card-block">
-                                                                            <div class="tab-pane active" id="requestDetails" role="tabpanel">
-                                                                                <!--TRAVEL DETAILS--> <br />
-                                                                                <div class="card-block">
-                                                                                    <asp:Label ID="Label30" runat="server" Text="Purpose of Travel:"></asp:Label> 
-                                                                                    <asp:TextBox ID="employeePurpose" runat="server" Style="margin-left: 40px; border-radius: 5px;color:black;background-color:transparent;font-size:18px" BorderColor="Transparent" Enabled="false" Width="300px" ></asp:TextBox>                                                         
-                                                                                </div> 
-                                                                                <div class="card-block">
-                                                                                      <asp:Label ID="Label31" runat="server" Text="Flight Options" ></asp:Label>
+                                                                                    </ul>
+                                                                                    <!-- Tab panes -->
+                                                                                    <div class="tab-content card-block">
+                                                                                        <div class="tab-pane active"  id="employeeDetails" role="tabpanel"> <br />
+                                                                                            <div class="row" style="place-content:center">
+                                                                                                <div class="col-md-4">
+                                                                                                    <div class="card-block" style="text-align:center;">
+                                                                                                        <i class="ti-user" style="font-size:20px"></i> <br />
+                                                                                                        <asp:Label runat="server" ID="empFName" style="font-size:22px;"></asp:Label> <br />
+                                                                                                         <asp:Label runat="server" style="font-size:15px"> Employee ID:</asp:Label>
+                                                                                                        <asp:Label runat="server" ID="empID" CssClass="h6"></asp:Label> <br />
+                                                                                                         <asp:Label runat="server" style="font-size:15px"> Level:</asp:Label>
+                                                                                                        <asp:Label ID="empLevel" runat="server" CssClass="h6"></asp:Label>
+                                                                                                    </div>
 
-                                                                                    <asp:TextBox ID="flightOptions" runat="server"  Width="343px"  Style="margin-left: 40px; border-radius: 5px;color:black;background-color:transparent;font-size:18px" BorderColor="Transparent"   Enabled="false"></asp:TextBox>                                        
-                                                                                  
-                                                                                </div> <br />
-                                                                                <div class="card-block" style="display: none" id="oneWaynput" runat="server">
-                                                                                    <asp:Label ID="Label32" runat="server" Text="Departing From"></asp:Label>
-                                                                                    <asp:TextBox ID="onewayFrom" runat="server"  Width="343px" Style="margin-left: 55px; border-radius: 5px" CssClass="textboxes" Enabled="false" ></asp:TextBox>
-
-                                                                                    <asp:Label ID="Label33" runat="server" Text="To" Style="padding-left: 60px"></asp:Label>
-                                                                                    <asp:TextBox ID="onewayTo" runat="server" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-
-                                                                                    <asp:Label ID="Label34" runat="server" Text="Date" Style="padding-left: 30px"></asp:Label>
-                                                                                    <asp:TextBox ID="onewayDate" runat="server" Width="100px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-
-                                                                                </div>
-                                                                                <div class="card-block" style="display: none" id="roundTripInput" runat="server">
-                                                                                    <asp:Label ID="Label35" runat="server" Text="Departing From"></asp:Label>
-                                                                                    <asp:TextBox ID="round1From" runat="server"  Width="260px" Style="margin-left: 40px; border-radius: 5px" CssClass="textboxes" Enabled="false" ></asp:TextBox>
-
-                                                                                    <asp:Label ID="Label36" runat="server" Text="To" Style="padding-left: 40px"></asp:Label>
-                                                                                    <asp:TextBox ID="round1To" runat="server" Width="200px" Style="margin-left: 40px; border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
-
-                                                                                    <asp:Label ID="Label37" runat="server" Text="Departure Date" Style="margin-left: 30px"></asp:Label>
-                                                                                    <asp:TextBox ID="round2departure" runat="server"  Width="150px" Style="margin-left: 30px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-
-                                                                                    <asp:Label ID="Label38" runat="server" Text="Return Date" Style="padding-left: 30px"></asp:Label>
-                                                                                    <asp:TextBox ID="round2return" runat="server" Width="150px" Style="margin-left: 30px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                                                </div>
-                                                                                  <div class="card-block" id="multipleInput" style="display: none;" runat="server">
-                                                                                    <!-- Multiple destinations flight input fields -->
-        
-                                                                                        <div id="destination1">
-                                                                                            <!--FIRST DESTINATION-->
-                                                                                            <asp:Label ID="Label39" runat="server" Text="1st Destination:"></asp:Label><br />
-                                                                                            <asp:Label ID="Label40" runat="server" Text="1. Departing From" Style="margin-left: 60px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox7" runat="server" Enabled="false" Style="margin-left: 20px; border-radius: 5px" Width="260px" CssClass="textboxes" ></asp:TextBox>
-                                                   
-                                                                                            <asp:Label ID="Label41" runat="server" Text="To" Style="padding-left: 50px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox8" runat="server" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                   
-                                                                                            <asp:Label ID="Label42" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox12"  runat="server" Enabled="false" CssClass="textboxes" Style="margin-left: 20px; border-radius: 5px"  Width="100px"></asp:TextBox>
-                                                                                         </div>   <br />
-                                                                                        <div id="destination2">
-                                                                                            <!--SECOND DESTINATION-->
-                                                                                            <asp:Label ID="Label43" runat="server" Text="2nd Destination:"></asp:Label><br />
-                                                                                            <asp:Label ID="Label44" runat="server" Text="2. Departing From" Style="margin-left: 60px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox9" runat="server" Enabled="false" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes" ></asp:TextBox>
-
-                                                                                            <asp:Label ID="Label45" runat="server" Text="To" Style="padding-left: 50px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox10" runat="server" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                                                            <asp:Label ID="Label47" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox14" runat="server" Enabled="false" Width="100px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes" ></asp:TextBox>
-
-                                                                                        </div>                                                   
-                                                                                    </div>
-                                                                                <div class="card-block" style="display:none" id="additionalFields" runat="server">
-                                                                                         <div id="destination3">
-                                                                                             <!--THIRD DESTINATION-->
-                                                                                            <asp:Label ID="Label48" runat="server" Text="3rd Destination:"></asp:Label><br />
-                                                                                            <asp:Label ID="Label49" runat="server" Text="3. Departing From" Style="margin-left: 60px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox15" runat="server" Enabled="false" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes" ></asp:TextBox>
-
-                                                                                            <asp:Label ID="Label51" runat="server" Text="To" Style="padding-left: 50px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox17" runat="server" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                                                            <asp:Label ID="Label52" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                                            <asp:TextBox ID="TextBox18" runat="server"  Enabled="false" CssClass="textboxes" Style="margin-left: 20px; border-radius: 5px" Width="100px"></asp:TextBox>
-
+                                                                                                </div>
                                                                                             </div> <br />
-                                                                                         <div id="destination4" style="display:none" runat="server">
-                                                                                                        <!--FOURTH DESTINATION-->
-                                                                                                        <asp:Label ID="Label54" runat="server" Text="4th Destination:"></asp:Label><br />
-                                                                                                        <asp:Label ID="Label55" runat="server" Text="4. Departing From" Style="margin-left: 60px"></asp:Label>
-                                                                                                        <asp:TextBox ID="TextBox27" Enabled="false" runat="server" Style="margin-left: 20px; border-radius: 5px" Width="260px" CssClass="textboxes" ></asp:TextBox>
+                                                                                            <div class="row" style="place-content:center">
+                                                                                                 <div class="col-xl-4 col-md-12">
+                                                                                                     <div class="card">
+                                                                                                         <div class="card-header">
+                                                                                                             <h5>Contact Information</h5>
+                                                                                                         </div>
+                                                                                                         <div class="card-block" style="text-align:left;font-size:15px">
+                                                                                                             <i class="ti-email"></i>
+                                                                                                             <asp:Label runat="server" style="" > Email:</asp:Label>
+                                                                                                              <asp:Label ID="empEmail" class="h6" style="margin-left:20px" runat="server"></asp:Label> <br />
+                                                                                                             <i class="ti-mobile"></i>
+                                                                                                             <asp:Label runat="server" style="" > Mobile:</asp:Label>
+                                                                                                             <asp:Label ID="empMobile" class="h6" style="margin-left:10px" runat="server"></asp:Label> <br />
+                                                                                                             <i class="ti-calendar"></i>
+                                                                                                             <asp:Label runat="server" style="" > Birthdate:</asp:Label>
+                                                                                                             <asp:Label ID="empBdate" class="h6" runat="server"></asp:Label>
+                                                                                                         </div>
+                                                                                                     </div>
+
+                                                                                                </div>
+                                                                                                 <div class="col-xl-4 col-md-12">
+                                                                                                     <div class="card">
+                                                                                                         <div class="card-header">
+                                                                                                             <h5>Company Information</h5>
+                                                                                                         </div>
+                                                                                                         <div class="card-block" style="text-align:left;font-size:15px">
+                                                                                                             <i class="ti-home"></i>
+                                                                                                             <asp:Label runat="server" style="" > Home Facility:</asp:Label>
+                                                                                                           <asp:Label runat="server" class="h6" style="margin-left:20px" ID="empFacility"></asp:Label> <br />
+                                                                                                             <i class="ti-archive"></i>
+                                                                                                             <asp:Label runat="server" style="" > Department Unit:</asp:Label>
+                                                                                                           <asp:Label runat="server" class="h6" ID="empDeptUnit"></asp:Label> <br />
+                                                                                                             <i class="ti-id-badge"></i>
+                                                                                                             <asp:Label runat="server" style="" > Project Code:</asp:Label>
+                                                                                                           <asp:Label runat="server" class="h6" style="margin-left:22px" ID="empCode"></asp:Label>
+                                                                                                         </div>
+                                                                                                     </div>
+
+                                                                                                </div>
+
+                                                                                            </div> <br />  
+
+                                                                                        </div>
+                                                                                        <div class="tab-pane" id="emprequestDetails" role="tabpanel">
+                                                                                            <!--TRAVEL DETAILS--> <br />
+                                                                                            <div class="card-block" style="margin-left:150px">
+                                                                                                <asp:Label ID="Label30" runat="server" Text="Purpose of Travel:"></asp:Label> 
+                                                                                                <asp:TextBox ID="employeePurpose" runat="server" Style="margin-left: 30px; border-radius: 5px;color:black;background-color:transparent;font-size:18px" BorderColor="Transparent" Enabled="false" Width="300px" ></asp:TextBox>     <br />
+                                                                                                <asp:Label ID="Label14" runat="server" Text="Route Destination:"></asp:Label> 
+                                                                                            </div> <br />
+                                                                               
+                                                                                            <center>
+  
+                                                                                            <div class="card-block" style="background-color:#C7E9FE;text-align:center;border-radius:10px;width:fit-content;color:black;"> <br />
+                                                                                              <div class="card-block" style="background-color:#C7E9FE;text-align:center;border-radius:10px;width:fit-content;color:black;">
+                                                                                               <img src="/images/airplane.png" style="width: 50px" alt="airplane.png">
+                                                                                               <asp:TextBox ID="flightOptions" runat="server"  Width="343px"  Style="border-radius: 5px;color:black;background-color:transparent;font-size:18px" BorderColor="Transparent"   Enabled="false"></asp:TextBox>                                        
+                                                                                                </div> <br />
+                                                                                                <div class="card-block" style="display: none" id="oneWaynput" runat="server">
+                                                                                                        <div style="text-align:left">
+                                                                                                             <asp:Label runat="server" Text="From" style="margin-left:10px;font-size:12px"></asp:Label>
+                                                                                                             <asp:Label runat="server" Text="To" style="margin-left:200px;font-size:12px"></asp:Label> <br />                                                                                           
+                                                                                                        </div>
+                                                                                                        <div >
+                                                                                                            <asp:TextBox ID="onewayFrom" runat="server"  Width="200px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+                                                                                                               <i class="ti-arrow-circle-right" style="margin-left:20px;color:dodgerblue;font-size:25px;margin-left:5px"></i>
+                                                                                                                <asp:TextBox ID="onewayTo" runat="server" Width="200px" Style="margin-left:-5px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px; " Enabled="false"></asp:TextBox>
+                                                                                                                <asp:TextBox ID="onewayDate" runat="server" Width="150px" Style="margin-left:20px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false"></asp:TextBox>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="card-block" style="display: none" id="roundTripInput" runat="server">
+                                                                                                     <div style="text-align:left">
+                                                                                                             <asp:Label runat="server" Text="From:" style="margin-left:10px;font-size:12px"></asp:Label>
+                                                                                                             <asp:Label runat="server" Text="To:" style="margin-left:200px;font-size:12px"></asp:Label> 
+                                                                                                             <asp:Label runat="server" Text="Departure:" style="margin-left:200px;font-size:12px"></asp:Label>
+                                                                                                             <asp:Label runat="server" Text="Return:" style="margin-left:100px;font-size:12px"></asp:Label>
+
+                                                                                                         <br />                                                                                           
+                                                                                                        </div>   
+                                                                                                        <asp:TextBox ID="round1From" runat="server"  Width="200px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+                                                                                                               <i class="ti-arrow-circle-right" style="margin-left:20px;color:dodgerblue;font-size:25px;margin-left:5px"></i>
+
+                                                                                                        <asp:TextBox ID="round1To" runat="server" Width="200px" Style="margin-left:-5px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+
+                                                                                                        <asp:TextBox ID="round2departure" runat="server"  Width="150px" Style="margin-left:20px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+
+                                                                                                        <asp:TextBox ID="round2return" runat="server" Width="150px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+                                                                                                    </div>
+                                                                                                    <div class="card-block" id="multipleInput" style="display: none;" runat="server">
+                                                                                                        <!-- Multiple destinations flight input fields -->
+                                                                                                     <div style="text-align:left">
+                                                                                                             <asp:Label runat="server" Text="From:" style="margin-left:10px;font-size:12px"></asp:Label>
+                                                                                                             <asp:Label runat="server" Text="To:" style="margin-left:200px;font-size:12px"></asp:Label> 
+                                                                                                             <asp:Label runat="server" Text="Departure:" style="margin-left:180px;font-size:12px"></asp:Label>
+                                                                                                         <br />                                                                                           
+                                                                                                        </div>                                                                                           
+        
+                                                                                                            <div id="destination1">
+                                                                                                                <!--FIRST DESTINATION-->
+                                                                                                                <asp:TextBox ID="TextBox7" runat="server"  Width="200px" Enabled="false" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" ></asp:TextBox>
+                                                                                                               <i class="ti-arrow-circle-right" style="margin-left:20px;color:dodgerblue;font-size:25px;margin-left:5px"></i>
+                                                                                                                <asp:TextBox ID="TextBox8" runat="server" Width="200px" Style="margin-left:-5px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+                                                                                                                <asp:TextBox ID="TextBox12"  runat="server"  Width="150px" Enabled="false" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" ></asp:TextBox>
+                                                                                                             </div>   <br />
+                                                                                                            <div id="destination2">
+                                                                                                                <!--SECOND DESTINATION-->
+                                                                                                                <asp:TextBox ID="TextBox9" runat="server" Enabled="false" Width="200px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px"  ></asp:TextBox>
+                                                                                                               <i class="ti-arrow-circle-right" style="margin-left:20px;color:dodgerblue;font-size:25px;margin-left:5px"></i>
+
+                                                                                                                <asp:TextBox ID="TextBox10" runat="server" Width="200px" Style="margin-left:-5px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+                                                                                                                <asp:TextBox ID="TextBox14" runat="server" Enabled="false" Width="150px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" ></asp:TextBox>
+
+                                                                                                            </div>                                                   
+                                                                                                        </div>
+                                                                                                    <div class="card-block" style="display:none" id="additionalFields" runat="server">
+                                                                                                             <div id="destination3"> <br />
+                                                                                                                 <!--THIRD DESTINATION-->
+                                                                                                                <asp:TextBox ID="TextBox15" runat="server" Enabled="false" Width="200px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px"></asp:TextBox>
+                                                                                                               <i class="ti-arrow-circle-right" style="margin-left:20px;color:dodgerblue;font-size:25px;margin-left:5px"></i>
+
+                                                                                                                <asp:TextBox ID="TextBox17" runat="server" Width="200px" Style="margin-left:-5px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+                                                                                                                <asp:TextBox ID="TextBox18" runat="server" Width="150px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+
+                                                                                                                </div> <br />
+                                                                                                             <div id="destination4" style="display:none" runat="server">
+                                                                                                                            <!--FOURTH DESTINATION-->
+                                                                                                                            <asp:TextBox ID="TextBox27" Enabled="false" runat="server" Width="200px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px"  ></asp:TextBox>
+                                                                                                               <i class="ti-arrow-circle-right" style="margin-left:20px;color:dodgerblue;font-size:25px;margin-left:5px"></i>
+
+                                                                                                                            <asp:TextBox ID="TextBox29" runat="server" Width="200px" Style="margin-left:-5px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+                                                                                                                            <asp:TextBox ID="TextBox30" Enabled="false" Width="150px"  runat="server" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" ></asp:TextBox>
+
+                                                                                                                </div>         <br />                                    
+                                                                                                             <div id="destination5" style="display:none" runat="server">
+                                                                                                                        <!--FIFTH DESTINATION-->
+                                                                                                                        <asp:TextBox ID="TextBox19" runat="server" Enabled="false" Width="200px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" ></asp:TextBox>
+                                                                                                               <i class="ti-arrow-circle-right" style="margin-left:20px;color:dodgerblue;font-size:25px;margin-left:5px"></i>
+
+                                                                                                                 <asp:TextBox ID="TextBox21" runat="server" Width="200px" Style="margin-left:-5px;text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" Enabled="false" ></asp:TextBox>
+                                                                                                                        <asp:TextBox ID="TextBox22" runat="server" Enabled="false" Width="150px" Style="text-align:center; border-radius: 5px;color:black;background-color:transparent;font-size:18px" ></asp:TextBox>
+
+                                                                                                                </div>   
+
+                                                                                                    </div>  <br /><br />                                                                                </div>
+
+                                                                                            </center>
+
+                                                                                              <!--END OF FLIGHT INFORMATION-->
+                                                                                            <div class="card-block" style="margin-left:150px">
+                                                                                                 <asp:Label ID="Label63" runat="server" Text="Remarks:"></asp:Label> <br />
+                                                                                                <asp:TextBox ID="employeeRemarks" runat="server" style="width:fit-content;margin-left:30px;text-align:center;border-radius:10px;color:black;background-color:transparent;font-size:18px" CssClass="textboxes"  Height="91px" Enabled="false"></asp:TextBox> 
+                                                                                            </div>
 
 
-                                                                                                        <asp:Label ID="Label57" runat="server" Text="To" Style="padding-left: 50px"></asp:Label>
-                                                                                                        <asp:TextBox ID="TextBox29" runat="server" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                                                                        <asp:Label ID="Label58" runat="server" Text="Date" Style="margin-left: 30px"></asp:Label>
-                                                                                                        <asp:TextBox ID="TextBox30" Enabled="false" runat="server" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Width="100px"></asp:TextBox>
+                                                                                        </div>
+                                                                                        <div class="tab-pane" id="managerApproval" role="tabpanel">
+                                                                                            <div class="card-block" id="uploadBlock" style="display:none" runat="server">
+                                                                                                <iframe id="pdfViewer"  runat="server" style="width:100%; display:none; height:600px" frameborder="0"></iframe>
 
-                                                                                            </div>         <br />                                    
-                                                                                         <div id="destination5" style="display:none" runat="server">
-                                                                                                    <!--FIFTH DESTINATION-->
-                                                                                                    <asp:Label ID="Label59" runat="server" Text="5th Destination:"></asp:Label><br />
-                                                                                                    <asp:Label ID="Label60" runat="server" Text="5. Departing From" Style="margin-left: 60px"></asp:Label>
-                                                                                                    <asp:TextBox ID="TextBox19" runat="server" Enabled="false" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes" ></asp:TextBox>
+                                                                                            </div>                                                                            
+                                                                                        </div>
 
-                                                                                                    <asp:Label ID="Label61" runat="server" Text="To" Style="padding-left: 60px"></asp:Label>
-                                                                                                    <asp:TextBox ID="TextBox21" runat="server" Width="260px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                                                                    <asp:Label ID="Label62" runat="server" Text="Date" Style="margin-left: 40px"></asp:Label>
-                                                                                                    <asp:TextBox ID="TextBox22" runat="server" Enabled="false" Width="100px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes" ></asp:TextBox>
-
-                                                                                            </div>   
-
-                                                                                </div>  <br /><br />
-                                                                                  <!--END OF FLIGHT INFORMATION-->
-                                                                                <div class="card-block">
-                                                                                     <asp:Label ID="Label63" runat="server" Text="Remarks"></asp:Label> <br />
-                                                                                    <asp:TextBox ID="employeeRemarks" runat="server"  Width="1000px" CssClass="textboxes"  TextMode="MultiLine" Height="91px" Enabled="false"></asp:TextBox> 
+                                                                                    </div>
                                                                                 </div>
-
-
-                                                                            </div>
-                                                                            <div class="tab-pane" id="managerApproval" role="tabpanel">
-                                                                                <div class="card-block" id="uploadBlock" style="display:none" runat="server">
-                                                                                    <iframe id="pdfViewer"  runat="server" style="width:100%; display:none; height:600px" frameborder="0"></iframe>
-
-                                                                                </div>                                                                            
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                          </div>
+                                                                              </div>
 
                                                                             </div>
                                                                         </div>

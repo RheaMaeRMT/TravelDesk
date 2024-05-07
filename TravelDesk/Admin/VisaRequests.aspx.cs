@@ -58,16 +58,18 @@ namespace TravelDesk.Admin
 
 
                                     // Retrieve the request details from the reader
-                                    string empID = reader["visaEmpID"].ToString();
-                                    string empFname = reader["visaFname"].ToString();
-                                    string empMname = reader["visaMname"].ToString();
-                                    string empLname = reader["visaLname"].ToString();
-                                    string empEmail = reader["visaEmail"].ToString();
-                                    string empBdate = reader["visaBdate"].ToString();
-                                    string empDU = reader["visaDU"].ToString();
-                                    string empPhone = reader["visaMobile"].ToString();
-                                    string empLevel = reader["visaLevel"].ToString();
+                                    string employeeID = reader["visaEmpID"].ToString();
+                                    string employeeFname = reader["visaFname"].ToString();
+                                    string employeeMname = reader["visaMname"].ToString();
+                                    string employeeLname = reader["visaLname"].ToString();
+                                    string employeeEmail = reader["visaEmail"].ToString();
+                                    string employeeBdate = reader["visaBdate"].ToString();
+                                    string employeeDU = reader["visaDU"].ToString();
+                                    string employeePhone = reader["visaMobile"].ToString();
+                                    string employeeLevel = reader["visaLevel"].ToString();
                                     string travelPurpose = reader["visaPurpose"].ToString();
+
+
                                     string proof = reader["visaApprovalPath"].ToString();
                                     string passport = reader["visaPassportPath"].ToString();
                                     string destination = reader["visaDestination"].ToString();
@@ -76,34 +78,47 @@ namespace TravelDesk.Admin
 
 
                                     // Display or use the retrieved request details
-                                    travellerName.Text = empFname + " " + empMname + " " + empLname + " - Visa Application Request" ;
-                                    employeeID.Text = empID;
-                                    employeeFName.Text = empFname;
-                                    employeeMName.Text = empMname;
-                                    employeeLName.Text = empLname;
-                                    employeeEmail.Text = empEmail;
-                                    employeeDU.Text = empDU;
-                                    employeePhone.Text = empPhone;
-                                    employeeLevel.Text = empLevel;
+                                    travellerName.Text = employeeFname + " " + employeeMname + " " + employeeLname + " - Visa Application Request" ;
+
+                                    empID.Text = employeeID;
+                                    empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
+                                    empLevel.Text = employeeLevel;
+                                    empEmail.Text = employeeEmail;
+                                    empMobile.Text = employeePhone;
+                                    empDeptUnit.Text = employeeDU;
+
                                     employeePurpose.Text = travelPurpose;
                                     empDestination.Text = destination;
-                                    EmpestTravelDate.Text = estTravelDate;
                                     pdfViewer.Src = proof;
                                     passportViewer.Src = passport;
 
-                                    if (!string.IsNullOrEmpty(empBdate))
+                                    if (!string.IsNullOrEmpty(employeeBdate))
                                     {
                                         // Parse the date string into a DateTime object
                                         DateTime arrivalDateTime;
-                                        if (DateTime.TryParse(empBdate, out arrivalDateTime))
+                                        if (DateTime.TryParse(employeeBdate, out arrivalDateTime))
                                         {
                                             // Format the DateTime object into the desired format
                                             string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
 
                                             // Assign the formatted date to the TextBox
-                                            employeeBdate.Text = formattedArrivalDate;
+                                            empBdate.Text = formattedArrivalDate;
                                         }
                                     }
+                                    if (!string.IsNullOrEmpty(estTravelDate))
+                                    {
+                                        // Parse the date string into a DateTime object
+                                        DateTime arrivalDateTime;
+                                        if (DateTime.TryParse(estTravelDate, out arrivalDateTime))
+                                        {
+                                            // Format the DateTime object into the desired format
+                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+
+                                            // Assign the formatted date to the TextBox
+                                            EmpestTravelDate.Text = formattedArrivalDate;
+                                        }
+                                    }
+
 
                                     Session["VreqStatus"] = status;
 

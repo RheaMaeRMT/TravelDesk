@@ -192,57 +192,62 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="tab-pane" id="requestDetails" role="tabpanel">
+                                                                                            <div class="row" style="place-content:center">
+                                                                                                <div class="col-md-4">
+                                                                                                    <div class="card-block" style="text-align:center;">
+                                                                                                        <i class="ti-user" style="font-size:20px"></i> <br />
+                                                                                                        <asp:Label runat="server" ID="empFName" style="font-size:22px;"></asp:Label> <br />
+                                                                                                             <asp:Label runat="server" style="" >Department Unit:</asp:Label>
+                                                                                                           <asp:Label runat="server" class="h6" ID="empDeptUnit"></asp:Label>  <br />
+                                                                                                         <asp:Label runat="server" style="font-size:15px"> Employee ID:</asp:Label>
+                                                                                                        <asp:Label runat="server" ID="empID" class="h6"></asp:Label> <br />
+                                                                                                         <asp:Label runat="server" style="font-size:15px"> Level:</asp:Label>
+                                                                                                        <asp:Label ID="empLevel" runat="server"  class="h6"></asp:Label>
+                                                                                                    </div>
 
-                                                                                <!--EMPLOYEE DETAILS-->
-                                                                                <div class="card-block">
-                                                                                    <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Employee Information</p>
-                                                                                </div>
-                                                                                <div class="card-block">
-                                                                                    <asp:Label ID="Label2" runat="server" Text="Employee ID" ></asp:Label>
-                                                                                    <asp:TextBox ID="employeeID" runat="server" style="margin-left:20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"  Width="300px"></asp:TextBox> 
-                                                               
+                                                                                                </div>
+                                                                                            </div> <br />
+                                                                                            <div class="row" style="place-content:center">
+                                                                                                 <div class="col-xl-4 col-md-12">
+                                                                                                     <div class="card">
+                                                                                                         <div class="card-header">
+                                                                                                             <h5>Contact Information</h5>
+                                                                                                         </div>
+                                                                                                         <div class="card-block" style="text-align:left;font-size:15px">
+                                                                                                             <i class="ti-email"></i>
+                                                                                                             <asp:Label runat="server" style="" > Email:</asp:Label>
+                                                                                                              <asp:Label ID="empEmail" class="h6" runat="server" style="margin-left:30px"></asp:Label> <br />
+                                                                                                             <i class="ti-mobile"></i>
+                                                                                                             <asp:Label runat="server" style="" > Mobile:</asp:Label>
+                                                                                                             <asp:Label ID="empMobile" class="h6" runat="server"  style="margin-left:20px"></asp:Label> <br />
+                                                                                                             <i class="ti-calendar"></i>
+                                                                                                             <asp:Label runat="server" style="" > Birthdate:</asp:Label>
+                                                                                                             <asp:Label ID="empBdate" class="h6" runat="server"  style="margin-left:5px"></asp:Label>
+                                                                                                         </div>
+                                                                                                     </div>
 
-                                                                                    <asp:Label ID="Label8" runat="server" Text="Level"  style="padding-left:40px"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeLevel" runat="server"   Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false" Width="80px"></asp:TextBox>
-                                                                
-                                                                                    <asp:Label ID="Label5" runat="server" Text="Department Unit" style="padding-left:50px"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeDU" runat="server" Width="200px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                          
-                                                                                    </div>
-                                                                                <div class="card-block">
-                                                                                    <asp:Label ID="Label7" runat="server" Text="First Name"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeFName" runat="server" Width="300px" Style="margin-left: 30px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
+                                                                                                </div>
+                                                                                                 <div class="col-xl-4 col-md-12">
+                                                                                                     <div class="card">
+                                                                                                         <div class="card-header">
+                                                                                                             <h5>Travel Information</h5>
+                                                                                                         </div>
+                                                                                                         <div class="card-block" style="text-align:left;font-size:15px">
+                                                                                                             <i class="ti-comment-alt"></i>
+                                                                                                             <asp:Label runat="server" style="" > Purpose of Travel:</asp:Label>
+                                                                                                              <asp:Label ID="employeePurpose" class="h6" runat="server"></asp:Label> <br />
+                                                                                                             <i class="ti-map-alt"></i>
+                                                                                                             <asp:Label runat="server" style="" > Destination:</asp:Label>
+                                                                                                             <asp:Label ID="empDestination" class="h6" runat="server" style="margin-left:40px"></asp:Label> <br />
+                                                                                                             <i class="ti-calendar"></i>
+                                                                                                             <asp:Label runat="server" style="" > Est. Travel Date:</asp:Label>
+                                                                                                             <asp:Label ID="EmpestTravelDate" class="h6" runat="server" style="margin-left:20px"></asp:Label>
+                                                                                                         </div>
+                                                                                                     </div>
 
-                                                                                    <asp:Label ID="Label19" runat="server" Text="Middle Name" Style="padding-left: 40px"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeMName" runat="server" Width="300px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
+                                                                                                </div>
 
-                                                                                    <asp:Label ID="Label20" runat="server" Text="Last Name" Style="padding-left: 40px"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeLName" runat="server" Width="300px" Style="margin-left: 20px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                                                </div>
-                                                                                <div class="card-block">
-
-                                                                                    <asp:Label ID="Label3" runat="server" Text="Mobile"></asp:Label>
-                                                                                    <asp:TextBox ID="employeePhone" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                                
-                                                                                    <asp:Label ID="Label46" runat="server" Text="Email" Style="padding-left: 60px"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false" ></asp:TextBox>
-
-                                                                                    <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 50px"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeBdate" runat="server" Width="150px" Style="margin-left: 30px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-
-                                                                                </div>   
-                                                                                 <div class="card-block">
-
-                                                                                    <asp:Label ID="Label1" runat="server" Text="Purpose of Travel"></asp:Label>
-                                                                                    <asp:TextBox ID="employeePurpose" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-                                                                
-                                                                                    <asp:Label ID="Label4" runat="server" Text="Destination" Style="padding-left: 60px"></asp:Label>
-                                                                                    <asp:TextBox ID="empDestination" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false" ></asp:TextBox>
-
-                                                                                    <asp:Label ID="Label10" runat="server" Text="Estimated Travel Date" Style="padding-left: 50px"></asp:Label>
-                                                                                    <asp:TextBox ID="EmpestTravelDate" runat="server" Width="150px" Style="margin-left: 30px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
-
-                                                                                </div>                                                                                 
+                                                                                            </div> <br />                                                                                 
                                                                             </div>
                                                                             <div class="tab-pane" id="pdfFiles" role="tabpanel">
                                                                                         <div class="row">

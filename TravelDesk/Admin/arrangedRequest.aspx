@@ -104,35 +104,11 @@
                                                             </div>
                                                             <div class="card-block">
                                                                 <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Flight Information</p>
-                                                                                                                <div class="col-lg-12 ">
-                                                                                                                    <ul class="nav nav-tabs md-tabs " role="tablist" style="background-color:steelblue">
-                                                                                                                     <li class="nav-item">
-                                                                                                                            <a class="nav-link active" data-toggle="tab" href="#airline" style="color:white;font-size:16px" role="tab"><i class="icofont icofont-ui-message"></i>  Airline</a>
-                                                                                                                            <div class="slide" style="background-color:#09426a"></div>
-                                                                                                                        </li>
-                                                                                                                     <li class="nav-item">
-                                                                                                                            <a class="nav-link" data-toggle="tab" href="#flightDetails" style="color:white;font-size:16px" role="tab"><i class="icofont icofont-ui-message"></i>Flight Route</a>
-                                                                                                                            <div class="slide" style="background-color:#09426a"></div>
-                                                                                                                        </li>
-                                                                                                                        <li class="nav-item">
-                                                                                                                            <a class="nav-link" data-toggle="tab" href="#transfersDetails" style="color:white;font-size:16px" role="tab"><i class="icofont icofont-home"></i>Car/Airport Transfers</a>
-                                                                                                                            <div class="slide" style="background-color:#09426a"></div>
-                                                                                                                        </li>
-                                                                                                                    </ul>
-                                                                                                                    <!-- Tab panes -->
-                                                                                                                    <div class="tab-content card-block">
-                                                                                                                        <div class="tab-pane active" id="airline">
-                                                                                                                           
                                                                                                                          <div class="card-block">
                                                                                                                             <asp:Label ID="Label16" runat="server" Text="Airline" Style="margin-left: 20px;"></asp:Label>
                                                                                                                             <asp:TextBox ID="bookedairline" runat="server" Width="300px" Style="margin-left: 60px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox> 
                                                                                                                          </div> 
-                                                                                                                         
-                                                                                                                        </div>
-
-                                                                                                                        <div class="tab-pane" id="flightDetails" role="tabpanel">
-                                                                                                                            <center>
-                                                                                                                                  <asp:Label ID="Label19" runat="server" Text="Travel Route" ></asp:Label><br />
+                                                                                                                               <asp:Label ID="Label19" runat="server" Text="Travel Route"  Style="margin-left: 40px;" ></asp:Label><br />
                                                                                                                                 <div class="card-block">
                                                                                                                                 <asp:Label ID="TextBox1" runat="server" Text="Flight #" Width="100px" Style="margin-left:40px;font-size:14px"></asp:Label>
                                                                                                                                 <asp:Label ID="TextBox2" runat="server" Text="Date of Departure" Width="120px" Style="margin-left: 40px;font-size:14px" TextMode="Date" CssClass="textboxes"></asp:Label> 
@@ -181,11 +157,9 @@
                                                                                                                                     <asp:TextBox ID="r5ETA" runat="server"  Width="100px" Style="margin-left: 23px;border-radius: 5px" CssClass="textboxes" Enabled="false" ></asp:TextBox>                                                                                               
 
                                                                                                                                 </div>    
-                                                                                                                            </center>
-                                                                                                                        </div>
-                                                                                                                        <div class="tab-pane" id="transfersDetails" role="tabpanel">
-                                                                                                                            <center>
-                                                                                                                                <asp:Label ID="Label15" runat="server" Text="Car/Airport Transfers" Style="margin-left: 30px;"></asp:Label>
+
+
+                                                                                                                                <asp:Label ID="Label15" runat="server" Text="Car/Airport Transfers" Style="margin-left: 40px;"></asp:Label>
                                                                                                                              <div class="card-block"  style="margin-left:10px" id="transfers1" runat="server">
                                                                                                                                   <asp:TextBox ID="transfer1" runat="server" Width="300px" Style="margin-left: 60px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
                                                                                                                                   <asp:TextBox ID="transfer1Date" runat="server" Width="150px" Style="margin-left: 40px;border-radius: 5px"  CssClass="textboxes" Enabled="false"></asp:TextBox> 
@@ -206,13 +180,6 @@
                                                                                                                                   <asp:TextBox ID="transfer5" runat="server" Width="300px" Style="margin-left: 60px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
                                                                                                                                   <asp:TextBox ID="transfer5Date" runat="server" Width="150px" Style="margin-left: 40px;" CssClass="textboxes" Enabled="false"></asp:TextBox> 
                                                                                                                             </div>
-
-                                                                                                                            </center>
-
-                                                                                                                        </div>
-
-                                                                                                                    </div>
-                                                                                                                    </div>
 
                                                             </div>
                                                                                         <div class="card-block">

@@ -90,16 +90,16 @@ namespace TravelDesk.Admin
 
                                     // Display or use the retrieved request details
                                     
-                                    empID.Text = "Employee ID: " + " " + employeeID;
-                                    empFName.Text = employeeFname + " " + " " + employeeMname + " " + employeeLname ;
-                                    empLevel.Text = "Level: " + " " + employeeLevel;
+                                    empID.Text = employeeID;
+                                    empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
+                                    empLevel.Text = employeeLevel;
 
-                                    empEmail.Text = "Email:" + " " + email;
-                                    empMobile.Text = "Mobile:" + " " + employeePhone;
+                                    empEmail.Text = email;
+                                    empMobile.Text = employeePhone;
 
-                                    empCode.Text = "Project Code:" + " " + employeeProjCode;
-                                    empFacility.Text = "Home Facility:" + " " + travelFacility;
-                                    empDeptUnit.Text = "Department Unit:" + " " + DU;
+                                    empCode.Text = employeeProjCode;
+                                    empFacility.Text = travelFacility;
+                                    empDeptUnit.Text = DU;
 
                                     pdfViewer.Src = proof;
                                     employeePurpose.Text = travelPurpose;
@@ -118,7 +118,7 @@ namespace TravelDesk.Admin
                                             string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
 
                                             //Assign the formatted date to the TextBox
-                                            empBdate.Text = "Birthdate: "+ " " + formattedArrivalDate;
+                                            empBdate.Text = formattedArrivalDate;
                                         }
                                     }
 
