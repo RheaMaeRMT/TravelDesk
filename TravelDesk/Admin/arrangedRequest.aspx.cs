@@ -943,6 +943,7 @@ namespace TravelDesk.Admin
         {
 
             Page.RegisterAsyncTask(new PageAsyncTask(exportasPdfAsync));
+
         }
 
         protected async Task exportasPdfAsync()
@@ -1041,9 +1042,12 @@ namespace TravelDesk.Admin
                 Response.Flush();
 
 
+                sendtoEmail.Style["display"] = "block";
+
+
                 //After sending the PDF for download, send it via email
 
-               await SendPdfByEmail(pdfBytes, filename, recipientEmail);
+                await SendPdfByEmail(pdfBytes, filename, recipientEmail);
 
 
 
@@ -1479,6 +1483,12 @@ namespace TravelDesk.Admin
             //    // Handle case when file path is not valid or file does not exist
             //    Response.Write("<script>alert('Invalid file path. Please try again.');</script>");
             //}
+        }
+
+        protected void backButton_Click(object sender, EventArgs e)
+        {
+            Response.Write("<script> window.location.href = 'TravelRequests.aspx'; </script>");
+
         }
 
         //protected void sendFile_Click(object sender, EventArgs e)

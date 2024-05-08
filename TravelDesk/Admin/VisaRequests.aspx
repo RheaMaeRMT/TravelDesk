@@ -171,22 +171,22 @@
                                                                                 <asp:Label runat="server" ID="currentStatus" style="color:#4CAF50;font-size:18px;margin-left:10px"></asp:Label>
                                                                                 <div class="tracker">
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="Requests that has been submitted and auto-approved."><span>1</span></div>
+                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="Visa Requests that has been submitted."><span>1</span></div>
                                                                                         <div class="text">Pending</div>
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="processingCircle" data-hover-message="Requests that has been accepted for travel arrangement processing."><span>2</span></div>
+                                                                                        <div class="circle" id="processingCircle" data-hover-message="Visa Requests that has been accepted for processing."><span>2</span></div>
                                                                                         <div class="text">Processing</div>
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Requests that completed the travel arrangement process."><span>3</span></div>
+                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Visa Requests that completed the processing."><span>3</span></div>
                                                                                         <div class="text">Completed</div>
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="completedCircle" data-hover-message="Requests that completed the travel arrangement and billing process"><span>4</span></div>
+                                                                                        <div class="circle" id="completedCircle" data-hover-message="Requests that has been granted a Visa for Travel"><span>4</span></div>
                                                                                         <div class="text">Granted</div>
                                                                                     </div>
                                                                                 </div>
@@ -209,9 +209,9 @@
                                                                                             </div> <br />
                                                                                             <div class="row" style="place-content:center">
                                                                                                  <div class="col-xl-4 col-md-12">
-                                                                                                     <div class="card">
-                                                                                                         <div class="card-header">
-                                                                                                             <h5>Contact Information</h5>
+                                                                                                     <div class="card" style="background-color:#C7E9FE">
+                                                                                                         <div class="card-header" style="background-color:#09426a">
+                                                                                                             <h5 style="color:white">Contact Information</h5>
                                                                                                          </div>
                                                                                                          <div class="card-block" style="text-align:left;font-size:15px">
                                                                                                              <i class="ti-email"></i>
@@ -228,21 +228,20 @@
 
                                                                                                 </div>
                                                                                                  <div class="col-xl-4 col-md-12">
-                                                                                                     <div class="card">
-                                                                                                         <div class="card-header">
-                                                                                                             <h5>Travel Information</h5>
+                                                                                                     <div class="card" style="background-color:#C7E9FE">
+                                                                                                         <div class="card-header" style="background-color:#09426a">
+                                                                                                             <h5 style="color:white">Travel Information</h5>
                                                                                                          </div>
                                                                                                          <div class="card-block" style="text-align:left;font-size:15px">
-                                                                                                             <i class="ti-comment-alt"></i>
-                                                                                                             <asp:Label runat="server" style="" > Purpose of Travel:</asp:Label>
-                                                                                                              <asp:Label ID="employeePurpose" class="h6" runat="server"></asp:Label> <br />
                                                                                                              <i class="ti-map-alt"></i>
                                                                                                              <asp:Label runat="server" style="" > Destination:</asp:Label>
                                                                                                              <asp:Label ID="empDestination" class="h6" runat="server" style="margin-left:40px"></asp:Label> <br />
                                                                                                              <i class="ti-calendar"></i>
                                                                                                              <asp:Label runat="server" style="" > Est. Travel Date:</asp:Label>
-                                                                                                             <asp:Label ID="EmpestTravelDate" class="h6" runat="server" style="margin-left:20px"></asp:Label>
-                                                                                                         </div>
+                                                                                                             <asp:Label ID="EmpestTravelDate" class="h6" runat="server" style="margin-left:18px"></asp:Label> <br />
+                                                                                                             <i class="ti-comment-alt"></i>
+                                                                                                             <asp:Label runat="server" style="" > Purpose of Travel:</asp:Label>
+                                                                                                              <asp:Label ID="employeePurpose" class="h6" runat="server" style="margin-left:5px"></asp:Label>                                                                                                       </div>
                                                                                                      </div>
 
                                                                                                 </div>

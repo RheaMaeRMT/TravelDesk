@@ -44,13 +44,13 @@
                                                     <div class="card-header" style="background-color:#09426a">
                                                                 <asp:Label runat="server" style="color:white; font-size:16px;margin-left:10px;" CssClass="h5" ID="travellerName"></asp:Label>
                                                     </div>      
-                                                                                     
+                         
                                                     <div class="card-block">
-<%--                                                         <asp:Button runat="server" class="btn btn-primary" Text="Open Request" ID="openRequest" OnClientClick="return showModal();" /> --%>
-                                                         <asp:Button runat="server" class="btn btn-primary" Text="Export as PDF" ID="exportasPdf" OnClick="exportasPdf_Click"/>
-                                                         <asp:Button runat="server" class="btn btn-primary" Text="Send" ID="sendtoEmail" OnClientClick="showModal(); return false" />
+                                                          <asp:LinkButton runat="server" ID="backButton"  style="color:black;font-size:16px"  OnClick="backButton_Click"> <i class="ti-back-left" style="color:black"></i> Back </asp:LinkButton>                                                
+                                                             <asp:Button runat="server" style="text-align:center;margin-left:1250px" class="btn btn-primary" Text="Export PDF" ID="exportasPDF" OnClick="exportasPdf_Click" />
+                                                         <asp:Button runat="server" style="text-align:center" class="btn btn-primary" Text="Send" ID="sendtoEmail" OnClientClick="showModal(); return false" />
+                                                   </div>
 
-                                                    </div>
                                                             <!--EMPLOYEE DETAILS-->
                                                             <div class="card-block">
                                                                 <p style="font-size:18px;color:white;background-color:#09426a;padding-top:5px;padding-left:5px"> Employee Information</p>
@@ -159,7 +159,7 @@
                                                                                                                                 </div>    
 
 
-                                                                                                                                <asp:Label ID="Label15" runat="server" Text="Car/Airport Transfers" Style="margin-left: 40px;"></asp:Label>
+                                                                                                                              <asp:Label ID="Label15" runat="server" Text="Car/Airport Transfers" Style="margin-left: 40px;"></asp:Label>
                                                                                                                              <div class="card-block"  style="margin-left:10px" id="transfers1" runat="server">
                                                                                                                                   <asp:TextBox ID="transfer1" runat="server" Width="300px" Style="margin-left: 60px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
                                                                                                                                   <asp:TextBox ID="transfer1Date" runat="server" Width="150px" Style="margin-left: 40px;border-radius: 5px"  CssClass="textboxes" Enabled="false"></asp:TextBox> 
@@ -232,7 +232,6 @@
                                                                 </div> 
 
                                              <asp:Button runat="server" class="btn btn-primary" Text="Proceed to Billing" ID="confirmArrangement" OnClick="confirmArrangement_Click" />
-                                 
                                     <!-- Page-body end -->
                                          </div>
                                 <div id="styleSelector"> </div>

@@ -183,14 +183,14 @@ namespace TravelDesk.Admin
                 document.getElementById('processingCircle').classList.add('completed');
                 document.querySelectorAll('.line')[0].classList.add('completed');
             }
-            if (arranged) {
+            if (completed) {
                 document.getElementById('requestSubmittedCircle').classList.add('completed');
                 document.getElementById('processingCircle').classList.add('completed');
                 document.querySelectorAll('.line')[0].classList.add('completed');
                 document.querySelectorAll('.line')[1].classList.add('completed');
                 document.getElementById('arrangedCircle').classList.add('completed');
             }
-            if (completed) {
+            if (arranged) {
                 document.getElementById('requestSubmittedCircle').classList.add('completed');
                 document.getElementById('processingCircle').classList.add('completed');
                 document.querySelectorAll('.line')[0].classList.add('completed');

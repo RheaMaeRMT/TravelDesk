@@ -208,9 +208,9 @@
                                                                                 </div> <br />
                                                                                 <div class="row" style="place-content:center">
                                                                                      <div class="col-xl-4 col-md-12">
-                                                                                         <div class="card">
-                                                                                             <div class="card-header">
-                                                                                                 <h5>Contact Information</h5>
+                                                                                                     <div class="card" style="background-color:#C7E9FE">
+                                                                                                         <div class="card-header" style="background-color:#09426a">
+                                                                                                 <h5 style="color:white">Contact Information</h5>
                                                                                              </div>
                                                                                              <div class="card-block" style="text-align:left;font-size:15px">
                                                                                                  <i class="ti-email"></i>
@@ -227,9 +227,9 @@
 
                                                                                     </div>
                                                                                      <div class="col-xl-4 col-md-12">
-                                                                                         <div class="card">
-                                                                                             <div class="card-header">
-                                                                                                 <h5>Company Information</h5>
+                                                                                                     <div class="card" style="background-color:#C7E9FE">
+                                                                                                         <div class="card-header" style="background-color:#09426a">
+                                                                                                 <h5 style="color:white">Company Information</h5>
                                                                                              </div>
                                                                                              <div class="card-block" style="text-align:left;font-size:15px">
                                                                                                  <i class="ti-home"></i>
@@ -253,7 +253,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <!--TRAVEL DETAILS--> <br /> 
-                                                                                <div class="card-block" style="margin-left:150px">
+                                                                                <div class="card-block" style="margin-left:250px">
                                                                                     <asp:Label ID="Label30" runat="server" Text="Purpose of Travel:"></asp:Label> 
                                                                                     <asp:TextBox ID="employeePurpose" runat="server" Style="margin-left: 30px; border-radius: 5px;color:black;background-color:transparent;font-size:18px" BorderColor="Transparent" Enabled="false" Width="300px" ></asp:TextBox>     <br />
                                                                                     <asp:Label ID="Label14" runat="server" Text="Route Destination:"></asp:Label> 
@@ -357,9 +357,9 @@
                                                                                 </center>
 
                                                                                   <!--END OF FLIGHT INFORMATION-->
-                                                                                <div class="card-block" style="margin-left:150px">
+                                                                                <div class="card-block"  style="margin-left:250px">
                                                                                      <asp:Label ID="Label63" runat="server" Text="Remarks:"></asp:Label> <br />
-                                                                                    <asp:TextBox ID="employeeRemarks" runat="server" style="width:fit-content;margin-left:30px;text-align:center;border-radius:10px;color:black;background-color:transparent;font-size:18px" CssClass="textboxes"  Height="91px" Enabled="false"></asp:TextBox> 
+                                                                                                <asp:TextBox ID="employeeRemarks" runat="server" style="width:600px ;margin-left:160px;text-align:center;border-radius:10px;color:black;background-color:transparent;font-size:18px" CssClass="textboxes"  Height="91px" Enabled="false"></asp:TextBox> 
                                                                                 </div>
 
 

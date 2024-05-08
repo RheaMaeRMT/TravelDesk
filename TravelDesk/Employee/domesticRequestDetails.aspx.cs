@@ -57,7 +57,7 @@ namespace TravelDesk.Employee
                                                                                                                                    
                                           FROM travelRequest tr
                                           LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
-                                          WHERE tr.travelRequestID = @RequestId AND travelDraftStat = 'No'";
+                                          WHERE tr.travelRequestID = @RequestId";
 
 
                             cmd.Parameters.AddWithValue("@RequestId", requestId);

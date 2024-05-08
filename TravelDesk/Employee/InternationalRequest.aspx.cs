@@ -231,7 +231,7 @@ namespace TravelDesk.Employee
                                     }
                                     cmd.Parameters.AddWithValue("@reqStatus", "Approved");
                                     cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
-                                    cmd.Parameters.AddWithValue("@type", "International");
+                                    cmd.Parameters.AddWithValue("@type", "International Travel");
                                     cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
                                     cmd.Parameters.AddWithValue("@userID", userID);
                                     cmd.Parameters.AddWithValue("@proofname", filename);

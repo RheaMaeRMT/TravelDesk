@@ -96,15 +96,6 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label empBdate;
 
         /// <summary>
-        /// employeePurpose control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label employeePurpose;
-
-        /// <summary>
         /// empDestination control.
         /// </summary>
         /// <remarks>
@@ -121,6 +112,15 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label EmpestTravelDate;
+
+        /// <summary>
+        /// employeePurpose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label employeePurpose;
 
         /// <summary>
         /// uploadBlock control.

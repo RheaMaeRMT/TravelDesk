@@ -102,7 +102,13 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(userID))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus != 'Draft' ";
+                string query = @"SELECT TR.travelReqStatus, TR.travelType, TR.travelRequestID, TR.travelUserID, TR.travelFname + ' ' + ISNULL(TR.travelMname, '') + ' ' + TR.travelLname AS FullName,  
+                            TR.travelHomeFacility, TR.travelProjectCode, TR.travelDU, TR.travelRemarks, TR.travelOptions, TR.travelPurpose, TR.travelDateSubmitted, 
+                            TV.visaReqStatus, TV.visaReqID, TV.visaFname + ' ' + ISNULL(TV.visaMname, '') + ' ' + TV.visaLname AS VisaFullName, 
+                            TV.visaPurpose, TV.visaDestination, TV.visaEstTravelDate, TV.visaDU, TV.visaBdate, TV.visaEmail, TV.visaLevel, TV.visaReqSubmitted
+                        FROM travelRequest TR
+                        LEFT JOIN travelVisa TV ON TR.travelRequestID = TV.visaRequestID
+                        WHERE TR.travelUserID = @UserID AND TR.travelReqStatus != 'Draft' ";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -139,7 +145,6 @@ namespace TravelDesk.Employee
                     }
                 }
             }
-
         }
         protected void viewDrafts_Click(object sender, EventArgs e)
         {

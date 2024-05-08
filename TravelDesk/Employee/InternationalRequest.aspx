@@ -388,7 +388,7 @@
                                                                 <asp:TextBox ID="employeeDU" runat="server"   Style="margin-left: 40px" Width="200px" ></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeDU"></asp:RequiredFieldValidator>
 
-                                                                </div>
+                                                            </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label7" runat="server" Text="First Name"></asp:Label>
                                                                 <asp:TextBox ID="employeeFName" runat="server" Width="300px" Style="margin-left: 50px"></asp:TextBox>

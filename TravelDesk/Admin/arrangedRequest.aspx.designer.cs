@@ -24,13 +24,22 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label travellerName;
 
         /// <summary>
-        /// exportasPdf control.
+        /// backButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button exportasPdf;
+        protected global::System.Web.UI.WebControls.LinkButton backButton;
+
+        /// <summary>
+        /// exportasPDF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button exportasPDF;
 
         /// <summary>
         /// sendtoEmail control.

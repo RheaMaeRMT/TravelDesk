@@ -58,8 +58,8 @@ namespace TravelDesk.Employee
                                         using (var cmd = db.CreateCommand())
                                         {
                                             cmd.CommandType = CommandType.Text;
-                                            cmd.CommandText = "INSERT INTO travelVisa (visaReqID, visaEmpID, visaFname, visaLname,  visaMname, visaBdate, visaDU, visaEmail, visaLevel, visaMobile, visaPurpose, visaDestination, visaEstTravelDate, visaReqStatus, visaApprovalPath, visaApprovalName, visaPassportPath, visaPassportName, visaUserID, visaReqCreated, visaReqSubmitted, visaDraftStat)"
-                                                + "VALUES (@ID, @empID, @empFName, @empLName,  @empMName, @empBdate, @empDu, @empEmail, @level, @mobile, @purpose, @destination, @estDate, @reqStatus, @proofpath, @proofname, @passportPath, @passportName, @userID, @created, @submitted, @draftStat)";
+                                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose,travelDestination, travelEstdate, travelReqStatus, travelType, travelUserID, travelProofname, travelProofPath, travelPassportPath, travelPassportName, travelDateCreated, travelDateSubmitted, travelDraftStat )"
+                                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @destination, @estDate, @reqStatus, @type,  @userID, @proofname, @proofpath, @passportPath, @passportName, @created, @submitted, @draftStat )";
 
                                             //FOR THE UNIQUE REQUEST ID
                                             string fname = employeeFName.Text;
@@ -75,8 +75,7 @@ namespace TravelDesk.Employee
 
                                             string ID = "VR" + levelText + random + Name;
                                             cmd.Parameters.AddWithValue("@ID", ID);
-
-
+                                            cmd.Parameters.AddWithValue("@location", homeFacility.Text);
                                             cmd.Parameters.AddWithValue("@empID", employeeID.Text);
                                             cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
                                             cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
@@ -86,15 +85,17 @@ namespace TravelDesk.Employee
                                             cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
                                             cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
                                             cmd.Parameters.AddWithValue("@mobile", employeePhone.Text);
+                                            cmd.Parameters.AddWithValue("@projCode", employeeProjCode.Text);
                                             cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
                                             cmd.Parameters.AddWithValue("@destination", destination.Text);
                                             cmd.Parameters.AddWithValue("@estDate", estTravelDate.Text);
                                             cmd.Parameters.AddWithValue("@reqStatus", "Pending");
-                                            cmd.Parameters.AddWithValue("@proofpath", imgPath);
+                                            cmd.Parameters.AddWithValue("@type", "Visa Request");
+                                            cmd.Parameters.AddWithValue("@userID", userID);
                                             cmd.Parameters.AddWithValue("@proofname", filename);
+                                            cmd.Parameters.AddWithValue("@proofpath", imgPath);
                                             cmd.Parameters.AddWithValue("@passportPath", passportPath);
                                             cmd.Parameters.AddWithValue("@passportName", passportName);
-                                            cmd.Parameters.AddWithValue("@userID", userID);
                                             cmd.Parameters.AddWithValue("@created", DateTime.Now); //date the request is created regardless if submitted or as draft
                                             cmd.Parameters.AddWithValue("@submitted", DateTime.Now); //date the request is submitted
                                             cmd.Parameters.AddWithValue("@draftStat", "No");

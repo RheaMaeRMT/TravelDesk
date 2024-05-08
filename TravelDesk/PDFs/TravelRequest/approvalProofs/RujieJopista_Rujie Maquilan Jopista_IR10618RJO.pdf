@@ -1,0 +1,541 @@
+%PDF-1.4
+%‚„œ”
+3 0 obj
+<</Length 852/Filter/FlateDecode>>stream
+xúµV€n‚0}Á+fﬂ∫Ré'°o¥ÖñnKY†`àÅts'È™øìQb'@•≠@¬93«g∆ˆl[7≥ñiÉKlòy-WTˇBw_B‘G∂´>aÙÙ€:ë¨?k˝nm[§MLFª@⁄îπ.≈OÀ`v‰*◊Ï∏5πR¥ñÉ¬#FπG&Éø:hä \∞_î¥ä≥∞’‡‘±ƒˇÛfπòI˛.ËI…£ïEî¬2ñ0…ﬁ|œ|õ˘è‡1ﬁ¯I Œﬁ0˘*Wø˝åëã`÷	•%zrØ£ß™"€2”˝ˇíI€q-≥(üªEò¥îEèŸ]Mu›¶SÍ¶h~Æ˚¢nÇ¯CF(3‰©Gπ™B—aéJ(”á∏J®rÂÅê0‚°∏ﬁE9`Q∑é÷ÏLïç9Ì.mî◊êPÁ<L^gF}«V¿O◊‘ZC§>¨MTq(`¿~‡ßM·5÷3è<ûâ˙ñ•¢„πe·\»¶ãtjZÃv‹Óæéw¶mê”ùYÈùiL≥(Õ˜—báaÏçôú’ôÃUÀRÜ:“ï:e¬=?â#∏	≤Zªô£ßÁyR$ISè≈ƒÜØŒ‘™î+∏Àd·CSçFXá|SÆ ˇa?Œ,,£g∂
+“À®ZÿA‡Ø÷)‹âî˚¡y%µ∫j}zæ¸®©û:˛VÃ3„Ü[˙ãZœ-W-–NÁt±^4¶“x¶ﬂˆo^·π7>ıŒÙ‹≤Ï”ûWA∫Á3‘ÂsŸAÀ6±LœÈ(Y
+y¶ıT=?˜¸&G4∆Å#£ﬁ∞áΩ¯2Î?¡xx˚Îu‹Ö®%¸Ïﬂ˝™åVâr _”9„≠ÇtMGΩF_“ıπÜöV˝≈	ÅW†,FÜ&kuÓò'I^’KW˚8+ºAÀì‚≤∂◊MS≠^~éÁxL‚Q”ò_#é¡Å6Â9ÒÍG ùR°—bè\¨”tì\w:"-î∂WÒ{{≥ÓÏm;⁄®Kø0¥U—ıCuùÔù3)≥ø"πÇnêlﬂ1gÎÒÚ?ΩA™ m¨∑€CL∑⁄+ü⁄ï/%émiø˚ûÄ•ﬁú/˛À‡—,‚h!dî¥·ó
+æDÜÙ7?÷Û£„-
+endstream
+endobj
+5 0 obj
+<</Type/Page/MediaBox[0 0 595 842]/Resources<</Font<</F1 1 0 R/F2 2 0 R>>>>/Contents 3 0 R/Parent 4 0 R>>
+endobj
+1 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding/WinAnsiEncoding>>
+endobj
+2 0 obj
+<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>
+endobj
+4 0 obj
+<</Type/Pages/Count 1/Kids[5 0 R]>>
+endobj
+6 0 obj
+<</Type/Catalog/Pages 4 0 R>>
+endobj
+7 0 obj
+<</Producer(iTextSharpí 5.5.13.3 ©2000-2022 iText Group NV \(AGPL-version\))/CreationDate(D:20240508104933+08'00')/ModDate(D:20240508104933+08'00')>>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000001055 00000 n 
+0000001148 00000 n 
+0000000015 00000 n 
+0000001236 00000 n 
+0000000934 00000 n 
+0000001287 00000 n 
+0000001332 00000 n 
+trailer
+<</Size 8/Root 6 0 R/Info 7 0 R/ID [<9267b74114cc90b401f1e7e6dc9a9daa><9267b74114cc90b401f1e7e6dc9a9daa>]>>
+%iText-5.5.13.3
+startxref
+1497
+%%EOF
+<script>alert('Error sending email. Please try again later.');</script>
+
+
+<!DOCTYPE html>
+
+<html>
+<head><title>
+	Travel Desk | Admin
+    
+</title>
+    <style>
+        .textboxes {
+            color: black;
+            background-color: transparent;
+            border-radius: 5px;
+        }
+        
+    </style>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<script type="text/javascript">
+
+    function showModal() {
+        $('#sendPDFModal').modal('show');
+        return false; // Prevents the default behavior of the button click event
+    }
+
+
+</script>
+
+
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." /><meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" /><meta name="author" content="codedthemes" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="/images/innodataLogo.png" type="image/x-icon" />
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" />
+    <!-- waves.css -->
+    <link rel="stylesheet" href="/assets/pages/waves/css/waves.min.css" type="text/css" media="all" />
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap/css/bootstrap.min.css" />
+    <!-- waves.css -->
+    <link rel="stylesheet" href="/assets/pages/waves/css/waves.min.css" type="text/css" media="all" />
+    <!-- themify icon -->
+    <link rel="stylesheet" type="text/css" href="/assets/icon/themify-icons/themify-icons.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="/assets/icon/font-awesome/css/font-awesome.min.css" />
+    <!-- scrollbar.css -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/jquery.mCustomScrollbar.css" />
+    <!-- am chart export.css -->
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+  
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+<body>
+    <form method="post" action="./arrangedRequest" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="17WpngJWzTToWTD9KM+0Vh4H4V3156RsIvsodNZHF0wf13MfNwrJsq7yw5MaPhZfwwXqrTlt9wgSC9yL+SjXQq+WxTZXgwQ8/sXXUPoQ3LOmmqJwi/ktTX9f/qisrSCNgVnmlxQQ5FoJIIvwRngBAzaU91DuOhUqLvi+QFDD6n/FpOXZI484bR8TptAWhxKIfNTvQqQ6/whEECLyRUP2EME7yNqRUq4W01lfquKdM0kSgoCHf8SzbXW0PzNWdJ7plhqYJ5NrLEAibPyXlEOJeg2bSvDHRCtBej8Isjul9YbuFZoJSIwtZvELNDukOKljpySUCMjBvi93S3flyjhWZiOj0OTnpLpMXoKCUdg5ByUXjqUi88HO7/c2BkBS9bkvCAk6zqZ4UCpMv19qMe1hGjOfkUee1VJmcgzOrqV1QWZdwoDRMqQuvw+WAErjU78xveuSjvi3rjcad8zwI8p5aO+z+x6G/zO8QLUjgykuuTiriroXLm9MPPlBxLIprbjqMFWfV7HK3CUPsrawA/Panai9N2+iXuTUPauDOzj9iPSTEtJhIsts9afBzIjdUDzm0aCo+t8DYXVCAVOQ9oZ4tpaIGhIE6tJ/w+L3Hhxj08i3T2E/skT5PXDkliDu3T6iIByw2XEP5G/4Qil0Y8C5k8dDbbBpu0jpoDKHhOLc6hpgYnYdDyjuR5TWFHO6t1kzQrLWRqCmN6z0I/3nO2v3poAgjx/re63Khsr7hIAt5zZjQaY5xKX2RsBHAWtSc4iMyv32vZ00PyP+e6liKc7xs/32Wz6TJ3rvXLDtWQN5K4JmVHNi7QybAN0tYlqwmMIxXFsDGKVhP9SNkPzkjm6WFkh1IpV5nDk4hBPrExJxAtn3l5Aw0sl3wrwNbLVOP7onc6B/RSW6igbg/PqOqnhfxY1nUZFAo3KHAXAcqXZJq1uSL4DrKDeufnPT6jVBEyrevBqrlgGtdqrXclDSaJZwh0wlQJWUGJJapDbESvKTrsg7GlrFks/XTG7J1WU1yFiL2LME11SvhowxPmSMEBdm1UAJBJF2js/nnXr6KptOeWA1gk9KZcSN+FU9mOQtlXfsmc5NJMZR5FlRnWVnalWO8sw0YynHvLb3N13MFr4A32rLYpJG24wF8W7DHobuDUrnZg1eACQRvt2azROPu3Nmihv1wnmy+fusLppmypcKeR8rTH2+pY9uhKKwuhVb0+lcKosdtMWx+j4ot4XtBzhf8+k1i3FfnUFWIUXcm22mDBpUaRVEIdOpnZOiKsQpUQVmJs6Ew9d45z75phLQAODCmw==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="F79E84D3" />
+</div>
+        <div id="pcoded" class="pcoded">
+            <div class="pcoded-overlay-box"></div>
+            <div class="pcoded-container navbar-wrapper">
+                <nav class="navbar header-navbar pcoded-header">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-logo">
+                            <div>
+                                <img src="/images/innodataLogo.png" style="width: 150px" alt="logo.png">
+                            </div>
+                            <a class="mobile-menu waves-effect waves-light text-left" id="mobile-collapse" href="#!">
+                                <i class="ti-menu"></i>
+                            </a>
+                            <div class="mobile-search waves-effect waves-light">
+                            </div>
+                            <a class="mobile-options waves-effect waves-light">
+                                <i class="ti-more"></i>
+                            </a>
+                        </div>
+
+                        <div class="navbar-container container-fluid">
+                            <ul class="nav-left">
+                                <li>
+                                    <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                                </li>
+                                 <div style="justify-content: center; padding-left:450px;">
+                                    <img src="/images/2ndLogoTD.png" style="width: 400px;" alt="logo.png">
+                                </div>
+                            </ul>
+
+                            <!-- NOTIFICATIONS -->
+                            <ul class="nav-right">
+                                <li class="header-notification">
+                                    
+
+
+
+
+
+                                </li>
+                                <!-- NOTIFICATIONS END -->
+                                    <li class="user-profile header-notification">
+                                        <a href="#!" class="waves-effect waves-light" id="dropdownToggle">
+                                            <span>
+                                                <span id="lblUserName">Miss Cheryll</span>
+                                            </span>
+                                            <i class="ti-angle-down" id="arrowDownIcon"></i>
+                                        </a>
+                                        <ul class="show-notification profile-notification" id="dropdownContent" style="display: none;">
+                                            <li class="waves-effect waves-light">
+                                                <a>
+                                                    <a id="logout" class="ti-layout-sidebar-left" href="javascript:__doPostBack(&#39;ctl00$logout&#39;,&#39;&#39;)" style="font-size:20px;color:black"> Logout  </a>
+                                               </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            document.getElementById("arrowDownIcon").addEventListener("click", function () {
+                                                var dropdownContent = document.getElementById("dropdownContent");
+                                                if (dropdownContent.style.display === "none") {
+                                                    dropdownContent.style.display = "block";
+                                                } else {
+                                                    dropdownContent.style.display = "none";
+                                                }
+                                            });
+                                        });
+                                    </script>
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div>
+                    
+        <div class="pcoded-main-container">
+              <div class="pcoded-wrapper">
+                  <div class="pcoded-content">
+                      <!-- Page-header start -->
+                      <div style="background-color:white">
+                                 <div>
+                                    <img src="/images/travelRequests.png" style="width: 250px;" alt="logo.png">
+
+                                </div>
+
+                      </div>
+                      <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body" >
+                                <div class="page-wrapper" >
+                                    <!-- Page-body start -->
+                                         <div class="page-body" style="color:black;font-size:16px;">
+                                                <div class="card" style="color:black;background-color:white" ID="arrangementBlock">
+                                                    <div class="card-header" style="background-color:#09426a">
+                                                                <span id="MainContent_travellerName" class="h5" style="color:white; font-size:16px;margin-left:10px;">Rujie Maquilan Jopista - Arranged Travel Arrangement</span>
+                                                    </div>      
+                         
+                                                    <div class="card-block">
+                                                          <a id="MainContent_backButton" href="javascript:__doPostBack(&#39;ctl00$MainContent$backButton&#39;,&#39;&#39;)" style="color:black;font-size:16px"> <i class="ti-back-left" style="color:black"></i> Back </a>                                                
+                                                             <input type="submit" name="ctl00$MainContent$exportasPDF" value="Export PDF" id="MainContent_exportasPDF" class="btn btn-primary" style="text-align:center;margin-left:1250px" />
+                                                         <input type="submit" name="ctl00$MainContent$sendtoEmail" value="Send" onclick="showModal(); return false;" id="MainContent_sendtoEmail" class="btn btn-primary" style="text-align:center;display:block;" />
+                                                   </div>
+
+                                                            <!--EMPLOYEE DETAILS-->
+                                                            <div class="card-block">
+                                                                <p style="font-size:18px;color:white;background-color:#09426a;padding-top:5px;padding-left:5px"> Employee Information</p>
+                                                            </div>
+                                                            <div class="card-block">
+                                                                <span id="MainContent_Label7">Traveller Name</span>
+                                                                <input name="ctl00$MainContent$employeeName" type="text" value="Rujie Maquilan Jopista" id="MainContent_employeeName" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 50px; border-radius: 5px" />
+
+                                                                <span id="MainContent_Label2" style="margin-left:40px;">Employee ID</span>
+                                                                <input name="ctl00$MainContent$employeeID" type="text" value="HROJT1" id="MainContent_employeeID" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left:40px; border-radius: 5px" /> 
+                                                                                                                    <span id="MainContent_Label8" style="padding-left:60px">Level</span>
+                                                                <input name="ctl00$MainContent$employeeLevel" type="text" value="10" id="MainContent_employeeLevel" disabled="disabled" class="aspNetDisabled textboxes" style="width:260px;margin-left: 40px; border-radius: 5px" />
+       
+                                                                </div>
+                                                            <div class="card-block">
+
+                                                                <span id="MainContent_Label11">Home Facility</span>
+                                                                <input name="ctl00$MainContent$homeFacility" type="text" value="Mandaue" id="MainContent_homeFacility" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 50px; border-radius: 5px" />                                                           
+                                                                <span id="MainContent_Label3" style="padding-left: 40px">Mobile Number</span>
+                                                                <input name="ctl00$MainContent$employeePhone" type="text" value="09123456789" id="MainContent_employeePhone" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 40px; border-radius: 5px" />
+
+                                                                </div>
+                                                            
+                                                            <!--ARRANGEMENTS -->
+                                                            <div class="card-block">
+                                                                <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Accomodations</p>
+                                                            </div>
+                                                            <div class="card-block">
+                                                                <span id="MainContent_Label5">Accomodations</span>
+                                                                <input name="ctl00$MainContent$accomodations" type="text" value="Hotel Accomodation" id="MainContent_accomodations" disabled="disabled" class="aspNetDisabled textboxes" style="margin-left: 60px; border-radius: 5px" />
+                                                            </div>
+                                                            <div id="MainContent_hotelAccomodations" class="card-block" style="display:block;margin-left:50px;">
+                                                                <span id="MainContent_Label6">Hotel Accomodations</span> <br /> <br />
+                                                                <span id="MainContent_Label1" style="margin-left: 40px;">Hotel Name</span>
+                                                                <input name="ctl00$MainContent$hotel" type="text" value="Radison Blu" id="MainContent_hotel" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 50px;border-radius: 5px" />
+                                                                <span id="MainContent_Label4" style="margin-left: 50px;">Address</span>
+                                                                <input name="ctl00$MainContent$hotelAddress" type="text" value="Manila" id="MainContent_hotelAddress" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 50px;border-radius: 5px" />
+                                                                <span id="MainContent_Label67" style="margin-left: 50px;">Contact Number</span>
+                                                                <input name="ctl00$MainContent$hotelContact" type="text" id="MainContent_hotelContact" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 50px;border-radius: 5px" /> <br /> <br />
+                                                                <span id="MainContent_Label9" style="margin-left: 40px;">Hotel Duration</span> <br />
+                                                                <span id="MainContent_Label10" style="margin-left: 150px;">From:</span> 
+                                                                <input name="ctl00$MainContent$durationFrom" type="text" value="05/20/2024" id="MainContent_durationFrom" disabled="disabled" class="aspNetDisabled textboxes" style="width:150px;margin-left: 40px;border-radius: 5px" /> 
+                                                                <span id="MainContent_Label12" style="margin-left: 50px;">To:</span>                                                                 
+                                                                <input name="ctl00$MainContent$durationTo" type="text" value="05/24/2024" id="MainContent_durationTo" disabled="disabled" class="aspNetDisabled textboxes" style="width:150px;margin-left: 40px;border-radius: 5px" />
+
+                                                            </div>
+                                                            <div id="MainContent_careofEmployee" class="card-block" style="display:none; margin-left:50px;">
+                                                                <span id="MainContent_Label17" style="margin-left: 40px;">Hotel Name</span>
+                                                                <input name="ctl00$MainContent$employeeHotel" type="text" id="MainContent_employeeHotel" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 50px;border-radius: 5px" />
+
+                                                            </div>
+                                                            <div class="card-block">
+                                                                <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Flight Information</p>
+                                                                                                                         <div class="card-block">
+                                                                                                                            <span id="MainContent_Label16" style="margin-left: 20px;">Airline</span>
+                                                                                                                            <input name="ctl00$MainContent$bookedairline" type="text" value="Cebu Pacific" id="MainContent_bookedairline" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 60px;border-radius: 5px" /> 
+                                                                                                                         </div> 
+                                                                                                                               <span id="MainContent_Label19" style="margin-left: 40px;">Travel Route</span><br />
+                                                                                                                                <div class="card-block">
+                                                                                                                                <span id="MainContent_TextBox1" style="display:inline-block;width:100px;margin-left:40px;font-size:14px">Flight #</span>
+                                                                                                                                <span id="MainContent_TextBox2" class="textboxes" TextMode="Date" style="display:inline-block;width:120px;margin-left: 40px;font-size:14px">Date of Departure</span> 
+                                                                                                                                <span id="MainContent_TextBox3" class="textboxes" style="display:inline-block;width:100px;margin-left: 65px;font-size:14px">From</span>
+                                                                                                                                <span id="MainContent_TextBox4" class="textboxes" style="display:inline-block;width:100px;margin-left: 25px;font-size:14px">To</span>
+                                                                                                                                <span id="MainContent_Label20" class="textboxes" style="display:inline-block;width:100px;margin-left: 25px;font-size:14px">ETD</span>
+                                                                                                                                <span id="MainContent_Label21" class="textboxes" style="display:inline-block;width:100px;margin-left: 25px;font-size:14px">ETA</span>
+                                                                                                                                <br />
+                                                                                                                                <input name="ctl00$MainContent$r1Flight" type="text" value="TG 621" id="MainContent_r1Flight" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 40px;border-radius: 5px" />
+                                                                                                                                <input name="ctl00$MainContent$r1FromDate" type="text" value="05/20/2024" id="MainContent_r1FromDate" disabled="disabled" class="aspNetDisabled textboxes" style="width:120px;margin-left: 40px;border-radius: 5px" /> 
+                                                                                                                                <input name="ctl00$MainContent$r1From" type="text" value="CEBU" id="MainContent_r1From" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 70px;border-radius: 5px" />
+                                                                                                                                <input name="ctl00$MainContent$r1To" type="text" value="MANILA" id="MainContent_r1To" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                <input name="ctl00$MainContent$r1ETD" type="text" value="1/1/1900 12:00:00 AM" id="MainContent_r1ETD" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                <input name="ctl00$MainContent$r1ETA" type="text" value="1/1/1900 12:00:00 AM" id="MainContent_r1ETA" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                            </div>
+                                                                                                                                <div id="MainContent_additional2routeFields" class="card-block" style="display:block;">
+                                                                                                                                     <input name="ctl00$MainContent$r2Flight" type="text" id="MainContent_r2Flight" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 40px;border-radius: 5px" />                                                                                                  
+                                                                                                                                    <input name="ctl00$MainContent$r2FromDate" type="text" id="MainContent_r2FromDate" disabled="disabled" class="aspNetDisabled textboxes" style="width:120px;margin-left: 40px;border-radius: 5px" /> 
+                                                                                                                                    <input name="ctl00$MainContent$r2From" type="text" id="MainContent_r2From" disabled="disabled" class="aspNetDisabled textboxes" PlaceHolder="From" style="width:100px;margin-left: 70px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r2To" type="text" id="MainContent_r2To" disabled="disabled" class="aspNetDisabled textboxes" PlaceHolder="To" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r2ETD" type="text" id="MainContent_r2ETD" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r2ETA" type="text" id="MainContent_r2ETA" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                </div>
+                                                                                                                                <div id="MainContent_additional3routeFields" class="card-block" style="display:none;">
+                                                                                                                                    <input name="ctl00$MainContent$r3Flight" type="text" id="MainContent_r3Flight" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 40px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r3FromDate" type="text" id="MainContent_r3FromDate" disabled="disabled" class="aspNetDisabled textboxes" style="width:120px;margin-left: 40px;border-radius: 5px" /> 
+                                                                                                                                    <input name="ctl00$MainContent$r3From" type="text" id="MainContent_r3From" disabled="disabled" class="aspNetDisabled textboxes" PlaceHolder="From" style="width:100px;margin-left: 70px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r3To" type="text" id="MainContent_r3To" disabled="disabled" class="aspNetDisabled textboxes" PlaceHolder="To" style="width:100px;margin-left: 23px;" />
+                                                                                                                                    <input name="ctl00$MainContent$r3ETD" type="text" id="MainContent_r3ETD" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r3ETA" type="text" id="MainContent_r3ETA" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                </div>
+                                                                                                                                <div id="MainContent_additional4routeFields" class="card-block" style="display:none;">
+                                                                                                                                    <input name="ctl00$MainContent$r4Flight" type="text" id="MainContent_r4Flight" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 40px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r4FromDate" type="text" id="MainContent_r4FromDate" disabled="disabled" class="aspNetDisabled textboxes" style="width:120px;margin-left: 40px;border-radius: 5px" />                                                                                                   
+                                                                                                                                    <input name="ctl00$MainContent$r4From" type="text" id="MainContent_r4From" disabled="disabled" class="aspNetDisabled textboxes" PlaceHolder="From" style="width:100px;margin-left: 70px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r4To" type="text" id="MainContent_r4To" disabled="disabled" class="aspNetDisabled textboxes" PlaceHolder="To" style="width:100px;margin-left: 23px;" />
+                                                                                                                                    <input name="ctl00$MainContent$r4ETD" type="text" id="MainContent_r4ETD" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r4ETA" type="text" id="MainContent_r4ETA" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                </div>
+                                                                                                                                <div id="MainContent_additional5routeFields" class="card-block" style="display:none;">
+                                                                                                                                    <input name="ctl00$MainContent$r5Flight" type="text" id="MainContent_r5Flight" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 40px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r5FromDate" type="text" id="MainContent_r5FromDate" disabled="disabled" class="aspNetDisabled textboxes" style="width:120px;margin-left: 40px;" /> 
+                                                                                                                                    <input name="ctl00$MainContent$r5From" type="text" id="MainContent_r5From" disabled="disabled" class="aspNetDisabled textboxes" PlaceHolder="From" style="width:100px;margin-left: 70px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r5To" type="text" id="MainContent_r5To" disabled="disabled" class="aspNetDisabled textboxes" PlaceHolder="To" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r5ETD" type="text" id="MainContent_r5ETD" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />
+                                                                                                                                    <input name="ctl00$MainContent$r5ETA" type="text" id="MainContent_r5ETA" disabled="disabled" class="aspNetDisabled textboxes" style="width:100px;margin-left: 23px;border-radius: 5px" />                                                                                               
+
+                                                                                                                                </div>    
+
+
+                                                                                                                              <span id="MainContent_Label15" style="margin-left: 40px;">Car/Airport Transfers</span>
+                                                                                                                             <div id="MainContent_transfers1" class="card-block" style="margin-left:10px">
+                                                                                                                                  <input name="ctl00$MainContent$transfer1" type="text" value="NAIA - HOTEL PICKUP " id="MainContent_transfer1" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 60px;border-radius: 5px" />
+                                                                                                                                  <input name="ctl00$MainContent$transfer1Date" type="text" value="05/20/2024" id="MainContent_transfer1Date" disabled="disabled" class="aspNetDisabled textboxes" style="width:150px;margin-left: 40px;border-radius: 5px" /> 
+                                                                                                                            </div>
+                                                                                                                             <div id="MainContent_transfers2" class="card-block" style="display:block;margin-left:10px;">
+                                                                                                                                  <input name="ctl00$MainContent$transfer2" type="text" value="HOTEL - NAIA PICKUP" id="MainContent_transfer2" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 60px;border-radius: 5px" />
+                                                                                                                                  <input name="ctl00$MainContent$transfer2Date" type="text" value="05/24/2024" id="MainContent_transfer2Date" disabled="disabled" class="aspNetDisabled textboxes" style="width:150px;margin-left: 40px;border-radius: 5px" /> 
+                                                                                                                            </div>
+                                                                                                                             <div id="MainContent_transfers3" class="card-block" style="display:none;margin-left:10px">
+                                                                                                                                  <input name="ctl00$MainContent$transfer3" type="text" id="MainContent_transfer3" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 60px;" />
+                                                                                                                                  <input name="ctl00$MainContent$transfer3Date" type="text" id="MainContent_transfer3Date" disabled="disabled" class="aspNetDisabled textboxes" style="width:150px;margin-left: 40px;border-radius: 5px" /> 
+                                                                                                                            </div>
+                                                                                                                             <div id="MainContent_transfers4" class="card-block" style="display:none;margin-left:10px">
+                                                                                                                                  <input name="ctl00$MainContent$transfer4" type="text" id="MainContent_transfer4" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 60px;border-radius: 5px" />
+                                                                                                                                  <input name="ctl00$MainContent$transfer4Date" type="text" id="MainContent_transfer4Date" disabled="disabled" class="aspNetDisabled textboxes" style="width:150px;margin-left: 40px;border-radius: 5px" /> 
+                                                                                                                            </div>
+                                                                                                                             <div id="MainContent_transfers5" class="card-block" style="display:none;margin-left:10px">
+                                                                                                                                  <input name="ctl00$MainContent$transfer5" type="text" id="MainContent_transfer5" disabled="disabled" class="aspNetDisabled textboxes" style="width:300px;margin-left: 60px;border-radius: 5px" />
+                                                                                                                                  <input name="ctl00$MainContent$transfer5Date" type="text" id="MainContent_transfer5Date" disabled="disabled" class="aspNetDisabled textboxes" style="width:150px;margin-left: 40px;" /> 
+                                                                                                                            </div>
+
+                                                            </div>
+                                                                                        <div class="card-block">
+                                                                                            <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Others</p>
+                                                                                        </div>
+                                                                                         <div class="row">
+                                                                                             <div class="col-lg-12 col-xl-6">
+                                                                                                 <div class="card-block" style="margin-left:50px">
+                                                                                                    <span id="MainContent_Label65">Travel Requirements</span> <br />
+                                                                                                    <textarea name="ctl00$MainContent$requirements" rows="2" cols="20" id="MainContent_requirements" disabled="disabled" class="aspNetDisabled textboxes" style="width:400px;margin-left: 60px; border-radius: 5px">
+Passport, e-Travel Registration, </textarea>
+                                                                                                 </div> 
+
+                                                                                             </div>
+                                                                                             <div class="col-lg-12 col-xl-6">
+                                                                                                 <div class="card-block" style="margin-left:50px">
+                                                                                                    <span id="MainContent_Label66">Additional Notes</span> <br />
+                                                                                                <textarea name="ctl00$MainContent$additionalNotes" rows="2" cols="20" id="MainContent_additionalNotes" disabled="disabled" class="aspNetDisabled textboxes" style="width:400px;margin-left: 60px;border-radius: 5px">
+Please register here: 
+https://etravel.gov.ph/</textarea>
+
+                                                                                                 </div> 
+
+                                                                                              </div>
+                                                                                         </div>
+                                                            </div>
+                                           </div>
+                                                                <!--MODAL FOR REQUEST DETAILS -->
+                                                                <div class="modal fade" id="sendPDFModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-md" role="document" style="max-width: 500px;">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"> Travel Arrangement </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>                                                                         
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <h4>  <br />  </h4>
+                                                                                <center>
+                                                                              <span id="MainContent_Label18"> Travel Arrangement has been successfully exported and downloaded. </span> 
+                                                                                <span id="MainContent_label"> Do you wish to send a copy to </span> <br />
+                                                                                    <span id="MainContent_employeeEmail">rujie.jopista@gmail.com?</span>
+
+                                                                                    <br /> <br />
+
+                                                                                    <a id="MainContent_sendFile" class="ti-share btn btn-primary btn-round" href="javascript:__doPostBack(&#39;ctl00$MainContent$sendFile&#39;,&#39;&#39;)" style="font-size:18px;"> Send </a>
+                                                                                </center>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+
+                                             <input type="submit" name="ctl00$MainContent$confirmArrangement" value="Proceed to Billing" id="MainContent_confirmArrangement" class="btn btn-primary" />
+                                    <!-- Page-body end -->
+                                         </div>
+                                <div id="styleSelector"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+                </div>
+                
+                <div id="navigationBarMaster" class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+                        <div class="pcoded-inner-navbar main-menu" style="background-color:#fff">
+                                <div>
+                                    <!--LOGO BEFORE THE MAIN--> <br />
+                                    <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">MAIN</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="">
+                                        <a href="/Admin/AdminDashboard" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">MANAGEMENT</div>
+                                <ul class="pcoded-item pcoded-left-item">
+                                     <li>
+                                        <a href="/Admin/TravelRequests" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-notepad"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">Travel Requests</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/VisaApplication" class="waves-effect waves-dark active">
+                                            <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">VISA Requests</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">REPORTS</div>
+                                <ul class="pcoded-item pcoded-left-item">
+
+                                    <li class=" ">
+                                        <a href="/Admin/Travels" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-envelope"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Travels
+                                            </span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="/Admin/Employees" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Employees</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    <li class="">
+                                        <a href="/Admin/Activity" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon"><i class="ti-list"></i><b>FC</b></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Activity Logs</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                    
+
+                                </ul>
+
+                            </div>
+                            </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warning Section Ends -->
+        <!-- Required Jquery -->
+        <script src="/assets/js/jquery/jquery.min.js"></script>
+        <script src="/assets/js/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/assets/js/popper.js/popper.min.js"></script>
+        <script type="text/javascript" src="/assets/js/bootstrap/js/bootstrap.min.js "></script>
+        <script type="text/javascript" src="/assets/pages/widget/excanvas.js "></script>
+        <!-- waves js -->
+        <!-- jquery slimscroll js -->
+        <script type="text/javascript" src="/assets/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+        <!-- modernizr js -->
+        <script type="text/javascript" src="/assets/js/modernizr/modernizr.js "></script>
+        <!-- slimscroll js -->
+        <script type="text/javascript" src="/assets/js/SmoothScroll.js"></script>
+        <script src="/assets/js/jquery.mCustomScrollbar.concat.min.js "></script>
+        <!-- Chart js -->
+        <!-- amchart js -->
+        <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+        <script src="/assets/pages/widget/amchart/gauge.js"></script>
+        <script src="/assets/pages/widget/amchart/serial.js"></script>
+        <script src="/assets/pages/widget/amchart/light.js"></script>
+        <script src="/assets/pages/widget/amchart/pie.min.js"></script>
+        <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+        <!-- menu js -->
+        <script src="/assets/js/pcoded.min.js"></script>
+        <script src="/assets/js/vertical-layout.min.js "></script>
+        <!-- custom js -->
+        <script type="text/javascript" src="/assets/pages/dashboard/custom-dashboard.js"></script>
+
+
+    </form>
+</body>
+</html>
