@@ -23,25 +23,20 @@
                                                     <div class="card-block">
                                                         <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br />
                                                     </div> <br />
-                                            <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
+                                            <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound">               
                                                 <Columns>   
-                                                    <asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Request ID">
                                                         <ItemTemplate>
-                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
+                                                        <asp:Button runat="server" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="btnRequestID" OnClick="viewDetails_Click"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
-
-                                                    <asp:BoundField DataField="travelReqStatus" HeaderText="Request Status" />
-                                                    <asp:BoundField DataField="travelType" HeaderText="Travel Type" />
-                                                    <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" />
+                                                    <asp:BoundField DataField="travelReqStatus" HeaderText="Status" />
+                                                    <asp:BoundField DataField="travelType" HeaderText="Type of Request" />
                                                     <asp:BoundField DataField="FullName" HeaderText="Traveller Name" />
-                                                    <asp:BoundField DataField="travelHomeFacility" HeaderText="Home Facility" />
-                                                    <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
+                                                    <asp:BoundField DataField="travelDestination" HeaderText="Destination" />
                                                     <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
-                                                    <asp:BoundField DataField="travelRemarks" HeaderText="Remarks" />
-                                                    <asp:BoundField DataField="travelOptions" HeaderText="Flight Option" />
-                                                    <asp:BoundField DataField="travelPurpose" HeaderText="Purpose" />
+                                                    <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
                                                     <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
 
 

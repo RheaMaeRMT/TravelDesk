@@ -63,8 +63,8 @@ namespace TravelDesk.Employee
                                     using (var cmd = db.CreateCommand())
                                     {
                                         cmd.CommandType = CommandType.Text;
-                                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat, travelPassportPath, travelPassportName)"
-                                            + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat, @passportPath, @passportName)";
+                                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat, travelPassportPath, travelPassportName)"
+                                            + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat, @passportPath, @passportName)";
 
                                         //FOR THE UNIQUE REQUEST ID
                                         string fname = employeeFName.Text;
@@ -99,7 +99,6 @@ namespace TravelDesk.Employee
                                         cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
                                         cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
                                         cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
-                                        cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
                                         cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
                                         cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
                                         cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
@@ -175,8 +174,8 @@ namespace TravelDesk.Employee
                                 using (var cmd = db.CreateCommand())
                                 {
                                     cmd.CommandType = CommandType.Text;
-                                    cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat, travelPassportPath, travelPassportName)"
-                                        + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat, @passportPath, @passportName)";
+                                    cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat, travelPassportPath, travelPassportName)"
+                                        + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat, @passportPath, @passportName)";
                                     
                                     //FOR THE UNIQUE REQUEST ID
                                     string fname = employeeFName.Text;
@@ -211,7 +210,6 @@ namespace TravelDesk.Employee
                                     cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
                                     cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
                                     cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
-                                    cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
                                     cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
                                     cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
                                     cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
@@ -656,8 +654,8 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat, travelPassportPath, travelPassportName)"
-                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat, @passportPath, @passportName)";
+                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat, travelPassportPath, travelPassportName)"
+                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat, @passportPath, @passportName)";
 
 
                             string ID = "IR" + random + "DRAFT";
@@ -681,7 +679,6 @@ namespace TravelDesk.Employee
                             cmd.Parameters.AddWithValue("@empFName", string.IsNullOrEmpty(employeeFName.Text) ? DBNull.Value : (object)employeeFName.Text);
                             cmd.Parameters.AddWithValue("@empMName", string.IsNullOrEmpty(employeeMName.Text) ? DBNull.Value : (object)employeeMName.Text);
                             cmd.Parameters.AddWithValue("@empLName", string.IsNullOrEmpty(employeeLName.Text) ? DBNull.Value : (object)employeeLName.Text);
-                            cmd.Parameters.AddWithValue("@empBdate", string.IsNullOrEmpty(employeeBdate.Text) ? DBNull.Value : (object)employeeBdate.Text);
                             cmd.Parameters.AddWithValue("@empDu", string.IsNullOrEmpty(employeeDU.Text) ? DBNull.Value : (object)employeeDU.Text);
                             cmd.Parameters.AddWithValue("@empEmail", string.IsNullOrEmpty(employeeEmail.Text) ? DBNull.Value : (object)employeeEmail.Text);
                             cmd.Parameters.AddWithValue("@level", string.IsNullOrEmpty(employeeLevel.Text) ? DBNull.Value : (object)employeeLevel.Text);
@@ -745,7 +742,6 @@ namespace TravelDesk.Employee
             RequiredFieldValidator3.Enabled = false;
             RequiredFieldValidator57.Enabled = false;
             RequiredFieldValidator25.Enabled = false;
-            RequiredFieldValidator27.Enabled = false;
             RequiredFieldValidator29.Enabled = false;
             //RequiredFieldValidator1.Enabled = false;
 

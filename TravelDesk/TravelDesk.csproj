@@ -498,6 +498,7 @@
     <Content Include="Employee\myTravelRequests.aspx" />
     <Content Include="Employee\myVisaRequests.aspx" />
     <Content Include="Employee\VisaRequest.aspx" />
+    <Content Include="Employee\visaRequestDetails.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -900,6 +901,13 @@
     </Compile>
     <Compile Include="Employee\VisaRequest.aspx.designer.cs">
       <DependentUpon>VisaRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee\visaRequestDetails.aspx.cs">
+      <DependentUpon>visaRequestDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employee\visaRequestDetails.aspx.designer.cs">
+      <DependentUpon>visaRequestDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

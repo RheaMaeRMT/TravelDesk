@@ -31,7 +31,6 @@
 					                    document.getElementById('<%= RequiredFieldValidator16.ClientID %>').enabled = false;
                                         document.getElementById('<%= RequiredFieldValidator57.ClientID %>').enabled = false;
                                         document.getElementById('<%= RequiredFieldValidator25.ClientID %>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator27.ClientID %>').enabled = false;
 
 
                                     }
@@ -66,7 +65,7 @@
                                          <div class="page-body">
                                                 <div class="card" style="color:black;">
                                                     <div class="card-header" style="background-color:#09426a">
-                                                        <h5 style="color:white">VISA Application Form</h5>
+                                                        <h5 style="color:white">VISA Request</h5>
                                                     </div>    
                                                             <div class="card-block">
                                                             <asp:Label ID="Label11" runat="server" Text="Home Facility"></asp:Label>
@@ -123,10 +122,6 @@
                                                                 <asp:Label ID="Label46" runat="server" Text="Email" Style="padding-left: 50px"></asp:Label>
                                                                 <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 50px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeEmail"></asp:RequiredFieldValidator>
-
-                                                                <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 40px"></asp:Label>
-                                                                <asp:TextBox ID="employeeBdate" runat="server" TextMode="Date" Width="150px" Style="margin-left: 25px"></asp:TextBox>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeBdate"></asp:RequiredFieldValidator>
 
 
                                                             </div>
