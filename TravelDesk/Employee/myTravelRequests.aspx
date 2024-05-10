@@ -23,11 +23,11 @@
                                                     <div class="card-block">
                                                         <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br />
                                                     </div> <br />
-                                            <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound">               
+                                            <asp:GridView CssClass="table container" style="text-align:center" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound">               
                                                 <Columns>   
                                                     <asp:TemplateField HeaderText="Request ID">
                                                         <ItemTemplate>
-                                                        <asp:Button runat="server" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="btnRequestID" OnClick="viewDetails_Click"/>
+                                                              <asp:Button runat="server" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="btnRequestID" OnClick="viewDetails_Click"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
@@ -37,10 +37,7 @@
                                                     <asp:BoundField DataField="travelDestination" HeaderText="Destination" />
                                                     <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
                                                     <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
-                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
-
-
-                                                    
+                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted"  DataFormatString="{0:MMMM dd, yyyy}" />
                                                 </Columns>
 
                                                 <FooterStyle BackColor="#CCCCCC" />

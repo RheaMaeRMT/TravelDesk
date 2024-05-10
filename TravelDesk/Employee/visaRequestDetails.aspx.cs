@@ -99,6 +99,19 @@ namespace TravelDesk.Employee
                                     employeeDestination.Text = travelDestination;
                                     estTravelDate.Text = estimatedTravel;
 
+                                    if (!string.IsNullOrEmpty(estimatedTravel))
+                                    {
+                                        // Parse the date string into a DateTime object
+                                        DateTime arrivalDateTime;
+                                        if (DateTime.TryParse(estimatedTravel, out arrivalDateTime))
+                                        {
+                                            // Format the DateTime object into the desired format
+                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+
+                                            // Assign the formatted date to the TextBox
+                                            estTravelDate.Text = formattedArrivalDate;
+                                        }
+                                    }
 
                                     string status = reader["travelReqStatus"].ToString();
 

@@ -118,7 +118,7 @@
                                                                             <div class="tab-pane" id="visaRequests" role="tabpanel">
                                                                                 <div class="card">
                                                                                     <div class="card-header">
-                                                                                        <h5 style="color:#09426a">VISA Application Requests</h5>
+                                                                                        <h5 style="color:#09426a">Visa Requests</h5>
                                                                                      </div>  
                                                                                   <div class="page-wrapper">
                                                                                     <!-- Page-body start -->
@@ -131,7 +131,7 @@
                                                                                                         <div class="row align-items-center">
                                                                                                             <div class="col-8">
                                                                                                                 <asp:Button runat="server" ID="visaPending" OnClick="visaPending_Click" CssClass=" h4" BorderStyle="None" BackColor="Transparent"/> <br />
-                                                                                                                <a class="m-b-0">Pending Requests</a>
+                                                                                                                <a class="m-b-0">Received Requests</a>
                                                                                                             </div>
                                                                                                             <div class="col-4 text-right">
                                                                                                                 <i class="fa fa-check-circle f-28"></i>

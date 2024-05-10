@@ -146,7 +146,7 @@ namespace TravelDesk.Employee
                                         if (DateTime.TryParse(empBdate, out arrivalDateTime))
                                         {
                                             // Format the DateTime object into the desired format
-                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                             // Assign the formatted date to the TextBox
                                             employeeBdate.Text = formattedArrivalDate;
@@ -165,7 +165,7 @@ namespace TravelDesk.Employee
                                             if (DateTime.TryParse(oneDate, out arrivalDateTime))
                                             {
                                                 // Format the DateTime object into the desired format
-                                                string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                                string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                                 // Assign the formatted date to the TextBox
                                                 onewayDate.Text = formattedArrivalDate;
@@ -185,7 +185,7 @@ namespace TravelDesk.Employee
                                             if (DateTime.TryParse(r1return, out arrivalDateTime))
                                             {
                                                 // Format the DateTime object into the desired format
-                                                string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                                string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                                 // Assign the formatted date to the TextBox
                                                 round2return.Text = formattedArrivalDate;
@@ -198,7 +198,7 @@ namespace TravelDesk.Employee
                                             if (DateTime.TryParse(r1depart, out arrivalDateTime))
                                             {
                                                 // Format the DateTime object into the desired format
-                                                string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                                string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                                 // Assign the formatted date to the TextBox
                                                 round2departure.Text = formattedArrivalDate;
@@ -226,7 +226,7 @@ namespace TravelDesk.Employee
                                                 if (DateTime.TryParse(mul1ToDate, out arrivalDateTime))
                                                 {
                                                     // Format the DateTime object into the desired format
-                                                    string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                                    string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                                     // Assign the formatted date to the TextBox
                                                     TextBox12.Text = formattedArrivalDate;
@@ -240,7 +240,7 @@ namespace TravelDesk.Employee
                                                 if (DateTime.TryParse(mul2ToDate, out arrivalDateTime))
                                                 {
                                                     // Format the DateTime object into the desired format
-                                                    string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                                    string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                                     // Assign the formatted date to the TextBox
                                                     TextBox14.Text = formattedArrivalDate;
@@ -264,7 +264,7 @@ namespace TravelDesk.Employee
                                                     if (DateTime.TryParse(mul3ToDate, out arrivalDateTime))
                                                     {
                                                         // Format the DateTime object into the desired format
-                                                        string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                                        string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                                         // Assign the formatted date to the TextBox
                                                         TextBox18.Text = formattedArrivalDate;
@@ -287,7 +287,7 @@ namespace TravelDesk.Employee
                                                         if (DateTime.TryParse(mul4ToDate, out arrivalDateTime))
                                                         {
                                                             // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                                             // Assign the formatted date to the TextBox
                                                             TextBox30.Text = formattedArrivalDate;
@@ -310,7 +310,7 @@ namespace TravelDesk.Employee
                                                         if (DateTime.TryParse(mul5ToDate, out arrivalDateTime))
                                                         {
                                                             // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
                                                             // Assign the formatted date to the TextBox
                                                             TextBox22.Text = formattedArrivalDate;

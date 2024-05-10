@@ -65,21 +65,49 @@ namespace TravelDesk.Admin
                                 if (reader.Read())
                                 {
                                     // Retrieve the request details from the reader
-                                    string facility = reader["travelHomeFacility"].ToString();
-                                    string name = reader["travelFname"].ToString() + " " + reader["travelMname"].ToString() + " " + reader["travelLname"].ToString();
-                                    string userID = reader["travelUserID"].ToString();
-                                    string mobile = reader["travelMobilenum"].ToString();
-                                    string level = reader["travelLevel"].ToString();
-
-                                    // Retrieve other request details as needed
+                                    string travelFacility = reader["travelHomeFacility"].ToString();
+                                    string employeeID = reader["travelEmpID"].ToString();
+                                    string employeeFname = reader["travelFname"].ToString();
+                                    string employeeMname = reader["travelMname"].ToString();
+                                    string employeeLname = reader["travelLname"].ToString();
+                                    string employeeProjCode = reader["travelProjectCode"].ToString();
+                                    string employeePhone = reader["travelMobilenum"].ToString();
+                                    string employeeLevel = reader["travelLevel"].ToString();
+                                    string travelPurpose = reader["travelPurpose"].ToString();
+                                    string proof = reader["travelProofPath"].ToString();
+                                    string remarks = reader["travelRemarks"].ToString();
+                                    string employeeBirth = reader["travelBdate"].ToString();
+                                    string flight = reader["travelOptions"].ToString();
+                                    string email = reader["travelEmail"].ToString();
+                                    string DU = reader["travelDU"].ToString();
 
                                     // Display or use the retrieved request details
-                                    employeeID.Text = userID;
-                                    employeeName.Text = name;
-                                    homeFacility.Text = facility;
-                                    employeePhone.Text = mobile;
-                                    employeeLevel.Text = level;
 
+                                    empID.Text = employeeID;
+                                    empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
+                                    empLevel.Text = employeeLevel;
+
+                                    empEmail.Text = email;
+                                    empMobile.Text = employeePhone;
+
+                                    empCode.Text = employeeProjCode;
+                                    empFacility.Text = travelFacility;
+                                    empDeptUnit.Text = DU;
+
+
+                                    if (!string.IsNullOrEmpty(employeeBirth))
+                                    {
+                                        //Parse the date string into a DateTime object
+                                        DateTime arrivalDateTime;
+                                        if (DateTime.TryParse(employeeBirth, out arrivalDateTime))
+                                        {
+                                            //Format the DateTime object into the desired format
+                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+
+                                            //Assign the formatted date to the TextBox
+                                            empBdate.Text = formattedArrivalDate;
+                                        }
+                                    }
 
                                     // Assign other request details to corresponding controls
                                 }
@@ -102,7 +130,7 @@ namespace TravelDesk.Admin
             {
                 // Log the exception or display a user-friendly error message
                 // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                Response.Write("<script>alert('An error occurred while retrieving the request details.')</script>");
+                Response.Write("<script>alert('An error occurred while retrieving the employee details.')</script>");
                 // Log additional information from the SQL exception
                 for (int i = 0; i < ex.Errors.Count; i++)
                 {

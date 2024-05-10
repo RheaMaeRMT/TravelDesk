@@ -21,29 +21,24 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                            <asp:GridView CssClass="table container" ID="visaRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
-                                                <Columns> 
-                                                    <asp:TemplateField>
+                                            <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound">               
+                                                <Columns>   
+                                                    <asp:TemplateField HeaderText="Request ID">
                                                         <ItemTemplate>
-                                                        <asp:Button runat="server" Text="View" Style="background-color: transparent; font-size: 16px;" class="active btn waves-effect text-center" ID="viewDetails" OnClick="viewDetails_Click"/>
+                                                        <asp:Button runat="server" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="btnRequestID" OnClick="viewDetails_Click"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
-
-                                                    <asp:BoundField DataField="visaReqStatus" HeaderText="Request Status" />
-                                                    <asp:BoundField DataField="visaReqID" HeaderText="Request ID" />
+                                                    <asp:BoundField DataField="travelReqStatus" HeaderText="Status" />
+                                                    <asp:BoundField DataField="travelType" HeaderText="Type of Request" />
                                                     <asp:BoundField DataField="FullName" HeaderText="Traveller Name" />
-                                                    <asp:BoundField DataField="visaPurpose" HeaderText="Purpose" />
-                                                    <asp:BoundField DataField="visaDestination" HeaderText="Destination" />
-                                                    <asp:BoundField DataField="visaEstTravelDate" HeaderText="est. Travel Date" />
-                                                    <asp:BoundField DataField="visaDU" HeaderText="Department Unit" />
-                                                    <asp:BoundField DataField="visaBdate" HeaderText="Birthdate" />
-                                                    <asp:BoundField DataField="visaEmail" HeaderText="Traveller Email" />
-                                                    <asp:BoundField DataField="visaLevel" HeaderText="Level" />
-                                                    <asp:BoundField DataField="visaReqSubmitted" HeaderText="Date Submitted" />
+                                                    <asp:BoundField DataField="travelDestination" HeaderText="Destination" />
+                                                    <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
+                                                    <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
+                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" />
 
 
-
+                                                    
                                                 </Columns>
 
                                                 <FooterStyle BackColor="#CCCCCC" />

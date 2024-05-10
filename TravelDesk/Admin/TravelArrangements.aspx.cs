@@ -450,7 +450,7 @@ namespace TravelDesk.Admin
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO TravelArrangement (arrangeID, arrangeUserID, arrangeTravelID, arrangeAirline, arrangeAccomodations, arrangeHotelName , arrangeHotelAdd, arrangeHotelFrom, arrangeHotelTo, " +
+                            cmd.CommandText = "INSERT INTO TravelArrangement (arrangeID, arrangeUserID, arrangeTravelID, arrangeAirline, arrangeAccomodations, arrangeHotelName , arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo, " +
                                 "arrangeTransfer1, arrangeTransfer1Date, arrangeTransfer2, arrangeTransfer2Date, arrangeTransfer3, arrangeTransfer3Date, arrangeTransfer4, arrangeTransfer4Date, arrangeTransfer5, arrangeTransfer5Date, " +
                                 "arrangeRequirements, arrangeNotes, arrangeDateCreated, " +
                                 "routeM1Flight, routeM1From, routeM1FromDate, routeM1To, routeM1ETA, routeM1ETD, " +
@@ -458,7 +458,7 @@ namespace TravelDesk.Admin
                                 "routeM3Flight, routeM3From, routeM3FromDate, routeM3To,  routeM3ETA, routeM3ETD, " +
                                 "routeM4Flight, routeM4From, routeM4FromDate, routeM4To, routeM4ETA, routeM4ETD, " +
                                 "routeM5Flight,  routeM5From, routeM5FromDate, routeM5To,  routeM5ETA, routeM5ETD)"
-                                + "VALUES (@ID, @userID, @travelID, @airline, @accomodations, @hotelName, @hotelAddress, @hotelFrom, @hotelTo, @transfer1, @transfer1Date, @transfer2, @transfer2Date, @transfer3, @transfer3Date, @transfer4, @transfer4Date, @transfer5, @transfer5Date, @requirements, @notes, @dateCreated," +
+                                + "VALUES (@ID, @userID, @travelID, @airline, @accomodations, @hotelName, @hotelAddress, @contact, @hotelFrom, @hotelTo, @transfer1, @transfer1Date, @transfer2, @transfer2Date, @transfer3, @transfer3Date, @transfer4, @transfer4Date, @transfer5, @transfer5Date, @requirements, @notes, @dateCreated," +
                                 " @r1f, @r1From, @r1FromDate, @r1To, @r1A, @r1D, " +
                                 " @r2f, @r2From, @r2FromDate, @r2To, @r2A, @r2D, " +
                                 " @r3f, @r3From, @r3FromDate, @r3To, @r3A, @r3D, " +
@@ -484,6 +484,7 @@ namespace TravelDesk.Admin
                             }
                             cmd.Parameters.AddWithValue("@accomodations", accomodations.SelectedItem.Text);
                             cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
+                            cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
                             cmd.Parameters.AddWithValue("@hotelFrom", string.IsNullOrEmpty(durationFrom.Text) ? (object)DBNull.Value : durationFrom.Text);
                             cmd.Parameters.AddWithValue("@hotelTo", string.IsNullOrEmpty(durationTo.Text) ? (object)DBNull.Value : durationTo.Text);
                             cmd.Parameters.AddWithValue("@transfer1", transfer1.Text);

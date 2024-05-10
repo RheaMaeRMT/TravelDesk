@@ -17,7 +17,19 @@
 
                                             }
                                         }
-        }
+                                    }
+                                    function showOthersFacility(dropdown) {
+                                        var othersLabel = document.getElementById('<%= facOthersLbl.ClientID %>');
+                                        var othersTextbox = document.getElementById('<%= othersFacility.ClientID %>');
+
+                                        if (dropdown.value === "Others") {
+                                            othersLabel.style.display = 'block';
+                                            othersTextbox.style.display = 'block';
+                                        } else {
+                                            othersLabel.style.display = 'none';
+                                            othersTextbox.style.display = 'none';
+                                        }
+                                    }
 
                                     function disableValidators() {
                                         document.getElementById('<%= RequiredFieldValidator29.ClientID%>').enabled = false;
@@ -65,7 +77,7 @@
                                          <div class="page-body">
                                                 <div class="card" style="color:black;">
                                                     <div class="card-header" style="background-color:#09426a">
-                                                        <h5 style="color:white">VISA Request</h5>
+                                                        <h5 style="color:white">Visa Request</h5>
                                                     </div>    
                                                             <div class="card-block">
                                                             <asp:Label ID="Label11" runat="server" Text="Home Facility"></asp:Label>
@@ -77,7 +89,7 @@
                                                                 <asp:ListItem Text="Others" Value="Others" />
                                                             </asp:DropDownList>   
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="homeFacility"></asp:RequiredFieldValidator>
-                                                                <br /> <br />
+                                                                <br />  <br />
                                                                 <asp:Label ID="facOthersLbl" runat="server" Text="Others, please specify... " Style="display: none;"></asp:Label>
                                                                 <asp:TextBox ID="othersFacility" runat="server" Width="320px" TextMode="MultiLine" Style="margin-left: 170px; display: none"></asp:TextBox>
                                                             </div>
@@ -120,7 +132,7 @@
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator57" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePhone"></asp:RequiredFieldValidator>
                                                                
                                                                 <asp:Label ID="Label46" runat="server" Text="Email" Style="padding-left: 50px"></asp:Label>
-                                                                <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 50px"></asp:TextBox>
+                                                                <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 75px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeEmail"></asp:RequiredFieldValidator>
 
 
@@ -137,7 +149,7 @@
                                                                 <asp:Label ID="Label14" runat="server" Text="Destination" Style="margin-left: 35px"></asp:Label>
                                                                 <asp:TextBox ID="destination" runat="server" Width="320px" Style="margin-left: 35px"></asp:TextBox>
 
-                                                                <asp:Label ID="Label4" runat="server" Text="Estimated Travel Date" Style="margin-left: 35px"></asp:Label>
+                                                                <asp:Label ID="Label4" runat="server" Text="Estimated Travel Date" Style="margin-left: 50px"></asp:Label>
                                                                 <asp:TextBox ID="estTravelDate" runat="server" TextMode="Date" Width="320px" Style="margin-left: 35px"></asp:TextBox>   <br />                                                         </div>
                                                             <div class="card-block">
                                                                 <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Approval</p>

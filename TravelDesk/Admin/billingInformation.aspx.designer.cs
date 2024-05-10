@@ -123,94 +123,85 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox totalExpensesTxt;
 
         /// <summary>
-        /// Label7 control.
+        /// empFName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.Label empFName;
 
         /// <summary>
-        /// employeeName control.
+        /// empID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeName;
+        protected global::System.Web.UI.WebControls.Label empID;
 
         /// <summary>
-        /// Label2 control.
+        /// empLevel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label empLevel;
 
         /// <summary>
-        /// employeeID control.
+        /// empEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeID;
+        protected global::System.Web.UI.WebControls.Label empEmail;
 
         /// <summary>
-        /// Label8 control.
+        /// empMobile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.Label empMobile;
 
         /// <summary>
-        /// employeeLevel control.
+        /// empBdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeeLevel;
+        protected global::System.Web.UI.WebControls.Label empBdate;
 
         /// <summary>
-        /// Label11 control.
+        /// empCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
+        protected global::System.Web.UI.WebControls.Label empCode;
 
         /// <summary>
-        /// homeFacility control.
+        /// empFacility control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox homeFacility;
+        protected global::System.Web.UI.WebControls.Label empFacility;
 
         /// <summary>
-        /// Label3 control.
+        /// empDeptUnit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-
-        /// <summary>
-        /// employeePhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox employeePhone;
+        protected global::System.Web.UI.WebControls.Label empDeptUnit;
 
         /// <summary>
         /// submitArrangement control.

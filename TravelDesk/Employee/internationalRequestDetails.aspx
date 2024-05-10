@@ -136,7 +136,7 @@
                                                         <!-- Tab variant tab card start -->
                                                         <div class="card" style="background-image:url('images/bgImage.jpg')">
                                                             <div class="card-header" style="background-color:#09426a">
-                                                                <h5 style="color:white">Domestic Travel Request</h5>
+                                                                <h5 style="color:white">International Travel Request</h5>
                                                             </div>
                                                             <div class="card-block tab-icon">
                                                                     <div class="col-lg-12 ">

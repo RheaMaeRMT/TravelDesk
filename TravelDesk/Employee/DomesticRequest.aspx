@@ -407,10 +407,10 @@
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator57" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePhone"></asp:RequiredFieldValidator>
                                                                
                                                                 <asp:Label ID="Label46" runat="server" Text="Email" Style="padding-left: 50px"></asp:Label>
-                                                                <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 50px"></asp:TextBox>
+                                                                <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 70px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeEmail"></asp:RequiredFieldValidator>
 
-                                                                <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 40px"></asp:Label>
+                                                                <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 50px"></asp:Label>
                                                                 <asp:TextBox ID="employeeBdate" runat="server" TextMode="Date" Width="150px" Style="margin-left: 25px"></asp:TextBox>
                                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator27" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeeBdate"></asp:RequiredFieldValidator>
 

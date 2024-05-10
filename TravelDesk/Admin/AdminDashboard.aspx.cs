@@ -70,7 +70,7 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelVisa WHERE visaReqStatus = 'Pending'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelType = 'Visa Request' AND travelReqStatus = 'Pending'";
 
                             object result = cmd.ExecuteScalar();
                             if (result != null)
@@ -114,7 +114,7 @@ namespace TravelDesk
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "SELECT COUNT(*) FROM travelVisa WHERE visaReqStatus = 'Processing'";
+                        cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelType = 'Visa Request' AND travelReqStatus = 'Processing'";
 
                         object result = cmd.ExecuteScalar();
                         if (result != null)
@@ -157,7 +157,7 @@ namespace TravelDesk
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "SELECT COUNT(*) FROM travelVisa WHERE visaReqStatus = 'Completed'";
+                        cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelType = 'Visa Request' AND travelReqStatus = 'Completed'";
 
                         object result = cmd.ExecuteScalar();
                         if (result != null)
@@ -198,7 +198,7 @@ namespace TravelDesk
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "SELECT COUNT(*) FROM travelVisa WHERE visaReqStatus = 'Granted'";
+                        cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelType = 'Visa Request' AND travelReqStatus = 'Granted'";
 
                         object result = cmd.ExecuteScalar();
                         if (result != null)
@@ -528,7 +528,7 @@ namespace TravelDesk
             {
                 string status = clicked;
                 Session["reqStatus"] = status;
-
+                
                 Response.Write("<script>window.location.href = 'TravelRequests.aspx'; </script>");
 
             }

@@ -26,7 +26,7 @@ namespace TravelDesk.Admin
                 string status = Session["VreqStatus"]?.ToString();
                 if (!string.IsNullOrEmpty(status))
                 {
-                    DisplayRequest();
+                    DisplayRequests();
                 }
                 else
                 {
@@ -36,15 +36,42 @@ namespace TravelDesk.Admin
 
 
         }
-        private void DisplayRequest()
+        protected void travelRequests_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            string userID = Session["userID"]?.ToString();
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Button btnRequestID = e.Row.FindControl("btnRequestID") as Button;
+                if (btnRequestID != null)
+                {
+                    // Set the text of the button from the value of travelRequestID
+                    string firstData = DataBinder.Eval(e.Row.DataItem, "travelRequestID").ToString();
+                    btnRequestID.Text = firstData;
+
+                }
+            }
+        }
+
+        private void DisplayRequests()
+        {
             string status = Session["VreqStatus"]?.ToString();
 
-            if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
+
+            if (!string.IsNullOrEmpty(status))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT visaReqStatus, visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaLname AS FullName, visaPurpose, visaDestination, visaEstTravelDate, visaDU, visaBdate, visaEmail, visaLevel, visaReqSubmitted FROM travelVisa WHERE visaReqStatus = @Status";
+                //string query = "SELECT trave travelReqStatus, travelType, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelDestination, travelDU, travelProjectCode, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
+                string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                            ELSE tr.travelDestination                             
+                        END AS travelDestination, 
+                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+                FROM travelRequest tr
+                LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+                WHERE tr.travelType = 'Visa Request' AND tr.travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -62,8 +89,8 @@ namespace TravelDesk.Admin
                         SqlDataReader reader = command.ExecuteReader();
 
                         // Bind the reader result to the GridView
-                        visaRequests.DataSource = reader;
-                        visaRequests.DataBind();
+                        travelRequests.DataSource = reader;
+                        travelRequests.DataBind();
 
                         // Close the reader
                         reader.Close();
@@ -72,7 +99,7 @@ namespace TravelDesk.Admin
                     {
                         // Log the exception or display a user-friendly error message
                         // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                        Response.Write("<script>alert('An error occurred during retrieval of Draft Visa Request records. Please try again.')</script>");
+                        Response.Write("<script>alert('An error occurred during retrieval of Travel Request records. Please try again.')</script>");
                         // Log additional information from the SQL exception
                         for (int i = 0; i < ex.Errors.Count; i++)
                         {
@@ -87,12 +114,21 @@ namespace TravelDesk.Admin
 
         private void DisplayAllRequests()
         {
-            string userID = Session["userID"]?.ToString();
-
-            if ((!string.IsNullOrEmpty(userID)))
+            try
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT visaReqStatus, visaReqID, visaFname + ' ' + ISNULL(visaMname, '') + ' ' + visaLname AS FullName, visaPurpose, visaDestination, visaEstTravelDate, visaDU, visaBdate, visaEmail, visaLevel, visaReqSubmitted FROM travelVisa WHERE visaReqStatus != 'Draft' ";
+                string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                            ELSE tr.travelDestination                             
+                        END AS travelDestination, 
+                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+                FROM travelRequest tr
+                LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+                WHERE tr.travelType = 'Visa Request' AND tr.travelReqStatus != 'Draft'";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -108,8 +144,8 @@ namespace TravelDesk.Admin
                         SqlDataReader reader = command.ExecuteReader();
 
                         // Bind the reader result to the GridView
-                        visaRequests.DataSource = reader;
-                        visaRequests.DataBind();
+                        travelRequests.DataSource = reader;
+                        travelRequests.DataBind();
 
                         // Close the reader
                         reader.Close();
@@ -118,7 +154,7 @@ namespace TravelDesk.Admin
                     {
                         // Log the exception or display a user-friendly error message
                         // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                        Response.Write("<script>alert('An error occurred during retrieval of Draft Visa Request records. Please try again.')</script>");
+                        Response.Write("<script>alert('An error occurred during route request enrollment. Please try again.')</script>");
                         // Log additional information from the SQL exception
                         for (int i = 0; i < ex.Errors.Count; i++)
                         {
@@ -127,8 +163,11 @@ namespace TravelDesk.Admin
                     }
                 }
             }
-            // Remove the reqStatus session variable after displaying the requests
-            Session.Remove("VreqStatus");
+            catch
+            {
+
+            }
+
         }
 
         protected void viewDetails_Click(object sender, EventArgs e)
@@ -138,7 +177,7 @@ namespace TravelDesk.Admin
             GridViewRow row = (GridViewRow)btn.NamingContainer;
 
             //Get the order ID from the first cell in the row
-            string requestID = row.Cells[2].Text;
+            string requestID = btn.Text;
 
             Console.WriteLine(requestID);
 
@@ -153,39 +192,25 @@ namespace TravelDesk.Admin
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "SELECT * FROM travelVisa WHERE visaReqID = @RequestId";
+                        cmd.CommandText = "SELECT * FROM travelRequest WHERE travelRequestID = @RequestId";
                         cmd.Parameters.AddWithValue("@RequestId", requestID);
 
                         using (var reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                // Retrieve the request details from the reader
-                                string status = reader["visaReqStatus"].ToString();
+                                string type = reader["travelType"].ToString();
 
-                                //check the status
-                                if (status != null)
-                                {
-                                    Session["VreqStatus"] = status;
-                                    Response.Redirect("VisaRequests.aspx");
-                                }
-                                //else if (status == "Processing")
-                                //{
-                                //    Response.Redirect("VisaRequests.aspx");
-
-                                //}
-                                else
-                                {
+                                 if (type == "Visa Request")
+                                 {
                                     //redirect to the next page after clicking the view button
                                     Response.Redirect("VisaRequests.aspx");
-                                }
-
-
+                                 }
                             }
                             else
                             {
                                 // Handle the case where no request with the given ID is found
-                                Response.Write("<script>alert('No request found with the specified ID.'); </script>");
+                                Response.Write("<script>alert('No request found with the specified ID.')</script>");
                             }
                         }
                     }

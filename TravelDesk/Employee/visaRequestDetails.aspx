@@ -136,7 +136,7 @@
                                                         <!-- Tab variant tab card start -->
                                                         <div class="card" style="background-image:url('images/bgImage.jpg')">
                                                             <div class="card-header" style="background-color:#09426a">
-                                                                <h5 style="color:white">Domestic Travel Request</h5>
+                                                                <h5 style="color:white">Visa Request</h5>
                                                             </div>
                                                             <div class="card-block tab-icon">
                                                                     <div class="col-lg-12 ">
@@ -226,7 +226,7 @@
                                                                                     <asp:Label ID="Label3" runat="server" Text="Mobile"></asp:Label>
                                                                                     <asp:TextBox ID="employeePhone" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
                                                                 
-                                                                                    <asp:Label ID="Label46" runat="server" Text="Email" Style="padding-left: 60px"></asp:Label>
+                                                                                    <asp:Label ID="Label46" runat="server" Text="Email" Style="padding-left: 45px"></asp:Label>
                                                                                     <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false" ></asp:TextBox>
 
 

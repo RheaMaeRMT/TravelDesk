@@ -27,6 +27,7 @@ namespace TravelDesk.Admin
             }
         }
 
+
         private void DisplayVisaReq()
         {
             try
@@ -44,7 +45,7 @@ namespace TravelDesk.Admin
                         {
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = @"
-                                        SELECT * FROM travelVisa WHERE visaReqID = @RequestId AND visaDraftStat = 'No'";
+                                        SELECT * FROM travelRequest WHERE travelRequestID = @RequestId AND travelDraftStat = 'No'";
 
 
                             cmd.Parameters.AddWithValue("@RequestId", requestId);
@@ -58,23 +59,23 @@ namespace TravelDesk.Admin
 
 
                                     // Retrieve the request details from the reader
-                                    string employeeID = reader["visaEmpID"].ToString();
-                                    string employeeFname = reader["visaFname"].ToString();
-                                    string employeeMname = reader["visaMname"].ToString();
-                                    string employeeLname = reader["visaLname"].ToString();
-                                    string employeeEmail = reader["visaEmail"].ToString();
-                                    string employeeBdate = reader["visaBdate"].ToString();
-                                    string employeeDU = reader["visaDU"].ToString();
-                                    string employeePhone = reader["visaMobile"].ToString();
-                                    string employeeLevel = reader["visaLevel"].ToString();
-                                    string travelPurpose = reader["visaPurpose"].ToString();
+                                    string employeeID = reader["travelRequestID"].ToString();
+                                    string employeeFname = reader["travelFname"].ToString();
+                                    string employeeMname = reader["travelMname"].ToString();
+                                    string employeeLname = reader["travelLname"].ToString();
+                                    string employeeEmail = reader["travelEmail"].ToString();
+                                    string employeeBdate = reader["travelBdate"].ToString();
+                                    string employeeDU = reader["travelDU"].ToString();
+                                    string employeePhone = reader["travelMobilenum"].ToString();
+                                    string employeeLevel = reader["travelLevel"].ToString();
+                                    string travelPurpose = reader["travelPurpose"].ToString();
 
 
-                                    string proof = reader["visaApprovalPath"].ToString();
-                                    string passport = reader["visaPassportPath"].ToString();
-                                    string destination = reader["visaDestination"].ToString();
-                                    string estTravelDate = reader["visaEstTravelDate"].ToString();
-                                    string status = reader["visaReqStatus"].ToString();
+                                    string proof = reader["travelProofPath"].ToString();
+                                    string passport = reader["travelPassportpath"].ToString();
+                                    string destination = reader["travelDestination"].ToString();
+                                    string estTravelDate = reader["travelEstdate"].ToString();
+                                    string status = reader["travelReqStatus"].ToString();
 
 
                                     // Display or use the retrieved request details
@@ -152,6 +153,7 @@ namespace TravelDesk.Admin
                 }
             }
             Session.Remove("VreqStatus");
+            Session.Remove("clickedVRequest");
 
         }
         private void getTrackingStatus()
