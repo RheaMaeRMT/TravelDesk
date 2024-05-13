@@ -227,6 +227,10 @@
                                                                                                       <asp:TextBox ID="transfer5" runat="server" Width="300px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
                                                                                                       <asp:TextBox ID="transfer5Date" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                 </div>                                                                                           
+                                                            <div class="card-block">
+                                                                <p style="font-size: 18px; color: white; background-color: #808080; padding-top: 5px; padding-left: 5px">Attachments</p>
+
+                                                            </div>
 
                                                             <div class="card-block">
                                                                 <p style="font-size: 18px; color: white; background-color: #808080; padding-top: 5px; padding-left: 5px">Others</p>

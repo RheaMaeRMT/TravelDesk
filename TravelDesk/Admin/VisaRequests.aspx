@@ -171,7 +171,7 @@
                                                                                 <asp:Label runat="server" ID="currentStatus" style="color:#4CAF50;font-size:18px;margin-left:10px"></asp:Label>
                                                                                 <div class="tracker">
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="Visa Requests that has been submitted."><span>1</span></div>
+                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="Visa Requests that has been received."><span>1</span></div>
                                                                                         <div class="text">Received Requests</div>
                                                                                     </div>
                                                                                     <div class="line"></div>

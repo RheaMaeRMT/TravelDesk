@@ -43,15 +43,7 @@ namespace TravelDesk.Admin
                     {
                         populateEmployeeDetails();
                         DisplayArrangement();
-
-                        Session["arrangementPath"]?.ToString();
-                        if (Session["arrangementPath"] != null)
-                        {
-                            string pdf = Session["arrangementPath"].ToString();
-                            if (!string.IsNullOrEmpty(pdf))
-                            {
-                            }
-                        }
+                        //checkIFexported();
                         
                     }
                 }             
@@ -62,6 +54,32 @@ namespace TravelDesk.Admin
                 }
 
             }
+        }
+        private void checkIFexported()
+        {
+            // Retrieve ID and name for filename
+            string ID = Session["clickedRequest"].ToString();
+            string name = employeeName.Text;
+
+            // Construct filename
+            string filename = name + "_" + ID + ".pdf";
+
+            // Save the PDF to the folder /PDFs/travelArrangements
+            string folderPath = Server.MapPath("~/PDFs/travelArrangements");
+            string filePath = Path.Combine(folderPath, filename);
+            // Check if the file exists
+            if (File.Exists(filePath))
+            {
+                exportPDF.Style["display"] = "none";
+                sendEmailbtn.Style["display"] = "block";
+            }
+            else
+            {
+                exportPDF.Style["display"] = "block";
+                sendEmailbtn.Style["display"] = "none";
+
+            }
+
         }
         private void populateEmployeeDetails()
         {
@@ -1038,7 +1056,7 @@ namespace TravelDesk.Admin
                 Response.Flush();
 
 
-                sendtoEmail.Style["display"] = "block";
+
 
 
                 //After sending the PDF for download, send it via email
@@ -1079,7 +1097,7 @@ namespace TravelDesk.Admin
             separatorTable.WidthPercentage = 100;
             PdfPCell cell = new PdfPCell(new Phrase(sectionTitle, font)); // Use custom font
             cell.BackgroundColor = customColor; // Use custom color
-            cell.HorizontalAlignment = Element.ALIGN_CENTER; // Center-align text
+            cell.HorizontalAlignment = Element.ALIGN_LEFT; // Center-align text
             cell.Padding = 5;
             separatorTable.AddCell(cell);
             doc.Add(separatorTable);
@@ -1157,8 +1175,8 @@ namespace TravelDesk.Admin
 
                 if (DateTime.TryParse(durationFrom.Text, out fromDate) && DateTime.TryParse(durationTo.Text, out toDate))
                 {
-                    string formattedFromDate = fromDate.ToString("MMMM dd, yyyy");
-                    string formattedToDate = toDate.ToString("MMMM dd, yyyy");
+                    string formattedFromDate = fromDate.ToString("dd, MMMM");
+                    string formattedToDate = toDate.ToString("dd, MMMM");
 
                     AddRowToTable(hotelAccommodationsTable, "Hotel Duration:", formattedFromDate + " - " + formattedToDate);
                 }
@@ -1180,8 +1198,15 @@ namespace TravelDesk.Admin
 
             // Add rows for flight details
             AddRowToTable(flightDetailsTable, "Airline:", bookedairline.Text);
+
+            DateTime arrival1DateTime;
+            if (DateTime.TryParse(r1FromDate.Text, out arrival1DateTime))
+            {
+                string formattedArrivalDate = arrival1DateTime.ToString("dd, MMMM");
+                AddFlightScheduleRow(flightDetailsTable, "", r1Flight.Text, formattedArrivalDate, r2From.Text, r2To.Text, r2ETA.Text, r2ETD.Text);
+
+            }
             // Add rows for flight schedule details
-            AddFlightScheduleRow(flightDetailsTable, "", r1Flight.Text, r1FromDate.Text, r1From.Text, r1To.Text, r1ETA.Text, r1ETD.Text);
 
             // Add additional flight schedule details if available
             if (additional2routeFields.Visible)
@@ -1247,15 +1272,20 @@ namespace TravelDesk.Admin
             transfersTable.SpacingAfter = 10f;
             transfersTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
-            AddTransfersRow(transfersTable, "Transfers:", transfer1Date.Text , transfer1.Text);
+            DateTime transfer1DateTime;
+            if (DateTime.TryParse(transfer1Date.Text, out transfer1DateTime))
+            {
+                string formattedTransfer2Date = transfer1DateTime.ToString("dd, MMMM");
+                AddTransfersRow(transfersTable, "", formattedTransfer2Date, transfer1.Text);
 
+            }
 
             if (transfers2.Visible)
             {
                 DateTime transfer2DateTime;
                 if (DateTime.TryParse(transfer2Date.Text, out transfer2DateTime))
                 {
-                    string formattedTransfer2Date = transfer2DateTime.ToString("MMMM dd, yyyy");
+                    string formattedTransfer2Date = transfer2DateTime.ToString("dd, MMMM");
                     AddTransfersRow(transfersTable, "", formattedTransfer2Date, transfer2.Text);
                 }
             }
@@ -1265,7 +1295,7 @@ namespace TravelDesk.Admin
                 DateTime transfer3DateTime;
                 if (DateTime.TryParse(transfer3Date.Text, out transfer3DateTime))
                 {
-                    string formattedTransfer3Date = transfer3DateTime.ToString("MMMM dd, yyyy");
+                    string formattedTransfer3Date = transfer3DateTime.ToString("dd, MMMM");
                     AddTransfersRow(transfersTable, "", formattedTransfer3Date, transfer3.Text);
                 }
             }
@@ -1275,7 +1305,7 @@ namespace TravelDesk.Admin
                 DateTime transfer4DateTime;
                 if (DateTime.TryParse(transfer4Date.Text, out transfer4DateTime))
                 {
-                    string formattedTransfer4Date = transfer4DateTime.ToString("MMMM dd, yyyy");
+                    string formattedTransfer4Date = transfer4DateTime.ToString("dd, MMMM");
                     AddTransfersRow(transfersTable, "", formattedTransfer4Date, transfer4.Text);
                 }
             }
@@ -1285,7 +1315,7 @@ namespace TravelDesk.Admin
                 DateTime transfer5DateTime;
                 if (DateTime.TryParse(transfer5Date.Text, out transfer5DateTime))
                 {
-                    string formattedTransfer5Date = transfer5DateTime.ToString("MMMM dd, yyyy");
+                    string formattedTransfer5Date = transfer5DateTime.ToString("dd, MMMM");
                     AddTransfersRow(transfersTable, "", formattedTransfer5Date, transfer5.Text);
                 }
             }
@@ -1339,7 +1369,7 @@ namespace TravelDesk.Admin
             separatorTable.WidthPercentage = 100;
             PdfPCell cell = new PdfPCell(new Phrase(sectionTitle, font)); // Use custom font
             cell.BackgroundColor = customColor; // Use custom color
-            cell.HorizontalAlignment = Element.ALIGN_CENTER; // Center-align text
+            cell.HorizontalAlignment = Element.ALIGN_LEFT; // Center-align text
             cell.Padding = 5;
             separatorTable.AddCell(cell);
             doc.Add(separatorTable);

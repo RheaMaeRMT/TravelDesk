@@ -16,6 +16,11 @@
         $('#sendPDFModal').modal('show');
         return false; // Prevents the default behavior of the button click event
     }
+    function showUpload() {
+        $('#uploadModal').modal('show');
+        return false; // Prevents the default behavior of the button click event
+
+    }
 
 
 </script>
@@ -43,13 +48,15 @@
                                                 <div class="card" style="color:black;background-color:white" ID="arrangementBlock">
                                                     <div class="card-header" style="background-color:#09426a">
                                                                 <asp:Label runat="server" style="color:white; font-size:16px;margin-left:10px;" CssClass="h5" ID="travellerName"></asp:Label>
+                                                          <asp:LinkButton runat="server" ID="backButton"  style="color:white;font-size:16px"  OnClick="backButton_Click"> <i class="ti-back-left" style="color:white"></i> Back </asp:LinkButton>    
+                                                   
                                                     </div>      
-                         
-                                                    <div class="card-block">
-                                                          <asp:LinkButton runat="server" ID="backButton"  style="color:black;font-size:16px"  OnClick="backButton_Click"> <i class="ti-back-left" style="color:black"></i> Back </asp:LinkButton>                                                
-                                                             <asp:Button runat="server" style="text-align:center;margin-left:1250px" class="btn btn-primary" Text="Export PDF" ID="exportasPDF" OnClick="exportasPdf_Click" />
-                                                         <asp:Button runat="server" style="text-align:center" class="btn btn-primary" Text="Send" ID="sendtoEmail" OnClientClick="showModal(); return false" />
-                                                   </div>
+                                                    <div class="card-block" style="margin-left:auto">
+                                                          <asp:LinkButton runat="server" ID="uploadAttachments" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClientClick="showUpload(); return false"> <i class="ti-upload" style="color:white"></i> Upload Attachments </asp:LinkButton>    
+                                                          <asp:LinkButton runat="server" ID="exportPDF" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClick="exportasPdf_Click"> <i class="ti-export" style="color:white"></i> Export PDF </asp:LinkButton>     
+                                                          <asp:LinkButton runat="server" ID="sendEmailbtn" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px" OnClientClick="showModal(); return false"> <i class="ti-email" style="color:white"></i> send to email </asp:LinkButton>     
+                                                    </div>
+
 
                                                             <!--EMPLOYEE DETAILS-->
                                                             <div class="card-block">
@@ -204,6 +211,33 @@
                                                                                          </div>
                                                             </div>
                                            </div>
+                                                                <!-- MODAL FOR UPLOAD ATTACHMENTS-->
+                                                                <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-md" role="document" style="max-width: 500px;">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"> Additional Attachments</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>                                                                         
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                  <asp:Label ID="Label13" runat="server" Text="Insert Attachments" style="margin-left:50px;font-size:16px;color:black"></asp:Label>  <br /> <br />                                                                                                           
+
+                                                                                <center>
+                                                                                <div class="card-block" style="font-size:16px">
+                                                                                    <asp:FileUpload ID="attachments" AllowMultiple="true" runat="server" style="margin-left:80px" />
+                                                                                             <br /><br />                                                   <asp:Button runat="server" class="btn btn-primary" Text="Upload" ID="uploadFiles" />
+
+                                                                                </div>
+
+                                                                                </center>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+
                                                                 <!--MODAL FOR REQUEST DETAILS -->
                                                                 <div class="modal fade" id="sendPDFModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-md" role="document" style="max-width: 500px;">
@@ -214,16 +248,14 @@
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>                                                                         
                                                                             </div>
-                                                                            <div class="modal-body">
-                                                                                <h4>  <br />  </h4>
+                                                                            <div class="modal-body" style="font-size:16px"> <br />
                                                                                 <center>
                                                                               <asp:Label ID="Label18" runat="server"> Travel Arrangement has been successfully exported and downloaded. </asp:Label> 
                                                                                 <asp:Label ID="label" runat="server"> Do you wish to send a copy to </asp:Label> <br />
-                                                                                    <asp:Label runat="server" ID="employeeEmail"> </asp:Label>
+                                                                                    <asp:Label runat="server" Font-Bold="true" ID="employeeEmail"> </asp:Label>
 
                                                                                     <br /> <br />
-
-                                                                                    <asp:LinkButton runat="server" class="ti-share btn btn-primary btn-round" style="font-size:18px;" ID="sendFile" OnClick="sendFile_Click"> Send </asp:LinkButton>
+                                                                                         <asp:LinkButton runat="server" ID="LinkButton4"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClick="sendFile_Click"> <i class="ti-email" style="color:white"></i> SEND </asp:LinkButton>     
                                                                                 </center>
 
                                                                             </div>
@@ -231,7 +263,7 @@
                                                                     </div>
                                                                 </div> 
 
-                                             <asp:Button runat="server" class="btn btn-primary" Text="Proceed to Billing" ID="confirmArrangement" OnClick="confirmArrangement_Click" />
+                                             <asp:LinkButton runat="server" ID="LinkButton3" class="btn btn-primary" style="color:white;font-size:16px;" OnClick="confirmArrangement_Click"> <i class="ti-money" style="color:white"></i> Process Billing </asp:LinkButton>     
                                     <!-- Page-body end -->
                                          </div>
                                 <div id="styleSelector"> </div>
