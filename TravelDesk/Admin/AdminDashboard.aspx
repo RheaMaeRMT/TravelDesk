@@ -29,7 +29,7 @@
                                                                                 <div class="slide"></div>
                                                                             </li>
                                                                             <li class="nav-item">
-                                                                                <a class="nav-link" data-toggle="tab" href="#visaRequests" role="tab" style="font-size:18px;"><i class="icofont icofont-home"></i>VISA Request</a>
+                                                                                <a class="nav-link" data-toggle="tab" href="#visaRequests" role="tab" style="font-size:18px;"><i class="icofont icofont-home"></i>Visa Request</a>
                                                                                 <div class="slide"></div>
                                                                             </li>
                                                                         </ul>

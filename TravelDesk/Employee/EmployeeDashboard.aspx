@@ -39,6 +39,9 @@
                                     <div class="page-body">
                                         <div class="row" style="color:black">
                                             <!-- task, page, download counter  start -->
+                                            <div class="col-xl-1 col-md-6">
+
+                                            </div>
                                             <div class="col-xl-3 col-md-6">
                                                 <div class="card">
                                                     <div class="card-block">
@@ -60,7 +63,6 @@
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
                                                                 <asp:Button runat="server" ID="Processing" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
-<%--                                                                <asp:Label ID="processing" runat="server" class="text-c-purple h4"></asp:Label> <br />--%>
                                                                 <a class=" m-b-0 a" data-hover-message="Requests that has been accepted for travel arrangement processing.">Processing Requests</a>
                                                             </div>
                                                             <div class="col-4 text-right">
@@ -76,27 +78,10 @@
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
                                                                 <asp:Button runat="server" ID="Arranged" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
-<%--                                                                <asp:Label ID="completed" runat="server" class="text-c-purple h4"></asp:Label> <br />--%>
                                                                 <a class=" m-b-0 a" data-hover-message="Requests that completed the travel arrangement process." >Arranged Requests</a>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-check-square f-28"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-3 col-md-6">
-                                                <div class="card">
-                                                    <div class="card-block">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-8">
-                                                                <asp:Button runat="server" ID="Completed" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
-<%--                                                                <asp:Label ID="cancelled" runat="server" class="text-c-purple h4"></asp:Label> <br />--%>
-                                                                <a class="m-b-0 a" data-hover-message="Requests that completed the travel arrangement and billing process" >Completed Requests</a>
-                                                            </div>
-                                                            <div class="col-4 text-right">
-                                                                <i class="fa fa-ban f-28"></i>
                                                             </div>
                                                         </div>
                                                     </div>

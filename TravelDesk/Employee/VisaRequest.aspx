@@ -6,7 +6,6 @@
                                             var level = parseInt(levelText);
                                             if (!isNaN(level)) {
                                                 var validator = document.getElementById('<%= RequiredFieldValidator29.ClientID %>');
-                                                var validator1 = document.getElementById('<%= RequiredFieldValidator1.ClientID%>');
                                             if (level <= 9) {
                                                 validator.enabled = true;
                                                 validator1.enabled = true;
@@ -33,7 +32,6 @@
 
                                     function disableValidators() {
                                         document.getElementById('<%= RequiredFieldValidator29.ClientID%>').enabled = false;
-                                        document.getElementById('<%= RequiredFieldValidator1.ClientID%>').enabled = false;
 
                                         //EMPLOYEE INFORMATION
                                         document.getElementById('<%= RequiredFieldValidator2.ClientID %>').enabled = false;
@@ -43,7 +41,9 @@
 					                    document.getElementById('<%= RequiredFieldValidator16.ClientID %>').enabled = false;
                                         document.getElementById('<%= RequiredFieldValidator57.ClientID %>').enabled = false;
                                         document.getElementById('<%= RequiredFieldValidator25.ClientID %>').enabled = false;
-
+                                        document.getElementById('<%= RequiredFieldValidator1.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator4.ClientID %>').enabled = false;
+                                        document.getElementById('<%= RequiredFieldValidator6.ClientID %>').enabled = false;
 
                                     }
 
@@ -145,12 +145,19 @@
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label13" runat="server" Text="Purpose of Travel"></asp:Label>    
                                                                 <asp:TextBox ID="employeePurpose" runat="server" Width="300px" Style="margin-left: 20px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="employeePurpose"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label14" runat="server" Text="Destination" Style="margin-left: 35px"></asp:Label>
                                                                 <asp:TextBox ID="destination" runat="server" Width="320px" Style="margin-left: 35px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="destination"></asp:RequiredFieldValidator>
 
                                                                 <asp:Label ID="Label4" runat="server" Text="Estimated Travel Date" Style="margin-left: 50px"></asp:Label>
-                                                                <asp:TextBox ID="estTravelDate" runat="server" TextMode="Date" Width="320px" Style="margin-left: 35px"></asp:TextBox>   <br />                                                         </div>
+                                                                <asp:TextBox ID="estTravelDate" runat="server" TextMode="Date" Width="320px" Style="margin-left: 35px"></asp:TextBox>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="estTravelDate"></asp:RequiredFieldValidator>
+
+                                                                <br />                                                         
+
+                                                            </div>
                                                             <div class="card-block">
                                                                 <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Approval</p>
                                                             </div>
@@ -177,7 +184,6 @@
                                                                                                     <asp:Label ID="Label24" runat="server" Text="Attach Scanned Copy of Passport"></asp:Label> <br />
                                                                                                    <asp:FileUpload ID="passportUpload" type="file" runat="server" style="margin-left:100px"  Width="348px" />
                                                                                                     <asp:Button class="form-control btn btn-primary btn-sm"  ID="uploadPassportbtn" runat="server" Text="Upload" Width="150px" CausesValidation="False" OnClick="uploadPassportbtn_Click" />
-                                                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" CssClass="required" ControlToValidate="passportUpload"></asp:RequiredFieldValidator>
                                                                                                </div>
                                                                                                  <div class="col-md-5" style="display:none" id="passportBlock" runat="server">
                                                                                                   <asp:Label ID="Label25" runat="server" Text="Copy of Passport"></asp:Label>     <br />  <br />                                                           

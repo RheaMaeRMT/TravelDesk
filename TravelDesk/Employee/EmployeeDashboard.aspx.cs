@@ -33,8 +33,8 @@ namespace TravelDesk.Employee
                 int arrangedCount = populateDashboardArranged();
                 Arranged.Text = arrangedCount.ToString();
 
-                int completedCount = populateDashboardCompleted();
-                Completed.Text = completedCount.ToString();
+                //int completedCount = populateDashboardCompleted();
+                //Completed.Text = completedCount.ToString();
 
             }
 

@@ -35,6 +35,7 @@
                                                     <asp:BoundField DataField="travelType" HeaderText="Type of Request" />
                                                     <asp:BoundField DataField="FullName" HeaderText="Traveller Name" />
                                                     <asp:BoundField DataField="travelDestination" HeaderText="Destination" />
+                                                    <asp:BoundField DataField="travelDates" HeaderText="Travel Dates" DataFormatString="{0:MMMM dd, yyyy}" />
                                                     <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
                                                     <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
                                                     <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted"  DataFormatString="{0:MMMM dd, yyyy}" />

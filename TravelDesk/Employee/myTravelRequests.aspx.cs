@@ -59,6 +59,11 @@ namespace TravelDesk.Employee
                             WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
                             ELSE tr.travelDestination                             
                         END AS travelDestination, 
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeODate 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate                          
+                        END AS travelDates, 
                         tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
                 FROM travelRequest tr
                 LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
@@ -135,11 +140,17 @@ namespace TravelDesk.Employee
                             WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
                             ELSE tr.travelDestination                             
                         END AS travelDestination, 
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeODate 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate   
+                            WHEN tr.travelType = 'Visa Request' THEN travelEstdate
+                        END AS travelDates, 
                         tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
-                FROM travelRequest tr
-                LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
-                WHERE tr.travelUserID = @UserID 
-                    AND tr.travelReqStatus != 'Draft'";
+                    FROM travelRequest tr
+                    LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+                    WHERE tr.travelUserID = @UserID 
+                    AND tr.travelReqStatus != 'Draft'";                     
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))

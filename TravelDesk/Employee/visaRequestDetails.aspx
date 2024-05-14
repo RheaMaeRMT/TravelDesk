@@ -176,14 +176,14 @@
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Visa Requests that completed the processing."><span>3</span></div>
+                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Visa Requests that completed the process."><span>3</span></div>
                                                                                         <div class="text">Completed</div>
                                                                                     </div>
-                                                                                    <div class="line"></div>
+                                          <%--                                          <div class="line"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="completedCircle" data-hover-message="Requests that has been granted a Visa for Travel"><span>4</span></div>
                                                                                         <div class="text">Granted</div>
-                                                                                    </div>
+                                                                                    </div>--%>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="tab-pane" id="requestDetails" role="tabpanel">

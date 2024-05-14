@@ -179,11 +179,11 @@
                                                                                         <div class="circle" id="arrangedCircle" data-hover-message="Requests that completed the travel arrangement process."><span>3</span></div>
                                                                                         <div class="text">Arranged</div>
                                                                                     </div>
-                                                                                    <div class="line"></div>
+<%--                                                                                    <div class="line"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="completedCircle" data-hover-message="Requests that completed the travel arrangement and billing process"><span>4</span></div>
                                                                                         <div class="text">Completed</div>
-                                                                                    </div>
+                                                                                    </div>--%>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="tab-pane" id="requestDetails" role="tabpanel">

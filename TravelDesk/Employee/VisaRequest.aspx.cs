@@ -295,7 +295,6 @@ namespace TravelDesk.Employee
 
                                     // Disable the RequiredFieldValidator
                                     RequiredFieldValidator29.Enabled = false;
-                                    RequiredFieldValidator1.Enabled = false;
 
                                     Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
                                     uploadBlock.Style["display"] = "none";
@@ -392,7 +391,6 @@ namespace TravelDesk.Employee
 
                                     // Disable the RequiredFieldValidator
                                     RequiredFieldValidator29.Enabled = false;
-                                    RequiredFieldValidator1.Enabled = false;
 
 
                                     Response.Write("<script>alert('Your file was uploaded successfully.')</script>");

@@ -505,36 +505,122 @@ namespace TravelDesk.Admin
                             cmd.Parameters.AddWithValue("@r1From", r1From.Text);
                             cmd.Parameters.AddWithValue("@r1FromDate", string.IsNullOrEmpty(r1FromDate.Text) ? (object)DBNull.Value : r1FromDate.Text);
                             cmd.Parameters.AddWithValue("@r1To", r1To.Text);
-                            cmd.Parameters.AddWithValue("@r1A", r1ETA.Text);
-                            cmd.Parameters.AddWithValue("@r1D", r1ETD.Text);
+
+                            if (r1ETA.Text != null && r1ETD != null)
+                            {
+                                DateTime arrivalDateTime;
+                                DateTime departDateTime;
+                                if (DateTime.TryParse(r1ETA.Text, out arrivalDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r1A", r1ETA.Text);
+
+                                }
+                                if (DateTime.TryParse(r1ETD.Text, out departDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r1D", r1ETD.Text);
+
+                                }
+
+                            }
 
                             cmd.Parameters.AddWithValue("@r2f", r2Flight.Text);
                             cmd.Parameters.AddWithValue("@r2From", r2From.Text);
                             cmd.Parameters.AddWithValue("@r2FromDate", string.IsNullOrEmpty(r2FromDate.Text) ? (object)DBNull.Value : r2FromDate.Text);
-                            cmd.Parameters.AddWithValue("@r2To", r1To.Text);
-                            cmd.Parameters.AddWithValue("@r2A", r2ETA.Text);
-                            cmd.Parameters.AddWithValue("@r2D", r2ETD.Text);
+                            cmd.Parameters.AddWithValue("@r2To", r2To.Text);
+
+                            if (r2ETA.Text != null && r2ETD != null)
+                            {
+                                DateTime arrivalDateTime;
+                                DateTime departDateTime;
+                                if (DateTime.TryParse(r2ETA.Text, out arrivalDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r2A", r2ETA.Text);
+
+                                }
+                                if (DateTime.TryParse(r2ETD.Text, out departDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r2D", r2ETD.Text);
+
+                                }
+
+                            }
+
 
                             cmd.Parameters.AddWithValue("@r3f", r3Flight.Text);
                             cmd.Parameters.AddWithValue("@r3From", r3From.Text);
                             cmd.Parameters.AddWithValue("@r3FromDate", string.IsNullOrEmpty(r3FromDate.Text) ? (object)DBNull.Value : r3FromDate.Text);
                             cmd.Parameters.AddWithValue("@r3To", r3To.Text);
-                            cmd.Parameters.AddWithValue("@r3A", r3ETA.Text);
-                            cmd.Parameters.AddWithValue("@r3D", r3ETD.Text);
+
+                            if (r3ETA.Text != null && r3ETD != null)
+                            {
+                                DateTime arrivalDateTime;
+                                DateTime departDateTime;
+                                if (DateTime.TryParse(r3ETA.Text, out arrivalDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r3A", r3ETA.Text);
+
+                                }
+                                if (DateTime.TryParse(r3ETD.Text, out departDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r3D", r3ETD.Text);
+
+                                }
+
+                            }
 
                             cmd.Parameters.AddWithValue("@r4f", r4Flight.Text);
                             cmd.Parameters.AddWithValue("@r4From", r4From.Text);
                             cmd.Parameters.AddWithValue("@r4FromDate", string.IsNullOrEmpty(r4FromDate.Text) ? (object)DBNull.Value : r4FromDate.Text);
                             cmd.Parameters.AddWithValue("@r4To", r4To.Text);
-                            cmd.Parameters.AddWithValue("@r4A", r4ETA.Text);
-                            cmd.Parameters.AddWithValue("@r4D", r4ETD.Text);
+
+                            if (r4ETA.Text != null && r4ETD != null)
+                            {
+                                DateTime arrivalDateTime;
+                                DateTime departDateTime;
+                                if (DateTime.TryParse(r4ETA.Text, out arrivalDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r4A", r4ETA.Text);
+
+                                }
+                                if (DateTime.TryParse(r4ETD.Text, out departDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r4D", r4ETD.Text);
+
+                                }
+
+                            }
 
                             cmd.Parameters.AddWithValue("@r5f", r5Flight.Text);
                             cmd.Parameters.AddWithValue("@r5From", r5From.Text);
                             cmd.Parameters.AddWithValue("@r5FromDate", string.IsNullOrEmpty(r5FromDate.Text) ? (object)DBNull.Value : r5FromDate.Text);
                             cmd.Parameters.AddWithValue("@r5To", r5To.Text);
-                            cmd.Parameters.AddWithValue("@r5A", r5ETA.Text);
-                            cmd.Parameters.AddWithValue("@r5D", r5ETD.Text);
+
+                            if (r5ETA.Text != null && r5ETD != null)
+                            {
+                                DateTime arrivalDateTime;
+                                DateTime departDateTime;
+                                if (DateTime.TryParse(r5ETA.Text, out arrivalDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r5A", r5ETA.Text);
+
+                                }
+                                if (DateTime.TryParse(r5ETD.Text, out departDateTime))
+                                {
+                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                    cmd.Parameters.AddWithValue("@r5D", r5ETD.Text);
+
+                                }
+
+                            }
 
 
                             //for the REQUIREMENTS
