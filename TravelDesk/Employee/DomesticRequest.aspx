@@ -65,7 +65,7 @@
 
 
 
-                                        } else if (selectedOption === "Roundtrip") {
+                                        } else if (selectedOption === "Round trip") {
 
                                             disableOneway();
                                             disableMultiple();
@@ -86,7 +86,7 @@
                                             enableValidators('<%= RequiredFieldValidator8.ClientID %>');
                                             enableValidators('<%= RequiredFieldValidator7.ClientID %>');
 
-                                        } else if (selectedOption === "multiple") {
+                                        } else if (selectedOption === "Multiple") {
                                             document.getElementById('<%= multipleInput.ClientID %>').style.display = 'block';
                                             enableValidators('<%= RequiredFieldValidator21.ClientID %>');
                                             enableValidators('<%= RequiredFieldValidator22.ClientID %>');
@@ -441,8 +441,8 @@
                                             <asp:DropDownList ID="flightOptions" runat="server" CssClass="m-l-50" Width="343px" onchange="flightSelection()" Style="margin-left: 70px">
                                                 <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True" />
                                                 <asp:ListItem Text="One Way" Value="One Way" />
-                                                <asp:ListItem Text="Round trip" Value="Roundtrip" />
-                                                <asp:ListItem Text="Multiple Destinations" Value="multiple" />
+                                                <asp:ListItem Text="Round trip" Value="Round trip" />
+                                                <asp:ListItem Text="Multiple Destinations" Value="Multiple" />
                                             </asp:DropDownList>
                                         </div>
                                         <div class="card-block" style="display: none" id="oneWaynput" runat="server">

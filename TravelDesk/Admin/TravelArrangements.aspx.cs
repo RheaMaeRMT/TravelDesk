@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -431,9 +432,114 @@ namespace TravelDesk.Admin
 
         protected void submitArrangement_Click(object sender, EventArgs e)
         {
+
+
+            try
+            {
+
+                if (Session["userID"] != null && Session["clickedRequest"] != null)
+                {
+                    saveArrangementDetails();
+                }
+                else
+                {
+                    // Session values are null
+                    Response.Write("<script>alert('Session Expired! Please login again.')</script>");
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during travel ARRANGEMENT. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+        }
+        private void saveArrangementDetails()
+        {
             Random rand = new Random();
             int random = rand.Next(100000, 999999);
-            string ID = "TA" + random;
+            string ID = "A" + random;
+            string acc = "ID" + random + "A";
+            string flight = "F" + random + "ID";
+            string transfer = "T" + random + "ID";
+
+            // Session values are not null, proceed with inserting into the database
+            string userID = Session["userID"].ToString();
+            string requestId = Session["clickedRequest"].ToString();
+
+            using (var db = new SqlConnection(connectionString))
+            {
+                db.Open();
+                using (var cmd = db.CreateCommand())
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "INSERT INTO travelArranged (arrangedID, arrangedUserID, arrangedTravelReqID, arrangedRequirements, arrangedNotes, arrangedDateCreated, arrangedAccomodationID, arrangedFlightID, arrangedTransferID )"
+                                                           + "VALUES (@ID, @userID, @travelID, @requirements, @notes, @dateCreated, @accomodationID, @flightID, @transfersID)";
+
+                    cmd.Parameters.AddWithValue("@ID", ID);
+                    cmd.Parameters.AddWithValue("@userID", userID);
+                    cmd.Parameters.AddWithValue("@travelID", requestId);
+                    cmd.Parameters.AddWithValue("@requirements", ""); // Initialize the parameter outside the loop
+                    cmd.Parameters.AddWithValue("@notes", additionalNotes.Text);
+                    cmd.Parameters.AddWithValue("@dateCreated", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@accomodationID", acc);
+                    cmd.Parameters.AddWithValue("@flightID", flight);
+                    cmd.Parameters.AddWithValue("@transfersID", transfer);
+
+                    Session["accomodationID"] = acc;
+                    Session["flightID"] = flight;
+                    Session["transfersID"] = transfer;
+
+                    //for the REQUIREMENTS
+                    // Create a list to hold the selected requirements
+                    List<string> selectedRequirements = new List<string>();
+
+                    // Iterate through the items and add the selected ones to the list
+                    foreach (ListItem item in requirements.Items)
+                    {
+                        if (item.Selected)
+                        {
+                            selectedRequirements.Add(item.Value);
+                        }
+                    }
+
+                    // Join the selected items into a single string, separated by ", "
+                    string requirementsValue = string.Join(", ", selectedRequirements);
+
+                    // Assign the joined string to the parameter
+                    cmd.Parameters["@requirements"].Value = requirementsValue;
+
+
+                    // Execute the command after setting all parameters
+                    var ctr = cmd.ExecuteNonQuery();
+
+                    if (ctr >= 1)
+                    {
+                        //UPDATE STATUS TO "ARRANGED"
+                        //updateRequestStat();
+                        saveAccomodationsDetails();
+
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                    }
+                }
+            }
+
+        }
+        private void saveAccomodationsDetails()
+        {
+
+            string ID = Session["accomodationID"].ToString();
 
             try
             {
@@ -450,16 +556,87 @@ namespace TravelDesk.Admin
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO TravelArrangement (arrangeID, arrangeUserID, arrangeTravelID, arrangeAirline, arrangeAccomodations, arrangeHotelName , arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo, " +
-                                "arrangeTransfer1, arrangeTransfer1Date, arrangeTransfer2, arrangeTransfer2Date, arrangeTransfer3, arrangeTransfer3Date, arrangeTransfer4, arrangeTransfer4Date, arrangeTransfer5, arrangeTransfer5Date, " +
-                                "arrangeRequirements, arrangeNotes, arrangeDateCreated, " +
-                                "routeM1Flight, routeM1From, routeM1FromDate, routeM1To, routeM1ETA, routeM1ETD, " +
+                            cmd.CommandText = "INSERT INTO travelAccomodation (arrangeAccID, arrangeAccomodation, arrangeHotelName , arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo)"
+                                                                        + "VALUES (@ID, @userID, @travelID, @airline, @accomodations, @hotelName, @hotelAddress, @contact, @hotelFrom, @hotelTo)";
+
+                            cmd.Parameters.AddWithValue("@ID", ID);
+                            string accomodation = accomodations.Text;
+
+                            if (accomodation == "Hotel Accomodation")
+                            {
+                                cmd.Parameters.AddWithValue("@hotelName", hotel.Text);
+
+                            }
+                            else if (accomodation == "c/o Traveller")
+                            {
+                                cmd.Parameters.AddWithValue("@hotelName", coTraveller.Text);
+
+                            }
+                            cmd.Parameters.AddWithValue("@accomodations", accomodations.SelectedItem.Text);
+                            cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
+                            cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
+                            cmd.Parameters.AddWithValue("@hotelFrom", string.IsNullOrEmpty(durationFrom.Text) ? (object)DBNull.Value : durationFrom.Text);
+                            cmd.Parameters.AddWithValue("@hotelTo", string.IsNullOrEmpty(durationTo.Text) ? (object)DBNull.Value : durationTo.Text);
+
+                            // Execute the command after setting all parameters
+                            var ctr = cmd.ExecuteNonQuery();
+
+                            if (ctr >= 1)
+                            {
+                                saveFlightDetails();
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Session values are null
+                    Response.Write("<script>alert('Session Expired! Please login again.')</script>");
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during travel ARRANGEMENT. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+        }
+        private void saveFlightDetails()
+        {
+            string ID = Session["flightID"].ToString();
+
+            try
+            {
+
+                if (Session["userID"] != null && Session["clickedRequest"] != null)
+                {
+                    // Session values are not null, proceed with inserting into the database
+                    string userID = Session["userID"].ToString();
+                    string requestId = Session["clickedRequest"].ToString();
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "INSERT INTO travelFlight (travelFlightID, travelAirline, routeM1Flight, routeM1From, routeM1FromDate, routeM1To, routeM1ETA, routeM1ETD, " +
                                 " routeM2Flight, routeM2From, routeM2FromDate, routeM2To, routeM2ETA, routeM2ETD, " +
                                 "routeM3Flight, routeM3From, routeM3FromDate, routeM3To,  routeM3ETA, routeM3ETD, " +
                                 "routeM4Flight, routeM4From, routeM4FromDate, routeM4To, routeM4ETA, routeM4ETD, " +
                                 "routeM5Flight,  routeM5From, routeM5FromDate, routeM5To,  routeM5ETA, routeM5ETD)"
-                                + "VALUES (@ID, @userID, @travelID, @airline, @accomodations, @hotelName, @hotelAddress, @contact, @hotelFrom, @hotelTo, @transfer1, @transfer1Date, @transfer2, @transfer2Date, @transfer3, @transfer3Date, @transfer4, @transfer4Date, @transfer5, @transfer5Date, @requirements, @notes, @dateCreated," +
-                                " @r1f, @r1From, @r1FromDate, @r1To, @r1A, @r1D, " +
+                                + "VALUES (@ID, @airline, @r1f, @r1From, @r1FromDate, @r1To, @r1A, @r1D, " +
                                 " @r2f, @r2From, @r2FromDate, @r2To, @r2A, @r2D, " +
                                 " @r3f, @r3From, @r3FromDate, @r3To, @r3A, @r3D, " +
                                 " @r4f, @r4From, @r4FromDate, @r4To, @r4A, @r4D, " +
@@ -470,23 +647,113 @@ namespace TravelDesk.Admin
                             cmd.Parameters.AddWithValue("@travelID", requestId);
                             cmd.Parameters.AddWithValue("@airline", airline.Text);
 
-                            string accomodation = accomodations.Text;
+                            string Flight1 = Regex.Replace(r1Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
+                            cmd.Parameters.AddWithValue("@r1f", Flight1);
+                            cmd.Parameters.AddWithValue("@r1From", r1From.Text);
+                            cmd.Parameters.AddWithValue("@r1FromDate", string.IsNullOrEmpty(r1FromDate.Text) ? (object)DBNull.Value : r1FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r1To", r1To.Text);
+                            cmd.Parameters.AddWithValue("@r1A", r1ETA.Text);
+                            cmd.Parameters.AddWithValue("@r1D", r1ETD.Text);
 
-                            if (accomodation == "Hotel Accomodation")
+
+
+                            string Flight2 = Regex.Replace(r2Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
+                            cmd.Parameters.AddWithValue("@r2f", Flight2);
+                            cmd.Parameters.AddWithValue("@r2From", r2From.Text);
+                            cmd.Parameters.AddWithValue("@r2FromDate", string.IsNullOrEmpty(r2FromDate.Text) ? (object)DBNull.Value : r2FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r2To", r2To.Text);
+                            cmd.Parameters.AddWithValue("@r2A", r2ETA.Text);
+                            cmd.Parameters.AddWithValue("@r2D", r2ETD.Text);
+
+
+
+                            string Flight3 = Regex.Replace(r3Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
+                            cmd.Parameters.AddWithValue("@r3f", Flight3);
+                            cmd.Parameters.AddWithValue("@r3From", r3From.Text);
+                            cmd.Parameters.AddWithValue("@r3FromDate", string.IsNullOrEmpty(r3FromDate.Text) ? (object)DBNull.Value : r3FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r3To", r3To.Text);
+                            cmd.Parameters.AddWithValue("@r3A", r3ETA.Text);
+                            cmd.Parameters.AddWithValue("@r3D", r3ETD.Text);
+
+
+
+                            string Flight4 = Regex.Replace(r4Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
+                            cmd.Parameters.AddWithValue("@r4f", Flight4);
+                            cmd.Parameters.AddWithValue("@r4From", r4From.Text);
+                            cmd.Parameters.AddWithValue("@r4FromDate", string.IsNullOrEmpty(r4FromDate.Text) ? (object)DBNull.Value : r4FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r4To", r4To.Text);
+                            cmd.Parameters.AddWithValue("@r4A", r4ETA.Text);
+                            cmd.Parameters.AddWithValue("@r4D", r4ETD.Text);
+
+
+                            string Flight5 = Regex.Replace(r5Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
+                            cmd.Parameters.AddWithValue("@r5f", Flight5);
+                            cmd.Parameters.AddWithValue("@r5From", r5From.Text);
+                            cmd.Parameters.AddWithValue("@r5FromDate", string.IsNullOrEmpty(r5FromDate.Text) ? (object)DBNull.Value : r5FromDate.Text);
+                            cmd.Parameters.AddWithValue("@r5To", r5To.Text);
+                            cmd.Parameters.AddWithValue("@r5A", r5ETA.Text);
+                            cmd.Parameters.AddWithValue("@r5D", r5ETD.Text);
+
+
+                          
+                            // Execute the command after setting all parameters
+                            var ctr = cmd.ExecuteNonQuery();
+
+                            if (ctr >= 1)
                             {
-                                cmd.Parameters.AddWithValue("@hotelName", hotel.Text);
-
+                                saveTransfersDetails();
                             }
-                            else if(accomodation == "c/o Traveller")
+                            else
                             {
-                                cmd.Parameters.AddWithValue("@hotelName", coTraveller.Text);
-
+                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
                             }
-                            cmd.Parameters.AddWithValue("@accomodations", accomodations.SelectedItem.Text);
-                            cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
-                            cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
-                            cmd.Parameters.AddWithValue("@hotelFrom", string.IsNullOrEmpty(durationFrom.Text) ? (object)DBNull.Value : durationFrom.Text);
-                            cmd.Parameters.AddWithValue("@hotelTo", string.IsNullOrEmpty(durationTo.Text) ? (object)DBNull.Value : durationTo.Text);
+                        }
+                    }
+                }
+                else
+                {
+                    // Session values are null
+                    Response.Write("<script>alert('Session Expired! Please login again.')</script>");
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during travel ARRANGEMENT. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+        }
+        private void saveTransfersDetails()
+        {
+ 
+            string ID = Session["transfersID"].ToString();
+
+            try
+            {
+
+                if (Session["userID"] != null && Session["clickedRequest"] != null)
+                {
+                    // Session values are not null, proceed with inserting into the database
+                    string userID = Session["userID"].ToString();
+                    string requestId = Session["clickedRequest"].ToString();
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "INSERT INTO travelTransfers (arrangeTransferID, arrangeTransfer1, arrangeTransfer1Date, arrangeTransfer2, arrangeTransfer2Date, arrangeTransfer3, arrangeTransfer3Date, arrangeTransfer4, arrangeTransfer4Date, arrangeTransfer5, arrangeTransfer5Date)"
+                                + "VALUES (@ID, @transfer1, @transfer1Date, @transfer2, @transfer2Date, @transfer3, @transfer3Date, @transfer4, @transfer4Date, @transfer5, @transfer5Date)";
+
+                            cmd.Parameters.AddWithValue("@ID", ID);
                             cmd.Parameters.AddWithValue("@transfer1", transfer1.Text);
                             cmd.Parameters.AddWithValue("@transfer1Date", string.IsNullOrEmpty(transfer1Date.Text) ? (object)DBNull.Value : transfer1Date.Text);
                             cmd.Parameters.AddWithValue("@transfer2", transfer2.Text);
@@ -497,142 +764,8 @@ namespace TravelDesk.Admin
                             cmd.Parameters.AddWithValue("@transfer4Date", string.IsNullOrEmpty(transfer4Date.Text) ? (object)DBNull.Value : transfer4Date.Text);
                             cmd.Parameters.AddWithValue("@transfer5", transfer5.Text);
                             cmd.Parameters.AddWithValue("@transfer5Date", string.IsNullOrEmpty(transfer5Date.Text) ? (object)DBNull.Value : transfer5Date.Text);
-                            cmd.Parameters.AddWithValue("@requirements", ""); // Initialize the parameter outside the loop
-                            cmd.Parameters.AddWithValue("@notes", additionalNotes.Text);
-                            cmd.Parameters.AddWithValue("@dateCreated", DateTime.Now);
 
-                            cmd.Parameters.AddWithValue("@r1f", r1Flight.Text);
-                            cmd.Parameters.AddWithValue("@r1From", r1From.Text);
-                            cmd.Parameters.AddWithValue("@r1FromDate", string.IsNullOrEmpty(r1FromDate.Text) ? (object)DBNull.Value : r1FromDate.Text);
-                            cmd.Parameters.AddWithValue("@r1To", r1To.Text);
-
-                            if (r1ETA.Text != null && r1ETD != null)
-                            {
-                                DateTime arrivalDateTime;
-                                DateTime departDateTime;
-                                if (DateTime.TryParse(r1ETA.Text, out arrivalDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r1A", r1ETA.Text);
-
-                                }
-                                if (DateTime.TryParse(r1ETD.Text, out departDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r1D", r1ETD.Text);
-
-                                }
-
-                            }
-
-                            cmd.Parameters.AddWithValue("@r2f", r2Flight.Text);
-                            cmd.Parameters.AddWithValue("@r2From", r2From.Text);
-                            cmd.Parameters.AddWithValue("@r2FromDate", string.IsNullOrEmpty(r2FromDate.Text) ? (object)DBNull.Value : r2FromDate.Text);
-                            cmd.Parameters.AddWithValue("@r2To", r2To.Text);
-
-                            if (r2ETA.Text != null && r2ETD != null)
-                            {
-                                DateTime arrivalDateTime;
-                                DateTime departDateTime;
-                                if (DateTime.TryParse(r2ETA.Text, out arrivalDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r2A", r2ETA.Text);
-
-                                }
-                                if (DateTime.TryParse(r2ETD.Text, out departDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r2D", r2ETD.Text);
-
-                                }
-
-                            }
-
-
-                            cmd.Parameters.AddWithValue("@r3f", r3Flight.Text);
-                            cmd.Parameters.AddWithValue("@r3From", r3From.Text);
-                            cmd.Parameters.AddWithValue("@r3FromDate", string.IsNullOrEmpty(r3FromDate.Text) ? (object)DBNull.Value : r3FromDate.Text);
-                            cmd.Parameters.AddWithValue("@r3To", r3To.Text);
-
-                            if (r3ETA.Text != null && r3ETD != null)
-                            {
-                                DateTime arrivalDateTime;
-                                DateTime departDateTime;
-                                if (DateTime.TryParse(r3ETA.Text, out arrivalDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r3A", r3ETA.Text);
-
-                                }
-                                if (DateTime.TryParse(r3ETD.Text, out departDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r3D", r3ETD.Text);
-
-                                }
-
-                            }
-
-                            cmd.Parameters.AddWithValue("@r4f", r4Flight.Text);
-                            cmd.Parameters.AddWithValue("@r4From", r4From.Text);
-                            cmd.Parameters.AddWithValue("@r4FromDate", string.IsNullOrEmpty(r4FromDate.Text) ? (object)DBNull.Value : r4FromDate.Text);
-                            cmd.Parameters.AddWithValue("@r4To", r4To.Text);
-
-                            if (r4ETA.Text != null && r4ETD != null)
-                            {
-                                DateTime arrivalDateTime;
-                                DateTime departDateTime;
-                                if (DateTime.TryParse(r4ETA.Text, out arrivalDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r4A", r4ETA.Text);
-
-                                }
-                                if (DateTime.TryParse(r4ETD.Text, out departDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r4D", r4ETD.Text);
-
-                                }
-
-                            }
-
-                            cmd.Parameters.AddWithValue("@r5f", r5Flight.Text);
-                            cmd.Parameters.AddWithValue("@r5From", r5From.Text);
-                            cmd.Parameters.AddWithValue("@r5FromDate", string.IsNullOrEmpty(r5FromDate.Text) ? (object)DBNull.Value : r5FromDate.Text);
-                            cmd.Parameters.AddWithValue("@r5To", r5To.Text);
-
-                            if (r5ETA.Text != null && r5ETD != null)
-                            {
-                                DateTime arrivalDateTime;
-                                DateTime departDateTime;
-                                if (DateTime.TryParse(r5ETA.Text, out arrivalDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r5A", r5ETA.Text);
-
-                                }
-                                if (DateTime.TryParse(r5ETD.Text, out departDateTime))
-                                {
-                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                    cmd.Parameters.AddWithValue("@r5D", r5ETD.Text);
-
-                                }
-
-                            }
-
-
-                            //for the REQUIREMENTS
-                            foreach (ListItem item in requirements.Items)
-                            {
-                                if (item.Selected)
-                                {
-                                    // Append the selected requirements to the parameter value
-                                    cmd.Parameters["@requirements"].Value += item.Value + ", ";
-                                }
-                            }
-
+                          
                             // Execute the command after setting all parameters
                             var ctr = cmd.ExecuteNonQuery();
 
@@ -669,7 +802,6 @@ namespace TravelDesk.Admin
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
-
         }
         private void updateTravelRoute()
         {

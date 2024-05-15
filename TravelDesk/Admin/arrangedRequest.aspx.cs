@@ -284,8 +284,27 @@ namespace TravelDesk.Admin
                                     r1From.Text = mul1From;
                                     r1To.Text = mul1To;
                                     r1Flight.Text = mul1Flight;
-                                    r1ETA.Text = mul1ETA;
-                                    r1ETD.Text = mul1ETD;
+
+
+                                    if (r1ETA.Text != null && r1ETD != null)
+                                    {
+                                        DateTime arrivalDateTime;
+                                        DateTime departDateTime;
+                                        if (DateTime.TryParse(mul1ETA, out arrivalDateTime))
+                                        {
+                                            string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                            r1ETA.Text = formattedArrivalDate;
+
+                                        }
+                                        if (DateTime.TryParse(mul1ETD, out departDateTime))
+                                        {
+                                            string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                            r1ETD.Text = formattedArrivalDate;
+
+                                        }
+
+                                    }
+
                                     if (!string.IsNullOrEmpty(mul1FromDate))
                                     {
                                         // Parse the date string into a DateTime object
@@ -310,23 +329,39 @@ namespace TravelDesk.Admin
                                                 r2From.Text = mul2From;
                                                 r2To.Text = mul2To;
                                                 r2Flight.Text = mul2Flight;
-                                                r2ETA.Text = mul2ETA;
-                                                r2ETD.Text = mul2ETD;
-                                                //TextBox14.Text = mul2ToDate;
+
+                                                if (r2ETA.Text != null && r2ETD != null)
+                                                {
+                                                    DateTime arrivalDateTime;
+                                                    DateTime departDateTime;
+                                                    if (DateTime.TryParse(mul2ETA, out arrivalDateTime))
+                                                    {
+                                                        string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                        r2ETA.Text = formattedArrivalDate;
+
+                                                    }
+                                                    if (DateTime.TryParse(mul2ETD, out departDateTime))
+                                                    {
+                                                        string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                        r2ETD.Text = formattedArrivalDate;
+
+                                                    }
+
+                                                }
 
                                                 if (!string.IsNullOrEmpty(mul2FromDate))
-                                                {
-                                                    // Parse the date string into a DateTime object
-                                                    DateTime arrivalDateTime;
-                                                    if (DateTime.TryParse(mul2FromDate, out arrivalDateTime))
                                                     {
-                                                        // Format the DateTime object into the desired format
-                                                        string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                                        // Parse the date string into a DateTime object
+                                                        DateTime arrivalDateTime;
+                                                        if (DateTime.TryParse(mul2FromDate, out arrivalDateTime))
+                                                        {
+                                                            // Format the DateTime object into the desired format
+                                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
-                                                    // Assign the formatted date to the TextBox
-                                                    r2FromDate.Text = formattedArrivalDate;
+                                                        // Assign the formatted date to the TextBox
+                                                        r2FromDate.Text = formattedArrivalDate;
+                                                        }
                                                     }
-                                                }
 
 
                                                 if (!string.IsNullOrEmpty(mul3From) && (!string.IsNullOrEmpty(mul3To)))
@@ -336,10 +371,27 @@ namespace TravelDesk.Admin
                                                     //TextBox16.Text = mul3FromDate;
                                                     r3To.Text = mul3To;
                                                     r3Flight.Text = mul3Flight;
-                                                    r3ETA.Text = mul3ETA;
-                                                    r3ETD.Text = mul3ETD;
 
-                                                    if (!string.IsNullOrEmpty(mul3FromDate))
+                                                    if (r3ETA.Text != null && r3ETD != null)
+                                                    {
+                                                        DateTime arrivalDateTime;
+                                                        DateTime departDateTime;
+                                                        if (DateTime.TryParse(mul3ETA, out arrivalDateTime))
+                                                        {
+                                                            string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                            r3ETA.Text = formattedArrivalDate;
+
+                                                        }
+                                                        if (DateTime.TryParse(mul3ETD, out departDateTime))
+                                                        {
+                                                            string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                            r3ETD.Text = formattedArrivalDate;
+
+                                                        }
+
+                                                    }
+
+                                                if (!string.IsNullOrEmpty(mul3FromDate))
                                                     {
                                                         // Parse the date string into a DateTime object
                                                         DateTime arrivalDateTime;
@@ -361,22 +413,39 @@ namespace TravelDesk.Admin
                                                         //TextBox28.Text = mul4FromDate;
                                                         r4To.Text = mul4To;
                                                         r4Flight.Text = mul4Flight;
-                                                        r4ETA.Text = mul4ETA;
-                                                        r4ETD.Text = mul4ETD;
+
+                                                        if (r4ETA.Text != null && r4ETD != null)
+                                                        {
+                                                            DateTime arrivalDateTime;
+                                                            DateTime departDateTime;
+                                                            if (DateTime.TryParse(mul4ETA, out arrivalDateTime))
+                                                            {
+                                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                                r4ETA.Text = formattedArrivalDate;
+
+                                                            }
+                                                            if (DateTime.TryParse(mul4ETD, out departDateTime))
+                                                            {
+                                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                                r4ETD.Text = formattedArrivalDate;
+
+                                                            }
+
+                                                        }
 
                                                         if (!string.IsNullOrEmpty(mul4FromDate))
-                                                        {
-                                                            // Parse the date string into a DateTime object
-                                                            DateTime arrivalDateTime;
-                                                            if (DateTime.TryParse(mul4FromDate, out arrivalDateTime))
                                                             {
-                                                                // Format the DateTime object into the desired format
-                                                                string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                                                // Parse the date string into a DateTime object
+                                                                DateTime arrivalDateTime;
+                                                                if (DateTime.TryParse(mul4FromDate, out arrivalDateTime))
+                                                                {
+                                                                    // Format the DateTime object into the desired format
+                                                                    string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
-                                                            // Assign the formatted date to the TextBox
-                                                            r4FromDate.Text = formattedArrivalDate;
+                                                                // Assign the formatted date to the TextBox
+                                                                r4FromDate.Text = formattedArrivalDate;
+                                                                }
                                                             }
-                                                        }
 
                                                     }
                                                     if (!string.IsNullOrEmpty(mul5From) && (!string.IsNullOrEmpty(mul5To)))
@@ -386,10 +455,27 @@ namespace TravelDesk.Admin
                                                         //TextBox20.Text = mul5FromDate;
                                                         r5To.Text = mul5To;
                                                         r5Flight.Text = mul1Flight;
-                                                        r5ETA.Text = mul5ETA;
-                                                        r5ETD.Text = mul5ETD;
 
-                                                        if (!string.IsNullOrEmpty(mul5FromDate))
+                                                        if (r5ETA.Text != null && r5ETD != null)
+                                                        {
+                                                            DateTime arrivalDateTime;
+                                                            DateTime departDateTime;
+                                                            if (DateTime.TryParse(mul5ETA, out arrivalDateTime))
+                                                            {
+                                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                                r5ETA.Text = formattedArrivalDate;
+
+                                                            }
+                                                            if (DateTime.TryParse(mul5ETD, out departDateTime))
+                                                            {
+                                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                                r5ETD.Text = formattedArrivalDate;
+
+                                                            }
+
+                                                        }
+
+                                                    if (!string.IsNullOrEmpty(mul5FromDate))
                                                         {
                                                             // Parse the date string into a DateTime object
                                                             DateTime arrivalDateTime;
@@ -935,10 +1021,19 @@ namespace TravelDesk.Admin
 
         void AddRowToTable(PdfPTable table, string label, string value)
         {
+            // Create and add the label cell
             PdfPCell labelCell = new PdfPCell(new Phrase(label));
-            labelCell.Border = PdfPCell.NO_BORDER;  
+            labelCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            labelCell.Border = Rectangle.NO_BORDER; // Remove border for cleaner look
+            labelCell.PaddingRight = 5; // Reduce right padding to bring cells closer
+
+            // Create and add the value cell
             PdfPCell valueCell = new PdfPCell(new Phrase(value));
-            valueCell.Border = PdfPCell.NO_BORDER;
+            valueCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            valueCell.Border = Rectangle.NO_BORDER; // Remove border for cleaner look
+            valueCell.PaddingLeft = -80; // Remove left padding to bring cells closer
+
+            // Add cells to the table
             table.AddCell(labelCell);
             table.AddCell(valueCell);
         }
@@ -1071,6 +1166,7 @@ namespace TravelDesk.Admin
             }
         }
 
+
         // Helper method to add a section separator with a title
         private void AddSectionSeparator(Document doc, string sectionTitle)
         {
@@ -1188,8 +1284,8 @@ namespace TravelDesk.Admin
                 DateTime arrivalDateTime;
                 if (DateTime.TryParse(r1FromDate.Text, out arrivalDateTime))
                 {
-                    string formattedArrivalDate = arrivalDateTime.ToString("dd, MMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r1Flight.Text, formattedArrivalDate, r1From.Text, r1To.Text, r1ETA.Text, r1ETD.Text);
+                    string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
+                    AddFlightScheduleRow(flightDetailsTable, "", r1Flight.Text,"  ", formattedArrivalDate, "  ", r1From.Text, " ", r1To.Text, "          ", r1ETA.Text, " ", r1ETD.Text);
                 }
             }
            
@@ -1199,8 +1295,8 @@ namespace TravelDesk.Admin
                 DateTime arrivalDateTime;
                 if (DateTime.TryParse(r2FromDate.Text, out arrivalDateTime))
                 {
-                    string formattedArrivalDate = arrivalDateTime.ToString("dd, MMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r2Flight.Text, formattedArrivalDate, r2From.Text, r2To.Text, r2ETA.Text, r2ETD.Text);
+                    string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
+                    AddFlightScheduleRow(flightDetailsTable, "", r2Flight.Text, "  ", formattedArrivalDate, "  ", r2From.Text, " ", r2To.Text, "          ", r2ETA.Text, " ", r2ETD.Text);
                 }
             }
 
@@ -1209,8 +1305,8 @@ namespace TravelDesk.Admin
                 DateTime arrivalDateTime;
                 if (DateTime.TryParse(r3FromDate.Text, out arrivalDateTime))
                 {
-                    string formattedArrivalDate = arrivalDateTime.ToString("dd, MMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r3Flight.Text, formattedArrivalDate, r3From.Text, r3To.Text, r3ETA.Text, r3ETD.Text);
+                    string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
+                    AddFlightScheduleRow(flightDetailsTable, "", r3Flight.Text, "  ", formattedArrivalDate, "  ", r3From.Text, " ", r3To.Text, "          ", r3ETA.Text, " ", r3ETD.Text);
                 }
             }
             if (additional4routeFields.Visible)
@@ -1218,8 +1314,8 @@ namespace TravelDesk.Admin
                 DateTime arrivalDateTime;
                 if (DateTime.TryParse(r4FromDate.Text, out arrivalDateTime))
                 {
-                    string formattedArrivalDate = arrivalDateTime.ToString("dd, MMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r4Flight.Text, formattedArrivalDate, r4From.Text, r4To.Text, r4ETA.Text, r4ETD.Text);
+                    string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
+                    AddFlightScheduleRow(flightDetailsTable, "", r4Flight.Text, "  ", formattedArrivalDate, "  ", r4From.Text, " ", r4To.Text, "          ", r4ETA.Text, " ", r4ETD.Text);
                 }
             }
             if (additional5routeFields.Visible)
@@ -1227,8 +1323,8 @@ namespace TravelDesk.Admin
                 DateTime arrivalDateTime;
                 if (DateTime.TryParse(r5FromDate.Text, out arrivalDateTime))
                 {
-                    string formattedArrivalDate = arrivalDateTime.ToString("dd, MMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r5Flight.Text, formattedArrivalDate, r5From.Text, r5To.Text, r5ETA.Text, r5ETD.Text);
+                    string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
+                    AddFlightScheduleRow(flightDetailsTable, "", r5Flight.Text, "  ", formattedArrivalDate, "  ", r5From.Text, " ", r5To.Text, "          ", r5ETA.Text, " ", r5ETD.Text);
                 }
             }
             // Add flight details table to document
@@ -1236,12 +1332,12 @@ namespace TravelDesk.Admin
         }
 
         //Helper method to add flight schedule row with conditional dash
-        private void AddFlightScheduleRow(PdfPTable table, string label, string flightNumber, string fromDate, string from, string to, string eta, string etd)
+        private void AddFlightScheduleRow(PdfPTable table, string label, string flightNumber, string text, string fromDate, string text1, string from, string text2, string to, string text3, string eta, string text4, string etd)
         {
             if (!string.IsNullOrEmpty(fromDate) && !string.IsNullOrEmpty(from) && !string.IsNullOrEmpty(to))
             {
                 // Format the flight schedule details including flight number, date, from, to, ETA, and ETD
-                string formattedSchedule = $"{flightNumber} {fromDate} {from} - {to} {eta} {etd}";
+                string formattedSchedule = $"{flightNumber} {text} {fromDate}{text1} {from} {text2} {to} {text3} {eta} {text4} {etd}";
                 AddRowToTable(table, label, formattedSchedule);
             }
         }
@@ -1260,8 +1356,8 @@ namespace TravelDesk.Admin
             DateTime transfer1DateTime;
             if (DateTime.TryParse(transfer1Date.Text, out transfer1DateTime))
             {
-                string formattedTransfer2Date = transfer1DateTime.ToString("dd, MMMM");
-                AddTransfersRow(transfersTable, "", formattedTransfer2Date, "-", transfer1.Text);
+                string formattedTransfer2Date = transfer1DateTime.ToString("ddMMMM");
+                AddTransfersRow(transfersTable, "Transfers:", formattedTransfer2Date, "-", transfer1.Text);
 
             }
 
@@ -1270,7 +1366,7 @@ namespace TravelDesk.Admin
                 DateTime transfer2DateTime;
                 if (DateTime.TryParse(transfer2Date.Text, out transfer2DateTime))
                 {
-                    string formattedTransfer2Date = transfer2DateTime.ToString("dd, MMMM");
+                    string formattedTransfer2Date = transfer2DateTime.ToString("ddMMMM");
                     AddTransfersRow(transfersTable, "", formattedTransfer2Date, "-", transfer2.Text);
                 }
             }
@@ -1280,7 +1376,7 @@ namespace TravelDesk.Admin
                 DateTime transfer3DateTime;
                 if (DateTime.TryParse(transfer3Date.Text, out transfer3DateTime))
                 {
-                    string formattedTransfer3Date = transfer3DateTime.ToString("dd, MMMM");
+                    string formattedTransfer3Date = transfer3DateTime.ToString("ddMMMM");
                     AddTransfersRow(transfersTable, "", formattedTransfer3Date, "-", transfer3.Text);
                 }
             }
@@ -1290,7 +1386,7 @@ namespace TravelDesk.Admin
                 DateTime transfer4DateTime;
                 if (DateTime.TryParse(transfer4Date.Text, out transfer4DateTime))
                 {
-                    string formattedTransfer4Date = transfer4DateTime.ToString("dd, MMMM");
+                    string formattedTransfer4Date = transfer4DateTime.ToString("ddMMMM");
                     AddTransfersRow(transfersTable, "", formattedTransfer4Date, "-", transfer4.Text);
                 }
             }
@@ -1300,7 +1396,7 @@ namespace TravelDesk.Admin
                 DateTime transfer5DateTime;
                 if (DateTime.TryParse(transfer5Date.Text, out transfer5DateTime))
                 {
-                    string formattedTransfer5Date = transfer5DateTime.ToString("dd, MMMM");
+                    string formattedTransfer5Date = transfer5DateTime.ToString("ddMMMM");
                     AddTransfersRow(transfersTable, "", formattedTransfer5Date, "-", transfer5.Text);
                 }
             }

@@ -120,7 +120,7 @@ namespace TravelDesk.Employee
                                         cmd.Parameters.AddWithValue("@reqStatus", "Approved");
                                         cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);                                       
                                         cmd.Parameters.AddWithValue("@type", "Domestic Travel");
-                                        cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
+                                        cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);
                                         cmd.Parameters.AddWithValue("@userID", userID);
                                         cmd.Parameters.AddWithValue("@proofname", filename);
                                         cmd.Parameters.AddWithValue("@proofpath", imgPath);
@@ -228,7 +228,7 @@ namespace TravelDesk.Employee
                                     cmd.Parameters.AddWithValue("@reqStatus", "Approved");
                                     cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
                                     cmd.Parameters.AddWithValue("@type", "Domestic Travel");
-                                    cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem.Text);
+                                    cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);
                                     cmd.Parameters.AddWithValue("@userID", userID);
                                     cmd.Parameters.AddWithValue("@proofname", filename);
                                     cmd.Parameters.AddWithValue("@proofpath", imgPath);
