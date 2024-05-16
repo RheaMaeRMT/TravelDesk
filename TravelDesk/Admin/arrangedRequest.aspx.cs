@@ -168,7 +168,7 @@ namespace TravelDesk.Admin
                         using (var cmd = db.CreateCommand())
                         {
                            cmd.CommandType = CommandType.Text;
-                           cmd.CommandText = "SELECT * FROM travelArrangement WHERE arrangeTravelID = @travelID";
+                           cmd.CommandText = "SELECT * FROM travelArranged WHERE arrangedTravelReqID = @travelID";
                            cmd.Parameters.AddWithValue("@travelID", requestId);
 
                             using (var reader = cmd.ExecuteReader())
@@ -176,326 +176,449 @@ namespace TravelDesk.Admin
                                 if (reader.Read())
                                 {
 
-
                                     // Retrieve the request details from the reader
-                                    string accomodation = reader["arrangeAccomodations"].ToString();
-                                    string airline = reader["arrangeAirline"].ToString();
-                                    string travelrequirements = reader["arrangeRequirements"].ToString();
-                                    string noted = reader["arrangeNotes"].ToString();
-                                    
-                                   
-                                    //TO CHECK IF NULL
-                                    string Name = reader["arrangeHotelName"] != DBNull.Value ? reader["arrangeHotelName"].ToString() : "";
-                                    string Address = reader["arrangeHotelAdd"] != DBNull.Value ? reader["arrangeHotelAdd"].ToString() : "";
-                                    string from = reader["arrangeHotelFrom"] != DBNull.Value ? reader["arrangeHotelFrom"].ToString() : "";
-                                    string to = reader["arrangeHotelTo"] != DBNull.Value ? reader["arrangeHotelTo"].ToString() : "";
-                                    string contact = reader["arrangeHotelPhone"] != DBNull.Value ? reader["arrangeHotelPhone"].ToString() : "";
+                                    string accomodationID = reader["arrangedAccomodationID"].ToString();
+                                    string flightID = reader["arrangedFlightID"].ToString();
+                                    string transfersID = reader["arrangedTransferID"].ToString();
+                                    string travelrequirements = reader["arrangedRequirements"].ToString();
+                                    string noted = reader["arrangedNotes"].ToString();
 
-                                    string t1 = reader["arrangeTransfer1"] != DBNull.Value ? reader["arrangeTransfer1"].ToString() : "";
-                                    string t1Date = reader["arrangeTransfer1Date"] != DBNull.Value ? reader["arrangeTransfer1Date"].ToString() : "";
-
-                                    string t2 = reader["arrangeTransfer2"] != DBNull.Value ? reader["arrangeTransfer2"].ToString() : "";
-                                    string t2Date = reader["arrangeTransfer2Date"] != DBNull.Value ? reader["arrangeTransfer2Date"].ToString() : "";
-
-                                    string t3 = reader["arrangeTransfer3"] != DBNull.Value ? reader["arrangeTransfer3"].ToString() : "";
-                                    string t3Date = reader["arrangeTransfer3Date"] != DBNull.Value ? reader["arrangeTransfer3Date"].ToString() : "";
-
-                                    string t4 = reader["arrangeTransfer4"] != DBNull.Value ? reader["arrangeTransfer4"].ToString() : "";
-                                    string t4Date = reader["arrangeTransfer4Date"] != DBNull.Value ? reader["arrangeTransfer4Date"].ToString() : "";
-
-                                    string t5 = reader["arrangeTransfer5"] != DBNull.Value ? reader["arrangeTransfer5"].ToString() : "";
-                                    string t5Date = reader["arrangeTransfer5Date"] != DBNull.Value ? reader["arrangeTransfer5Date"].ToString() : "";
-
-                                    string mul1Flight = reader["routeM1Flight"] != DBNull.Value ? reader["routeM1Flight"].ToString() : "";
-                                    string mul1From = reader["routeM1From"] != DBNull.Value ? reader["routeM1From"].ToString() : "";
-                                    string mul1FromDate = reader["routeM1FromDate"] != DBNull.Value ? reader["routeM1FromDate"].ToString() : "";
-                                    string mul1To = reader["routeM1To"] != DBNull.Value ? reader["routeM1To"].ToString() : "";
-                                    string mul1ETD = reader["routeM1ETD"] != DBNull.Value ? reader["routeM1ETD"].ToString() : "";
-                                    string mul1ETA = reader["routeM1ETA"] != DBNull.Value ? reader["routeM1ETA"].ToString() : "";
-
-                                    string mul2Flight = reader["routeM2Flight"] != DBNull.Value ? reader["routeM2Flight"].ToString() : "";
-                                    string mul2From = reader["routeM2From"] != DBNull.Value ? reader["routeM2From"].ToString() : "";
-                                    string mul2FromDate = reader["routeM2FromDate"] != DBNull.Value ? reader["routeM2FromDate"].ToString() : "";
-                                    string mul2To = reader["routeM2To"] != DBNull.Value ? reader["routeM2To"].ToString() : "";
-                                    string mul2ETD = reader["routeM2ETD"] != DBNull.Value ? reader["routeM2ETD"].ToString() : "";
-                                    string mul2ETA = reader["routeM2ETA"] != DBNull.Value ? reader["routeM2ETA"].ToString() : "";
-
-                                    string mul3Flight = reader["routeM3Flight"] != DBNull.Value ? reader["routeM3Flight"].ToString() : "";
-                                    string mul3From = reader["routeM3From"] != DBNull.Value ? reader["routeM3From"].ToString() : "";
-                                    string mul3FromDate = reader["routeM3FromDate"] != DBNull.Value ? reader["routeM3FromDate"].ToString() : "";
-                                    string mul3To = reader["routeM3To"] != DBNull.Value ? reader["routeM3To"].ToString() : "";
-                                    string mul3ETD = reader["routeM3ETD"] != DBNull.Value ? reader["routeM3ETD"].ToString() : "";
-                                    string mul3ETA = reader["routeM3ETA"] != DBNull.Value ? reader["routeM3ETA"].ToString() : "";
-
-                                    string mul4Flight = reader["routeM4Flight"] != DBNull.Value ? reader["routeM4Flight"].ToString() : "";
-                                    string mul4From = reader["routeM4From"] != DBNull.Value ? reader["routeM4From"].ToString() : "";
-                                    string mul4FromDate = reader["routeM4FromDate"] != DBNull.Value ? reader["routeM4FromDate"].ToString() : "";
-                                    string mul4To = reader["routeM4To"] != DBNull.Value ? reader["routeM4To"].ToString() : "";
-                                    string mul4ETD = reader["routeM4ETD"] != DBNull.Value ? reader["routeM4ETD"].ToString() : "";
-                                    string mul4ETA = reader["routeM4ETA"] != DBNull.Value ? reader["routeM4ETA"].ToString() : "";
-
-                                    string mul5Flight = reader["routeM5Flight"] != DBNull.Value ? reader["routeM5Flight"].ToString() : "";
-                                    string mul5From = reader["routeM5From"] != DBNull.Value ? reader["routeM5From"].ToString() : "";
-                                    string mul5FromDate = reader["routeM5FromDate"] != DBNull.Value ? reader["routeM5FromDate"].ToString() : "";
-                                    string mul5To = reader["routeM5To"] != DBNull.Value ? reader["routeM5To"].ToString() : "";
-                                    string mul5ETD = reader["routeM5ETD"] != DBNull.Value ? reader["routeM5ETD"].ToString() : "";
-                                    string mul5ETA = reader["routeM5ETA"] != DBNull.Value ? reader["routeM5ETA"].ToString() : "";
+                                    //SAVE THE IDs to the SESSION
+                                    Session["accomodation"] = accomodationID;
+                                    Session["flight"] = flightID;
+                                    Session["transfers"] = transfersID;
 
                                     // Display or use the retrieved request details
-
-                                    accomodations.Text = accomodation;
-
-                                    if (accomodation == "c/o Traveller")
-                                    {
-                                        careofEmployee.Style["display"] = "block";
-                                        employeeHotel.Text = Name;
-                                    }
-                                    else
-                                    {
-                                        hotelAccomodations.Style["display"] = "block";
-                                        hotel.Text = Name;
-                                        hotelAddress.Text = Address;
-                                        hotelContact.Text = contact;
-
-                                        if (!string.IsNullOrEmpty(from))
-                                        {
-                                            // Parse the date string into a DateTime object
-                                            DateTime fromDate;
-                                            DateTime toDate;
-
-                                            if (DateTime.TryParse(from, out fromDate) & DateTime.TryParse(to, out toDate))
-                                            {
-                                                // Format the DateTime object into the desired format
-                                                string formattedFromDate = fromDate.ToString("MMMM dd, yyyy");
-                                                string formattedToDate = toDate.ToString("MMMM dd, yyyy");
-
-                                                // Assign the formatted date to the TextBox
-                                                durationFrom.Text = formattedFromDate + " " + "-" + " " + formattedToDate;
-                                            }
-                                        }
-                                        
-                                    }
-
-                                    bookedairline.Text = airline;
                                     requirements.Text = travelrequirements;
                                     additionalNotes.Text = noted;
 
-                                    //ROUTE DEFAULT 1
-                                    r1From.Text = mul1From;
-                                    r1To.Text = mul1To;
-                                    r1Flight.Text = mul1Flight;
+                                    getAccomodationDetails();
+                                    getFlightDetails();
+                                    getTransfersDetails();
+                                }
+                                else
+                                {
+                                    // Handle the case where no request with the given ID is found
+                                    Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle the case where the request ID stored in the session is null or empty
+                    Response.Write("<script>alert('Invalid request ID.')</script>");
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred while retrieving the request details.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+        }
+
+        private void getAccomodationDetails()
+        {
+            if (Session["clickedRequest"] != null && Session["accomodation"] != null)
+            {
+                string accomodation = Session["accomodation"].ToString();
+
+                // Query the database to retrieve the request details based on the ID
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM travelAccomodation WHERE arrangedAccID = @travelID";
+                        cmd.Parameters.AddWithValue("@travelID", accomodation);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read()) // Check if there are any rows returned by the query
+                            {
+                                string accomodationType = reader["arrangeAccomodation"].ToString();
+                                string Name = reader["arrangeHotelName"] != DBNull.Value ? reader["arrangeHotelName"].ToString() : "";
+                                string Address = reader["arrangeHotelAdd"] != DBNull.Value ? reader["arrangeHotelAdd"].ToString() : "";
+                                string from = reader["arrangeHotelFrom"] != DBNull.Value ? reader["arrangeHotelFrom"].ToString() : "";
+                                string to = reader["arrangeHotelTo"] != DBNull.Value ? reader["arrangeHotelTo"].ToString() : "";
+                                string contact = reader["arrangeHotelPhone"] != DBNull.Value ? reader["arrangeHotelPhone"].ToString() : "";
+                                string duration = reader["arrangeHotelDuration"] != DBNull.Value ? reader["arrangeHotelDuration"].ToString() : "";
+
+                                accomodations.Text = accomodationType;
+
+                                if (accomodationType == "c/o Traveller")
+                                {
+                                    careofEmployee.Style["display"] = "block";
+                                    employeeHotel.Text = Name;
+                                }
+                                else
+                                {
+                                    hotelAccomodations.Style["display"] = "block";
+                                    hotel.Text = Name;
+                                    hotelAddress.Text = Address;
+                                    hotelContact.Text = contact;
 
 
-                                    if (r1ETA.Text != null && r1ETD != null)
+                                    if (!string.IsNullOrEmpty(duration))
                                     {
-                                        DateTime arrivalDateTime;
-                                        DateTime departDateTime;
-                                        if (DateTime.TryParse(mul1ETA, out arrivalDateTime))
-                                        {
-                                            string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                            r1ETA.Text = formattedArrivalDate;
+                                        //Parse the date string into a DateTime object
+                                       DateTime fromDate;
 
-                                        }
-                                        if (DateTime.TryParse(mul1ETD, out departDateTime))
+                                        if (DateTime.TryParse(from, out fromDate))
                                         {
-                                            string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                            r1ETD.Text = formattedArrivalDate;
+                                            //Format the DateTime object into the desired format
+                                            string formattedFromDate = fromDate.ToString("MMMM dd, yyyy");
 
+                                            //Assign the formatted date to the TextBox
+                                            durationFrom.Text = formattedFromDate;
                                         }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Something went wrong: Accomodations ')</script>");
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        private void getFlightDetails()
+        {
+            if (Session["clickedRequest"] != null && Session["flight"] != null)
+            {
+                string flight = Session["flight"].ToString();
+
+                // Query the database to retrieve the request details based on the ID
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM travelFlight WHERE travelFlightID = @travelID";
+                        cmd.Parameters.AddWithValue("@travelID", flight);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string airline = reader["travelAirline"].ToString();
+                                string mul1Flight = reader["routeM1Flight"] != DBNull.Value ? reader["routeM1Flight"].ToString() : "";
+                                string mul1From = reader["routeM1From"] != DBNull.Value ? reader["routeM1From"].ToString() : "";
+                                string mul1FromDate = reader["routeM1FromDate"] != DBNull.Value ? reader["routeM1FromDate"].ToString() : "";
+                                string mul1To = reader["routeM1To"] != DBNull.Value ? reader["routeM1To"].ToString() : "";
+                                string mul1ETD = reader["routeM1ETD"] != DBNull.Value ? reader["routeM1ETD"].ToString() : "";
+                                string mul1ETA = reader["routeM1ETA"] != DBNull.Value ? reader["routeM1ETA"].ToString() : "";
+
+                                string mul2Flight = reader["routeM2Flight"] != DBNull.Value ? reader["routeM2Flight"].ToString() : "";
+                                string mul2From = reader["routeM2From"] != DBNull.Value ? reader["routeM2From"].ToString() : "";
+                                string mul2FromDate = reader["routeM2FromDate"] != DBNull.Value ? reader["routeM2FromDate"].ToString() : "";
+                                string mul2To = reader["routeM2To"] != DBNull.Value ? reader["routeM2To"].ToString() : "";
+                                string mul2ETD = reader["routeM2ETD"] != DBNull.Value ? reader["routeM2ETD"].ToString() : "";
+                                string mul2ETA = reader["routeM2ETA"] != DBNull.Value ? reader["routeM2ETA"].ToString() : "";
+
+                                string mul3Flight = reader["routeM3Flight"] != DBNull.Value ? reader["routeM3Flight"].ToString() : "";
+                                string mul3From = reader["routeM3From"] != DBNull.Value ? reader["routeM3From"].ToString() : "";
+                                string mul3FromDate = reader["routeM3FromDate"] != DBNull.Value ? reader["routeM3FromDate"].ToString() : "";
+                                string mul3To = reader["routeM3To"] != DBNull.Value ? reader["routeM3To"].ToString() : "";
+                                string mul3ETD = reader["routeM3ETD"] != DBNull.Value ? reader["routeM3ETD"].ToString() : "";
+                                string mul3ETA = reader["routeM3ETA"] != DBNull.Value ? reader["routeM3ETA"].ToString() : "";
+
+                                string mul4Flight = reader["routeM4Flight"] != DBNull.Value ? reader["routeM4Flight"].ToString() : "";
+                                string mul4From = reader["routeM4From"] != DBNull.Value ? reader["routeM4From"].ToString() : "";
+                                string mul4FromDate = reader["routeM4FromDate"] != DBNull.Value ? reader["routeM4FromDate"].ToString() : "";
+                                string mul4To = reader["routeM4To"] != DBNull.Value ? reader["routeM4To"].ToString() : "";
+                                string mul4ETD = reader["routeM4ETD"] != DBNull.Value ? reader["routeM4ETD"].ToString() : "";
+                                string mul4ETA = reader["routeM4ETA"] != DBNull.Value ? reader["routeM4ETA"].ToString() : "";
+
+                                string mul5Flight = reader["routeM5Flight"] != DBNull.Value ? reader["routeM5Flight"].ToString() : "";
+                                string mul5From = reader["routeM5From"] != DBNull.Value ? reader["routeM5From"].ToString() : "";
+                                string mul5FromDate = reader["routeM5FromDate"] != DBNull.Value ? reader["routeM5FromDate"].ToString() : "";
+                                string mul5To = reader["routeM5To"] != DBNull.Value ? reader["routeM5To"].ToString() : "";
+                                string mul5ETD = reader["routeM5ETD"] != DBNull.Value ? reader["routeM5ETD"].ToString() : "";
+                                string mul5ETA = reader["routeM5ETA"] != DBNull.Value ? reader["routeM5ETA"].ToString() : "";
+
+
+                                //DISPLAY TO TEXTBOXES
+                                bookedairline.Text = airline;
+                                //ROUTE DISPLAY START
+                                r1From.Text = mul1From;
+                                r1To.Text = mul1To;
+                                r1Flight.Text = mul1Flight;
+
+                                if (r1ETA.Text != null && r1ETD != null)
+                                {
+                                    DateTime arrivalDateTime;
+                                    DateTime departDateTime;
+                                    if (DateTime.TryParse(mul1ETA, out arrivalDateTime))
+                                    {
+                                        string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                        r1ETA.Text = formattedArrivalDate;
+
+                                    }
+                                    if (DateTime.TryParse(mul1ETD, out departDateTime))
+                                    {
+                                        string formattedArrivalDate = departDateTime.ToString("HHmm");
+                                        r1ETD.Text = formattedArrivalDate;
 
                                     }
 
-                                    if (!string.IsNullOrEmpty(mul1FromDate))
+                                }
+
+                                if (!string.IsNullOrEmpty(mul1FromDate))
+                                {
+                                    // Parse the date string into a DateTime object
+                                    DateTime arrivalDateTime;
+                                    if (DateTime.TryParse(mul1FromDate, out arrivalDateTime))
                                     {
-                                        // Parse the date string into a DateTime object
-                                        DateTime arrivalDateTime;
-                                        if (DateTime.TryParse(mul1FromDate, out arrivalDateTime))
-                                        {
-                                            // Format the DateTime object into the desired format
-                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                        // Format the DateTime object into the desired format
+                                        string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
 
-                                            // Assign the formatted date to the TextBox
-                                            r1FromDate.Text = formattedArrivalDate;
-                                        }
+                                        // Assign the formatted date to the TextBox
+                                        r1FromDate.Text = formattedArrivalDate;
                                     }
+                                }
 
-                                    //ROUTE DISPLAY
+                                if (!string.IsNullOrEmpty(mul2From) && (!string.IsNullOrEmpty(mul2To)))
+                                {
+                                    additional2routeFields.Style["display"] = "block";
+
                                     if (!string.IsNullOrEmpty(mul2From) && (!string.IsNullOrEmpty(mul2To)))
                                     {
-                                        additional2routeFields.Style["display"] = "block";
+                                        r2From.Text = mul2From;
+                                        r2To.Text = mul2To;
+                                        r2Flight.Text = mul2Flight;
 
-                                          if (!string.IsNullOrEmpty(mul2From) && (!string.IsNullOrEmpty(mul2To)))
+                                        if (r2ETA.Text != null && r2ETD != null)
+                                        {
+                                            DateTime arrivalDateTime;
+                                            DateTime departDateTime;
+                                            if (DateTime.TryParse(mul2ETA, out arrivalDateTime))
                                             {
-                                                r2From.Text = mul2From;
-                                                r2To.Text = mul2To;
-                                                r2Flight.Text = mul2Flight;
+                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                r2ETA.Text = formattedArrivalDate;
 
-                                                if (r2ETA.Text != null && r2ETD != null)
+                                            }
+                                            if (DateTime.TryParse(mul2ETD, out departDateTime))
+                                            {
+                                                string formattedArrivalDate = departDateTime.ToString("HHmm");
+                                                r2ETD.Text = formattedArrivalDate;
+
+                                            }
+
+                                        }
+
+                                        if (!string.IsNullOrEmpty(mul2FromDate))
+                                        {
+                                            // Parse the date string into a DateTime object
+                                            DateTime arrivalDateTime;
+                                            if (DateTime.TryParse(mul2FromDate, out arrivalDateTime))
+                                            {
+                                                // Format the DateTime object into the desired format
+                                                string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+
+                                                // Assign the formatted date to the TextBox
+                                                r2FromDate.Text = formattedArrivalDate;
+                                            }
+                                        }
+
+
+                                        if (!string.IsNullOrEmpty(mul3From) && (!string.IsNullOrEmpty(mul3To)))
+                                        {
+                                            additional3routeFields.Style["display"] = "block";
+                                            r3From.Text = mul3From;
+                                            //TextBox16.Text = mul3FromDate;
+                                            r3To.Text = mul3To;
+                                            r3Flight.Text = mul3Flight;
+
+                                            if (r3ETA.Text != null && r3ETD != null)
+                                            {
+                                                DateTime arrivalDateTime;
+                                                DateTime departDateTime;
+                                                if (DateTime.TryParse(mul3ETA, out arrivalDateTime))
                                                 {
-                                                    DateTime arrivalDateTime;
-                                                    DateTime departDateTime;
-                                                    if (DateTime.TryParse(mul2ETA, out arrivalDateTime))
-                                                    {
-                                                        string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                                        r2ETA.Text = formattedArrivalDate;
-
-                                                    }
-                                                    if (DateTime.TryParse(mul2ETD, out departDateTime))
-                                                    {
-                                                        string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                                        r2ETD.Text = formattedArrivalDate;
-
-                                                    }
+                                                    string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                    r3ETA.Text = formattedArrivalDate;
 
                                                 }
-
-                                                if (!string.IsNullOrEmpty(mul2FromDate))
-                                                    {
-                                                        // Parse the date string into a DateTime object
-                                                        DateTime arrivalDateTime;
-                                                        if (DateTime.TryParse(mul2FromDate, out arrivalDateTime))
-                                                        {
-                                                            // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
-
-                                                        // Assign the formatted date to the TextBox
-                                                        r2FromDate.Text = formattedArrivalDate;
-                                                        }
-                                                    }
-
-
-                                                if (!string.IsNullOrEmpty(mul3From) && (!string.IsNullOrEmpty(mul3To)))
+                                                if (DateTime.TryParse(mul3ETD, out departDateTime))
                                                 {
-                                                    additional3routeFields.Style["display"] = "block";
-                                                    r3From.Text = mul3From;
-                                                    //TextBox16.Text = mul3FromDate;
-                                                    r3To.Text = mul3To;
-                                                    r3Flight.Text = mul3Flight;
-
-                                                    if (r3ETA.Text != null && r3ETD != null)
-                                                    {
-                                                        DateTime arrivalDateTime;
-                                                        DateTime departDateTime;
-                                                        if (DateTime.TryParse(mul3ETA, out arrivalDateTime))
-                                                        {
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                                            r3ETA.Text = formattedArrivalDate;
-
-                                                        }
-                                                        if (DateTime.TryParse(mul3ETD, out departDateTime))
-                                                        {
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                                            r3ETD.Text = formattedArrivalDate;
-
-                                                        }
-
-                                                    }
-
-                                                if (!string.IsNullOrEmpty(mul3FromDate))
-                                                    {
-                                                        // Parse the date string into a DateTime object
-                                                        DateTime arrivalDateTime;
-                                                        if (DateTime.TryParse(mul3FromDate, out arrivalDateTime))
-                                                        {
-                                                            // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
-
-                                                        // Assign the formatted date to the TextBox
-                                                        r3FromDate.Text = formattedArrivalDate;
-                                                        }
-                                                    }
-
-
-                                                    if (!string.IsNullOrEmpty(mul4From) && (!string.IsNullOrEmpty(mul4To)))
-                                                    {
-                                                        additional4routeFields.Style["display"] = "block";
-                                                        r4From.Text = mul4From;
-                                                        //TextBox28.Text = mul4FromDate;
-                                                        r4To.Text = mul4To;
-                                                        r4Flight.Text = mul4Flight;
-
-                                                        if (r4ETA.Text != null && r4ETD != null)
-                                                        {
-                                                            DateTime arrivalDateTime;
-                                                            DateTime departDateTime;
-                                                            if (DateTime.TryParse(mul4ETA, out arrivalDateTime))
-                                                            {
-                                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                                                r4ETA.Text = formattedArrivalDate;
-
-                                                            }
-                                                            if (DateTime.TryParse(mul4ETD, out departDateTime))
-                                                            {
-                                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                                                r4ETD.Text = formattedArrivalDate;
-
-                                                            }
-
-                                                        }
-
-                                                        if (!string.IsNullOrEmpty(mul4FromDate))
-                                                            {
-                                                                // Parse the date string into a DateTime object
-                                                                DateTime arrivalDateTime;
-                                                                if (DateTime.TryParse(mul4FromDate, out arrivalDateTime))
-                                                                {
-                                                                    // Format the DateTime object into the desired format
-                                                                    string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
-
-                                                                // Assign the formatted date to the TextBox
-                                                                r4FromDate.Text = formattedArrivalDate;
-                                                                }
-                                                            }
-
-                                                    }
-                                                    if (!string.IsNullOrEmpty(mul5From) && (!string.IsNullOrEmpty(mul5To)))
-                                                    {
-                                                        additional5routeFields.Style["display"] = "block";
-                                                        r5From.Text = mul5From;
-                                                        //TextBox20.Text = mul5FromDate;
-                                                        r5To.Text = mul5To;
-                                                        r5Flight.Text = mul1Flight;
-
-                                                        if (r5ETA.Text != null && r5ETD != null)
-                                                        {
-                                                            DateTime arrivalDateTime;
-                                                            DateTime departDateTime;
-                                                            if (DateTime.TryParse(mul5ETA, out arrivalDateTime))
-                                                            {
-                                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                                                r5ETA.Text = formattedArrivalDate;
-
-                                                            }
-                                                            if (DateTime.TryParse(mul5ETD, out departDateTime))
-                                                            {
-                                                                string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
-                                                                r5ETD.Text = formattedArrivalDate;
-
-                                                            }
-
-                                                        }
-
-                                                    if (!string.IsNullOrEmpty(mul5FromDate))
-                                                        {
-                                                            // Parse the date string into a DateTime object
-                                                            DateTime arrivalDateTime;
-                                                            if (DateTime.TryParse(mul5FromDate, out arrivalDateTime))
-                                                            {
-                                                                // Format the DateTime object into the desired format
-                                                                string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
-
-                                                            // Assign the formatted date to the TextBox
-                                                            r5FromDate.Text = formattedArrivalDate;
-                                                            }
-                                                        }
-
-                                                    }
-
+                                                    string formattedArrivalDate = departDateTime.ToString("HHmm");
+                                                    r3ETD.Text = formattedArrivalDate;
 
                                                 }
 
                                             }
+
+                                            if (!string.IsNullOrEmpty(mul3FromDate))
+                                            {
+                                                // Parse the date string into a DateTime object
+                                                DateTime arrivalDateTime;
+                                                if (DateTime.TryParse(mul3FromDate, out arrivalDateTime))
+                                                {
+                                                    // Format the DateTime object into the desired format
+                                                    string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+
+                                                    // Assign the formatted date to the TextBox
+                                                    r3FromDate.Text = formattedArrivalDate;
+                                                }
+                                            }
+
+
+                                            if (!string.IsNullOrEmpty(mul4From) && (!string.IsNullOrEmpty(mul4To)))
+                                            {
+                                                additional4routeFields.Style["display"] = "block";
+                                                r4From.Text = mul4From;
+                                                //TextBox28.Text = mul4FromDate;
+                                                r4To.Text = mul4To;
+                                                r4Flight.Text = mul4Flight;
+
+                                                if (r4ETA.Text != null && r4ETD != null)
+                                                {
+                                                    DateTime arrivalDateTime;
+                                                    DateTime departDateTime;
+                                                    if (DateTime.TryParse(mul4ETA, out arrivalDateTime))
+                                                    {
+                                                        string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                        r4ETA.Text = formattedArrivalDate;
+
+                                                    }
+                                                    if (DateTime.TryParse(mul4ETD, out departDateTime))
+                                                    {
+                                                        string formattedArrivalDate = departDateTime.ToString("HHmm");
+                                                        r4ETD.Text = formattedArrivalDate;
+
+                                                    }
+
+                                                }
+
+                                                if (!string.IsNullOrEmpty(mul4FromDate))
+                                                {
+                                                    // Parse the date string into a DateTime object
+                                                    DateTime arrivalDateTime;
+                                                    if (DateTime.TryParse(mul4FromDate, out arrivalDateTime))
+                                                    {
+                                                        // Format the DateTime object into the desired format
+                                                        string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+
+                                                        // Assign the formatted date to the TextBox
+                                                        r4FromDate.Text = formattedArrivalDate;
+                                                    }
+                                                }
+
+                                            }
+                                            if (!string.IsNullOrEmpty(mul5From) && (!string.IsNullOrEmpty(mul5To)))
+                                            {
+                                                additional5routeFields.Style["display"] = "block";
+                                                r5From.Text = mul5From;
+                                                //TextBox20.Text = mul5FromDate;
+                                                r5To.Text = mul5To;
+                                                r5Flight.Text = mul1Flight;
+
+                                                if (r5ETA.Text != null && r5ETD != null)
+                                                {
+                                                    DateTime arrivalDateTime;
+                                                    DateTime departDateTime;
+                                                    if (DateTime.TryParse(mul5ETA, out arrivalDateTime))
+                                                    {
+                                                        string formattedArrivalDate = arrivalDateTime.ToString("HHmm");
+                                                        r5ETA.Text = formattedArrivalDate;
+
+                                                    }
+                                                    if (DateTime.TryParse(mul5ETD, out departDateTime))
+                                                    {
+                                                        string formattedArrivalDate = departDateTime.ToString("HHmm");
+                                                        r5ETD.Text = formattedArrivalDate;
+
+                                                    }
+
+                                                }
+
+                                                if (!string.IsNullOrEmpty(mul5FromDate))
+                                                {
+                                                    // Parse the date string into a DateTime object
+                                                    DateTime arrivalDateTime;
+                                                    if (DateTime.TryParse(mul5FromDate, out arrivalDateTime))
+                                                    {
+                                                        // Format the DateTime object into the desired format
+                                                        string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+
+                                                        // Assign the formatted date to the TextBox
+                                                        r5FromDate.Text = formattedArrivalDate;
+                                                    }
+                                                }
+
+                                            }
+
+
+                                        }
+
                                     }
+                                }
+                                //ROUTE DISPLAY END
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Something went wrong: Flight .')</script>");
+
+                            }
+
+
+                        }
+
+                    }
+                }
+            }
+
+        }
+        private void getTransfersDetails()
+        {
+            if (Session["clickedRequest"] != null && Session["transfers"] != null)
+            {
+                string transfers = Session["transfers"].ToString();
+
+                // Query the database to retrieve the request details based on the ID
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM travelTransfers WHERE arrangeTransferID = @travelID";
+                        cmd.Parameters.AddWithValue("@travelID", transfers);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                //TRANSFERS
+                                string t1 = reader["arrangeTransfer1"] != DBNull.Value ? reader["arrangeTransfer1"].ToString() : "";
+                                string t1Date = reader["arrangeTransfer1Date"] != DBNull.Value ? reader["arrangeTransfer1Date"].ToString() : "";
+
+                                string t2 = reader["arrangeTransfer2"] != DBNull.Value ? reader["arrangeTransfer2"].ToString() : "";
+                                string t2Date = reader["arrangeTransfer2Date"] != DBNull.Value ? reader["arrangeTransfer2Date"].ToString() : "";
+
+                                string t3 = reader["arrangeTransfer3"] != DBNull.Value ? reader["arrangeTransfer3"].ToString() : "";
+                                string t3Date = reader["arrangeTransfer3Date"] != DBNull.Value ? reader["arrangeTransfer3Date"].ToString() : "";
+
+                                string t4 = reader["arrangeTransfer4"] != DBNull.Value ? reader["arrangeTransfer4"].ToString() : "";
+                                string t4Date = reader["arrangeTransfer4Date"] != DBNull.Value ? reader["arrangeTransfer4Date"].ToString() : "";
+
+                                string t5 = reader["arrangeTransfer5"] != DBNull.Value ? reader["arrangeTransfer5"].ToString() : "";
+                                string t5Date = reader["arrangeTransfer5Date"] != DBNull.Value ? reader["arrangeTransfer5Date"].ToString() : "";
+                               
 
                                     //TRANSFERS DISPLAY
                                     if (!string.IsNullOrEmpty(t1))
@@ -610,34 +733,23 @@ namespace TravelDesk.Admin
 
                                             }
                                         }
+                                        
 
                                     }
+                                    else
+                                    {
+                                        transfers1.Style["display"] = "none";
+                                        transfer1Date.Style["display"] = "none";
+                                    } 
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Something went wrong: Transfers.')</script>");
 
-                                }
-                                else
-                                {
-                                    // Handle the case where no request with the given ID is found
-                                    Response.Write("<script>alert('No request found with the specified ID.')</script>");
-                                }
                             }
                         }
+
                     }
-                }
-                else
-                {
-                    // Handle the case where the request ID stored in the session is null or empty
-                    Response.Write("<script>alert('Invalid request ID.')</script>");
-                }
-            }
-            catch (SqlException ex)
-            {
-                // Log the exception or display a user-friendly error message
-                // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                Response.Write("<script>alert('An error occurred while retrieving the request details.')</script>");
-                // Log additional information from the SQL exception
-                for (int i = 0; i < ex.Errors.Count; i++)
-                {
-                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
 
@@ -674,7 +786,7 @@ namespace TravelDesk.Admin
         //                                    rt.routeM4To, rt.routeM4ToDate, 
         //                                    rt.routeM5From, rt.routeM5FromDate, 
         //                                    rt.routeM5To, rt.routeM5ToDate
-                                                                                                                                   
+
         //                                  FROM travelRequest tr
         //                                  LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
         //                                  WHERE tr.travelRequestID = @RequestId AND travelDraftStat = 'No'";

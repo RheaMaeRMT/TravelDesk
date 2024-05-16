@@ -22,6 +22,26 @@
 
             }
         }
+        function add2Hotel(button) {
+            document.getElementById('<%=hotel2.ClientID %>').style.display = 'block';
+            document.getElementById('<%=Button5.ClientID%>').style.display = 'none';
+        }
+        function add3Hotel(button) {
+            document.getElementById('<%=hotel3.ClientID %>').style.display = 'block';
+            document.getElementById('<%=Button6.ClientID%>').style.display = 'none';
+
+        }
+        function add4Hotel(button) {
+            document.getElementById('<%=hotel4.ClientID %>').style.display = 'block';
+            document.getElementById('<%=Button7.ClientID%>').style.display = 'none';
+
+        }
+        function add5Hotel(button) {
+            document.getElementById('<%=hotel5.ClientID %>').style.display = 'block';
+            document.getElementById('<%=Button8.ClientID%>').style.display = 'none';
+
+        }
+
         function add2Route(button) {
             document.getElementById('<%= additional2routeFields.ClientID %>').style.display = 'block';
             document.getElementById('<%= add2nd.ClientID %>').style.display = 'none';
@@ -128,8 +148,66 @@
                                                                 <asp:TextBox ID="durationFrom" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                 <asp:Label ID="Label12" runat="server" Text="To:" Style="margin-left: 50px;"></asp:Label>                                                                 
                                                                 <asp:TextBox ID="durationTo" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Button runat="server" ID="Button5" class="btn btn-primary" Text="+" OnClientClick="add2Hotel();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
 
                                                             </div>
+                                                            <div class="card-block" style="display:none; margin-left:50px;" id="hotel2" runat="server"> <hr />
+                                                                <asp:Label ID="Label17" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
+                                                                <asp:TextBox ID="hotelname2" runat="server" Width="300px" Style="margin-left: 50px;" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Label ID="Label18" runat="server" Text="Address" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="address2" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox>
+                                                                <asp:Label ID="Label19" runat="server" Text="Contact Number" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="phone2" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox> <br /> <br />
+                                                                <asp:Label ID="Label20" runat="server" Text="Duration of Stay" Style="margin-left: 40px;"></asp:Label> <br />
+                                                                <asp:Label ID="Label21" runat="server" Text="From:" Style="margin-left: 150px;"></asp:Label> 
+                                                                <asp:TextBox ID="from2" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
+                                                                <asp:Label ID="Label22" runat="server" Text="To:" Style="margin-left: 50px;"></asp:Label>                                                                 
+                                                                <asp:TextBox ID="to2" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Button runat="server" ID="Button6" class="btn btn-primary" Text="+" OnClientClick="add3Hotel();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
+
+                                                            </div>
+                                                            <div class="card-block" style="display:none; margin-left:50px;" id="hotel3" runat="server"> <hr />
+                                                                <asp:Label ID="Label23" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
+                                                                <asp:TextBox ID="hotelname3" runat="server" Width="300px" Style="margin-left: 50px;" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Label ID="Label24" runat="server" Text="Address" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="address3" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox>
+                                                                <asp:Label ID="Label25" runat="server" Text="Contact Number" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="phone3" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox> <br /> <br />
+                                                                <asp:Label ID="Label26" runat="server" Text="Duration of Stay" Style="margin-left: 40px;"></asp:Label> <br />
+                                                                <asp:Label ID="Label27" runat="server" Text="From:" Style="margin-left: 150px;"></asp:Label> 
+                                                                <asp:TextBox ID="from3" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
+                                                                <asp:Label ID="Label28" runat="server" Text="To:" Style="margin-left: 50px;"></asp:Label>                                                                 
+                                                                <asp:TextBox ID="to3" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Button runat="server" ID="Button7" class="btn btn-primary" Text="+" OnClientClick="add4Hotel();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
+                                                            </div>
+                                                            <div class="card-block" style="display:none; margin-left:50px;" id="hotel4" runat="server"> <hr />
+                                                                <asp:Label ID="Label29" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
+                                                                <asp:TextBox ID="hotelname4" runat="server" Width="300px" Style="margin-left: 50px;" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Label ID="Label31" runat="server" Text="Address" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="address4" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox>
+                                                                <asp:Label ID="Label32" runat="server" Text="Contact Number" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="phone4" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox> <br /> <br />
+                                                                <asp:Label ID="Label33" runat="server" Text="Duration of Stay" Style="margin-left: 40px;"></asp:Label> <br />
+                                                                <asp:Label ID="Label34" runat="server" Text="From:" Style="margin-left: 150px;"></asp:Label> 
+                                                                <asp:TextBox ID="from4" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
+                                                                <asp:Label ID="Label35" runat="server" Text="To:" Style="margin-left: 50px;"></asp:Label>                                                                 
+                                                                <asp:TextBox ID="to4" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Button runat="server" ID="Button8" class="btn btn-primary" Text="+" OnClientClick="add5Hotel();  return false;"  CausesValidation="False" Style="margin-left: 10px"/>
+                                                            </div>
+                                                            <div class="card-block" style="display:none; margin-left:50px;" id="hotel5" runat="server"> <hr />
+                                                                <asp:Label ID="Label36" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
+                                                                <asp:TextBox ID="hotelname5" runat="server" Width="300px" Style="margin-left: 50px;" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Label ID="Label37" runat="server" Text="Address" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="address5" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox>
+                                                                <asp:Label ID="Label38" runat="server" Text="Contact Number" Style="margin-left: 50px;" > </asp:Label>
+                                                                <asp:TextBox ID="phone5" runat="server" Width="300px" Style="margin-left: 50px;" ></asp:TextBox> <br /> <br />
+                                                                <asp:Label ID="Label39" runat="server" Text="Duration of Stay" Style="margin-left: 40px;"></asp:Label> <br />
+                                                                <asp:Label ID="Label40" runat="server" Text="From:" Style="margin-left: 150px;"></asp:Label> 
+                                                                <asp:TextBox ID="from5" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
+                                                                <asp:Label ID="Label41" runat="server" Text="To:" Style="margin-left: 50px;"></asp:Label>                                                                 
+                                                                <asp:TextBox ID="to5" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox>
+                                                            </div>
+
                                                             <div class="card-block" style="display:none;margin-left:50px" runat="server" id="travellerAccomodation">
                                                                 <asp:Label ID="Label2" runat="server" Text="care of Traveller"></asp:Label> <br /> <br />
                                                                 <asp:Label ID="Label3" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>

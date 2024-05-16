@@ -101,6 +101,18 @@
                                                                 <asp:Label ID="Label9" runat="server" Text="Duration of Stay" Style="margin-left: 40px;"></asp:Label>
                                                                 <asp:TextBox ID="durationFrom" runat="server" Width="270px" Style="margin-left: 20px;border-radius: 5px"  CssClass="textboxes" Enabled="false"></asp:TextBox> 
                                                             </div>
+                                                            <div class="card-block" style="display:none; margin-left:50px;" id="hotel2Acc" runat="server">
+                                                                <asp:Label ID="Label10" runat="server" Text="Hotel Accomodations"></asp:Label> <br /> <br />
+                                                                <asp:Label ID="Label12" runat="server" Text="Hotel Name" Style="margin-left: 30px;"></asp:Label>
+                                                                <asp:TextBox ID="TextBox5" runat="server" Width="300px" Style="margin-left: 30px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
+                                                                <asp:Label ID="Label14" runat="server" Text="Contact Number" Style="margin-left: 30px;" > </asp:Label>
+                                                                <asp:TextBox ID="TextBox6" runat="server" Width="270px" Style="margin-left: 20px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
+                                                                 <br /> <br />
+                                                                <asp:Label ID="Label22" runat="server" Text="Address" Style="margin-left: 30px;" > </asp:Label>
+                                                                <asp:TextBox ID="TextBox7" runat="server" Width="300px" Style="margin-left: 50px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
+                                                                <asp:Label ID="Label23" runat="server" Text="Duration of Stay" Style="margin-left: 40px;"></asp:Label>
+                                                                <asp:TextBox ID="TextBox8" runat="server" Width="270px" Style="margin-left: 20px;border-radius: 5px"  CssClass="textboxes" Enabled="false"></asp:TextBox> 
+                                                            </div>
                                                             <div class="card-block" style="display:none; margin-left:50px;" id="careofEmployee" runat="server">
                                                                 <asp:Label ID="Label17" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
                                                                 <asp:TextBox ID="employeeHotel" runat="server" Width="300px" Style="margin-left: 50px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
