@@ -136,7 +136,9 @@
                                                                 </asp:DropDownList>
                                                             </div>
                                                             <div class="card-block" style="display:none; margin-left:50px;" id="hotelAccomodations" runat="server">
-                                                                <asp:Label ID="Label6" runat="server" Text="Hotel Accomodations"></asp:Label> <br /> <br />
+                                                                <asp:Label ID="Label6" runat="server" Text="Hotel Accomodations"></asp:Label>
+                                                                <asp:LinkButton ID="getsavedHotels" runat="server" style="color:white;font-size:13px;margin-left:1150px;border-radius:5px" CssClass="btn btn-primary" OnClick="getsavedHotels_Click"> <i class="ti-bookmark-alt"></i> get Saved Hotels</asp:LinkButton>
+                                                                <br /> <br />
                                                                 <asp:Label ID="Label1" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
                                                                 <asp:TextBox ID="hotel" runat="server" Width="300px" Style="margin-left: 50px;" CssClass="textboxes"></asp:TextBox>
                                                                 <asp:Label ID="Label4" runat="server" Text="Address" Style="margin-left: 50px;" > </asp:Label>

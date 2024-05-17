@@ -246,12 +246,42 @@ namespace TravelDesk.Admin
                             if (reader.Read()) // Check if there are any rows returned by the query
                             {
                                 string accomodationType = reader["arrangeAccomodation"].ToString();
+                                //1ST HOTEL
                                 string Name = reader["arrangeHotelName"] != DBNull.Value ? reader["arrangeHotelName"].ToString() : "";
                                 string Address = reader["arrangeHotelAdd"] != DBNull.Value ? reader["arrangeHotelAdd"].ToString() : "";
                                 string from = reader["arrangeHotelFrom"] != DBNull.Value ? reader["arrangeHotelFrom"].ToString() : "";
                                 string to = reader["arrangeHotelTo"] != DBNull.Value ? reader["arrangeHotelTo"].ToString() : "";
                                 string contact = reader["arrangeHotelPhone"] != DBNull.Value ? reader["arrangeHotelPhone"].ToString() : "";
-                                string duration = reader["arrangeHotelDuration"] != DBNull.Value ? reader["arrangeHotelDuration"].ToString() : "";
+
+                                //2ND HOTEL
+                                string Name2 = reader["arrangeHotel2Name"] != DBNull.Value ? reader["arrangeHotel2Name"].ToString() : "";
+                                string Address2 = reader["arrangeHotel2Add"] != DBNull.Value ? reader["arrangeHotel2Add"].ToString() : "";
+                                string from2 = reader["arrangeHotel2From"] != DBNull.Value ? reader["arrangeHotel2From"].ToString() : "";
+                                string to2 = reader["arrangeHotel2To"] != DBNull.Value ? reader["arrangeHotel2To"].ToString() : "";
+                                string contact2 = reader["arrangeHotel2Phone"] != DBNull.Value ? reader["arrangeHotel2Phone"].ToString() : "";
+
+                                //3RD HOTEL
+                                string Name3 = reader["arrangeHotel3Name"] != DBNull.Value ? reader["arrangeHotel3Name"].ToString() : "";
+                                string Address3 = reader["arrangeHotel3Add"] != DBNull.Value ? reader["arrangeHotel3Add"].ToString() : "";
+                                string from3 = reader["arrangeHotel3From"] != DBNull.Value ? reader["arrangeHotel3From"].ToString() : "";
+                                string to3 = reader["arrangeHotel3To"] != DBNull.Value ? reader["arrangeHotel3To"].ToString() : "";
+                                string contact3 = reader["arrangeHotel3Phone"] != DBNull.Value ? reader["arrangeHotel3Phone"].ToString() : "";
+
+                                //4TH HOTEL
+                                string Name4 = reader["arrangeHotel4Name"] != DBNull.Value ? reader["arrangeHotel4Name"].ToString() : "";
+                                string Address4 = reader["arrangeHotel4Add"] != DBNull.Value ? reader["arrangeHotel4Add"].ToString() : "";
+                                string from4 = reader["arrangeHotel4From"] != DBNull.Value ? reader["arrangeHotel4From"].ToString() : "";
+                                string to4 = reader["arrangeHotel4To"] != DBNull.Value ? reader["arrangeHotel4To"].ToString() : "";
+                                string contact4 = reader["arrangeHotel4Phone"] != DBNull.Value ? reader["arrangeHotel4Phone"].ToString() : "";
+
+                                //5TH HOTEL
+                                string Name5 = reader["arrangeHotel5Name"] != DBNull.Value ? reader["arrangeHotel5Name"].ToString() : "";
+                                string Address5 = reader["arrangeHotel5Add"] != DBNull.Value ? reader["arrangeHotel5Add"].ToString() : "";
+                                string from5 = reader["arrangeHotel5From"] != DBNull.Value ? reader["arrangeHotel5From"].ToString() : "";
+                                string to5 = reader["arrangeHotel5To"] != DBNull.Value ? reader["arrangeHotel5To"].ToString() : "";
+                                string contact5 = reader["arrangeHotel5Phone"] != DBNull.Value ? reader["arrangeHotel5Phone"].ToString() : "";
+
+
 
                                 accomodations.Text = accomodationType;
 
@@ -267,21 +297,160 @@ namespace TravelDesk.Admin
                                     hotelAddress.Text = Address;
                                     hotelContact.Text = contact;
 
-
-                                    if (!string.IsNullOrEmpty(duration))
+                                    if (!string.IsNullOrEmpty(from))
                                     {
                                         //Parse the date string into a DateTime object
-                                       DateTime fromDate;
+                                        DateTime fromDate;
+                                        DateTime toDate;
 
                                         if (DateTime.TryParse(from, out fromDate))
                                         {
                                             //Format the DateTime object into the desired format
-                                            string formattedFromDate = fromDate.ToString("MMMM dd, yyyy");
+                                            string formattedFromDate = fromDate.ToString("MMMM dd");
 
-                                            //Assign the formatted date to the TextBox
-                                            durationFrom.Text = formattedFromDate;
+                                            if (DateTime.TryParse(to, out toDate))
+                                            {
+                                                //Format the DateTime object into the desired format
+                                                string formattedToDate = toDate.ToString("MMMM dd");
+
+                                                //Assign the formatted date to the TextBox
+                                                durationFrom.Text = formattedFromDate + " - " + formattedToDate;
+                                            }
+
+                                        }
+
+                                    }
+                                    if (!string.IsNullOrEmpty(Name2))
+                                    {
+                                        hotel2Acc.Style["display"] = "block";
+                                        hotel2.Text = Name2;
+                                        hotelAddress2.Text = Address2;
+                                        hotelContact2.Text = contact2;
+
+                                        if (!string.IsNullOrEmpty(from2))
+                                        {
+                                            //Parse the date string into a DateTime object
+                                            DateTime fromDate;
+                                            DateTime toDate;
+
+                                            if (DateTime.TryParse(from2, out fromDate))
+                                            {
+                                                //Format the DateTime object into the desired format
+                                                string formattedFromDate = fromDate.ToString("MMMM dd");
+
+                                                if (DateTime.TryParse(from2, out toDate))
+                                                {
+                                                    //Format the DateTime object into the desired format
+                                                    string formattedToDate = toDate.ToString("MMMM dd");
+
+                                                    //Assign the formatted date to the TextBox
+                                                    durationFrom2.Text = formattedFromDate + " - " + formattedToDate;
+                                                }
+
+                                            }
+
                                         }
                                     }
+                                    else
+                                    {
+                                        hotel2Acc.Style["display"] = "none";
+
+                                    }
+                                    if (!string.IsNullOrEmpty(Name3))
+                                    {
+                                        hotel3Acc.Style["display"] = "block";
+                                        hotel3.Text = Name3;
+                                        hotelAddress3.Text = Address3;
+                                        hotelContact3.Text = contact3;
+
+                                        if (!string.IsNullOrEmpty(from3))
+                                        {
+                                            //Parse the date string into a DateTime object
+                                            DateTime fromDate;
+                                            DateTime toDate;
+
+                                            if (DateTime.TryParse(from3, out fromDate))
+                                            {
+                                                //Format the DateTime object into the desired format
+                                                string formattedFromDate = fromDate.ToString("MMMM dd");
+
+                                                if (DateTime.TryParse(from3, out toDate))
+                                                {
+                                                    //Format the DateTime object into the desired format
+                                                    string formattedToDate = toDate.ToString("MMMM dd");
+
+                                                    //Assign the formatted date to the TextBox
+                                                    durationFrom3.Text = formattedFromDate + " - " + formattedToDate;
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+                                    if (!string.IsNullOrEmpty(Name4))
+                                    {
+                                        hotel4Acc.Style["display"] = "block";
+                                        hotel4.Text = Name4;
+                                        hotelAddress4.Text = Address4;
+                                        hotelContact4.Text = contact4;
+
+                                        if (!string.IsNullOrEmpty(from4))
+                                        {
+                                            //Parse the date string into a DateTime object
+                                            DateTime fromDate;
+                                            DateTime toDate;
+
+                                            if (DateTime.TryParse(from4, out fromDate))
+                                            {
+                                                //Format the DateTime object into the desired format
+                                                string formattedFromDate = fromDate.ToString("MMMM dd");
+
+                                                if (DateTime.TryParse(from4, out toDate))
+                                                {
+                                                    //Format the DateTime object into the desired format
+                                                    string formattedToDate = toDate.ToString("MMMM dd");
+
+                                                    //Assign the formatted date to the TextBox
+                                                    durationFrom3.Text = formattedFromDate + " - " + formattedToDate;
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+                                    if (!string.IsNullOrEmpty(Name5))
+                                    {
+                                        hotel5Acc.Style["display"] = "block";
+                                        hotel5.Text = Name5;
+                                        hotelAddress5.Text = Address5;
+                                        hotelContact5.Text = contact5;
+
+                                        if (!string.IsNullOrEmpty(from5))
+                                        {
+                                            //Parse the date string into a DateTime object
+                                            DateTime fromDate;
+                                            DateTime toDate;
+
+                                            if (DateTime.TryParse(from5, out fromDate))
+                                            {
+                                                //Format the DateTime object into the desired format
+                                                string formattedFromDate = fromDate.ToString("MMMM dd");
+
+                                                if (DateTime.TryParse(from5, out toDate))
+                                                {
+                                                    //Format the DateTime object into the desired format
+                                                    string formattedToDate = toDate.ToString("MMMM dd");
+
+                                                    //Assign the formatted date to the TextBox
+                                                    durationFrom5.Text = formattedFromDate + " - " + formattedToDate;
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+
+
                                 }
                             }
                             else

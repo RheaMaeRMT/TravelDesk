@@ -217,12 +217,17 @@ namespace TravelDesk.Admin
                                 if (status == "Arranged")
                                 {
                                     Session["clickedRequest"] = requestID;
+                                    string empID = reader["travelEmpID"].ToString();
+                                    Session["employeeID"] = empID;
+
                                     //redirect to the next page after clicking the view button
                                     Response.Redirect("arrangedRequest.aspx");
 
                                 } else if (status == "Processing")
                                 {
                                     Session["clickedRequest"] = requestID;
+                                    string empID = reader["travelEmpID"].ToString();
+                                    Session["employeeID"] = empID;
                                     //redirect to the next page after clicking the view button
                                     Response.Redirect("TravelArrangements.aspx");
                                 }

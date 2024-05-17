@@ -469,7 +469,7 @@ namespace TravelDesk.Admin
             string ID = "A" + random;
 
             // Session values are not null, proceed with inserting into the database
-            string userID = Session["userID"].ToString();
+            string empID = Session["employeeID"].ToString();
             string requestId = Session["clickedRequest"].ToString();
 
             using (var db = new SqlConnection(connectionString))
@@ -484,7 +484,7 @@ namespace TravelDesk.Admin
                             "VALUES (@ID, @userID, @travelID, @requirements, @notes, @dateCreated)";
 
                         cmd.Parameters.AddWithValue("@ID", ID);
-                        cmd.Parameters.AddWithValue("@userID", userID);
+                        cmd.Parameters.AddWithValue("@userID", empID);
                         cmd.Parameters.AddWithValue("@travelID", requestId);
                         cmd.Parameters.AddWithValue("@requirements", ""); // Initialize the parameter outside the loop
                         cmd.Parameters.AddWithValue("@notes", additionalNotes.Text);
@@ -539,10 +539,21 @@ namespace TravelDesk.Admin
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeAccomodation, arrangeHotelName , arrangeHotelAdd, arrangeHotelPhone, arrangeHotelDuration, arrangeHotel2Name, arrangeHotel2Add, arrangeHotel2Duration, arrangeHotel2Phone, arrangeHotel3Name, arrangeHotel3Add, arrangeHotel3Duration, arrangeHotel3Phone, arrangeHotel4Name, arrangeHotel4Add, arrangeHotel4Duration, arrangeHotel4Phone, arrangeHotel5Name, arrangeHotel5Add, arrangeHotel5Duration, arrangeHotel5Phone)"
-                                                                    + "VALUES (@ID, @accomodations, @hotelName, @hotelAddress, @contact, @duration, @hotel2Name, @hotel2Add, @hotel2Phone, @hotel2Duration, @hotel3Name, @hotel3Add, @hotel3Phone, @hotel3Duration, @hotel4Name, @hotel4Add, @hotel4Phone, @hotel4Duration, @hotel5Name, @hotel5Add, @hotel5Phone, @hotel5Duration )";
+                        cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeEmpID, arrangeAccomodation, " +
+                            "arrangeHotelName , arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo," +
+                            "arrangeHotel2Name, arrangeHotel2Add, arrangeHotel2Phone, arrangeHotel2From, arrangeHotel2To," +
+                            "arrangeHotel3Name, arrangeHotel3Add, arrangeHotel3Phone, arrangeHotel3From, arrangeHotel3To," +
+                            "arrangeHotel4Name, arrangeHotel4Add, arrangeHotel4Phone, arrangeHotel4From, arrangeHotel4To," +
+                            "arrangeHotel5Name, arrangeHotel5Add, arrangeHotel5Phone, arrangeHotel5From, arrangeHotel5To)"
+                             + "VALUES (@ID, @empID, @accomodations, " +
+                             " @hotelName, @hotelAddress, @contact, @from, @to," +
+                             " @hotel2Name, @hotel2Add, @hotel2Phone, @hotel2From, @hotel2To," +
+                             " @hotel3Name, @hotel3Add, @hotel3Phone, @hotel3From, @hotel3To," +
+                             " @hotel4Name, @hotel4Add, @hotel4Phone, @hotel4From, @hotel4To," +
+                             " @hotel5Name, @hotel5Add, @hotel5Phone, @hotel5From, @hotel5To)";
 
                         cmd.Parameters.AddWithValue("@ID", acc);
+                        cmd.Parameters.AddWithValue("@empID", empID.Text);
                         cmd.Parameters.AddWithValue("@accomodations", accomodations.SelectedItem.Text);
                         string accomodation = accomodations.Text;
                         if (accomodation == "Hotel Accomodation")
@@ -560,27 +571,33 @@ namespace TravelDesk.Admin
                         }
                         cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
                         cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
-                        cmd.Parameters.AddWithValue("@duration", durationFrom.Text + " - " + durationTo.Text);
+                        cmd.Parameters.AddWithValue("@from", durationFrom.Text);
+                        cmd.Parameters.AddWithValue("@to", durationTo.Text);
 
                         cmd.Parameters.AddWithValue("@hotel2Add", address2.Text);
                         cmd.Parameters.AddWithValue("@hotel2Phone", phone2.Text);
-                        cmd.Parameters.AddWithValue("@hotel2Duration", from2.Text + " - " + to2.Text);
+                        cmd.Parameters.AddWithValue("@hotel2From", from2.Text);
+                        cmd.Parameters.AddWithValue("@hotel2To", to2.Text);
 
                         cmd.Parameters.AddWithValue("@hotel3Add", address3.Text);
                         cmd.Parameters.AddWithValue("@hotel3Phone", phone3.Text);
-                        cmd.Parameters.AddWithValue("@hotel3Duration", from3.Text + " - " + to3.Text);
+                        cmd.Parameters.AddWithValue("@hotel3From", from3.Text);
+                        cmd.Parameters.AddWithValue("@hotel3To", to3.Text);
 
                         cmd.Parameters.AddWithValue("@hotel4Add", address4.Text);
                         cmd.Parameters.AddWithValue("@hotel4Phone", phone4.Text);
-                        cmd.Parameters.AddWithValue("@hotel4Duration", from4.Text + " - " + to4.Text);
+                        cmd.Parameters.AddWithValue("@hotel4From", from4.Text);
+                        cmd.Parameters.AddWithValue("@hotel4To", to4.Text);
 
                         cmd.Parameters.AddWithValue("@hotel5Add", address5.Text);
                         cmd.Parameters.AddWithValue("@hotel5Phone", phone5.Text);
-                        cmd.Parameters.AddWithValue("@hotel5Duration", from5.Text + " - " + to5.Text);
+                        cmd.Parameters.AddWithValue("@hotel5From", from5.Text);
+                        cmd.Parameters.AddWithValue("@hotel5To", to5.Text);
 
                         cmd.ExecuteNonQuery();
 
                         Session["accomodationID"] = acc;
+                        Session["empID"] = empID.Text;
                         saveFlightDetails();
 
                     }
@@ -956,6 +973,130 @@ namespace TravelDesk.Admin
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
+        }
+
+        protected void getsavedHotels_Click(object sender, EventArgs e)
+        {
+            string employeeID = empID.Text;
+
+            if (employeeID != null)
+            {
+
+                // Query the database to retrieve the request details based on the ID
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM travelAccomodation WHERE arrangeEmpID = @empID";
+                        cmd.Parameters.AddWithValue("@empID", employeeID);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read()) // Check if there are any rows returned by the query
+                            {
+                                string accomodationType = reader["arrangeAccomodation"].ToString();
+                                //1ST HOTEL
+                                string Name = reader["arrangeHotelName"] != DBNull.Value ? reader["arrangeHotelName"].ToString() : "";
+                                string Address = reader["arrangeHotelAdd"] != DBNull.Value ? reader["arrangeHotelAdd"].ToString() : "";
+                                string from = reader["arrangeHotelFrom"] != DBNull.Value ? reader["arrangeHotelFrom"].ToString() : "";
+                                string to = reader["arrangeHotelTo"] != DBNull.Value ? reader["arrangeHotelTo"].ToString() : "";
+                                string contact = reader["arrangeHotelPhone"] != DBNull.Value ? reader["arrangeHotelPhone"].ToString() : "";
+
+                                //2ND HOTEL
+                                string Name2 = reader["arrangeHotel2Name"] != DBNull.Value ? reader["arrangeHotel2Name"].ToString() : "";
+                                string Address2 = reader["arrangeHotel2Add"] != DBNull.Value ? reader["arrangeHotel2Add"].ToString() : "";
+                                string from2 = reader["arrangeHotel2From"] != DBNull.Value ? reader["arrangeHotel2From"].ToString() : "";
+                                string to2 = reader["arrangeHotel2To"] != DBNull.Value ? reader["arrangeHotel2To"].ToString() : "";
+                                string contact2 = reader["arrangeHotel2Phone"] != DBNull.Value ? reader["arrangeHotel2Phone"].ToString() : "";
+
+                                //3RD HOTEL
+                                string Name3 = reader["arrangeHotel3Name"] != DBNull.Value ? reader["arrangeHotel3Name"].ToString() : "";
+                                string Address3 = reader["arrangeHotel3Add"] != DBNull.Value ? reader["arrangeHotel3Add"].ToString() : "";
+                                string from3 = reader["arrangeHotel3From"] != DBNull.Value ? reader["arrangeHotel3From"].ToString() : "";
+                                string to3 = reader["arrangeHotel3To"] != DBNull.Value ? reader["arrangeHotel3To"].ToString() : "";
+                                string contact3 = reader["arrangeHotel3Phone"] != DBNull.Value ? reader["arrangeHotel3Phone"].ToString() : "";
+
+                                //4TH HOTEL
+                                string Name4 = reader["arrangeHotel4Name"] != DBNull.Value ? reader["arrangeHotel4Name"].ToString() : "";
+                                string Address4 = reader["arrangeHotel4Add"] != DBNull.Value ? reader["arrangeHotel4Add"].ToString() : "";
+                                string from4 = reader["arrangeHotel4From"] != DBNull.Value ? reader["arrangeHotel4From"].ToString() : "";
+                                string to4 = reader["arrangeHotel4To"] != DBNull.Value ? reader["arrangeHotel4To"].ToString() : "";
+                                string contact4 = reader["arrangeHotel4Phone"] != DBNull.Value ? reader["arrangeHotel4Phone"].ToString() : "";
+
+                                //5TH HOTEL
+                                string Name5 = reader["arrangeHotel5Name"] != DBNull.Value ? reader["arrangeHotel5Name"].ToString() : "";
+                                string Address5 = reader["arrangeHotel5Add"] != DBNull.Value ? reader["arrangeHotel5Add"].ToString() : "";
+                                string from5 = reader["arrangeHotel5From"] != DBNull.Value ? reader["arrangeHotel5From"].ToString() : "";
+                                string to5 = reader["arrangeHotel5To"] != DBNull.Value ? reader["arrangeHotel5To"].ToString() : "";
+                                string contact5 = reader["arrangeHotel5Phone"] != DBNull.Value ? reader["arrangeHotel5Phone"].ToString() : "";
+
+
+
+                                    hotelAccomodations.Style["display"] = "block";
+                                    hotel.Text = Name;
+                                    hotelAddress.Text = Address;
+                                    hotelPhone.Text = contact;
+
+                                    if (!string.IsNullOrEmpty(Name2))
+                                    {
+                                        hotel2.Style["display"] = "block";
+                                        hotelname2.Text = Name2;
+                                        address2.Text = Address2;
+                                        phone2.Text = contact2;
+                                        Button5.Style["display"] = "none";
+
+                                    }
+                                    else
+                                    {
+                                        hotel2.Style["display"] = "none";
+
+                                    }
+                                    if (!string.IsNullOrEmpty(Name3))
+                                    {
+                                        hotel3.Style["display"] = "block";
+                                        hotelname3.Text = Name3;
+                                        address3.Text = Address3;
+                                        phone3.Text = contact3;
+                                        Button6.Style["display"] = "none";
+
+                                    }
+                                    if (!string.IsNullOrEmpty(Name4))
+                                    {
+                                        hotel4.Style["display"] = "block";
+                                        hotelname4.Text = Name4;
+                                        address4.Text = Address4;
+                                        phone4.Text = contact4;
+                                        Button7.Style["display"] = "none";
+
+                                    }
+                                    if (!string.IsNullOrEmpty(Name5))
+                                    {
+                                        hotel5.Style["display"] = "block";
+                                        hotelname5.Text = Name5;
+                                        address5.Text = Address5;
+                                        phone5.Text = contact5;
+                                        Button8.Style["display"] = "none";
+
+                                    }
+
+                                getsavedHotels.Style["display"] = "none";
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('No Hotel Accomodations Exist for Traveller')</script>");
+                                hotelAccomodations.Style["display"] = "block";
+                                getsavedHotels.Style["display"] = "none";
+
+                            }
+                        }
+
+                    }
+                }
+            }
+
+
         }
     }
 }
