@@ -327,6 +327,7 @@
     <Content Include="Admin\Employees.aspx" />
     <Content Include="Admin\Managers.aspx" />
     <Content Include="Admin\RequestDetails.aspx" />
+    <Content Include="Admin\sendToEmail.aspx" />
     <Content Include="Admin\TravelArrangements.aspx" />
     <Content Include="Admin\TravelRequests.aspx" />
     <Content Include="Admin\Travels.aspx" />
@@ -668,6 +669,13 @@
     </Compile>
     <Compile Include="Admin\RequestDetails.aspx.designer.cs">
       <DependentUpon>RequestDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\sendToEmail.aspx.cs">
+      <DependentUpon>sendToEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\sendToEmail.aspx.designer.cs">
+      <DependentUpon>sendToEmail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\TravelArrangements.aspx.cs">
       <DependentUpon>TravelArrangements.aspx</DependentUpon>

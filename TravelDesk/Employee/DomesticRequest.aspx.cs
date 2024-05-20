@@ -347,28 +347,38 @@ namespace TravelDesk.Employee
         //        Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
         //    }
         //}
-        
+
         protected void btnUpload_Click(object sender, EventArgs e) //UPLOAD PDF
         {
-            string saveDIR = Server.MapPath("/PDFs/TravelRequest/approvalProofs");
             try
             {
                 if (Session["userName"] != null)
                 {
+                    string employeeFirstName = Session["userName"].ToString();
 
-                    string name = employeeFName.Text + employeeLName.Text;
+                    // Concatenate the first and last name to create a unique folder name
+                    string folderName = employeeFirstName;
+
+                    // Create a directory path using the concatenated folder name
+                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName);
+
+                    // Check if the directory exists, if not, create it
+                    if (!Directory.Exists(saveDIR))
+                    {
+                        Directory.CreateDirectory(saveDIR);
+                    }
 
                     if (employeeUpload.HasFile)
                     {
-                        string filename = Server.HtmlEncode(name + "_" + employeeUpload.FileName);
+                        string filename = Server.HtmlEncode(folderName + "_" + employeeUpload.FileName);
                         string extension = System.IO.Path.GetExtension(filename).ToLower(); // Convert extension to lowercase for comparison
                         int filesize = employeeUpload.PostedFile.ContentLength;
+
+                        // Check if the file already exists in the folder
                         if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
                         {
                             Response.Write("<script>alert('File already exists. Please upload a valid proof of approval for this travel request.')</script>");
                             uploadBlock.Style["display"] = "block";
-
-
                         }
                         else
                         {
@@ -382,7 +392,7 @@ namespace TravelDesk.Employee
                                     employeeUpload.SaveAs(savePath);
 
                                     // Store file path in session
-                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", filename);
+                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", folderName, filename);
                                     Session["filename"] = filename;
 
                                     string pdfPath = Session["pdfPath"].ToString();
@@ -401,8 +411,6 @@ namespace TravelDesk.Employee
                                     string path = Session["pdfPath"].ToString();
                                     Session["filePath"] = path;
 
-                                    
-
                                     // Log success message to the console
                                     Console.WriteLine("File uploaded successfully: " + filename);
                                     Console.WriteLine("PDF path: " + Session["imgPath"]);
@@ -420,20 +428,15 @@ namespace TravelDesk.Employee
                             {
                                 Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
                                 uploadBlock.Style["display"] = "block";
-
                             }
-
                         }
                     }
                     else
                     {
                         Response.Write("<script>alert('Upload failed: No file selected.')</script>");
                         uploadBlock.Style["display"] = "block";
-
                     }
-
                 }
-
             }
             catch (Exception ex)
             {

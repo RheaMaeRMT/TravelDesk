@@ -354,25 +354,35 @@ namespace TravelDesk.Employee
 
         protected void btnUpload_Click(object sender, EventArgs e) //UPLOAD PDF
         {
-            string saveDIR = Server.MapPath("/PDFs/TravelRequest/approvalProofs");
             try
             {
                 if (Session["userName"] != null)
                 {
+                    string employeeFirstName = Session["userName"].ToString();
 
-                    string name = employeeFName.Text + employeeLName.Text;
+                    // Concatenate the first and last name to create a unique folder name
+                    string folderName = employeeFirstName;
+
+                    // Create a directory path using the concatenated folder name
+                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName);
+
+                    // Check if the directory exists, if not, create it
+                    if (!Directory.Exists(saveDIR))
+                    {
+                        Directory.CreateDirectory(saveDIR);
+                    }
 
                     if (employeeUpload.HasFile)
                     {
-                        string filename = Server.HtmlEncode(name + "_" + employeeUpload.FileName);
+                        string filename = Server.HtmlEncode(folderName + "_" + employeeUpload.FileName);
                         string extension = System.IO.Path.GetExtension(filename).ToLower(); // Convert extension to lowercase for comparison
                         int filesize = employeeUpload.PostedFile.ContentLength;
+
+                        // Check if the file already exists in the folder
                         if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
                         {
                             Response.Write("<script>alert('File already exists. Please upload a valid proof of approval for this travel request.')</script>");
                             uploadBlock.Style["display"] = "block";
-
-
                         }
                         else
                         {
@@ -386,7 +396,7 @@ namespace TravelDesk.Employee
                                     employeeUpload.SaveAs(savePath);
 
                                     // Store file path in session
-                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", filename);
+                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", folderName, filename);
                                     Session["filename"] = filename;
 
                                     string pdfPath = Session["pdfPath"].ToString();
@@ -405,8 +415,6 @@ namespace TravelDesk.Employee
                                     string path = Session["pdfPath"].ToString();
                                     Session["filePath"] = path;
 
-
-
                                     // Log success message to the console
                                     Console.WriteLine("File uploaded successfully: " + filename);
                                     Console.WriteLine("PDF path: " + Session["imgPath"]);
@@ -424,20 +432,15 @@ namespace TravelDesk.Employee
                             {
                                 Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
                                 uploadBlock.Style["display"] = "block";
-
                             }
-
                         }
                     }
                     else
                     {
                         Response.Write("<script>alert('Upload failed: No file selected.')</script>");
                         uploadBlock.Style["display"] = "block";
-
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -971,72 +974,73 @@ namespace TravelDesk.Employee
 
         protected void uploadPassportbtn_Click(object sender, EventArgs e)
         {
-            string saveDIR = Server.MapPath("/PDFs/TravelRequest/employeePassports");
             try
             {
                 if (Session["userName"] != null)
                 {
+                    string employeeFirstName = Session["userName"].ToString();
 
-                    string name = employeeFName.Text + employeeLName.Text;
+                    // Concatenate the first and last name to create a unique folder name
+                    string folderName = employeeFirstName;
+
+                    // Create a directory path using the concatenated folder name
+                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/employeePassports"), folderName);
+
+                    // Check if the directory exists, if not, create it
+                    if (!Directory.Exists(saveDIR))
+                    {
+                        Directory.CreateDirectory(saveDIR);
+                    }
 
                     if (passportUpload.HasFile)
                     {
-                        string filename = Server.HtmlEncode(name + "_" + passportUpload.FileName);
+                        string filename = Server.HtmlEncode(folderName + "_" + passportUpload.FileName);
                         string extension = System.IO.Path.GetExtension(filename).ToLower(); // Convert extension to lowercase for comparison
                         int filesize = employeeUpload.PostedFile.ContentLength;
-                        if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
-                        {
-                            Response.Write("<script>alert('File already exists. Please upload a valid proof of approval for this travel request.')</script>");
-                            uploadPassport.Style["display"] = "block";
 
-
-                        }
-                        else
+                        if (extension == ".pdf") // Allow only PDF files
                         {
-                            if (extension == ".pdf") // Allow only PDF files
+                            if (filesize < 4100000)
                             {
-                                if (filesize < 4100000)
-                                {
-                                    string savePath = System.IO.Path.Combine(saveDIR, filename);
+                                string savePath = System.IO.Path.Combine(saveDIR, filename);
 
-                                    // Save the uploaded file
-                                    passportUpload.SaveAs(savePath);
+                                // Save the uploaded file
+                                passportUpload.SaveAs(savePath);
 
-                                    // Store file path in session
-                                    Session["passportPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/employeePassports/", filename);
-                                    Session["passportName"] = filename;
 
-                                    string pdfPath = Session["passportPath"].ToString();
+                                // Store file path in session
+                                Session["passportPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/employeePassports/", folderName, filename);
+                                Session["passportName"] = filename;
 
-                                    // Show the PDF viewer
-                                    passportViewer.Attributes["src"] = pdfPath;
-                                    passportBlock.Style["display"] = "block";
+                                string pdfPath = Session["passportPath"].ToString();
 
-                                    // Disable the RequiredFieldValidator
-                                    RequiredFieldValidator29.Enabled = false;
-                                    DisableRouteRequiredFieldValidators();
+                                // Show the PDF viewer
+                                passportViewer.Attributes["src"] = pdfPath;
+                                passportBlock.Style["display"] = "block";
 
-                                    Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
-                                    uploadPassport.Style["display"] = "none";
+                                // Disable the RequiredFieldValidator
+                                RequiredFieldValidator29.Enabled = false;
+                                DisableRouteRequiredFieldValidators();
 
-                                    string path = Session["passportPath"].ToString();
-                                    Session["filePassportPath"] = path;
+                                Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+                                uploadPassport.Style["display"] = "none";
 
-                                    // Display contents after successful upload
-                                    displayContents();
-                                }
-                                else
-                                {
-                                    Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
-                                    uploadPassport.Style["display"] = "block";
-                                }
+                                string path = Session["passportPath"].ToString();
+                                Session["filePassportPath"] = path;
+
+                                // Display contents after successful upload
+                                displayContents();
                             }
                             else
                             {
-                                Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
+                                Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
                                 uploadPassport.Style["display"] = "block";
-
                             }
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
+                            uploadPassport.Style["display"] = "block";
 
                         }
                     }
@@ -1046,9 +1050,7 @@ namespace TravelDesk.Employee
                         uploadBlock.Style["display"] = "block";
 
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -1059,6 +1061,7 @@ namespace TravelDesk.Employee
                 Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
                 Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
             }
+
         }
 
         protected void passportReupload_Click(object sender, EventArgs e)
@@ -1066,7 +1069,6 @@ namespace TravelDesk.Employee
             try
             {
                 // Get the file path from the session
-                //string filePath = Session["pdfPath"] as string;
                 string filePath = Session["filePassportPath"].ToString();
 
                 // Check if the file path is not null or empty

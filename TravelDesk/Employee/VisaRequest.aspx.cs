@@ -252,88 +252,82 @@ namespace TravelDesk.Employee
 
         protected void approvalUpload_Click(object sender, EventArgs e)
         {
-            string saveDIR = Server.MapPath("/PDFs/VisaRequest/approvalProofs");
             try
             {
                 if (Session["userName"] != null)
                 {
+                    string employeeFirstName = Session["userName"].ToString();
 
-                    string name = employeeFName.Text + employeeLName.Text;
+                    // Concatenate the first and last name to create a unique folder name
+                    string folderName = employeeFirstName;
+
+                    // Create a directory path using the concatenated folder name
+                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/VisaRequest/approvalProofs"), folderName);
+
+                    // Check if the directory exists, if not, create it
+                    if (!Directory.Exists(saveDIR))
+                    {
+                        Directory.CreateDirectory(saveDIR);
+                    }
 
                     if (employeeUpload.HasFile)
                     {
-                        string filename = Server.HtmlEncode(name + "_" + employeeUpload.FileName);
+                        string filename = Server.HtmlEncode(folderName + "_" + employeeUpload.FileName);
                         string extension = System.IO.Path.GetExtension(filename).ToLower(); // Convert extension to lowercase for comparison
                         int filesize = employeeUpload.PostedFile.ContentLength;
-                        if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
-                        {
-                            Response.Write("<script>alert('File already exists. Please upload a valid proof of approval for this travel request.')</script>");
-                            uploadBlock.Style["display"] = "block";
 
-
-                        }
-                        else
+                        if (extension == ".pdf") // Allow only PDF files
                         {
-                            if (extension == ".pdf") // Allow only PDF files
+                            if (filesize < 4100000)
                             {
-                                if (filesize < 4100000)
-                                {
-                                    string savePath = System.IO.Path.Combine(saveDIR, filename);
+                                string savePath = System.IO.Path.Combine(saveDIR, filename);
 
-                                    // Save the uploaded file
-                                    employeeUpload.SaveAs(savePath);
+                                // Save the uploaded file
+                                employeeUpload.SaveAs(savePath);
 
-                                    // Store file path in session
-                                    Session["pdfPath"] = System.IO.Path.Combine("/PDFs/VisaRequest/approvalProofs/", filename);
-                                    Session["filename"] = filename;
+                                // Store file path in session
+                                Session["pdfPath"] = System.IO.Path.Combine("/PDFs/VisaRequest/approvalProofs/", folderName, filename);
+                                Session["filename"] = filename;
 
-                                    string pdfPath = Session["pdfPath"].ToString();
+                                string pdfPath = Session["pdfPath"].ToString();
 
-                                    // Show the PDF viewer
-                                    pdfViewer.Attributes["src"] = pdfPath;
-                                    pdfBlock.Style["display"] = "block";
+                                // Show the PDF viewer
+                                pdfViewer.Attributes["src"] = pdfPath;
+                                pdfBlock.Style["display"] = "block";
 
-                                    // Disable the RequiredFieldValidator
-                                    RequiredFieldValidator29.Enabled = false;
+                                // Disable the RequiredFieldValidator
+                                RequiredFieldValidator29.Enabled = false;
 
-                                    Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
-                                    uploadBlock.Style["display"] = "none";
+                                Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+                                uploadBlock.Style["display"] = "none";
 
-                                    string path = Session["pdfPath"].ToString();
-                                    Session["filePath"] = path;
+                                string path = Session["pdfPath"].ToString();
+                                Session["filePath"] = path;
 
-
-
-                                    // Log success message to the console
-                                    Console.WriteLine("File uploaded successfully: " + filename);
-                                    Console.WriteLine("PDF path: " + Session["imgPath"]);
+                                // Log success message to the console
+                                Console.WriteLine("File uploaded successfully: " + filename);
+                                Console.WriteLine("PDF path: " + Session["imgPath"]);
 
 
-                                }
-                                else
-                                {
-                                    Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
-                                    uploadBlock.Style["display"] = "block";
-                                }
                             }
                             else
                             {
-                                Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
+                                Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
                                 uploadBlock.Style["display"] = "block";
-
                             }
-
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
+                            uploadBlock.Style["display"] = "block";
                         }
                     }
                     else
                     {
                         Response.Write("<script>alert('Upload failed: No file selected.')</script>");
                         uploadBlock.Style["display"] = "block";
-
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -344,80 +338,75 @@ namespace TravelDesk.Employee
                 Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
                 Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
             }
+
         }
 
         protected void uploadPassportbtn_Click(object sender, EventArgs e)
         {
-            string saveDIR = Server.MapPath("/PDFs/VisaRequest/employeePassports");
             try
             {
                 if (Session["userName"] != null)
                 {
+                    string employeeFirstName = Session["userName"].ToString();
 
-                    string name = employeeFName.Text + employeeLName.Text;
+                    // Concatenate the first and last name to create a unique folder name
+                    string folderName = employeeFirstName;
+
+                    // Create a directory path using the concatenated folder name
+                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/VisaRequest/employeePassports"), folderName);
+
+                    // Check if the directory exists, if not, create it
+                    if (!Directory.Exists(saveDIR))
+                    {
+                        Directory.CreateDirectory(saveDIR);
+                    }
 
                     if (passportUpload.HasFile)
                     {
-                        string filename = Server.HtmlEncode(name + "_" + passportUpload.FileName);
+                        string filename = Server.HtmlEncode(folderName + "_" + passportUpload.FileName);
                         string extension = System.IO.Path.GetExtension(filename).ToLower(); // Convert extension to lowercase for comparison
                         int filesize = employeeUpload.PostedFile.ContentLength;
-                        if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
-                        {
-                            Response.Write("<script>alert('File already exists. Please upload a valid proof of approval for this travel request.')</script>");
-                            uploadPassport.Style["display"] = "block";
 
-
-                        }
-                        else
+                        if (extension == ".pdf") // Allow only PDF files
                         {
-                            if (extension == ".pdf") // Allow only PDF files
+                            if (filesize < 4100000)
                             {
-                                if (filesize < 4100000)
-                                {
-                                    string savePath = System.IO.Path.Combine(saveDIR, filename);
+                                string savePath = System.IO.Path.Combine(saveDIR, filename);
 
-                                    // Save the uploaded file
-                                    passportUpload.SaveAs(savePath);
-
-                                    // Store file path in session
-                                    Session["passportPath"] = System.IO.Path.Combine("/PDFs/VisaRequest/employeePassports/", filename);
-                                    Session["passportName"] = filename;
-
-                                    string pdfPath = Session["passportPath"].ToString();
-
-                                    // Show the PDF viewer
-                                    passportViewer.Attributes["src"] = pdfPath;
-                                    passportBlock.Style["display"] = "block";
-
-                                    // Disable the RequiredFieldValidator
-                                    RequiredFieldValidator29.Enabled = false;
+                                // Save the uploaded file
+                                passportUpload.SaveAs(savePath);
 
 
-                                    Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
-                                    uploadPassport.Style["display"] = "none";
+                                // Store file path in session
+                                Session["passportPath"] = System.IO.Path.Combine("/PDFs/VisaRequest/employeePassports/", folderName, filename);
+                                Session["passportName"] = filename;
 
-                                    string path = Session["passportPath"].ToString();
-                                    Session["filePassportPath"] = path;
+                                string pdfPath = Session["passportPath"].ToString();
 
+                                // Show the PDF viewer
+                                passportViewer.Attributes["src"] = pdfPath;
+                                passportBlock.Style["display"] = "block";
 
+                                // Disable the RequiredFieldValidator
+                                RequiredFieldValidator29.Enabled = false;
 
-                                    // Log success message to the console
-                                    Console.WriteLine("File uploaded successfully: " + filename);
-                                    Console.WriteLine("PDF path: " + Session["imgPath"]);
+                                Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
+                                uploadPassport.Style["display"] = "none";
 
-                                }
-                                else
-                                {
-                                    Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
-                                    uploadPassport.Style["display"] = "block";
-                                }
+                                string path = Session["passportPath"].ToString();
+                                Session["filePassportPath"] = path;
+
                             }
                             else
                             {
-                                Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
+                                Response.Write("<script>alert('Your file was not uploaded because the file size is more than 4MB.')</script>");
                                 uploadPassport.Style["display"] = "block";
-
                             }
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file as proof of your travel approval.')</script>");
+                            uploadPassport.Style["display"] = "block";
 
                         }
                     }
@@ -427,9 +416,7 @@ namespace TravelDesk.Employee
                         uploadBlock.Style["display"] = "block";
 
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -440,6 +427,7 @@ namespace TravelDesk.Employee
                 Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
                 Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
             }
+
         }
 
         protected void reUpload_Click(object sender, EventArgs e)

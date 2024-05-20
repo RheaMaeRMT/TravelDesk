@@ -1322,13 +1322,13 @@ namespace TravelDesk.Admin
         //START OF PDF FOR ARRANGEMENT
         protected void exportasPdf_Click(object sender, EventArgs e)
         {
-
             Page.RegisterAsyncTask(new PageAsyncTask(exportasPdfAsync));
 
         }
 
         protected async Task exportasPdfAsync()
         {
+
             // Create a new MemoryStream to hold the PDF
             using (MemoryStream ms = new MemoryStream())
             {
@@ -1398,14 +1398,17 @@ namespace TravelDesk.Admin
                 // Construct filename
                 string filename = name + "_" + ID + ".pdf";
 
-                // Save the PDF to the folder /PDFs/travelArrangements
-                string folderPath = Server.MapPath("~/PDFs/travelArrangements");
+                // Create a directory path using empFname
+                string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), name);
+
+                // Check if the directory exists, if not, create it
                 if (!Directory.Exists(folderPath))
                 {
                     Directory.CreateDirectory(folderPath);
                 }
                 string filePath = Path.Combine(folderPath, filename);
                 File.WriteAllBytes(filePath, pdfBytes);
+
 
                 // Clear the response
                 Response.Clear();
@@ -1416,18 +1419,20 @@ namespace TravelDesk.Admin
 
                 Session["arrangementPath"] = filePath;
 
+
                 // Write the PDF bytes to the response
                 Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
 
                 // End the response
                 Response.Flush();
+                Response.Redirect("sendToEmail.aspx");
+
 
 
 
 
 
                 //After sending the PDF for download, send it via email
-
                 await SendPdfByEmail(pdfBytes, filename, recipientEmail);
 
 
@@ -1566,7 +1571,7 @@ namespace TravelDesk.Admin
                 if (DateTime.TryParse(r1FromDate.Text, out arrivalDateTime))
                 {
                     string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r1Flight.Text,"  ", formattedArrivalDate, "  ", r1From.Text, " ", r1To.Text, "          ", r1ETA.Text, " ", r1ETD.Text);
+                    AddFlightScheduleRow(flightDetailsTable, "", r1Flight.Text,"  ", formattedArrivalDate, "  ", r1From.Text, " ", r1To.Text, "      ", r1ETA.Text, " ", r1ETD.Text);
                 }
             }
            
@@ -1577,7 +1582,7 @@ namespace TravelDesk.Admin
                 if (DateTime.TryParse(r2FromDate.Text, out arrivalDateTime))
                 {
                     string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r2Flight.Text, "  ", formattedArrivalDate, "  ", r2From.Text, " ", r2To.Text, "          ", r2ETA.Text, " ", r2ETD.Text);
+                    AddFlightScheduleRow(flightDetailsTable, "", r2Flight.Text, "  ", formattedArrivalDate, "  ", r2From.Text, " ", r2To.Text, "      ", r2ETA.Text, " ", r2ETD.Text);
                 }
             }
 
@@ -1587,7 +1592,7 @@ namespace TravelDesk.Admin
                 if (DateTime.TryParse(r3FromDate.Text, out arrivalDateTime))
                 {
                     string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r3Flight.Text, "  ", formattedArrivalDate, "  ", r3From.Text, " ", r3To.Text, "          ", r3ETA.Text, " ", r3ETD.Text);
+                    AddFlightScheduleRow(flightDetailsTable, "", r3Flight.Text, "  ", formattedArrivalDate, "  ", r3From.Text, " ", r3To.Text, "      ", r3ETA.Text, " ", r3ETD.Text);
                 }
             }
             if (additional4routeFields.Visible)
@@ -1596,7 +1601,7 @@ namespace TravelDesk.Admin
                 if (DateTime.TryParse(r4FromDate.Text, out arrivalDateTime))
                 {
                     string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r4Flight.Text, "  ", formattedArrivalDate, "  ", r4From.Text, " ", r4To.Text, "          ", r4ETA.Text, " ", r4ETD.Text);
+                    AddFlightScheduleRow(flightDetailsTable, "", r4Flight.Text, "  ", formattedArrivalDate, "  ", r4From.Text, " ", r4To.Text, "     ", r4ETA.Text, " ", r4ETD.Text);
                 }
             }
             if (additional5routeFields.Visible)
@@ -1605,7 +1610,7 @@ namespace TravelDesk.Admin
                 if (DateTime.TryParse(r5FromDate.Text, out arrivalDateTime))
                 {
                     string formattedArrivalDate = arrivalDateTime.ToString("ddMMMM");
-                    AddFlightScheduleRow(flightDetailsTable, "", r5Flight.Text, "  ", formattedArrivalDate, "  ", r5From.Text, " ", r5To.Text, "          ", r5ETA.Text, " ", r5ETD.Text);
+                    AddFlightScheduleRow(flightDetailsTable, "", r5Flight.Text, "  ", formattedArrivalDate, "  ", r5From.Text, " ", r5To.Text, "     ", r5ETA.Text, " ", r5ETD.Text);
                 }
             }
             // Add flight details table to document
