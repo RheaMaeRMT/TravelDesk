@@ -17,6 +17,7 @@ using System.Text;
 using System.Web.UI;
 using MimeKit;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace TravelDesk.Admin
 {
@@ -122,6 +123,7 @@ namespace TravelDesk.Admin
                                     travellerName.Text = name + " - Arranged Travel Arrangement";
 
                                     Session["userEmail"] = email;
+                                    Session["travellerName"] = name;
 
                                     // Assign other request details to corresponding controls
                                 }
@@ -1322,11 +1324,13 @@ namespace TravelDesk.Admin
         //START OF PDF FOR ARRANGEMENT
         protected void exportasPdf_Click(object sender, EventArgs e)
         {
-            Page.RegisterAsyncTask(new PageAsyncTask(exportasPdfAsync));
+
+
+            Response.Write("<script>alert('EXPORT DONE.')</script>");
 
         }
 
-        protected async Task exportasPdfAsync()
+        protected Task exportasPdfAsync()
         {
 
             // Create a new MemoryStream to hold the PDF
@@ -1387,12 +1391,20 @@ namespace TravelDesk.Admin
                     doc.Close();
                 }
 
+
                 // Convert the MemoryStream to a byte array
                 byte[] pdfBytes = ms.ToArray();
+
+                // Store PDF bytes in session
+                Session["pdfBytes"] = pdfBytes;
+
+                // Set a flag indicating that PDF generation and download are complete
+                Session["pdfDownloadComplete"] = true;
 
                 // Retrieve ID and name for filename
                 string ID = Session["clickedRequest"].ToString();
                 string recipientEmail = Session["userEmail"].ToString();
+                
                 string name = employeeName.Text;
 
                 // Construct filename
@@ -1420,26 +1432,21 @@ namespace TravelDesk.Admin
                 Session["arrangementPath"] = filePath;
 
 
+
                 // Write the PDF bytes to the response
                 Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
 
                 // End the response
                 Response.Flush();
-                Response.Redirect("sendToEmail.aspx");
-
-
-
-
-
-
-                //After sending the PDF for download, send it via email
-                await SendPdfByEmail(pdfBytes, filename, recipientEmail);
-
 
 
             }
+
+            return Task.CompletedTask;
+
         }
-        
+
+
         public class FileParameter
         {
             public byte[] File { get; private set; }
@@ -1939,6 +1946,17 @@ namespace TravelDesk.Admin
         protected void backButton_Click(object sender, EventArgs e)
         {
             Response.Write("<script> window.location.href = 'TravelRequests.aspx'; </script>");
+
+        }
+
+        protected void confirmExport_Click(object sender, EventArgs e)
+        {
+            Page.RegisterAsyncTask(new PageAsyncTask(exportasPdfAsync));
+        }
+
+        protected void sendToEmail_Click(object sender, EventArgs e)
+        {
+            Response.Write("<script> window.location.href = 'sendToEmail.aspx'; </script>");
 
         }
 

@@ -16,7 +16,10 @@
         $('#sendPDFModal').modal('show');
         return false; // Prevents the default behavior of the button click event
     }
-    
+    function showConfirmModal() {
+        $('#downloadConfirmation').modal('show');
+        return false; // Prevents the default behavior of the button click event
+    }
 
 
 </script>
@@ -48,10 +51,9 @@
                                                    
                                                     </div>      
                                                     <div class="card-block" style="margin-left:auto">
-                                                          <asp:LinkButton runat="server" ID="exportPDF" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClick="exportasPdf_Click"> <i class="ti-export" style="color:white"></i> Export PDF </asp:LinkButton>     
-                                                          <asp:LinkButton runat="server" ID="sendEmailbtn" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px" OnClientClick="showModal(); return false"> <i class="ti-email" style="color:white"></i> send to email </asp:LinkButton>     
+                                                          <asp:LinkButton runat="server" ID="exportPDF" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClientClick="showConfirmModal(); return false"> <i class="ti-export" style="color:white"></i> Export PDF </asp:LinkButton>     
+                                                          <asp:LinkButton runat="server" ID="sendEmailbtn" class="btn btn-primary" style="display:none;color:white;font-size:16px;border-radius:20px;width:200px" OnClientClick="showModal(); return false"> <i class="ti-email" style="color:white"></i> send to email </asp:LinkButton>     
                                                     </div>
-
 
                                                             <!--EMPLOYEE DETAILS-->
                                                             <div class="card-block">
@@ -272,6 +274,31 @@
 
                                                                                     <br /> <br />
                                                                                          <asp:LinkButton runat="server" ID="LinkButton4"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClick="sendFile_Click"> <i class="ti-email" style="color:white"></i> SEND </asp:LinkButton>     
+                                                                                </center>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="modal fade" id="downloadConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-md" role="document" style="max-width: 500px;">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"> Travel Arrangement PDF </h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>                                                                         
+                                                                            </div>
+                                                                            <div class="modal-body" style="font-size:16px"> <br />
+                                                                                <center>
+                                                                              <asp:Label ID="Label39" runat="server"> Travel Arrangement has been exported to PDF</asp:Label> 
+                                                                                <asp:Label ID="label40" runat="server"> </asp:Label> <br />
+                                                                                    <asp:Label runat="server" Font-Bold="true" ID="Label41"> Click button to Download </asp:Label>
+
+                                                                                    <br /> <br />
+                                                                                         <asp:LinkButton runat="server" ID="confirmExport"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClick="confirmExport_Click"> <i class="ti-download" style="color:white"></i> Download </asp:LinkButton>     
+                                                                                         <asp:LinkButton runat="server" ID="sendToEmail"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px"  OnClick="sendToEmail_Click"> <i class="ti-share" style="color:white"></i> Send </asp:LinkButton>     
+
                                                                                 </center>
 
                                                                             </div>
