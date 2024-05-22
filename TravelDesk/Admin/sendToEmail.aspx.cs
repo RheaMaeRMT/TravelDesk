@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -129,24 +130,82 @@ namespace TravelDesk.Admin
         }
         private void DisplayPDFs(string folderPath)
         {
-            attachFiles.Style["display"] = "none";
+            attached.Style["display"] = "block";
+            deleteFiles.Style["display"] = "block";
+            deleteFiles.Style["Width"] = "100px";
+            attached.Style["Width"] = "100px";
+
             // Get all PDF files in the folder
             string[] pdfFiles = Directory.GetFiles(folderPath, "*.pdf");
             string empFname = Session["travellerName"].ToString();
-
 
             // Create HTML to display PDFs in iframes
             StringBuilder html = new StringBuilder();
             foreach (string pdfFile in pdfFiles)
             {
-                string fileName = Path.GetFileName(pdfFile);
-                string pdfPath = "/PDFs/travelArrangements/" + empFname + "/" + fileName;
-                html.Append("<iframe src='" + pdfPath + "' style='width:50%; height:600px;'></iframe>");
+                FileInfo fileInfo = new FileInfo(pdfFile);
+                // Check if the file was created or modified today
+                if (fileInfo.CreationTime.Date == DateTime.Today || fileInfo.LastWriteTime.Date == DateTime.Today)
+                {
+                    string fileName = Path.GetFileName(pdfFile);
+                    string pdfPath = "/PDFs/travelArrangements/" + empFname + "/" + fileName;
+                    html.Append("<iframe src='" + pdfPath + "' style='width:50%; height:600px;'></iframe>");
+                }
             }
 
             // Display the HTML content in a placeholder or another container on your page
             pdfPlaceholder.Controls.Add(new LiteralControl(html.ToString()));
         }
 
+        protected void deleteFiles_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Session["travellerName"] != null)
+                {
+                    deleteFiles.Style["display"] = "none";
+                    attached.Style["display"] = "none";
+
+                    string empFname = Session["travellerName"].ToString();
+                    string folderPath = Server.MapPath("/PDFs/travelArrangements/" + empFname);
+
+                    if (Directory.Exists(folderPath))
+                    {
+                        // Get all PDF files in the folder
+                        string[] pdfFiles = Directory.GetFiles(folderPath, "*.pdf");
+
+                        // Delete PDFs uploaded today
+                        foreach (string pdfFile in pdfFiles)
+                        {
+                            FileInfo fileInfo = new FileInfo(pdfFile);
+                            if (fileInfo.CreationTime.Date == DateTime.Today)
+                            {
+                                File.Delete(pdfFile);
+                            }
+                        }
+
+
+
+
+                        // Display success message
+                        Response.Write("<script>alert('PDFs uploaded today have been deleted.')</script>");
+
+                        // Clear the PDF display
+                        pdfPlaceholder.Controls.Clear();
+                    }
+                    else
+                    {
+                        // Display message if folder does not exist
+                        Response.Write("<script>alert('No files to delete.')</script>");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Response.Write("<script>alert('An error occurred while deleting files.')</script>");
+                Console.WriteLine("Error deleting files: " + ex.Message);
+            }
+        }
     }
 }

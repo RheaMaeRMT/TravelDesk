@@ -88,7 +88,7 @@ namespace TravelDesk.Employee
                                             cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
                                             cmd.Parameters.AddWithValue("@destination", destination.Text);
                                             cmd.Parameters.AddWithValue("@estDate", estTravelDate.Text);
-                                            cmd.Parameters.AddWithValue("@reqStatus", "Pending");
+                                            cmd.Parameters.AddWithValue("@reqStatus", "New");
                                             cmd.Parameters.AddWithValue("@type", "Visa Request");
                                             cmd.Parameters.AddWithValue("@userID", userID);
                                             cmd.Parameters.AddWithValue("@proofname", filename);
@@ -182,7 +182,7 @@ namespace TravelDesk.Employee
                                     cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
                                     cmd.Parameters.AddWithValue("@destination", destination.Text);
                                     cmd.Parameters.AddWithValue("@estDate", estTravelDate.Text);
-                                    cmd.Parameters.AddWithValue("@reqStatus", "Pending");
+                                    cmd.Parameters.AddWithValue("@reqStatus", "New");
                                     cmd.Parameters.AddWithValue("@type", "Visa Request");
                                     cmd.Parameters.AddWithValue("@userID", userID);
                                     cmd.Parameters.AddWithValue("@proofname", filename);

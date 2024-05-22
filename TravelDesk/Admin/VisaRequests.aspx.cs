@@ -33,10 +33,11 @@ namespace TravelDesk.Admin
             try
             {
                 // Get the ID of the clicked request from the session
-                string requestId = Session["clickedVRequest"].ToString();
 
-                if (!string.IsNullOrEmpty(requestId))
+                if (Session["clickedVRequest"] != null)
                 {
+                    string requestId = Session["clickedVRequest"].ToString();
+
                     // Query the database to retrieve the request details based on the ID
                     using (var db = new SqlConnection(connectionString))
                     {
@@ -79,7 +80,7 @@ namespace TravelDesk.Admin
 
 
                                     // Display or use the retrieved request details
-                                    travellerName.Text = employeeFname + " " + employeeMname + " " + employeeLname + " - Visa Application Request" ;
+                                    travellerName.Text = employeeFname + " " + employeeMname + " " + employeeLname + " - Visa Request" ;
 
                                     empID.Text = employeeID;
                                     empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
@@ -159,13 +160,13 @@ namespace TravelDesk.Admin
         private void getTrackingStatus()
         {
             string currentStat = Session["VreqStatus"].ToString();
-            currentStatus.Text = currentStat;
+            currentStatus.Text = currentStat + " " + "Request";
 
             // Set boolean variables based on the value of currentStat
-            bool requestSubmitted = currentStat == "Pending";
-            bool processing = currentStat == "Processing";
-            bool granted = currentStat == "Granted";
+            bool requestSubmitted = currentStat == "New";
+            bool processing = currentStat == "In-progress";
             bool completed = currentStat == "Completed";
+            bool closed = currentStat == "Closed";
 
             // Generate the script block with the values
             string script = @"
@@ -173,8 +174,8 @@ namespace TravelDesk.Admin
             // Set the status of each stage (true for completed, false for uncompleted)
             var approved = " + requestSubmitted.ToString().ToLower() + @"; // Set value from server-side
             var processing = " + processing.ToString().ToLower() + @"; // Set value from server-side
-            var arranged = " + granted.ToString().ToLower() + @"; // Set value from server-side
-            var completed = " + completed.ToString().ToLower() + @"; // Set value from server-side
+            var arranged = " + completed.ToString().ToLower() + @"; // Set value from server-side
+            var completed = " + closed.ToString().ToLower() + @"; // Set value from server-side
 
             // Update the appearance of circles based on the status
             if (approved) {
@@ -185,14 +186,14 @@ namespace TravelDesk.Admin
                 document.getElementById('processingCircle').classList.add('completed');
                 document.querySelectorAll('.line')[0].classList.add('completed');
             }
-            if (completed) {
+            if (arranged) {
                 document.getElementById('requestSubmittedCircle').classList.add('completed');
                 document.getElementById('processingCircle').classList.add('completed');
                 document.querySelectorAll('.line')[0].classList.add('completed');
                 document.querySelectorAll('.line')[1].classList.add('completed');
                 document.getElementById('arrangedCircle').classList.add('completed');
             }
-            if (arranged) {
+            if (completed) {
                 document.getElementById('requestSubmittedCircle').classList.add('completed');
                 document.getElementById('processingCircle').classList.add('completed');
                 document.querySelectorAll('.line')[0].classList.add('completed');
@@ -208,5 +209,9 @@ namespace TravelDesk.Admin
             ClientScript.RegisterStartupScript(this.GetType(), "trackingStatus", script);
         }
 
+        protected void processVisa_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

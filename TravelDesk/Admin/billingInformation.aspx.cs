@@ -277,7 +277,7 @@ namespace TravelDesk.Admin
                             cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
 
                             // Set parameters for updating request status
-                            cmd.Parameters.AddWithValue("@newStatus", "Processed");
+                            cmd.Parameters.AddWithValue("@newStatus", "Completed");
                             cmd.Parameters.AddWithValue("@ID", requestId);
 
                             // Execute the update query

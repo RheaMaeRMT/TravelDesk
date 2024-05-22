@@ -91,6 +91,7 @@ namespace TravelDesk.Admin
                                     string email = reader["travelEmail"].ToString();
                                     string DU = reader["travelDU"].ToString();
 
+                                    Session["employeeID"] = employeeID;
                                     // Display or use the retrieved request details
                                     
                                     empID.Text = employeeID;
@@ -924,7 +925,7 @@ namespace TravelDesk.Admin
                             cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
 
                             // Set parameters for updating request status
-                            cmd.Parameters.AddWithValue("@newStatus", "Arranged");
+                            cmd.Parameters.AddWithValue("@newStatus", "In-progress");
                             cmd.Parameters.AddWithValue("@ID", requestId);
 
                             // Execute the update query

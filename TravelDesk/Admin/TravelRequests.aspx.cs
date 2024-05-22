@@ -56,9 +56,9 @@ namespace TravelDesk.Admin
         {
             string status = Session["reqStatus"]?.ToString();
 
-
             if (!string.IsNullOrEmpty(status))
             {
+
                 // Construct the SQL query using parameterized queries to prevent SQL injection
                 //string query = "SELECT trave travelReqStatus, travelType, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelDestination, travelDU, travelProjectCode, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
                 string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
@@ -114,6 +114,7 @@ namespace TravelDesk.Admin
                     }
                 }
             }
+
             // Remove the reqStatus session variable after displaying the requests
             Session.Remove("reqStatus");
         }
@@ -122,6 +123,7 @@ namespace TravelDesk.Admin
             string userID = Session["userID"]?.ToString();
             try
             {
+
                 // Construct the SQL query using parameterized queries to prevent SQL injection
                 string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
                         tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
@@ -212,38 +214,36 @@ namespace TravelDesk.Admin
                         {
                             if (reader.Read())
                             {
-                                string status = reader["travelReqStatus"].ToString();
-
-                                if (status == "Arranged")
-                                {
-                                    Session["clickedRequest"] = requestID;
-                                    string empID = reader["travelEmpID"].ToString();
-                                    Session["employeeID"] = empID;
-
-                                    //redirect to the next page after clicking the view button
-                                    Response.Redirect("arrangedRequest.aspx");
-
-                                } else if (status == "Processing")
-                                {
-                                    Session["clickedRequest"] = requestID;
-                                    string empID = reader["travelEmpID"].ToString();
-                                    Session["employeeID"] = empID;
-                                    //redirect to the next page after clicking the view button
-                                    Response.Redirect("TravelArrangements.aspx");
-                                }
-                                else
-                                {
+                                    string status = reader["travelReqStatus"].ToString();
                                     string type = reader["travelType"].ToString();
 
-                                    if (type == "Domestic Travel")
+                                    if (type == "Domestic Travel" || type == "International Travel")
                                     {
-                                        //redirect to the next page after clicking the view button
-                                        Response.Redirect("RequestDetails.aspx");
-                                    }
-                                    else if (type == "International Travel")
-                                    {
-                                        //redirect to the next page after clicking the view button
-                                        Response.Redirect("RequestDetails.aspx");
+                                        if (status == "Completed")
+                                        {
+                                            Session["clickedRequest"] = requestID;
+                                            string empID = reader["travelEmpID"].ToString();
+                                            Session["employeeID"] = empID;
+
+                                            //redirect to the next page after clicking the view button
+                                            Response.Redirect("arrangedRequest.aspx");
+
+                                        }
+                                        else if (status == "Processing")
+                                        {
+                                            Session["clickedRequest"] = requestID;
+                                            string empID = reader["travelEmpID"].ToString();
+                                            Session["employeeID"] = empID;
+                                            //redirect to the next page after clicking the view button
+                                            Response.Redirect("TravelArrangements.aspx");
+                                        }
+                                        else
+                                        {
+                                            //redirect to the next page after clicking the view button
+
+                                            Response.Redirect("RequestDetails.aspx");
+                                        }
+
                                     }
                                     else if (type == "Visa Request")
                                     {
@@ -251,7 +251,6 @@ namespace TravelDesk.Admin
                                         //redirect to the next page after clicking the view button
                                         Response.Redirect("VisaRequests.aspx");
                                     }
-                                }
 
                                 
                             }

@@ -166,23 +166,23 @@
                                                                                 <asp:Label runat="server" ID="currentStatus" style="color:#4CAF50;font-size:18px;margin-left:10px"></asp:Label>
                                                                                 <div class="tracker">
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="Requests that has been submitted and auto-approved."><span>1</span></div>
-                                                                                        <div class="text">Approved</div>
+                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="New Submitted Travel Requests."><span>1</span></div>
+                                                                                        <div class="text">New Requests</div>
+                                                                                    </div>
+                                                                                    <div class="line" style="margin-left:-30px"></div>
+                                                                                    <div class="stage">
+                                                                                        <div class="circle" id="processingCircle" data-hover-message="Requests that started the processing."><span>2</span></div>
+                                                                                        <div class="text" style="margin-left:-10px">In-progress</div>
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="processingCircle" data-hover-message="Requests that has been accepted for travel arrangement processing."><span>2</span></div>
-                                                                                        <div class="text">Processing</div>
+                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Requests that completed the process."><span>3</span></div>
+                                                                                        <div class="text" style="margin-left:-50px">Requirements Completed</div>
                                                                                     </div>
-                                                                                    <div class="line"></div>
+                                                                                    <div class="line" style="margin-left:-50px"></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Requests that completed the travel arrangement process."><span>3</span></div>
-                                                                                        <div class="text">Arranged</div>
-                                                                                    </div>
-                                                                                    <div class="line"></div>
-                                                                                    <div class="stage">
-                                                                                        <div class="circle" id="completedCircle" data-hover-message="Requests that completed the travel arrangement and billing process"><span>4</span></div>
-                                                                                        <div class="text">Completed</div>
+                                                                                        <div class="circle" id="completedCircle" data-hover-message="Requests that has been completed and closed."><span>4</span></div>
+                                                                                        <div class="text">Closed Requests</div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

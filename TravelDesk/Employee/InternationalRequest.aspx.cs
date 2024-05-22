@@ -115,7 +115,7 @@ namespace TravelDesk.Employee
                                             cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
 
                                         }
-                                        cmd.Parameters.AddWithValue("@reqStatus", "Approved");
+                                        cmd.Parameters.AddWithValue("@reqStatus", "New");
                                         cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
                                         cmd.Parameters.AddWithValue("@type", "International Travel");
                                         cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);
@@ -227,7 +227,7 @@ namespace TravelDesk.Employee
                                         cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
 
                                     }
-                                    cmd.Parameters.AddWithValue("@reqStatus", "Approved");
+                                    cmd.Parameters.AddWithValue("@reqStatus", "New");
                                     cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
                                     cmd.Parameters.AddWithValue("@type", "International Travel");
                                     cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);

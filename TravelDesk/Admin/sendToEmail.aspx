@@ -38,12 +38,15 @@
 
                                                             </center>
                                                         </div>
+
                                                               <div class="card-block">
+
                                                                 <asp:Label ID="attached" runat="server" style="display:none"> Attachments:</asp:Label> <br />
-                                                            <asp:LinkButton runat="server" ID="deleteFiles"  class="btn btn-danger" style="color:white;font-size:16px;border-radius:5px" > <i class="ti-trash" style="color:white"></i> </asp:LinkButton>                                                                      
-                                                                <div runat="server" id="pdfPlaceholder">
+                                                            <asp:LinkButton runat="server" ID="deleteFiles"  class="btn btn-danger" style="color:white;font-size:16px;border-radius:5px;display:none"  OnClick="deleteFiles_Click"> <i class="ti-trash" style="color:white"></i> </asp:LinkButton>                                                                      
+
+                                                                <div runat="server" id="pdfPlaceholder" >
                                                                 </div>
-                                                              </div>                  
+                                                              </div>        
                                                         <div class="card-block">
                                                             <center>
                                                            <asp:LinkButton runat="server" ID="attachFiles"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClientClick="showUpload(); return false"> <i class="ti-files" style="color:white"></i> Attach Files </asp:LinkButton>     
@@ -53,6 +56,7 @@
 
                                                         </div>
                                              </div>
+
                                          </div>
                                                                 <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-md" role="document" style="max-width: 500px;">

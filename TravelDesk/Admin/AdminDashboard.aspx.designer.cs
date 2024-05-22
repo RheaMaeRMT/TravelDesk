@@ -15,75 +15,39 @@ namespace TravelDesk
     {
 
         /// <summary>
-        /// Approved control.
+        /// New control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Approved;
+        protected global::System.Web.UI.WebControls.Button New;
 
         /// <summary>
-        /// Processing control.
+        /// Inprogress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Processing;
+        protected global::System.Web.UI.WebControls.Button Inprogress;
 
         /// <summary>
-        /// Arranged control.
+        /// Completed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Arranged;
+        protected global::System.Web.UI.WebControls.Button Completed;
 
         /// <summary>
-        /// Processed control.
+        /// Closed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Processed;
-
-        /// <summary>
-        /// visaPending control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button visaPending;
-
-        /// <summary>
-        /// visaProcessing control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button visaProcessing;
-
-        /// <summary>
-        /// visaCompleted control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button visaCompleted;
-
-        /// <summary>
-        /// visaGranted control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button visaGranted;
+        protected global::System.Web.UI.WebControls.Button Closed;
     }
 }

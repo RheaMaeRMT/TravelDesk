@@ -172,22 +172,22 @@
                                                                                 <div class="tracker">
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="requestSubmittedCircle" data-hover-message="Visa Requests that has been received."><span>1</span></div>
-                                                                                        <div class="text">Received Requests</div>
+                                                                                        <div class="text">New Requests</div>
                                                                                     </div>
-                                                                                    <div class="line"></div>
+                                                                                    <div class="line" style="margin-left:-40px"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="processingCircle" data-hover-message="Visa Requests that has been accepted for processing."><span>2</span></div>
-                                                                                        <div class="text">Processing</div>
+                                                                                        <div class="text" style="margin-left:-10px">In-progress</div>
                                                                                     </div>
-                                                                                    <div class="line"></div>
+                                                                                    <div class="line" style="margin-left:-10px" ></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="arrangedCircle" data-hover-message="Visa Requests that completed the processing."><span>3</span></div>
-                                                                                        <div class="text">Completed</div>
+                                                                                        <div class="text" style="margin-left:-50px">Requirements Completed</div>
                                                                                     </div>
-                                                                                    <div class="line"></div>
+                                                                                    <div class="line" style="margin-left:-50px"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="completedCircle" data-hover-message="Requests that has been granted a Visa for Travel"><span>4</span></div>
-                                                                                        <div class="text">Granted</div>
+                                                                                        <div class="text">Closed Requests</div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -270,7 +270,7 @@
                                                           </div>
 
                                                         </div>
-                                                            <asp:Button runat="server" class="btn btn-primary" Text="Process Request" ID="processRequest"/>
+                                                            <asp:Button runat="server" class="btn btn-primary" Text="Process Request" ID="processVisa" OnClick="processVisa_Click"/>
                                                     </div>
                                                 </div>
                                     <!-- Page-body end -->
