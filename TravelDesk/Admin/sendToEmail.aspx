@@ -29,15 +29,26 @@
                                          <div class="page-body" style="color:black;font-size:16px;">
                                              <div  class="card" style="color:black;background-color:white"> 
                                                     <div class="card-header" style="background-color:#09426a">
-                                                        <h5 style="color:white">Email Traveller</h5>
+                                                        <h5 style="color:white">Travel Arrangement</h5>
                                                     </div> 
                                                         <div class="card-block">      
                                                             <center>
-                                                                <asp:Label ID="Label18" runat="server"> Sending Email to: </asp:Label> <br />
-                                                                <asp:Label ID="travellerEmail" style="font-size:20px" runat="server"></asp:Label> 
 
                                                             </center>
                                                         </div>
+                                                 <center>
+                                                 <div class="card-block" style="background-color:gainsboro; width: 956px; border-radius:10px; height: 257px;">
+                                                                <asp:Label ID="Label18" runat="server" style="margin-left:-500px">Recipient: </asp:Label> 
+                                                                <asp:Label ID="travellerEmail" style="font-size:18px;" runat="server"></asp:Label>  <br />
+                                                        
+                                                                <asp:Label ID="Label2" runat="server" style="margin-left:-690px">Body: </asp:Label>                                                       <br />
+
+                                                     <asp:TextBox runat="server" ID="emailMessage" TextMode="MultiLine" Height="105px" Width="648px" ></asp:TextBox> <br />
+                                                           <asp:LinkButton runat="server" ID="attachFiles"  class="btn btn-primary"  style="color:white;font-size:14px;border-radius:10px;margin-left:-650px" OnClientClick="showUpload(); return false"> <i class="ti-link" style="color:WHITE"></i> Attach </asp:LinkButton>   <br />
+
+                                                 </div>
+                                                 </center>
+
 
                                                               <div class="card-block">
 
@@ -49,7 +60,6 @@
                                                               </div>        
                                                         <div class="card-block">
                                                             <center>
-                                                           <asp:LinkButton runat="server" ID="attachFiles"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClientClick="showUpload(); return false"> <i class="ti-files" style="color:white"></i> Attach Files </asp:LinkButton>     
                                                            <asp:LinkButton runat="server" ID="sendEmail"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" > <i class="ti-email" style="color:white"></i> Send </asp:LinkButton>     
 
                                                             </center>

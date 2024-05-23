@@ -37,6 +37,8 @@ namespace TravelDesk.Admin
                         // Display the request and populate employee details
                         DisplayRequest();
                         populateEmployeeDetails();
+                        checkifArranged();
+
                     }
                     else
                     {
@@ -49,6 +51,50 @@ namespace TravelDesk.Admin
                     // Redirect to the login page if the session variable is null
                     Response.Write("<script>alert('Session Expired. Please login again.');window.location.href = '../LoginPage.aspx';</script>");
                 }
+            }
+        }
+        private void checkifArranged()
+        {
+
+            if (Session["employeeID"] != null)
+            {
+                string employeeID = Session["employeeID"].ToString();
+                string requestId = Session["clickedRequest"].ToString();
+
+                // Query the database to retrieve the request details based on the ID
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM travelArranged WHERE arrangedUserID = @empID AND arrangedTravelReqID = @requestID";
+                        cmd.Parameters.AddWithValue("@empID", employeeID);
+                        cmd.Parameters.AddWithValue("@requestID", requestId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read()) // Check if there are any rows returned by the query
+                            {
+                                //THE REQUEST IS ALREADY ARRANGED, REDIRECT TO ARRANGEDREQUEST PAGE
+                                Response.Write("<script> window.location.href = 'arrangedRequest.aspx'; </script>");
+
+                            }
+                            else
+                            {
+                                //REQUEST IS NOT YET ARRANGED, PROCEED TO TRAVEL ARRANGEMENT PAGE
+                                Response.Write("<script> window.location.href = 'TravelArrangements.aspx'; </script>");
+
+                            }
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('Session Expired. Please login again.');window.location.href = '../LoginPage.aspx';</script>");
+
             }
         }
 
@@ -110,7 +156,7 @@ namespace TravelDesk.Admin
                                     employeeRemarks.Text = remarks;
                                     flightOptions.Text = flight;
 
-
+                                    ArrangementLabel.Text = "Travel Arrangement for" + " " + employeeFname + " " + employeeMname + " " + employeeLname;
 
                                     if (!string.IsNullOrEmpty(employeeBirth))
                                     {
@@ -1083,7 +1129,7 @@ namespace TravelDesk.Admin
                                         Button8.Style["display"] = "none";
 
                                     }
-
+                                Response.Write("<script>alert('Travellers saved Hotel Accomodations Retrieved')</script>");
                                 getsavedHotels.Style["display"] = "none";
                             }
                             else
@@ -1103,100 +1149,100 @@ namespace TravelDesk.Admin
         }
 
 
-        protected void uploadButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string empFname = empFName.Text.Trim();
+        //protected void uploadButton_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        string empFname = empFName.Text.Trim();
 
-                // Create a directory path using empFname
-                string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), empFname);
+        //        // Create a directory path using empFname
+        //        string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), empFname);
 
-                // Check if the directory exists, if not, create it
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
+        //        // Check if the directory exists, if not, create it
+        //        if (!Directory.Exists(folderPath))
+        //        {
+        //            Directory.CreateDirectory(folderPath);
+        //        }
 
-                // Loop through the uploaded files
-                HttpFileCollection attachmentsCollection = Request.Files;
-                if (attachmentsCollection.Count > 0)
-                {
-                    for (int i = 0; i < attachmentsCollection.Count; i++)
-                    {
-                        HttpPostedFile attachment = attachmentsCollection[i];
+        //        // Loop through the uploaded files
+        //        HttpFileCollection attachmentsCollection = Request.Files;
+        //        if (attachmentsCollection.Count > 0)
+        //        {
+        //            for (int i = 0; i < attachmentsCollection.Count; i++)
+        //            {
+        //                HttpPostedFile attachment = attachmentsCollection[i];
 
-                        if (attachment.ContentLength > 0)
-                        {
-                            string filename = Server.HtmlEncode(empFname + "_" + System.IO.Path.GetFileName(attachment.FileName));
-                            string extension = System.IO.Path.GetExtension(filename).ToLower();
+        //                if (attachment.ContentLength > 0)
+        //                {
+        //                    string filename = Server.HtmlEncode(empFname + "_" + System.IO.Path.GetFileName(attachment.FileName));
+        //                    string extension = System.IO.Path.GetExtension(filename).ToLower();
 
-                            if (extension == ".pdf")
-                            {
-                                if (attachment.ContentLength < 4100000)
-                                {
-                                    string savePath = System.IO.Path.Combine(folderPath, filename);
-                                    attachment.SaveAs(savePath);
+        //                    if (extension == ".pdf")
+        //                    {
+        //                        if (attachment.ContentLength < 4100000)
+        //                        {
+        //                            string savePath = System.IO.Path.Combine(folderPath, filename);
+        //                            attachment.SaveAs(savePath);
 
-                                    Session["pdfPath_" + i] = savePath;
-                                    Session["filename_" + i] = filename;
+        //                            Session["pdfPath_" + i] = savePath;
+        //                            Session["filename_" + i] = filename;
 
-                                    // Log success message to the console
-                                    Console.WriteLine("File uploaded successfully: " + filename);
-                                }
-                                else
-                                {
-                                    Response.Write("<script>alert('File " + filename + " was not uploaded because the file size is more than 4MB.')</script>");
-                                    uploadBlock.Style["display"] = "block";
-                                }
-                            }
-                            else
-                            {
-                                Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file.')</script>");
-                                uploadBlock.Style["display"] = "block";
-                            }
-                        }
-                    }
-                    // Display the uploaded PDF files
-                    DisplayPDFs(folderPath);
+        //                            // Log success message to the console
+        //                            Console.WriteLine("File uploaded successfully: " + filename);
+        //                        }
+        //                        else
+        //                        {
+        //                            Response.Write("<script>alert('File " + filename + " was not uploaded because the file size is more than 4MB.')</script>");
+        //                            uploadBlock.Style["display"] = "block";
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file.')</script>");
+        //                        uploadBlock.Style["display"] = "block";
+        //                    }
+        //                }
+        //            }
+        //            // Display the uploaded PDF files
+        //            DisplayPDFs(folderPath);
 
-                    Response.Write("<script>alert('All files uploaded successfully.')</script>");
-                    uploadBlock.Style["display"] = "none";
-                }
-                else
-                {
-                    Response.Write("<script>alert('Upload failed: No files selected.')</script>");
-                    uploadBlock.Style["display"] = "block";
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log the exception to the console
-                Console.WriteLine("Error uploading file: " + ex.Message);
+        //            Response.Write("<script>alert('All files uploaded successfully.')</script>");
+        //            uploadBlock.Style["display"] = "none";
+        //        }
+        //        else
+        //        {
+        //            Response.Write("<script>alert('Upload failed: No files selected.')</script>");
+        //            uploadBlock.Style["display"] = "block";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Log the exception to the console
+        //        Console.WriteLine("Error uploading file: " + ex.Message);
 
-                // Display error message in an alert box and in the console
-                Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
-                Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
-            }
-        }
-        private void DisplayPDFs(string folderPath)
-        {
-            uploadAttachments.Style["display"] = "none";
-            // Get all PDF files in the folder
-            string[] pdfFiles = Directory.GetFiles(folderPath, "*.pdf");
+        //        // Display error message in an alert box and in the console
+        //        Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
+        //        Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
+        //    }
+        //}
+        //private void DisplayPDFs(string folderPath)
+        //{
+        //    uploadAttachments.Style["display"] = "none";
+        //    // Get all PDF files in the folder
+        //    string[] pdfFiles = Directory.GetFiles(folderPath, "*.pdf");
 
-            // Create HTML to display PDFs in iframes
-            StringBuilder html = new StringBuilder();
-            foreach (string pdfFile in pdfFiles)
-            {
-                string fileName = Path.GetFileName(pdfFile);
-                string pdfPath = "/PDFs/travelArrangements/" + empFName.Text.Trim() + "/" + fileName;
-                html.Append("<iframe src='" + pdfPath + "' style='width:50%; height:300px;'></iframe>");
-            }
+        //    // Create HTML to display PDFs in iframes
+        //    StringBuilder html = new StringBuilder();
+        //    foreach (string pdfFile in pdfFiles)
+        //    {
+        //        string fileName = Path.GetFileName(pdfFile);
+        //        string pdfPath = "/PDFs/travelArrangements/" + empFName.Text.Trim() + "/" + fileName;
+        //        html.Append("<iframe src='" + pdfPath + "' style='width:50%; height:300px;'></iframe>");
+        //    }
 
-            // Display the HTML content in a placeholder or another container on your page
-            pdfPlaceholder.Controls.Add(new LiteralControl(html.ToString()));
-        }
+        //    // Display the HTML content in a placeholder or another container on your page
+        //    pdfPlaceholder.Controls.Add(new LiteralControl(html.ToString()));
+        //}
 
     }
 }

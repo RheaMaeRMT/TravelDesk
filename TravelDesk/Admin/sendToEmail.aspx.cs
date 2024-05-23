@@ -55,9 +55,11 @@ namespace TravelDesk.Admin
                 if (Session["travellerName"] != null)
                 {
                     string empFname = Session["travellerName"].ToString();
+                    string subFolder = "otherFiles";
+                    string path = Path.Combine(empFname, subFolder);
 
                     // Create a directory path using empFname
-                    string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), empFname);
+                    string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), path);
 
                     // Check if the directory exists, if not, create it
                     if (!Directory.Exists(folderPath))
@@ -148,7 +150,7 @@ namespace TravelDesk.Admin
                 if (fileInfo.CreationTime.Date == DateTime.Today || fileInfo.LastWriteTime.Date == DateTime.Today)
                 {
                     string fileName = Path.GetFileName(pdfFile);
-                    string pdfPath = "/PDFs/travelArrangements/" + empFname + "/" + fileName;
+                    string pdfPath = "/PDFs/travelArrangements/" + empFname + "/" + "otherFiles" + "/" + fileName;
                     html.Append("<iframe src='" + pdfPath + "' style='width:50%; height:600px;'></iframe>");
                 }
             }
@@ -167,7 +169,7 @@ namespace TravelDesk.Admin
                     attached.Style["display"] = "none";
 
                     string empFname = Session["travellerName"].ToString();
-                    string folderPath = Server.MapPath("/PDFs/travelArrangements/" + empFname);
+                    string folderPath = Server.MapPath("/PDFs/travelArrangements/" + empFname + "/" + "otherFiles");
 
                     if (Directory.Exists(folderPath))
                     {

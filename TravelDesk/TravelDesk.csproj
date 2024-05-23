@@ -556,6 +556,7 @@
     <Content Include="ApproverSite.Master" />
     <Content Include="images\activityLogs.png" />
     <Content Include="images\airplane.png" />
+    <Content Include="images\attached.png" />
     <Content Include="images\bgImage.jpg" />
     <Content Include="images\dashboard.png" />
     <Content Include="images\employeeReport.png" />

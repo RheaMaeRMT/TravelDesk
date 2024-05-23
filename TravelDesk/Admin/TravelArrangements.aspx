@@ -5,11 +5,7 @@
             $('#requestModal').modal('show');
             return false; // Prevents the default behavior of the button click event
         }
-        function showUpload() {
-            $('#uploadModal').modal('show');
-            return false; // Prevents the default behavior of the button click event
 
-        }
 
         function accomodationOptions() {
             var accomodations = document.getElementById('<%= accomodations.ClientID %>');
@@ -120,7 +116,7 @@
                                          <div class="page-body" style="color:black;font-size:16px;">
                                              <div  class="card" style="color:black;background-color:white"> 
                                                     <div class="card-header" style="background-color:#09426a">
-                                                        <h5 style="color:white">Travel Arrangement Form</h5>
+                                                        <asp:Label runat="server" ID="ArrangementLabel" style="color:white;font-size:16px" ></asp:Label>
                                                     </div> 
                                                                                      
                                                     <div class="card-block">
@@ -311,10 +307,6 @@
                                                                                                       <asp:TextBox ID="transfer5" runat="server" Width="300px" Style="margin-left: 23px;" CssClass="textboxes"></asp:TextBox>
                                                                                                       <asp:TextBox ID="transfer5Date" runat="server" Width="150px" Style="margin-left: 40px;" TextMode="Date" CssClass="textboxes"></asp:TextBox> 
                                                                                                 </div>                                                                                           
-                                                            <div class="card-block">
-                                                                <p style="font-size: 18px; color: white; background-color: #808080; padding-top: 5px; padding-left: 5px">Attachments</p>
-                                                               <asp:LinkButton runat="server" ID="uploadAttachments" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;margin-left:50px" OnClientClick="showUpload(); return false"> <i class="ti-upload" style="color:white"></i> Attach Files</asp:LinkButton>    
-                                                            </div>
 
                                                             <div class="card-block">
                                                                 <p style="font-size: 18px; color: white; background-color: #808080; padding-top: 5px; padding-left: 5px">Others</p>
@@ -343,34 +335,6 @@
                                                              </div>
 
                                            </div>
-                                                                                  <!-- MODAL FOR UPLOAD ATTACHMENTS-->
-                                                                <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-md" role="document" style="max-width: 500px;">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title"> Attachments</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>                                                                         
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                  <asp:Label ID="Label42" runat="server" Text="Insert Attachments" style="margin-left:50px;font-size:16px;color:black"></asp:Label>  <br /> <br />                                                                                                           
-
-                                                                                <center>
-                                                                                <div class="card-block" style="font-size:16px">
-                                                                                    <asp:FileUpload ID="attachments" AllowMultiple="true" runat="server" style="margin-left:80px" /> <br /> <br />       
-                                                                                    <asp:LinkButton runat="server" ID="uploadButton" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:160px;margin-left:50px" OnClick="uploadButton_Click"> <i class="ti-upload" style="color:white"></i>Upload</asp:LinkButton>    
-
-                                                                                </div>
-                                                                                    <div runat="server" id="pdfPlaceholder">
-
-                                                                                    </div>
-                                                                                </center>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> 
                                        
                                              <!--MODAL FOR REQUEST DETAILS -->
                                                                 <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

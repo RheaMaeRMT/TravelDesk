@@ -384,7 +384,7 @@ namespace TravelDesk.Admin
 
             // Set boolean variables based on the value of currentStat
             bool requestSubmitted = currentStat == "New";
-            bool processing = currentStat == "Inprogress";
+            bool processing = currentStat == "In-progress";
             bool completed = currentStat == "Completed";
             bool closed = currentStat == "Closed";
 
@@ -431,57 +431,56 @@ namespace TravelDesk.Admin
 
         protected void processRequest_Click(object sender, EventArgs e)
         {
-            Response.Redirect("TravelArrangements.aspx");
 
-            //try
-            //{
+            try
+            {
 
-            //    string request = Session["clickedRequest"].ToString();
+                string request = Session["clickedRequest"].ToString();
 
 
-            //    using (var db = new SqlConnection(connectionString))
-            //    {
-            //        db.Open();
-            //        using (var cmd = db.CreateCommand())
-            //        {
-            //            cmd.Parameters.Clear();
-            //            cmd.CommandType = CommandType.Text;
-            //            cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.Parameters.Clear();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
 
-            //            // Set parameters
-            //            cmd.Parameters.AddWithValue("@newStatus", "Processing");
-            //            cmd.Parameters.AddWithValue("@ID", request);
+                        // Set parameters
+                        cmd.Parameters.AddWithValue("@newStatus", "In-progress");
+                        cmd.Parameters.AddWithValue("@ID", request);
 
-            //            // Execute the update query
-            //            int rowsAffected = cmd.ExecuteNonQuery();
+                        // Execute the update query
+                        int rowsAffected = cmd.ExecuteNonQuery();
 
-            //            if (rowsAffected > 0)
-            //            {
+                        if (rowsAffected > 0)
+                        {
 
-            //                Session["travelStatus"] = "Processing";
+                            Session["travelStatus"] = "In-progress";
 
-            //                // The update was successful
+                            Response.Redirect("TravelArrangements.aspx");
 
-            //            }
-            //            else
-            //            {
-            //                // No rows were affected, meaning no matching travel request ID was found
-            //                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
-            //            }
-            //        }
-            //    }
-            //}
-            //catch (SqlException ex)
-            //{
-            //    // Log the exception or display a user-friendly error message
-            //    // Example: Log.Error("An error occurred during travel request enrollment", ex);
-            //    Response.Write("<script>alert('An error occurred during insertion of date submitted and draft state. Please try again.')</script>");
-            //    // Log additional information from the SQL exception
-            //    for (int i = 0; i < ex.Errors.Count; i++)
-            //    {
-            //        Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
-            //    }
-            //}
+                        }
+                        else
+                        {
+                            // No rows were affected, meaning no matching travel request ID was found
+                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during insertion of date submitted and draft state. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
 
         }
     }

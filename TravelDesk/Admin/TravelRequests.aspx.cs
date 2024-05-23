@@ -229,7 +229,7 @@ namespace TravelDesk.Admin
                                             Response.Redirect("arrangedRequest.aspx");
 
                                         }
-                                        else if (status == "Processing")
+                                        else if (status == "In-progress")
                                         {
                                             Session["clickedRequest"] = requestID;
                                             string empID = reader["travelEmpID"].ToString();

@@ -301,7 +301,7 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Inprogress'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'In-progress'";
                             cmd.Parameters.AddWithValue("@UserID", currentUser);
 
                             object result = cmd.ExecuteScalar();
@@ -509,7 +509,7 @@ namespace TravelDesk
             }
             else if (clicked == "Inprogress")
             {
-                string status = clicked;
+                string status = "In-progress";
                 Session["reqStatus"] = status;
 
                 Response.Write("<script> window.location.href = 'TravelRequests.aspx'; </script>");
