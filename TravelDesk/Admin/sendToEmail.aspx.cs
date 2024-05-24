@@ -6,8 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Net;
+using System.Net.Mail;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json;
 
 namespace TravelDesk.Admin
 {
@@ -26,7 +29,10 @@ namespace TravelDesk.Admin
 
                 string email = Session["userEmail"].ToString();
                 travellerEmail.Text = email;
+
+                
             }
+          
         }
         //private void DownloadPdf()
         //{
@@ -48,88 +54,141 @@ namespace TravelDesk.Admin
         //    // End the response
         //    Response.End();
         //}
+        private void loadDetailsForEmail()
+        {
+
+            if (Session["travellerName"] != null && Session["userEmail"] != null)
+            {
+                // Retrieve the dynamically generated file paths
+                string[] filePaths = GetUploadedFilePaths();
+                // Pass the file paths to the client-side JavaScript function
+                string receiverEmail = Session["userEmail"].ToString(); // Example email address, replace with actual dynamic value
+                string message = emailMessage.Text; // Example message content, replace with actual dynamic value
+
+                string name = Session["travellerName"].ToString();
+                string script = $"<script>sendEmail('{receiverEmail}', '{message}','{name}', {JsonConvert.SerializeObject(filePaths)});</script>";
+                ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
+
+            }
+            else
+            {
+                Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+
+            }
+
+        }
+
+        // Method to retrieve dynamically generated file paths
+        private string[] GetUploadedFilePaths()
+        {
+            List<string> filePaths = new List<string>();
+
+            if (Session["travellerName"] != null)
+            {
+                string empFname = Session["travellerName"].ToString();
+                string subFolder = "otherFiles";
+                string folderPath1 = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), empFname, subFolder);
+                string folderPath2 = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), empFname);
+
+                if (Directory.Exists(folderPath1))
+                {
+                    // Get all PDF files in the first folder
+                    string[] pdfFiles1 = Directory.GetFiles(folderPath1, "*.pdf");
+                    filePaths.AddRange(pdfFiles1);
+                }
+
+                if (Directory.Exists(folderPath2))
+                {
+                    // Get all PDF files in the second folder
+                    string[] pdfFiles2 = Directory.GetFiles(folderPath2, "*.pdf");
+                    filePaths.AddRange(pdfFiles2);
+                }
+            }
+            else
+            {
+                // Session expired
+                Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+            }
+
+            return filePaths.ToArray();
+        }
         protected void uploadButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (Session["travellerName"] != null)
+                List<string> filePaths = new List<string>();
+
+                if (attachments.HasFile)
                 {
-                    string empFname = Session["travellerName"].ToString();
-                    string subFolder = "otherFiles";
-                    string path = Path.Combine(empFname, subFolder);
-
-                    // Create a directory path using empFname
-                    string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), path);
-
-                    // Check if the directory exists, if not, create it
-                    if (!Directory.Exists(folderPath))
+                    if (Session["travellerName"] != null)
                     {
-                        Directory.CreateDirectory(folderPath);
-                    }
+                        string empFname = Session["travellerName"].ToString();
+                        string subFolder = "otherFiles";
+                        string path = Path.Combine(empFname, subFolder);
+                        string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), path);
 
-                    // Loop through the uploaded files
-                    HttpFileCollection attachmentsCollection = Request.Files;
-                    if (attachmentsCollection.Count > 0)
-                    {
+                        if (!Directory.Exists(folderPath))
+                        {
+                            Directory.CreateDirectory(folderPath);
+                        }
+
+                        HttpFileCollection attachmentsCollection = Request.Files;
+
                         for (int i = 0; i < attachmentsCollection.Count; i++)
                         {
                             HttpPostedFile attachment = attachmentsCollection[i];
 
                             if (attachment.ContentLength > 0)
                             {
-                                string filename = Server.HtmlEncode(empFname + "_" + System.IO.Path.GetFileName(attachment.FileName));
-                                string extension = System.IO.Path.GetExtension(filename).ToLower();
+                                string filename = Server.HtmlEncode(empFname + "_" + Path.GetFileName(attachment.FileName));
+                                string extension = Path.GetExtension(filename).ToLower();
 
                                 if (extension == ".pdf")
                                 {
                                     if (attachment.ContentLength < 4100000)
                                     {
-                                        string savePath = System.IO.Path.Combine(folderPath, filename);
+                                        string savePath = Path.Combine(folderPath, filename);
                                         attachment.SaveAs(savePath);
 
-                                        Session["pdfPath_" + i] = savePath;
-                                        Session["filename_" + i] = filename;
+                                        filePaths.Add(savePath);
 
-                                        // Log success message to the console
                                         Console.WriteLine("File uploaded successfully: " + filename);
                                     }
                                     else
                                     {
                                         Response.Write("<script>alert('File " + filename + " was not uploaded because the file size is more than 4MB.')</script>");
-                                        //uploadBlock.Style["display"] = "block";
                                     }
                                 }
                                 else
                                 {
                                     Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file.')</script>");
-                                    //uploadBlock.Style["display"] = "block";
                                 }
                             }
                         }
-                        // Display the uploaded PDF files
-                        DisplayPDFs(folderPath);
 
-                        Response.Write("<script>alert('All files uploaded successfully.')</script>");
-                        //uploadBlock.Style["display"] = "none";
+                        DisplayPDFs(folderPath);
+                        Response.Write("<script>alert('File uploaded successfully.')</script>");
                     }
                     else
                     {
-                        Response.Write("<script>alert('Upload failed: No files selected.')</script>");
-                        attachFiles.Style["display"] = "block";
+                        Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+
                     }
                 }
-                
+                else
+                {
+                    Response.Write("<script>alert('No files inserted. Please attach the PDF file you want to upload.')</script>");
+                }
+
             }
             catch (Exception ex)
             {
-                // Log the exception to the console
                 Console.WriteLine("Error uploading file: " + ex.Message);
-
-                // Display error message in an alert box and in the console
                 Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
                 Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
             }
         }
+
         private void DisplayPDFs(string folderPath)
         {
             attached.Style["display"] = "block";
@@ -201,6 +260,11 @@ namespace TravelDesk.Admin
                         Response.Write("<script>alert('No files to delete.')</script>");
                     }
                 }
+                else
+                {
+                    Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+
+                }
             }
             catch (Exception ex)
             {
@@ -209,5 +273,53 @@ namespace TravelDesk.Admin
                 Console.WriteLine("Error deleting files: " + ex.Message);
             }
         }
+
+        protected void sendEmail_Click(object sender, EventArgs e)
+        {
+            loadDetailsForEmail();
+
+        }
+
+
+
+        //protected void sendEmail_Click(object sender, EventArgs e)
+        //{
+        //  if (Session["userEmail"] != null)
+        //    {
+        //        string recipientEmail = travellerEmail.Text;
+        //        string message = emailMessage.Text;
+        //        string senderEmail = "trinidadarheamae28@gmail.com";
+        //        string senderPassword = "Rhea1190646";
+
+        //        // Create the email
+        //        MailMessage mailMessage = new MailMessage();
+        //        mailMessage.From = new MailAddress(senderEmail);
+        //        mailMessage.To.Add(new MailAddress(recipientEmail));
+        //        mailMessage.Subject = "Travel Arrangement";
+        //        mailMessage.Body = message;
+
+        //        // Check if a file is uploaded
+        //        if (attachments.HasFile)
+        //        {
+        //            string fileName = Path.GetFileName(attachments.PostedFile.FileName);
+        //            Attachment attachment = new Attachment(attachments.PostedFile.InputStream, fileName);
+        //            mailMessage.Attachments.Add(attachment);
+        //        }
+        //        // Configure the SMTP client
+        //        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587); // For TLS
+        //        smtpClient.UseDefaultCredentials = false;
+        //        smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
+        //        smtpClient.EnableSsl = true;
+
+
+        //        // Send the email
+        //        smtpClient.Send(mailMessage);
+
+        //        // Display success message
+        //        Response.Write("<script>alert('Email sent!.')</script>");
+
+        //    }
+
+        //}
     }
 }
