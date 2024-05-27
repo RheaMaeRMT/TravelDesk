@@ -60,7 +60,7 @@
                                                                 <p style="font-size:18px;color:white;background-color:#09426a;padding-top:5px;padding-left:5px"> Employee Information</p>
                                                             </div>
                                                             <div class="card-block">
-                                                                <asp:Label ID="Label7" runat="server" Text="Traveller Name"></asp:Label>
+                                                                <asp:Label ID="Label7" runat="server" Text="Traveler Name"></asp:Label>
                                                                 <asp:TextBox ID="employeeName" runat="server" Width="300px" Style="margin-left: 40px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
 
                                                                 <asp:Label ID="Label2" runat="server" Text="Employee ID"  style="margin-left:40px;"></asp:Label>
@@ -231,8 +231,16 @@
                                                                                                                                   <asp:TextBox ID="transfer5" runat="server" Width="300px" Style="margin-left: 60px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
                                                                                                                                   <asp:TextBox ID="transfer5Date" runat="server" Width="150px" Style="margin-left: 40px;" CssClass="textboxes" Enabled="false"></asp:TextBox> 
                                                                                                                             </div>
-
                                                             </div>
+                                                                                        <div class="card-block">
+                                                                                            <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Remarks</p>
+                                                                                            <div class="card-block">
+                                                                        <asp:Label ID="Label42" runat="server" Text="Additional Remarks:" Style="margin-left: 20px;"></asp:Label> <br />
+                                                                    <asp:TextBox ID="remarks" runat="server" Width="400px" TextMode="MultiLine" Style="margin-left: 60px; border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
+
+                                                                                            </div>
+                                                                                        </div>
+
                                                                                         <div class="card-block">
                                                                                             <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Others</p>
                                                                                         </div>

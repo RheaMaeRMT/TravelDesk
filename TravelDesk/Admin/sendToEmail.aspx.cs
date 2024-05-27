@@ -11,12 +11,18 @@ using System.Net.Mail;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
+using Microsoft.Graph;
+using Microsoft.Identity.Client;
+using System.Threading.Tasks;
+using Microsoft.Graph.Models;
 
 namespace TravelDesk.Admin
 {
+
     public partial class sendToEmail : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DB_TravelDesk"].ConnectionString;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,6 +40,8 @@ namespace TravelDesk.Admin
             }
           
         }
+
+
         //private void DownloadPdf()
         //{
         //    // Retrieve PDF bytes from session
@@ -54,6 +62,7 @@ namespace TravelDesk.Admin
         //    // End the response
         //    Response.End();
         //}
+
         private void loadDetailsForEmail()
         {
 
@@ -282,44 +291,5 @@ namespace TravelDesk.Admin
 
 
 
-        //protected void sendEmail_Click(object sender, EventArgs e)
-        //{
-        //  if (Session["userEmail"] != null)
-        //    {
-        //        string recipientEmail = travellerEmail.Text;
-        //        string message = emailMessage.Text;
-        //        string senderEmail = "trinidadarheamae28@gmail.com";
-        //        string senderPassword = "Rhea1190646";
-
-        //        // Create the email
-        //        MailMessage mailMessage = new MailMessage();
-        //        mailMessage.From = new MailAddress(senderEmail);
-        //        mailMessage.To.Add(new MailAddress(recipientEmail));
-        //        mailMessage.Subject = "Travel Arrangement";
-        //        mailMessage.Body = message;
-
-        //        // Check if a file is uploaded
-        //        if (attachments.HasFile)
-        //        {
-        //            string fileName = Path.GetFileName(attachments.PostedFile.FileName);
-        //            Attachment attachment = new Attachment(attachments.PostedFile.InputStream, fileName);
-        //            mailMessage.Attachments.Add(attachment);
-        //        }
-        //        // Configure the SMTP client
-        //        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587); // For TLS
-        //        smtpClient.UseDefaultCredentials = false;
-        //        smtpClient.Credentials = new NetworkCredential(senderEmail, senderPassword);
-        //        smtpClient.EnableSsl = true;
-
-
-        //        // Send the email
-        //        smtpClient.Send(mailMessage);
-
-        //        // Display success message
-        //        Response.Write("<script>alert('Email sent!.')</script>");
-
-        //    }
-
-        //}
     }
 }

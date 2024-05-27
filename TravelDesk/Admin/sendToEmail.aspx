@@ -55,19 +55,20 @@
             from_name: "Travel Desk",
             message: message
         };
-        const attachments = filePaths.map(path => ({
-            fileName: path.split("/").pop(),
-            mimeType: "application/pdf",
-            path: path
-        }));
+        //const attachments = filePaths.map(path => ({
+        //    fileName: path.split("/").pop(),
+        //    mimeType: "application/pdf",
+        //    path: path
+        //}));
 
         console.log("Email Data:", emailData);
-        console.log("Attachments:", attachments);
+        //console.log("Attachments:", attachments);
 
-        emailjs.send("service_6updv5w", "template_p46ovxf", emailData, { attachments })
+        emailjs.send("service_6updv5w", "template_p46ovxf", emailData)
+        //emailjs.send("service_6updv5w", "template_p46ovxf", emailData, { attachments })
             .then(function (response) {
-                alert("Email sent successfully");
                 console.log('Email Sent!', response);
+                window.location.replace("emailSent.aspx"); // Replace with your desired URL
             }, function (error) {
                 alert("Email send failed");
                 console.error("Email send failed:", error);

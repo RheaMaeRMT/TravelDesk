@@ -184,6 +184,7 @@ namespace TravelDesk.Admin
                                     string transfersID = reader["arrangedTransferID"].ToString();
                                     string travelrequirements = reader["arrangedRequirements"].ToString();
                                     string noted = reader["arrangedNotes"].ToString();
+                                    string addRemarks = reader["arrangedRemarks"].ToString();
 
                                     //SAVE THE IDs to the SESSION
                                     Session["accomodation"] = accomodationID;
@@ -193,6 +194,7 @@ namespace TravelDesk.Admin
                                     // Display or use the retrieved request details
                                     requirements.Text = travelrequirements;
                                     additionalNotes.Text = noted;
+                                    remarks.Text = addRemarks;
 
                                     getAccomodationDetails();
                                     getFlightDetails();
@@ -520,6 +522,7 @@ namespace TravelDesk.Admin
                                 string mul5To = reader["routeM5To"] != DBNull.Value ? reader["routeM5To"].ToString() : "";
                                 string mul5ETD = reader["routeM5ETD"] != DBNull.Value ? reader["routeM5ETD"].ToString() : "";
                                 string mul5ETA = reader["routeM5ETA"] != DBNull.Value ? reader["routeM5ETA"].ToString() : "";
+                                
 
 
                                 //DISPLAY TO TEXTBOXES
@@ -1373,6 +1376,9 @@ namespace TravelDesk.Admin
                     AddSectionSeparator(doc, "Car/Airport Transfers");
                     AddTransfersSection(doc);
 
+                    AddSectionSeparator(doc, "Additional Remarks");
+                    AddRemarksSection(doc);
+
                     AddSectionSeparator(doc, "Others");
                     AddOthersSection(doc);
 
@@ -1635,7 +1641,22 @@ namespace TravelDesk.Admin
             }
         }
 
+        private void AddRemarksSection (Document doc)
+        {
+            // Add transfers details
+            PdfPTable remarksTable = new PdfPTable(2);
+            remarksTable.TotalWidth = 500f; // Adjust width as needed
+            remarksTable.LockedWidth = true;
+            remarksTable.SpacingBefore = 10f;
+            remarksTable.SpacingAfter = 10f;
+            remarksTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
+            AddRowToTable(remarksTable, "Remarks:", remarks.Text);
+
+            // Add employee table to document
+            doc.Add(remarksTable);
+
+        }
         private void AddTransfersSection(Document doc)
         {
             // Add transfers details

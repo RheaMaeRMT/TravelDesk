@@ -529,8 +529,8 @@ namespace TravelDesk.Admin
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO travelArranged (arrangedID, arrangedUserID, arrangedTravelReqID, arrangedRequirements, arrangedNotes, arrangedDateCreated) " +
-                            "VALUES (@ID, @userID, @travelID, @requirements, @notes, @dateCreated)";
+                        cmd.CommandText = "INSERT INTO travelArranged (arrangedID, arrangedUserID, arrangedTravelReqID, arrangedRequirements, arrangedNotes, arrangedDateCreated, arrangedRemarks) " +
+                            "VALUES (@ID, @userID, @travelID, @requirements, @notes, @dateCreated, @remarks)";
 
                         cmd.Parameters.AddWithValue("@ID", ID);
                         cmd.Parameters.AddWithValue("@userID", empID);
@@ -538,6 +538,7 @@ namespace TravelDesk.Admin
                         cmd.Parameters.AddWithValue("@requirements", ""); // Initialize the parameter outside the loop
                         cmd.Parameters.AddWithValue("@notes", additionalNotes.Text);
                         cmd.Parameters.AddWithValue("@dateCreated", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@remarks", remarks.Text);
 
                         //for the REQUIREMENTS                            
                         List<string> selectedRequirements = new List<string>();  // Create a list to hold the selected requirements                     
@@ -1129,12 +1130,12 @@ namespace TravelDesk.Admin
                                         Button8.Style["display"] = "none";
 
                                     }
-                                Response.Write("<script>alert('Travellers saved Hotel Accomodations Retrieved')</script>");
+                                Response.Write("<script>alert('Traveler's saved Hotel Accomodations Retrieved')</script>");
                                 getsavedHotels.Style["display"] = "none";
                             }
                             else
                             {
-                                Response.Write("<script>alert('No Hotel Accomodations Exist for Traveller')</script>");
+                                Response.Write("<script>alert('No Hotel Accomodations Exist for Traveler')</script>");
                                 hotelAccomodations.Style["display"] = "block";
                                 getsavedHotels.Style["display"] = "none";
 

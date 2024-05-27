@@ -216,6 +216,7 @@ namespace TravelDesk.Admin
                             {
                                     string status = reader["travelReqStatus"].ToString();
                                     string type = reader["travelType"].ToString();
+                                     string processStat = reader["travelProcessStat"].ToString();
 
                                     if (type == "Domestic Travel" || type == "International Travel")
                                     {
@@ -231,12 +232,21 @@ namespace TravelDesk.Admin
                                         }
                                         else if (status == "In-progress")
                                         {
+                                            if (processStat == "Email Sent")
+                                            {
+                                              Response.Redirect("billingInformation.aspx");
+
+                                            }
+                                            else
+                                            {
                                             Session["clickedRequest"] = requestID;
                                             string empID = reader["travelEmpID"].ToString();
                                             Session["employeeID"] = empID;
                                             //redirect to the next page after clicking the view button
                                             Response.Redirect("TravelArrangements.aspx");
-                                        }
+
+                                             }
+                                         }
                                         else
                                         {
                                             //redirect to the next page after clicking the view button
