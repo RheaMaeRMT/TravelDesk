@@ -111,6 +111,7 @@ namespace TravelDesk.Admin
                                     string mobile = reader["travelMobilenum"].ToString();
                                     string level = reader["travelLevel"].ToString();
                                     string email = reader["travelEmail"].ToString();
+                                    string status = reader["travelProcessStat"].ToString();
                                     // Retrieve other request details as needed
 
                                     // Display or use the retrieved request details
@@ -120,7 +121,8 @@ namespace TravelDesk.Admin
                                     employeePhone.Text = mobile;
                                     employeeLevel.Text = level;
                                     employeeEmail.Text = email + "?";
-                                    travellerName.Text = name + " - Arranged Travel Arrangement";
+                                    travellerName.Text = " Travel Arrangement for " + name;
+                                    statusLabel.Text = "In-Progress:" + " " + status;
 
                                     Session["userEmail"] = email;
                                     Session["travellerName"] = name;

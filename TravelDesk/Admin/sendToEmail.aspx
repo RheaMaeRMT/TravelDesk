@@ -6,6 +6,13 @@
             return false; // Prevents the default behavior of the button click event
 
         }
+        function deleteFile(filePath) {
+            // Set the hidden field value to the file path
+            document.getElementById('<%= hiddenFilePath.ClientID %>').value = filePath;
+
+        // Trigger the postback to delete the file
+            __doPostBack('<%= deleteFileButton.UniqueID %>', '');
+        }
     </script>
 <%--<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script type="text/javascript">
@@ -41,11 +48,14 @@
     }
 </script>--%>
 
+        
+
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script type="text/javascript">
     (function () {
-        emailjs.init("4R2vvYNuFdqznyjBm"); // Replace with your EmailJS user ID
+        emailjs.init("7kzw_508bI-BkJqPm"); // Replace with your EmailJS user ID
     })();
+    
 </script>
 <script>
     function sendEmail(receiverEmail, message, name, filePaths) {
@@ -64,7 +74,7 @@
         console.log("Email Data:", emailData);
         //console.log("Attachments:", attachments);
 
-        emailjs.send("service_6updv5w", "template_p46ovxf", emailData)
+        emailjs.send("service_rwuwsiv", "template_pofgyf1", emailData)
         //emailjs.send("service_6updv5w", "template_p46ovxf", emailData, { attachments })
             .then(function (response) {
                 console.log('Email Sent!', response);
@@ -97,37 +107,27 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                          <div class="page-body" style="color:black;font-size:16px;">
-                                             <div  class="card" style="color:black;background-color:white"> 
+                                             <div  class="card" style="color:black;background-color:gainsboro"> 
                                                     <div class="card-header" style="background-color:#09426a">
                                                         <h5 style="color:white">Travel Arrangement</h5>
                                                     </div>  <br /><br />
-                                                 <center>
-                                                 <div class="card-block" style="background-color:gainsboro; width: 956px; border-radius:10px; height: 257px;">
-                                                                <asp:Label ID="Label18" runat="server" style="margin-left:-530px">Recipient: </asp:Label> 
-                                                                <asp:Label ID="travellerEmail" style="font-size:18px;" runat="server"></asp:Label>  <br />
+                                                                <asp:Label ID="Label18" runat="server" style="margin-left:50px">Recipient: </asp:Label> 
+                                                                <asp:Label ID="travellerEmail" style="font-size:18px;margin-left:50px" runat="server"></asp:Label>  <br />
                                                         
-                                                                <asp:Label ID="Label2" runat="server" style="margin-left:-690px">Message: </asp:Label>                                                       <br />
-
-                                                     <asp:TextBox runat="server" ID="emailMessage" TextMode="MultiLine" Height="105px" Width="648px" ></asp:TextBox> <br /> <br />
-                                                           <asp:LinkButton runat="server" ID="attachFiles"  class="btn btn-primary"  style="color:white;font-size:14px;border-radius:10px;margin-left:-650px" OnClientClick="showUpload(); return false"> <i class="ti-link" style="color:WHITE"></i> Attach </asp:LinkButton>   <br />
-
-                                                 </div>
-                                                 </center>
-
+                                                                <asp:Label ID="Label2" runat="server" style="margin-left:50px">Message: </asp:Label>      
+                                                                 <asp:TextBox runat="server" ID="emailMessage" TextMode="MultiLine" Height="540px" style="margin-left:40px;width:auto;margin-right:40px"></asp:TextBox> <br /> <br />
 
                                                               <div class="card-block">
+                                                                    <asp:Label ID="attached" runat="server" style="display:none"> Attachments:</asp:Label> <br />
 
-                                                                <asp:Label ID="attached" runat="server" style="display:none"> Attachments:</asp:Label> <br />
-                                                            <asp:LinkButton runat="server" ID="deleteFiles"  class="btn btn-danger" style="color:white;font-size:16px;border-radius:5px;display:none"  OnClick="deleteFiles_Click"> <i class="ti-trash" style="color:white"></i> </asp:LinkButton>                                                                      
-
-                                                                <div runat="server" id="pdfPlaceholder" >
-                                                                </div>
+                                                                <asp:PlaceHolder ID="fileListPlaceholder" runat="server"></asp:PlaceHolder>
+                                                                <asp:HiddenField ID="hiddenFilePath" runat="server" />
+                                                                  <asp:Button ID="deleteFileButton" runat="server" Text="Delete File" Style="display: none;" OnClick="DeleteFileButton_Click" />
                                                               </div>        
-                                                        <div class="card-block">
-                                                            <center>
-                                                           <asp:LinkButton runat="server" ID="sendEmail"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClick="sendEmail_Click" > <i class="ti-email" style="color:white"></i> Send </asp:LinkButton>     
+                                                        <div class="card-block" style="background-color:white">
+                                                             <asp:LinkButton runat="server" ID="sendEmail"  class="btn btn-primary" style="color:black;font-size:16px;border-radius:10px;background-color:gainsboro;border-color:transparent" OnClick="sendEmail_Click" > <i class="ti-email" style="color:black"></i> Send </asp:LinkButton>     
+                                                           <asp:LinkButton runat="server" ID="attachFiles"  class="btn btn-primary"  style="color:black;font-size:16px;border-radius:10px;background-color:gainsboro;border-color:transparent" OnClientClick="showUpload(); return false"> <i class="ti-link" style="color:black"></i> Attach </asp:LinkButton>   <br />
 
-                                                            </center>
 
                                                         </div>
                                              </div>
@@ -151,9 +151,6 @@
                                                                                     <asp:LinkButton runat="server" ID="uploadButton" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:160px;margin-left:50px" OnClick="uploadButton_Click"> <i class="ti-upload" style="color:white"></i>Upload</asp:LinkButton>    
 
                                                                                 </div>
-                                                                                    <div runat="server" id="Div1">
-
-                                                                                    </div>
                                                                                 </center>
 
                                                                             </div>

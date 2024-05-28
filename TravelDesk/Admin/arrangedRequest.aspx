@@ -45,16 +45,23 @@
                                     <!-- Page-body start -->
                                          <div class="page-body" style="color:black;font-size:16px;">
                                                 <div class="card" style="color:black;background-color:white" ID="arrangementBlock" runat="server">
+
                                                     <div class="card-header" style="background-color:#09426a">
-                                                                <asp:Label runat="server" style="color:white; font-size:16px;margin-left:10px;" CssClass="h5" ID="travellerName"></asp:Label>
-                                                          <asp:LinkButton runat="server" ID="backButton"  style="color:white;font-size:16px"  OnClick="backButton_Click"> <i class="ti-back-left" style="color:white"></i> Back </asp:LinkButton>    
-                                                   
-                                                    </div>      
+                                                         <asp:Label runat="server" ID="statusLabel" style="color:white; font-size:16px;margin-left:10px;" CssClass="h5"></asp:Label>
+
+                                                        </div>
+
+
+
                                                     <div class="card-block" style="margin-left:auto">
                                                           <asp:LinkButton runat="server" ID="exportPDF" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClientClick="showConfirmModal(); return false"> <i class="ti-export" style="color:white"></i> Export PDF </asp:LinkButton>     
                                                           <asp:LinkButton runat="server" ID="sendEmailbtn" class="btn btn-primary" style="display:none;color:white;font-size:16px;border-radius:20px;width:200px" OnClientClick="showModal(); return false"> <i class="ti-email" style="color:white"></i> send to email </asp:LinkButton>     
                                                     </div>
-
+                                                    <center>
+                                                            <div class="card-block">
+                                                                <asp:Label runat="server" style="font-size:20px;color:black;padding-top:5px;padding-left:5px" CssClass="h5" ID="travellerName"></asp:Label>
+                                                            </div>
+                                                    </center>
                                                             <!--EMPLOYEE DETAILS-->
                                                             <div class="card-block">
                                                                 <p style="font-size:18px;color:white;background-color:#09426a;padding-top:5px;padding-left:5px"> Employee Information</p>

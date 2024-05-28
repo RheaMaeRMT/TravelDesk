@@ -51,15 +51,6 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox emailMessage;
 
         /// <summary>
-        /// attachFiles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton attachFiles;
-
-        /// <summary>
         /// attached control.
         /// </summary>
         /// <remarks>
@@ -69,22 +60,31 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.Label attached;
 
         /// <summary>
-        /// deleteFiles control.
+        /// fileListPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton deleteFiles;
+        protected global::System.Web.UI.WebControls.PlaceHolder fileListPlaceholder;
 
         /// <summary>
-        /// pdfPlaceholder control.
+        /// hiddenFilePath control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pdfPlaceholder;
+        protected global::System.Web.UI.WebControls.HiddenField hiddenFilePath;
+
+        /// <summary>
+        /// deleteFileButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button deleteFileButton;
 
         /// <summary>
         /// sendEmail control.
@@ -94,6 +94,15 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton sendEmail;
+
+        /// <summary>
+        /// attachFiles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton attachFiles;
 
         /// <summary>
         /// Label42 control.
@@ -121,14 +130,5 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton uploadButton;
-
-        /// <summary>
-        /// Div1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
     }
 }

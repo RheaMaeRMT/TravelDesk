@@ -358,11 +358,11 @@
                                                                                     <!-- Nav tabs -->
                                                                                     <ul class="nav nav-tabs md-tabs " role="tablist">
                                                                                         <li class="nav-item">
-                                                                                            <a class="nav-link active" data-toggle="tab" href="#employeeDetails" role="tab"><i class="icofont icofont-home"></i>Traveller Information</a>
+                                                                                            <a class="nav-link " data-toggle="tab" href="#employeeDetails" role="tab"><i class="icofont icofont-home"></i>Traveller Information</a>
                                                                                             <div class="slide"></div>
                                                                                         </li>
                                                                                         <li class="nav-item">
-                                                                                            <a class="nav-link" data-toggle="tab" href="#emprequestDetails" role="tab"><i class="icofont icofont-home"></i>Travel Information</a>
+                                                                                            <a class="nav-link active" data-toggle="tab" href="#emprequestDetails" role="tab"><i class="icofont icofont-home"></i>Travel Information</a>
                                                                                             <div class="slide"></div>
                                                                                         </li>
                                                                                         <li class="nav-item">
@@ -374,7 +374,7 @@
                                                                                     </ul>
                                                                                     <!-- Tab panes -->
                                                                                     <div class="tab-content card-block">
-                                                                                        <div class="tab-pane active"  id="employeeDetails" role="tabpanel"> <br />
+                                                                                        <div class="tab-pane "  id="employeeDetails" role="tabpanel"> <br />
                                                                                             <div class="row" style="place-content:center">
                                                                                                 <div class="col-md-4">
                                                                                                     <div class="card-block" style="text-align:center;">
@@ -431,7 +431,7 @@
                                                                                             </div> <br />  
 
                                                                                         </div>
-                                                                                        <div class="tab-pane" id="emprequestDetails" role="tabpanel">
+                                                                                        <div class="tab-pane active" id="emprequestDetails" role="tabpanel">
                                                                                             <!--TRAVEL DETAILS--> <br />
                                                                                             <div class="card-block" style="margin-left:250px">
                                                                                                 <asp:Label ID="Label30" runat="server" Text="Purpose of Travel:"></asp:Label> 

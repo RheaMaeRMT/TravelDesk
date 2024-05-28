@@ -125,7 +125,7 @@ namespace TravelDesk.Admin
             {
 
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                string query = @"SELECT tr.travelRequestID,  tr.travelReqStatus, tr.travelType, 
                         tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
                         CASE 
                             WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
@@ -134,9 +134,9 @@ namespace TravelDesk.Admin
                             ELSE tr.travelDestination                             
                         END AS travelDestination, 
                         CASE 
-                            WHEN tr.travelOptions = 'One Way' THEN rt.routeODate 
-                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart
-                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate   
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeODate
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart 
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate 
                             WHEN tr.travelType = 'Visa Request' THEN travelEstdate
                         END AS travelDates, 
                         tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
@@ -232,21 +232,33 @@ namespace TravelDesk.Admin
                                         }
                                         else if (status == "In-progress")
                                         {
-                                            if (processStat == "Email Sent")
+                                            if (processStat != null)
                                             {
-                                              Response.Redirect("billingInformation.aspx");
+                                                if (processStat == "Email Sent" || processStat == "Billing")
+                                                {
+                                                    Response.Redirect("billingInformation.aspx");
+                                                }
+                                                else if (processStat == "Arranged")
+                                                {
+                                                    Session["clickedRequest"] = requestID;
+                                                    string empID = reader["travelEmpID"].ToString();
+                                                    Session["employeeID"] = empID;
 
+                                                    //redirect to the next page
+                                                    Response.Redirect("arrangedRequest.aspx");
+                                                }
+                                                else
+                                                {
+                                                    Session["clickedRequest"] = requestID;
+                                                    string empID = reader["travelEmpID"].ToString();
+                                                    Session["employeeID"] = empID;
+                                                    //redirect to the next page 
+                                                    Response.Redirect("TravelArrangements.aspx");
+
+                                                }
                                             }
-                                            else
-                                            {
-                                            Session["clickedRequest"] = requestID;
-                                            string empID = reader["travelEmpID"].ToString();
-                                            Session["employeeID"] = empID;
-                                            //redirect to the next page after clicking the view button
-                                            Response.Redirect("TravelArrangements.aspx");
-
-                                             }
-                                         }
+                                            
+                                        }
                                         else
                                         {
                                             //redirect to the next page after clicking the view button

@@ -22,7 +22,7 @@
                                          <div class="page-body" style="color:black;font-size:16px;">
                                                 <div class="card" style="color:black;background-color:white">
                                                     <div class="card-header" style="background-color:#09426a">
-                                                                <asp:Label runat="server" style="color:white; font-size:16px;margin-left:10px;" CssClass="h5">Billing Process</asp:Label>
+                                                                <asp:Label runat="server" ID="billingLabel" style="color:white; font-size:16px;margin-left:10px;" CssClass="h5"></asp:Label>
                                                     </div> 
                                                             <div class="card-block tab-icon">
                                                                     <div class="col-lg-12 ">
@@ -33,10 +33,10 @@
                                                                                 <a class="nav-link active" data-toggle="tab" href="#billingInfo" role="tab"><i class="icofont icofont-ui-message"></i>Billing Information</a>
                                                                                 <div class="slide"></div>
                                                                             </li>
-                                                                            <li class="nav-item">
+<%--                                                                            <li class="nav-item">
                                                                                 <a class="nav-link" data-toggle="tab" href="#employeeInfo" role="tab"><i class="icofont icofont-home"></i>Employee Information</a>
                                                                                 <div class="slide"></div>
-                                                                            </li> 
+                                                                            </li> --%>
                                                                         </ul>
                                                                         <!-- Tab panes -->
                                                                         <div class="tab-content card-block">
@@ -74,7 +74,7 @@
                                                                                                 </center>
                                                                             </div>
 
-                                                                            <div class="tab-pane" id="employeeInfo" role="tabpanel">   
+<%--                                                                            <div class="tab-pane" id="employeeInfo" role="tabpanel">   
                                                                                  <!--EMPLOYEE DETAILS-->
                                                                                             <div class="row" style="place-content:center">
                                                                                                 <div class="col-md-4">
@@ -131,7 +131,7 @@
 
                                                                                             </div> <br />  
                                                                                 
-                                                                            </div>
+                                                                            </div>--%>
 
                                                                         </div>
                                                                     </div>

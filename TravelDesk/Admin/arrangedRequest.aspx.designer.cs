@@ -24,22 +24,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl arrangementBlock;
 
         /// <summary>
-        /// travellerName control.
+        /// statusLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label travellerName;
-
-        /// <summary>
-        /// backButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton backButton;
+        protected global::System.Web.UI.WebControls.Label statusLabel;
 
         /// <summary>
         /// exportPDF control.
@@ -58,6 +49,15 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton sendEmailbtn;
+
+        /// <summary>
+        /// travellerName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label travellerName;
 
         /// <summary>
         /// Label7 control.

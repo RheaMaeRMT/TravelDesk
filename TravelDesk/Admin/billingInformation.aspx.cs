@@ -28,7 +28,8 @@ namespace TravelDesk.Admin
                     string request = Session["clickedRequest"].ToString();
 
                     if (!string.IsNullOrEmpty(request))
-                    {;
+                    {
+                        changeReqStatus();
                         populateEmployeeDetails();
 
                     }
@@ -40,6 +41,52 @@ namespace TravelDesk.Admin
                 }
 
             }
+
+        }
+        private void changeReqStatus()
+        {
+            try
+            {
+                if (Session["clickedRequest"] != null)
+                {
+                    string requestId = Session["clickedRequest"].ToString();
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "UPDATE travelRequest SET travelProcessStat = @newStatus WHERE travelRequestID = @ID";
+
+                            // Set parameters for updating request status
+                            cmd.Parameters.AddWithValue("@newStatus", "Billing");
+                            cmd.Parameters.AddWithValue("@ID", requestId);
+
+                            // Execute the update query
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                else
+                {
+                    // Session is expired, redirect to login page
+                    Response.Write("<script>alert('Session Expired! Please login again.'); window.location.href = '../LoginPage.aspx'; </script>");
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request status update", ex);
+                Response.Write("<script>alert('An error occurred during travel request status update. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
 
         }
         private void populateEmployeeDetails()
@@ -80,34 +127,37 @@ namespace TravelDesk.Admin
                                     string flight = reader["travelOptions"].ToString();
                                     string email = reader["travelEmail"].ToString();
                                     string DU = reader["travelDU"].ToString();
+                                    string status = reader["travelProcessStat"].ToString();
+
 
                                     // Display or use the retrieved request details
 
-                                    empID.Text = employeeID;
-                                    empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
-                                    empLevel.Text = employeeLevel;
+                                    //empID.Text = employeeID;
+                                    //empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
+                                    //empLevel.Text = employeeLevel;
 
-                                    empEmail.Text = email;
-                                    empMobile.Text = employeePhone;
+                                    //empEmail.Text = email;
+                                    //empMobile.Text = employeePhone;
 
-                                    empCode.Text = employeeProjCode;
-                                    empFacility.Text = travelFacility;
-                                    empDeptUnit.Text = DU;
+                                    //empCode.Text = employeeProjCode;
+                                    //empFacility.Text = travelFacility;
+                                    //empDeptUnit.Text = DU;
+                                    billingLabel.Text = "In-Progress:" + " " + status;
 
 
-                                    if (!string.IsNullOrEmpty(employeeBirth))
-                                    {
-                                        //Parse the date string into a DateTime object
-                                        DateTime arrivalDateTime;
-                                        if (DateTime.TryParse(employeeBirth, out arrivalDateTime))
-                                        {
-                                            //Format the DateTime object into the desired format
-                                            string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
+                                    //if (!string.IsNullOrEmpty(employeeBirth))
+                                    //{
+                                    //    //Parse the date string into a DateTime object
+                                    //    DateTime arrivalDateTime;
+                                    //    if (DateTime.TryParse(employeeBirth, out arrivalDateTime))
+                                    //    {
+                                    //        //Format the DateTime object into the desired format
+                                    //        string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
 
-                                            //Assign the formatted date to the TextBox
-                                            empBdate.Text = formattedArrivalDate;
-                                        }
-                                    }
+                                    //        //Assign the formatted date to the TextBox
+                                    //        empBdate.Text = formattedArrivalDate;
+                                    //    }
+                                    //}
 
                                     // Assign other request details to corresponding controls
                                 }
