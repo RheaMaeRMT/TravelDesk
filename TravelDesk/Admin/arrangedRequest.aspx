@@ -312,7 +312,7 @@
 
                                                                                     <br /> <br />
                                                                                          <asp:LinkButton runat="server" ID="confirmExport"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClick="confirmExport_Click"> <i class="ti-download" style="color:white"></i> Download </asp:LinkButton>     
-                                                                                         <asp:LinkButton runat="server" ID="sendToEmail"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px"  OnClick="sendToEmail_Click"> <i class="ti-share" style="color:white"></i> Send </asp:LinkButton>     
+                                                                                         <asp:LinkButton runat="server" ID="sendToEmail"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px"  OnClick="sendToEmail_Click"> <i class="ti-share" style="color:white"></i> Email Traveler </asp:LinkButton>     
 
                                                                                 </center>
 

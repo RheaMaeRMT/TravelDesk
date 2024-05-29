@@ -16,6 +16,7 @@ using Microsoft.Identity.Client;
 using System.Threading.Tasks;
 using Microsoft.Graph.Models;
 
+
 namespace TravelDesk.Admin
 {
 
@@ -35,52 +36,58 @@ namespace TravelDesk.Admin
 
                 string email = Session["userEmail"].ToString();
                 travellerEmail.Text = email;
-                string message = @"
-                            Dear Traveler,
 
-                            Attached are the following:
-                            1. Travel Advance Form (TAF)
-                            2. E-ticket receipt
-                            3. Hotel confirmation
-                            4. Summary of travel arrangements
-                            For per diem processing, kindly fill out and submit signed TAF and approved request (through Acumatica) to Ms. Emelina Hortel.
-
-                            Per diem: P3,200 x 2.5 days = P
-
-                            The per diem is now inclusive of the accommodation and roundtrip airport transportation allowances.
-
-                            You may now choose, book and pay for your preferred accommodation. You may still book with our accredited hotels or from online booking platforms such as Airbnb, Agoda, etc.
-
-                            You may want to check available unit at Entrata Tower 1, same building where Manila office is located, through the online booking platforms.
-
-                            Manila office address: Units 1617 and 1618, Entrata Tower 1 Condominium, 2609 Civic Drive, Filinvest Corporate City, Muntinlupa City 1781
-
-                            Please refer to the summary of travel arrangements and let me know if I missed anything.
-
-                            You may check status of your flight at https://www.cebupacificair.com/flight-status
-
-                            You may check status of your flight at https://www.philippineairlines.com/en/ph/home#flight-status-tab
-
-                            You may check status of your flight at https://www.airasia.com/flightstatus/en/GB
-                            ** Changes are not allowed once checked-in or if Air Asia flight is within 48hrs
-
-                            **REMINDERS**
-
-                            - Effective April 2022, only one baggage piece per 20kg will be allowed for check-in. You may purchase maximum of 2 pieces per weight option
-                            - Only one hand carry bag is allowed per person, but you may bring an extra if it's a laptop bag, food that cannot be checked in, or a small bag that can fit under the seat.
-                            - Web and mobile check-in
-                                 Cebu Pacific: from 7 days up to 4 hours before your flight
-                                 Philippine Airlines: 24hrs to 1hr before your flight
-                                 Air Asia: 48hrs to 30min before your flight
-                            - Go to the Bag Drop Counter before counter closure to check-in your bags.
-                            - Please be at the airport at least two hours prior to departure
-                            - Liquidation must be submitted to Stanly Ortiz within seven working days from the date of arrival to the home facility. Please provide the liquidation form, boarding pass and TAF.
- 
-                            Please do not hesitate to reach out to me if you have any questions or require further information.";
-
-                emailMessage.Text = message;
             }
+            if (!IsPostBack)
+            {
+                // Set the default message in the emailMessage TextBox
+                string defaultMessage = @"Dear Traveler,
 
+Attached are the following:
+1. Travel Advance Form (TAF)
+2. E-ticket receipt
+3. Hotel confirmation
+4. Summary of travel arrangements
+For per diem processing, kindly fill out and submit signed TAF and approved request (through Acumatica) to Ms. Emelina Hortel.
+
+Per diem: P3,200 x 2.5 days = P
+
+The per diem is now inclusive of the accommodation and roundtrip airport transportation allowances.
+
+You may now choose, book and pay for your preferred accommodation. You may still book with our accredited hotels or from online booking platforms such as Airbnb, Agoda, etc.
+
+You may want to check available unit at Entrata Tower 1, same building where Manila office is located, through the online booking platforms.
+
+Manila office address: Units 1617 and 1618, Entrata Tower 1 Condominium, 2609 Civic Drive, Filinvest Corporate City, Muntinlupa City 1781
+
+Please refer to the summary of travel arrangements and let me know if I missed anything.
+
+You may check status of your flight at https://www.cebupacificair.com/flight-status
+
+You may check status of your flight at https://www.philippineairlines.com/en/ph/home#flight-status-tab
+
+You may check status of your flight at https://www.airasia.com/flightstatus/en/GB
+** Changes are not allowed once checked-in or if Air Asia flight is within 48hrs
+
+**REMINDERS**
+
+- Effective April 2022, only one baggage piece per 20kg will be allowed for check-in. You may purchase maximum of 2 pieces per weight option
+- Only one hand carry bag is allowed per person, but you may bring an extra if it's a laptop bag, food that cannot be checked in, or a small bag that can fit under the seat.
+- Web and mobile check-in
+     Cebu Pacific: from 7 days up to 4 hours before your flight
+     Philippine Airlines: 24hrs to 1hr before your flight
+     Air Asia: 48hrs to 30min before your flight
+- Go to the Bag Drop Counter before counter closure to check-in your bags.
+- Please be at the airport at least two hours prior to departure
+- Liquidation must be submitted to Stanly Ortiz within seven working days from the date of arrival to the home facility. Please provide the liquidation form, boarding pass and TAF.
+
+Please do not hesitate to reach out to me if you have any questions or require further information.";
+
+                emailMessage.Text = defaultMessage;
+
+                // Store the default message in a session variable
+                Session["DefaultMessage"] = defaultMessage;
+            }
         }
 
 
@@ -112,19 +119,31 @@ namespace TravelDesk.Admin
             {
                 // Retrieve the dynamically generated file paths
                 string[] filePaths = GetUploadedFilePaths();
-                // Pass the file paths to the client-side JavaScript function
-                string receiverEmail = Session["userEmail"].ToString(); // Example email address, replace with actual dynamic value
-                string message = emailMessage.Text; // Example message content, replace with actual dynamic value
 
-                string name = Session["travellerName"].ToString();
-                string script = $"<script>sendEmail('{receiverEmail}', '{message}','{name}', {JsonConvert.SerializeObject(filePaths)});</script>";
-                ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
+                // Retrieve the current value of the emailMessage TextBox
+                string message = emailMessage.Text;
 
-            }
-            else
-            {
-                Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+                // Retrieve the default message from the session variable
+                string defaultMessage = Session["DefaultMessage"].ToString();
 
+                // Compare the current message with the default message to see if it has been edited
+                if (message != defaultMessage)
+                {
+                    // If the message has been edited, use the edited message
+                    // Pass the edited message to the JavaScript function
+                    string receiverEmail = Session["userEmail"].ToString();
+                    string name = Session["travellerName"].ToString();
+
+                    message = HttpUtility.JavaScriptStringEncode(message);
+
+                    string script = $"<script>sendEmail('{receiverEmail}', '{message}', '{name}', {JsonConvert.SerializeObject(filePaths)});</script>";
+                    ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
+                }
+                else
+                {
+                    // If the message has not been edited, alert the user
+                    Response.Write("<script>alert('Please edit the message before sending.');</script>");
+                }
             }
 
         }
@@ -173,9 +192,7 @@ namespace TravelDesk.Admin
                     {
                         string empFname = Session["travellerName"].ToString();
                         string subFolder = "otherFiles";
-                        string path = Path.Combine(empFname, subFolder);
-                        string folderPath = Server.MapPath("/PDFs/travelArrangements/" + empFname + "/" + "otherFiles");
-
+                        string folderPath = Server.MapPath("~/PDFs/travelArrangements/" + empFname + "/" + subFolder);
 
                         if (!Directory.Exists(folderPath))
                         {
@@ -212,7 +229,7 @@ namespace TravelDesk.Admin
                             }
                         }
 
-                        ListUploadedFiles(folderPath); // Call the method to list the filenames
+                        ListUploadedFiles(folderPath);
                         Response.Write("<script>alert('File uploaded successfully.')</script>");
                     }
                     else
@@ -233,34 +250,6 @@ namespace TravelDesk.Admin
             }
         }
 
-        //private void DisplayPDFs(string folderPath)
-        //{
-        //    attached.Style["display"] = "block";
-        //    deleteFiles.Style["display"] = "block";
-        //    deleteFiles.Style["Width"] = "100px";
-        //    attached.Style["Width"] = "100px";
-
-        //    // Get all PDF files in the folder
-        //    string[] pdfFiles = Directory.GetFiles(folderPath, "*.pdf");
-        //    string empFname = Session["travellerName"].ToString();
-
-        //    // Create HTML to display PDFs in iframes
-        //    StringBuilder html = new StringBuilder();
-        //    foreach (string pdfFile in pdfFiles)
-        //    {
-        //        FileInfo fileInfo = new FileInfo(pdfFile);
-        //        // Check if the file was created or modified today
-        //        if (fileInfo.CreationTime.Date == DateTime.Today || fileInfo.LastWriteTime.Date == DateTime.Today)
-        //        {
-        //            string fileName = Path.GetFileName(pdfFile);
-        //            string pdfPath = "/PDFs/travelArrangements/" + empFname + "/" + "otherFiles" + "/" + fileName;
-        //            html.Append("<iframe src='" + pdfPath + "' style='width:50%; height:600px;'></iframe>");
-        //        }
-        //    }
-
-        //    // Display the HTML content in a placeholder or another container on your page
-        //    pdfPlaceholder.Controls.Add(new LiteralControl(html.ToString()));
-        //}
         protected void ListUploadedFiles(string folderPath)
         {
             if (Directory.Exists(folderPath))
@@ -272,13 +261,14 @@ namespace TravelDesk.Admin
                 foreach (string filePath in fileEntries)
                 {
                     string fileName = Path.GetFileName(filePath);
-                    sb.AppendFormat("<li>{0} <button type='button' onclick=\"deleteFile('{1}')\">X</button></li>", fileName, filePath);
+                    sb.AppendFormat("<li>{0} <button type='button' onclick=\"deleteFile('{1}')\">X</button></li>", fileName, filePath.Replace("\\", "\\\\"));
                 }
 
                 sb.Append("</ul>");
                 fileListPlaceholder.Controls.Add(new Literal { Text = sb.ToString() });
             }
         }
+
         protected void DeleteFileButton_Click(object sender, EventArgs e)
         {
             string filePath = hiddenFilePath.Value;
@@ -288,10 +278,9 @@ namespace TravelDesk.Admin
             string empFname = Session["travellerName"].ToString();
             string subFolder = "otherFiles";
             string path = Path.Combine(empFname, subFolder);
-            string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements/"), path);
+            string folderPath = Path.Combine(Server.MapPath("~/PDFs/travelArrangements/"), path);
             ListUploadedFiles(folderPath);
         }
-
 
         protected void DeleteFile(string filePath)
         {
@@ -321,8 +310,5 @@ namespace TravelDesk.Admin
             loadDetailsForEmail();
 
         }
-
-
-
     }
 }

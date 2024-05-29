@@ -10,60 +10,29 @@
             // Set the hidden field value to the file path
             document.getElementById('<%= hiddenFilePath.ClientID %>').value = filePath;
 
-        // Trigger the postback to delete the file
+    // Trigger the postback to delete the file
             __doPostBack('<%= deleteFileButton.UniqueID %>', '');
         }
+
     </script>
-<%--<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script type="text/javascript">
-    (function () {
-        emailjs.init("4R2vvYNuFdqznyjBm"); // Replace with your EmailJS user ID
-    })();
-</script>
-<script>
-    function sendEmail(receiverEmail, message, name, filePaths) {
-        const emailData = {
-            to_email: receiverEmail,
-            to_name: name,
-            from_name: "Travel Desk",
-            message: message
-        };
-
-        const attachments = filePaths.map(path => ({
-            fileName: path.split("/").pop(),
-            mimeType: "application/pdf",
-            path: path
-        }));
-
-        console.log("Email Data:", emailData);
-        console.log("Attachments:", attachments);
-
-        emailjs.send("service_6updv5w", "template_p46ovxf", emailData, { attachments })
-            .then(function (response) {
-                alert("Email sent successfully");
-                console.log('Email Sent!', response);
-            }, function (error) {
-                console.error("Email send failed:", error);
-            });
-    }
-</script>--%>
-
-        
-
+      
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script type="text/javascript">
     (function () {
-        emailjs.init("7kzw_508bI-BkJqPm"); // Replace with your EmailJS user ID
+        //emailjs.init("7kzw_508bI-BkJqPm"); // TravelDesk
+        emailjs.init("4R2vvYNuFdqznyjBm"); // Personal Email JS
+
     })();
     
 </script>
 <script>
     function sendEmail(receiverEmail, message, name, filePaths) {
+
         const emailData = {
             to_email: receiverEmail,
             to_name: name,
             from_name: "Travel Desk",
-            message: message
+            message: message 
         };
         //const attachments = filePaths.map(path => ({
         //    fileName: path.split("/").pop(),
@@ -74,8 +43,8 @@
         console.log("Email Data:", emailData);
         //console.log("Attachments:", attachments);
 
-        emailjs.send("service_rwuwsiv", "template_pofgyf1", emailData)
-        //emailjs.send("service_6updv5w", "template_p46ovxf", emailData, { attachments })
+        //emailjs.send("service_rwuwsiv", "template_pofgyf1", emailData) // TravelDesk
+        emailjs.send("service_6updv5w", "template_p46ovxf", emailData) // Personal Email JS
             .then(function (response) {
                 console.log('Email Sent!', response);
                 window.location.replace("emailSent.aspx"); // Replace with your desired URL
