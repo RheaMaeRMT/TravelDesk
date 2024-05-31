@@ -26,24 +26,19 @@
     
 </script>
 <script>
-    function sendEmail(receiverEmail, message, name, filePaths) {
+    function sendEmail(receiverEmail, message, name) {
+
 
         const emailData = {
             to_email: receiverEmail,
             to_name: name,
             from_name: "Travel Desk",
-            message: message 
+            message: message,
         };
-        //const attachments = filePaths.map(path => ({
-        //    fileName: path.split("/").pop(),
-        //    mimeType: "application/pdf",
-        //    path: path
-        //}));
+        
 
         console.log("Email Data:", emailData);
-        //console.log("Attachments:", attachments);
 
-        //emailjs.send("service_rwuwsiv", "template_pofgyf1", emailData) // TravelDesk
         emailjs.send("service_6updv5w", "template_p46ovxf", emailData) // Personal Email JS
             .then(function (response) {
                 console.log('Email Sent!', response);
@@ -54,6 +49,88 @@
             });
     }
 </script>
+<script src="https://alcdn.msauth.net/browser/2.18.0/js/msal-browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<%--<script>
+    const msalConfig = {
+        auth: {
+            clientId: '012c9319-8466-48bf-b2a7-addbc886747d',
+            authority: 'https://login.microsoftonline.com/f8cdef31-a31e-4b4a-93e4-5f571e91255a',
+            redirectUri: window.location.origin
+        }
+    };
+
+    const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+    const loginRequest = {
+        scopes: ["Files.ReadWrite.All", "User.Read"]
+    };
+
+    function uploadFilesToOneDrive() {
+        msalInstance.loginPopup(loginRequest)
+            .then(loginResponse => {
+                const account = loginResponse.account;
+                msalInstance.setActiveAccount(account);
+                return msalInstance.acquireTokenSilent(loginRequest);
+            })
+            .then(tokenResponse => {
+                const accessToken = tokenResponse.accessToken;
+                const files = document.getElementById('<%= attachments.ClientID %>').files;
+
+                const fileLinks = [];
+                const uploadPromises = [];
+
+                for (let i = 0; i < files.length; i++) {
+                    uploadPromises.push(uploadFileToOneDrive(files[i], accessToken, fileLinks));
+                }
+
+                Promise.all(uploadPromises).then(() => {
+                    document.getElementById('<%= hiddenFileLinks.ClientID %>').value = JSON.stringify(fileLinks);
+                    alert('Files uploaded to onedrive successfully');
+                });
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error logging in or acquiring token.');
+            });
+    }
+
+    function uploadFileToOneDrive(file, accessToken, fileLinks) {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+
+            fileReader.onload = function (event) {
+                const arrayBuffer = event.target.result;
+
+                axios.put(`https://graph.microsoft.com/v1.0/me/drive/root:/${file.name}:/content`, arrayBuffer, {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': file.type
+                    }
+                })
+                    .then(response => {
+                        console.log('File uploaded:', response.data);
+
+                        // Make sure response.data points to the correct property containing the URL
+                        const fileLink = response.data?.webUrl; // Use optional chaining to avoid errors
+                        if (fileLink) {
+                            fileLinks.push(fileLink);
+                            resolve();
+                        } else {
+                            console.error('Error: Unable to retrieve OneDrive URL.');
+                            reject();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error uploading file:', error);
+                        reject();
+                    });
+            };
+
+            fileReader.readAsArrayBuffer(file);
+        });
+    }
+</script>--%>
 
 
 </asp:Content>
@@ -91,6 +168,7 @@
 
                                                                 <asp:PlaceHolder ID="fileListPlaceholder" runat="server"></asp:PlaceHolder>
                                                                 <asp:HiddenField ID="hiddenFilePath" runat="server" />
+                                                                <asp:HiddenField ID="hiddenFileLinks" runat="server" />
                                                                   <asp:Button ID="deleteFileButton" runat="server" Text="Delete File" Style="display: none;" OnClick="DeleteFileButton_Click" />
                                                               </div>        
                                                         <div class="card-block" style="background-color:white">

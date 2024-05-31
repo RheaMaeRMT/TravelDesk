@@ -15,6 +15,10 @@ using Microsoft.Graph;
 using Microsoft.Identity.Client;
 using System.Threading.Tasks;
 using Microsoft.Graph.Models;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Services;
+
 
 
 namespace TravelDesk.Admin
@@ -114,21 +118,22 @@ Please do not hesitate to reach out to me if you have any questions or require f
 
         private void loadDetailsForEmail()
         {
+            
+
 
             if (Session["travellerName"] != null && Session["userEmail"] != null)
             {
-                // Retrieve the dynamically generated file paths
-                string[] filePaths = GetUploadedFilePaths();
 
                 // Retrieve the current value of the emailMessage TextBox
                 string message = emailMessage.Text;
-
+                string[] filePaths = GetUploadedFilePaths();
                 // Retrieve the default message from the session variable
                 string defaultMessage = Session["DefaultMessage"].ToString();
 
                 // Compare the current message with the default message to see if it has been edited
                 if (message != defaultMessage)
                 {
+
                     // If the message has been edited, use the edited message
                     // Pass the edited message to the JavaScript function
                     string receiverEmail = Session["userEmail"].ToString();
@@ -136,16 +141,62 @@ Please do not hesitate to reach out to me if you have any questions or require f
 
                     message = HttpUtility.JavaScriptStringEncode(message);
 
+
                     string script = $"<script>sendEmail('{receiverEmail}', '{message}', '{name}', {JsonConvert.SerializeObject(filePaths)});</script>";
                     ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
                 }
                 else
                 {
-                    // If the message has not been edited, alert the user
-                    Response.Write("<script>alert('Please edit the message before sending.');</script>");
+                    // If the message has been edited, use the edited message
+                    // Pass the edited message to the JavaScript function
+                    string receiverEmail = Session["userEmail"].ToString();
+                    string name = Session["travellerName"].ToString();
+
+                    message = HttpUtility.JavaScriptStringEncode(defaultMessage);
+
+
+                    string script = $"<script>sendEmail('{receiverEmail}', '{message}', '{name}', {JsonConvert.SerializeObject(filePaths)});</script>";
+                    ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
                 }
             }
 
+        }
+
+        // Upload file to Google Drive
+        public void UploadFileToDrive(string filePath, string folderId)
+        {
+            // OAuth 2.0 scopes required for Google Drive API
+            string[] scopes = { DriveService.Scope.DriveFile };
+
+            // Load client secrets JSON file (downloaded from Google Cloud Console)
+            GoogleCredential credential;
+            using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+            {
+                credential = GoogleCredential.FromStream(stream)
+                    .CreateScoped(scopes);
+            }
+
+            // Create Drive API service
+            var service = new DriveService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = "Travel Desk",
+            });
+
+            var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+            {
+                Name = Path.GetFileName(filePath),
+                Parents = new List<string> { folderId } // Folder ID where you want to upload the file
+            };
+            FilesResource.CreateMediaUpload request;
+            using (var stream = new FileStream(filePath, FileMode.Open))
+            {
+                request = service.Files.Create(fileMetadata, stream, "application/pdf");
+                request.Upload();
+            }
+            var file = request.ResponseBody;
+            Console.WriteLine("File ID: " + file.Id);
+            Console.WriteLine("File URL: " + file.WebViewLink);
         }
 
         // Method to retrieve dynamically generated file paths
@@ -255,17 +306,17 @@ Please do not hesitate to reach out to me if you have any questions or require f
             if (Directory.Exists(folderPath))
             {
                 string[] fileEntries = Directory.GetFiles(folderPath, "*.pdf");
+
                 StringBuilder sb = new StringBuilder();
                 sb.Append("<ul>");
 
                 foreach (string filePath in fileEntries)
                 {
                     string fileName = Path.GetFileName(filePath);
-                    sb.AppendFormat("<li>{0} <button type='button' onclick=\"deleteFile('{1}')\">X</button></li>", fileName, filePath.Replace("\\", "\\\\"));
-                }
 
-                sb.Append("</ul>");
-                fileListPlaceholder.Controls.Add(new Literal { Text = sb.ToString() });
+                    sb.AppendFormat("<li>{0} <button type='button' onclick=\"deleteFile('{1}')\">X</button></li>", fileName, filePath.Replace("\\", "\\\\"));
+
+                }
             }
         }
 
