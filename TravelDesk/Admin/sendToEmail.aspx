@@ -26,16 +26,18 @@
     
 </script>
 <script>
-    function sendEmail(receiverEmail, message, name) {
-
-
+    function sendEmailWithDriveLinks(receiverEmail, message, name, formattedLinks) {
         const emailData = {
             to_email: receiverEmail,
             to_name: name,
             from_name: "Travel Desk",
-            message: message,
+            message: message
         };
-        
+
+        if (formattedLinks !== "") {
+            
+            emailData.fileLinks = "Attached Files:\n " + formattedLinks;
+        }
 
         console.log("Email Data:", emailData);
 

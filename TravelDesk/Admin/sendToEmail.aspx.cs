@@ -18,8 +18,7 @@ using Microsoft.Graph.Models;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
-
-
+using System.Text.RegularExpressions;
 
 namespace TravelDesk.Admin
 {
@@ -45,9 +44,7 @@ namespace TravelDesk.Admin
             if (!IsPostBack)
             {
                 // Set the default message in the emailMessage TextBox
-                string defaultMessage = @"Dear Traveler,
-
-Attached are the following:
+                string defaultMessage = @"Attached are the following:
 1. Travel Advance Form (TAF)
 2. E-ticket receipt
 3. Hotel confirmation
@@ -83,9 +80,7 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
      Air Asia: 48hrs to 30min before your flight
 - Go to the Bag Drop Counter before counter closure to check-in your bags.
 - Please be at the airport at least two hours prior to departure
-- Liquidation must be submitted to Stanly Ortiz within seven working days from the date of arrival to the home facility. Please provide the liquidation form, boarding pass and TAF.
-
-Please do not hesitate to reach out to me if you have any questions or require further information.";
+- Liquidation must be submitted to Stanly Ortiz within seven working days from the date of arrival to the home facility. Please provide the liquidation form, boarding pass and TAF.";
 
                 emailMessage.Text = defaultMessage;
 
@@ -95,7 +90,7 @@ Please do not hesitate to reach out to me if you have any questions or require f
         }
 
 
-        private async Task loadDetailsForEmail()
+        private void loadDetailsForEmail()
         {
             if (Session["travellerName"] != null && Session["userEmail"] != null)
             {
@@ -119,22 +114,51 @@ Please do not hesitate to reach out to me if you have any questions or require f
                 string receiverEmail = Session["userEmail"].ToString();
                 string name = Session["travellerName"].ToString();
 
-                // Upload files to Google Drive and retrieve the links
-                List<string> driveLinks = new List<string>();
-                foreach (var postedFile in attachments.PostedFiles)
-                {
-                    string driveLink = UploadFileToGoogleDrive(postedFile);
-                    driveLinks.Add(driveLink);
-                }
+                // Retrieve drive links from session
+                List<string> driveLinks = (List<string>)Session["UploadedDriveLinks"] ?? new List<string>();
+
+                // Assign drive links to the LINKS list
+                LINKS.AddRange(driveLinks);
+
+                // Ensure the formatted links are encoded to be used in JavaScript
+                string formattedLinks = driveLinks.Count > 0 ? HttpUtility.JavaScriptStringEncode(GetFormattedLinks(driveLinks)) : "";
 
                 // Pass the email details including the uploaded file links to the JavaScript function
-                string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{message}', '{name}', {JsonConvert.SerializeObject(driveLinks)});</script>";
+                string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{message}', '{name}', '{formattedLinks}');</script>";
                 ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
             }
+            Session.Remove("UploadedDriveLinks");
+        }
+
+        private string GetFormattedLinks(List<string> driveLinks)
+        {
+            StringBuilder formattedLinks = new StringBuilder();
+
+            for (int i = 0; i < driveLinks.Count; i++)
+            {
+                string link = driveLinks[i];
+                string fileName = GetFileNameFromLink(link);
+                formattedLinks.AppendLine($"{i + 1}. {link}");
+            }
+
+            return formattedLinks.ToString();
+        }
+
+        private string GetFileNameFromLink(string link)
+        {
+            Uri uri = new Uri(link);
+            string[] segments = uri.Segments;
+            string fileName = segments[segments.Length - 1];
+
+            if (fileName.Contains("?"))
+            {
+                fileName = fileName.Substring(0, fileName.IndexOf("?"));
+            }
+
+            return fileName;
         }
 
 
-        // Method to retrieve dynamically generated file paths
         private string[] GetUploadedFilePaths()
         {
             List<string> filePaths = new List<string>();
@@ -188,10 +212,13 @@ Please do not hesitate to reach out to me if you have any questions or require f
                 fileListPlaceholder.Controls.Add(new Literal { Text = sb.ToString() });
             }
         }
+
+        private List<string> LINKS = new List<string>();
         private string UploadFileToGoogleDrive(HttpPostedFile postedFile)
         {
             try
             {
+
                 // Path to the service account JSON key file
                 var serviceAccountCredentialFilePath = @"C:\Users\HR-OJT\source\repos\InnodataTravelDesk\TravelDesk\App_Data\service-account.json";
 
@@ -243,6 +270,11 @@ Please do not hesitate to reach out to me if you have any questions or require f
                 string driveLink = file.WebContentLink;
                 Console.WriteLine("Google Drive link: " + driveLink);
 
+                LINKS.Add(driveLink);
+
+                // Log the current list of links
+                Console.WriteLine("Current LINKS: " + string.Join(", ", LINKS));
+
                 // Return the Google Drive link
                 return driveLink;
             }
@@ -288,76 +320,6 @@ Please do not hesitate to reach out to me if you have any questions or require f
             var file = request.Execute();
             return file.Id;
         }
-
-        //protected void uploadButton_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (attachments.HasFile)
-        //        {
-        //            if (Session["travellerName"] != null)
-        //            {
-        //                string empFname = Session["travellerName"].ToString();
-        //                string subFolder = "otherFiles";
-        //                string folderPath = Server.MapPath("~/PDFs/travelArrangements/" + empFname + "/" + subFolder);
-
-        //                if (!Directory.Exists(folderPath))
-        //                {
-        //                    Directory.CreateDirectory(folderPath);
-        //                }
-
-        //                HttpFileCollection attachmentsCollection = Request.Files;
-
-        //                for (int i = 0; i < attachmentsCollection.Count; i++)
-        //                {
-        //                    HttpPostedFile attachment = attachmentsCollection[i];
-
-        //                    if (attachment.ContentLength > 0)
-        //                    {
-        //                        string filename = Server.HtmlEncode(empFname + "_" + Path.GetFileName(attachment.FileName));
-        //                        string extension = Path.GetExtension(filename).ToLower();
-
-        //                        if (extension == ".pdf")
-        //                        {
-        //                            if (attachment.ContentLength < 4100000)
-        //                            {
-        //                                string savePath = Path.Combine(folderPath, filename);
-        //                                attachment.SaveAs(savePath);
-        //                                // Upload file to Google Drive
-        //                                UploadFileToGoogleDrive(attachment);
-        //                            }
-        //                            else
-        //                            {
-        //                                Response.Write("<script>alert('File " + filename + " was not uploaded because the file size is more than 4MB.')</script>");
-        //                            }
-        //                        }
-        //                        else
-        //                        {
-        //                            Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file.')</script>");
-        //                        }
-        //                    }
-        //                }
-
-        //                ListUploadedFiles(folderPath);
-        //                Response.Write("<script>alert('File uploaded successfully.')</script>");
-        //            }
-        //            else
-        //            {
-        //                Response.Write("<script>alert('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Response.Write("<script>alert('No files inserted. Please attach the PDF file you want to upload.')</script>");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Error uploading file: " + ex.Message);
-        //        Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
-        //        Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
-        //    }
-        //}
 
         protected void uploadButton_Click(object sender, EventArgs e)
         {
@@ -456,8 +418,6 @@ Please do not hesitate to reach out to me if you have any questions or require f
                 Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
             }
         }
-
-
 
         protected void sendEmail_Click(object sender, EventArgs e)
         {
