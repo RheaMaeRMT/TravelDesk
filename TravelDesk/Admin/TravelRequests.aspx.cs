@@ -69,10 +69,11 @@ namespace TravelDesk.Admin
                             WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
                             ELSE tr.travelDestination                             
                         END AS travelDestination, 
-                        CASE 
-                            WHEN tr.travelOptions = 'One Way' THEN rt.routeODate 
-                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart
-                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate                          
+                       CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
                         END AS travelDates, 
                         tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
                 FROM travelRequest tr
@@ -125,7 +126,7 @@ namespace TravelDesk.Admin
             {
 
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = @"SELECT tr.travelRequestID,  tr.travelReqStatus, tr.travelType, 
+                string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
                         tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
                         CASE 
                             WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
@@ -134,10 +135,10 @@ namespace TravelDesk.Admin
                             ELSE tr.travelDestination                             
                         END AS travelDestination, 
                         CASE 
-                            WHEN tr.travelOptions = 'One Way' THEN rt.routeODate
-                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart 
-                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate 
-                            WHEN tr.travelType = 'Visa Request' THEN travelEstdate
+                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
                         END AS travelDates, 
                         tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
                     FROM travelRequest tr
@@ -285,6 +286,46 @@ namespace TravelDesk.Admin
                     }
                 }
             }
+        }
+
+        protected void travelRequests_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            // Retrieve the DataTable from the GridView's DataSource
+            DataTable dt = travelRequests.DataSource as DataTable;
+
+            if (dt != null)
+            {
+                // Sort the DataTable based on the clicked column
+                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
+
+                // Rebind the sorted data to the GridView
+                travelRequests.DataSource = dt;
+                travelRequests.DataBind();
+            }
+        }
+        private string GetSortDirection(string column)
+        {
+            // By default, set the sort direction to ascending
+            string sortDirection = "ASC";
+
+            // Retrieve the sort expression and sort direction from ViewState
+            string sortExpression = ViewState["SortExpression"] as string;
+            string sortDir = ViewState["SortDirection"] as string;
+
+            // If the clicked column is the same as the previously sorted column, reverse the sort direction
+            if (sortExpression != null && sortExpression.Equals(column))
+            {
+                if (sortDir != null && sortDir.Equals("ASC"))
+                {
+                    sortDirection = "DESC";
+                }
+            }
+
+            // Store the current sort expression and sort direction in ViewState
+            ViewState["SortExpression"] = column;
+            ViewState["SortDirection"] = sortDirection;
+
+            return sortDirection;
         }
     }
 }

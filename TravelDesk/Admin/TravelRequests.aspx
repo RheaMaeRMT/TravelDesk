@@ -20,26 +20,24 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                            <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound">               
-                                                <Columns>   
+                                            <asp:GridView CssClass="table container" class="table-hover" EditRowStyle-HorizontalAlign="Center" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound" AllowSorting="true" OnSorting="travelRequests_Sorting">               
+                                                <Columns>
                                                     <asp:TemplateField HeaderText="Request ID">
                                                         <ItemTemplate>
                                                         <asp:Button runat="server" Style="background-color: transparent; font-size: 15px;" class="active btn waves-effect text-center" ID="btnRequestID" OnClick="viewDetails_Click"/>
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
-                                                    <asp:BoundField DataField="travelReqStatus" HeaderText="Status" />
-                                                    <asp:BoundField DataField="travelType" HeaderText="Type of Request" />
-                                                    <asp:BoundField DataField="FullName" HeaderText="Traveller Name" />
-                                                    <asp:BoundField DataField="travelDestination" HeaderText="Destination" />
-                                                    <asp:BoundField DataField="travelDates" HeaderText="Travel Dates" DataFormatString="{0:MMMM dd, yyyy}" />
-                                                    <asp:BoundField DataField="travelDU" HeaderText="Department Unit" />
-                                                    <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" />
-                                                    <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" DataFormatString="{0:MMMM dd, yyyy}" />
-
-
-                                                    
-                                                </Columns>
+                                                        <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" SortExpression="travelRequestID" />
+                                                        <asp:BoundField DataField="travelReqStatus" HeaderText="Status" SortExpression="travelReqStatus" />
+                                                        <asp:BoundField DataField="travelType" HeaderText="Type of Request" SortExpression="travelType" />
+                                                        <asp:BoundField DataField="FullName" HeaderText="Traveller Name" SortExpression="FullName" />
+                                                        <asp:BoundField DataField="travelDestination" HeaderText="Destination" SortExpression="travelDestination" />
+                                                        <asp:BoundField DataField="travelDates" HeaderText="Travel Dates" SortExpression="travelDates" />
+                                                        <asp:BoundField DataField="travelDU" HeaderText="Department Unit" SortExpression="travelDU" />
+                                                        <asp:BoundField DataField="travelProjectCode" HeaderText="Project Code" SortExpression="travelProjectCode" />
+                                                        <asp:BoundField DataField="travelDateSubmitted" HeaderText="Date Submitted" DataFormatString="{0:MMMM dd, yyyy}" SortExpression="travelDateSubmitted" />
+                                                    </Columns>
 
                                                 <FooterStyle BackColor="#CCCCCC" />
                                                 <HeaderStyle BackColor="#003366" Font-Bold="True" ForeColor="White" />                                                

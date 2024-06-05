@@ -1479,6 +1479,8 @@ namespace TravelDesk.Admin
             separatorTable.AddCell(cell);
             doc.Add(separatorTable);
         }
+
+
         private void AddSectionSeparatorHeader(Document doc, string sectionTitle, Font font, BaseColor customColor)
         {
             PdfPTable separatorTable = new PdfPTable(1);
@@ -1524,7 +1526,7 @@ namespace TravelDesk.Admin
             employeeTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
             // Add rows for employee details
-            AddRowToTable(employeeTable, "Traveller Name:", employeeName.Text);
+            AddRowToTable(employeeTable, "Traveler Name:", employeeName.Text);
             AddRowToTable(employeeTable, "Employee ID:", employeeID.Text);
             AddRowToTable(employeeTable, "Home Facility:", homeFacility.Text);
             AddRowToTable(employeeTable, "Mobile Number:", employeePhone.Text);
@@ -1543,25 +1545,87 @@ namespace TravelDesk.Admin
             hotelAccommodationsTable.SpacingAfter = 10f;
             hotelAccommodationsTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
-            // Add rows for hotel accommodations details if they are not null or empty
-            if (!string.IsNullOrEmpty(hotel.Text))
-                AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
+            if (hotelAccomodations.Visible)
+            {
+                // Add rows for hotel accommodations details if they are not null or empty
+                if (!string.IsNullOrEmpty(hotel.Text))
+                {
+                    AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom.Text);
 
-            if (!string.IsNullOrEmpty(employeeHotel.Text))
-                AddRowToTable(hotelAccommodationsTable, "Hotel Name:", employeeHotel.Text);
 
-            if (!string.IsNullOrEmpty(hotelAddress.Text))
-                AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
+                }
+                else if (!string.IsNullOrEmpty(employeeHotel.Text))
+                {
+                    AddRowToTable(hotelAccommodationsTable, "Hotel Name:", employeeHotel.Text);
 
-            if (!string.IsNullOrEmpty(hotelContact.Text))
-                AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
+                }
 
-            if (!string.IsNullOrEmpty(durationFrom.Text))
+            }
+            if (hotel2Acc.Visible)
             {
 
-               AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom.Text);
+                // Add rows for hotel accommodations details if they are not null or empty
+                if (!string.IsNullOrEmpty(hotel2.Text))
+                {
+                    AddRowToTable(hotelAccommodationsTable, "2nd Accomodation", "");
+                    AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel2.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress2.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact2.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom2.Text);
+
+                }
+
+
+            }
+            if (hotel3Acc.Visible)
+            {
+
+                // Add rows for hotel accommodations details if they are not null or empty
+                if (!string.IsNullOrEmpty(hotel3.Text))
+                {
+                    AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel3.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress3.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact3.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom3.Text);
+
+                }
+
+
                 
             }
+            if (hotel4Acc.Visible)
+            {
+
+                // Add rows for hotel accommodations details if they are not null or empty
+                if (!string.IsNullOrEmpty(hotel4.Text))
+                {
+                    AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel4.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress4.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact4.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom4.Text);
+
+                }
+
+
+            }
+            if (hotel5Acc.Visible)
+            {
+
+                // Add rows for hotel accommodations details if they are not null or empty
+                if (!string.IsNullOrEmpty(hotel5.Text))
+                {
+                    AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel5.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress5.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact5.Text);
+                    AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom5.Text);
+
+                }
+            }
+
+
 
             // Add hotel accommodations table to document
             doc.Add(hotelAccommodationsTable);
