@@ -239,11 +239,10 @@
                                                                                                                                   <asp:TextBox ID="transfer5Date" runat="server" Width="150px" Style="margin-left: 40px;" CssClass="textboxes" Enabled="false"></asp:TextBox> 
                                                                                                                             </div>
                                                             </div>
-                                                                                        <div class="card-block">
-                                                                                            <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Remarks</p>
+                                                                                        <div class="card-block" id="remarksDiv" runat="server" style="display:none">
+                                                                                            <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Additional Information</p>
                                                                                             <div class="card-block">
-                                                                        <asp:Label ID="Label42" runat="server" Text="Additional Remarks:" Style="margin-left: 20px;"></asp:Label> <br />
-                                                                    <asp:TextBox ID="remarks" runat="server" Width="400px" TextMode="MultiLine" Style="margin-left: 60px; border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
+                                                                    <asp:TextBox ID="remarks" runat="server" Width="1200px"  Height="100px"  TextMode="MultiLine" Style="margin-left: 60px; border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
 
                                                                                             </div>
                                                                                         </div>
@@ -260,7 +259,7 @@
 
                                                                                              </div>
                                                                                              <div class="col-lg-12 col-xl-6">
-                                                                                                 <div class="card-block" style="margin-left:50px">
+                                                                                                 <div class="card-block" style="margin-left:50px;display:none" id="additionalDiv" runat="server">
                                                                                                     <asp:Label ID="Label66" runat="server" Text="Additional Notes"></asp:Label> <br />
                                                                                                 <asp:TextBox ID="additionalNotes" runat="server" Width="400px" TextMode="MultiLine" Style="margin-left: 60px;border-radius: 5px" CssClass="textboxes" Enabled="false"></asp:TextBox>
 

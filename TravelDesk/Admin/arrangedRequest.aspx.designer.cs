@@ -1185,13 +1185,13 @@ namespace TravelDesk.Admin
         protected global::System.Web.UI.WebControls.TextBox transfer5Date;
 
         /// <summary>
-        /// Label42 control.
+        /// remarksDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label42;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl remarksDiv;
 
         /// <summary>
         /// remarks control.
@@ -1219,6 +1219,15 @@ namespace TravelDesk.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox requirements;
+
+        /// <summary>
+        /// additionalDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl additionalDiv;
 
         /// <summary>
         /// Label66 control.

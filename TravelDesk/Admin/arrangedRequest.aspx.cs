@@ -195,9 +195,18 @@ namespace TravelDesk.Admin
 
                                     // Display or use the retrieved request details
                                     requirements.Text = travelrequirements;
-                                    additionalNotes.Text = noted;
-                                    remarks.Text = addRemarks;
 
+                                    if (addRemarks != "")
+                                    {
+                                        remarksDiv.Style["display"] = "block";
+                                        remarks.Text = addRemarks;
+                                    }
+
+                                    if (noted != "")
+                                    {
+                                        additionalDiv.Style["display"] = "block";
+                                        additionalNotes.Text = noted;
+                                    }
                                     getAccomodationDetails();
                                     getFlightDetails();
                                     getTransfersDetails();
@@ -1378,8 +1387,12 @@ namespace TravelDesk.Admin
                     AddSectionSeparator(doc, "Car/Airport Transfers");
                     AddTransfersSection(doc);
 
-                    AddSectionSeparator(doc, "Additional Remarks");
-                    AddRemarksSection(doc);
+                    string remarksText = remarks.Text;
+                    if (remarksText != "")
+                    {
+                        AddSectionSeparator(doc, "Additional Information");
+                        AddRemarksSection(doc);
+                    }
 
                     AddSectionSeparator(doc, "Others");
                     AddOthersSection(doc);
@@ -1487,7 +1500,7 @@ namespace TravelDesk.Admin
             separatorTable.WidthPercentage = 100;
             PdfPCell cell = new PdfPCell(new Phrase(sectionTitle, font)); // Use custom font
             cell.BackgroundColor = customColor; // Use custom color
-            cell.HorizontalAlignment = Element.ALIGN_LEFT; // Center-align text
+            cell.HorizontalAlignment = Element.ALIGN_CENTER; // Center-align text
             cell.Padding = 5;
             separatorTable.AddCell(cell);
             doc.Add(separatorTable);
@@ -1550,11 +1563,18 @@ namespace TravelDesk.Admin
                 // Add rows for hotel accommodations details if they are not null or empty
                 if (!string.IsNullOrEmpty(hotel.Text))
                 {
+                    AddRowToTable(hotelAccommodationsTable, "1st Accomodation", "");
                     AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
                     AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
                     AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
                     AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom.Text);
 
+                    // Add empty row for spacing
+                    PdfPCell emptyCell = new PdfPCell(new Phrase(" "));
+                    emptyCell.Colspan = 2;
+                    emptyCell.Border = 0;
+                    emptyCell.MinimumHeight = 20f; // Adjust height as needed for spacing
+                    hotelAccommodationsTable.AddCell(emptyCell);
 
                 }
                 else if (!string.IsNullOrEmpty(employeeHotel.Text))
@@ -1576,6 +1596,12 @@ namespace TravelDesk.Admin
                     AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact2.Text);
                     AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom2.Text);
 
+                    // Add empty row for spacing
+                    PdfPCell emptyCell = new PdfPCell(new Phrase(" "));
+                    emptyCell.Colspan = 2;
+                    emptyCell.Border = 0;
+                    emptyCell.MinimumHeight = 20f; // Adjust height as needed for spacing
+                    hotelAccommodationsTable.AddCell(emptyCell);
                 }
 
 
@@ -1586,11 +1612,18 @@ namespace TravelDesk.Admin
                 // Add rows for hotel accommodations details if they are not null or empty
                 if (!string.IsNullOrEmpty(hotel3.Text))
                 {
+                    AddRowToTable(hotelAccommodationsTable, "3rd Accomodation", "");
                     AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel3.Text);
                     AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress3.Text);
                     AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact3.Text);
                     AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom3.Text);
 
+                    // Add empty row for spacing
+                    PdfPCell emptyCell = new PdfPCell(new Phrase(" "));
+                    emptyCell.Colspan = 2;
+                    emptyCell.Border = 0;
+                    emptyCell.MinimumHeight = 20f; // Adjust height as needed for spacing
+                    hotelAccommodationsTable.AddCell(emptyCell);
                 }
 
 
@@ -1602,11 +1635,19 @@ namespace TravelDesk.Admin
                 // Add rows for hotel accommodations details if they are not null or empty
                 if (!string.IsNullOrEmpty(hotel4.Text))
                 {
+                    AddRowToTable(hotelAccommodationsTable, "4th Accomodation", "");
                     AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel4.Text);
                     AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress4.Text);
                     AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact4.Text);
                     AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom4.Text);
+                    AddRowToTable(hotelAccommodationsTable, "", "");
 
+                    // Add empty row for spacing
+                    PdfPCell emptyCell = new PdfPCell(new Phrase(" "));
+                    emptyCell.Colspan = 2;
+                    emptyCell.Border = 0;
+                    emptyCell.MinimumHeight = 20f; // Adjust height as needed for spacing
+                    hotelAccommodationsTable.AddCell(emptyCell);
                 }
 
 
@@ -1617,11 +1658,18 @@ namespace TravelDesk.Admin
                 // Add rows for hotel accommodations details if they are not null or empty
                 if (!string.IsNullOrEmpty(hotel5.Text))
                 {
+                    AddRowToTable(hotelAccommodationsTable, "5th Accomodation", "");
                     AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel5.Text);
                     AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress5.Text);
                     AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact5.Text);
                     AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom5.Text);
 
+                    // Add empty row for spacing
+                    PdfPCell emptyCell = new PdfPCell(new Phrase(" "));
+                    emptyCell.Colspan = 2;
+                    emptyCell.Border = 0;
+                    emptyCell.MinimumHeight = 20f; // Adjust height as needed for spacing
+                    hotelAccommodationsTable.AddCell(emptyCell);
                 }
             }
 
@@ -1717,7 +1765,7 @@ namespace TravelDesk.Admin
             remarksTable.SpacingAfter = 10f;
             remarksTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
-            AddRowToTable(remarksTable, "Remarks:", remarks.Text);
+            AddRowToTable(remarksTable, "", remarks.Text);
 
             // Add employee table to document
             doc.Add(remarksTable);
@@ -1806,7 +1854,7 @@ namespace TravelDesk.Admin
 
             // Add rows for others details
             AddRowToTable(othersTable, "Travel Requirements:", requirements.Text);
-            AddRowToTable(othersTable, "Additional Notes:", ParseTextWithLinks(additionalNotes.Text));
+            AddRowToTable(othersTable, "", ParseTextWithLinks(additionalNotes.Text));
 
             // Add others table to document
             doc.Add(othersTable);
@@ -1830,7 +1878,7 @@ namespace TravelDesk.Admin
             separatorTable.WidthPercentage = 100;
             PdfPCell cell = new PdfPCell(new Phrase(sectionTitle, font)); // Use custom font
             cell.BackgroundColor = customColor; // Use custom color
-            cell.HorizontalAlignment = Element.ALIGN_LEFT; // Center-align text
+            cell.HorizontalAlignment = Element.ALIGN_CENTER ; // Center-align text
             cell.Padding = 5;
             separatorTable.AddCell(cell);
             doc.Add(separatorTable);
