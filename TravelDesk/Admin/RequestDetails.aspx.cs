@@ -23,6 +23,34 @@ namespace TravelDesk.Admin
             }
             else
             {
+                if (Session["requestStatus"] != null)
+                {
+                    string status = Session["requestStatus"].ToString();
+
+                    if (status == "In-progress")
+                    {
+                        string process = Session["processStat"].ToString();
+
+                        if (process == "Email")
+                        {
+                            processRequest.Text = "Proceed to Billing";
+
+                        }
+                        else
+                        {
+                            processRequest.Text = "Proceed to " + process;
+
+                        }
+                    }
+                    else
+                    {
+                        processRequest.Text = "Process Request";
+
+                    }
+
+
+                }
+
                 DisplayRequest();
             }
 
@@ -434,40 +462,64 @@ namespace TravelDesk.Admin
 
             try
             {
-
-                string request = Session["clickedRequest"].ToString();
-
-
-                using (var db = new SqlConnection(connectionString))
+                if (Session["clickedRequest"] != null)
                 {
-                    db.Open();
-                    using (var cmd = db.CreateCommand())
+                    string status = Session["requestStatus"].ToString();
+
+                    if (status == "In-Progress")
                     {
-                        cmd.Parameters.Clear();
-                        cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
+                        string process = Session["processStat"].ToString();
 
-                        // Set parameters
-                        cmd.Parameters.AddWithValue("@newStatus", "In-progress");
-                        cmd.Parameters.AddWithValue("@ID", request);
-
-                        // Execute the update query
-                        int rowsAffected = cmd.ExecuteNonQuery();
-
-                        if (rowsAffected > 0)
+                        if (process == "Billing" || process == "Email")
                         {
-
-                            Session["travelStatus"] = "In-progress";
-
-                            Response.Redirect("TravelArrangements.aspx");
-
+                            Response.Redirect("billingInformation.aspx");
                         }
-                        else
+                        else if (process == "Arranged")
                         {
-                            // No rows were affected, meaning no matching travel request ID was found
-                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                            Response.Redirect("arrangedRequest.aspx");
+
+                        } 
+                    }
+                    else
+                    {
+                        string request = Session["clickedRequest"].ToString();
+
+
+                        using (var db = new SqlConnection(connectionString))
+                        {
+                            db.Open();
+                            using (var cmd = db.CreateCommand())
+                            {
+                                cmd.Parameters.Clear();
+                                cmd.CommandType = CommandType.Text;
+                                cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus, travelProcessStat = @processStat WHERE travelRequestID = @ID";
+
+                                // Set parameters
+                                cmd.Parameters.AddWithValue("@newStatus", "In-progress");
+                                cmd.Parameters.AddWithValue("@processStat", "Arrangement");
+                                cmd.Parameters.AddWithValue("@ID", request);
+
+                                // Execute the update query
+                                int rowsAffected = cmd.ExecuteNonQuery();
+
+                                if (rowsAffected > 0)
+                                {
+
+                                    Session["travelStatus"] = "In-progress";
+
+                                    Response.Redirect("TravelArrangements.aspx");
+
+                                }
+                                else
+                                {
+                                    // No rows were affected, meaning no matching travel request ID was found
+                                    Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                }
+                            }
                         }
                     }
+
+
                 }
             }
             catch (SqlException ex)

@@ -19,6 +19,7 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using System.Text.RegularExpressions;
+using System.Data;
 
 namespace TravelDesk.Admin
 {
@@ -126,6 +127,9 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                 // Pass the email details including the uploaded file links to the JavaScript function
                 string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{message}', '{name}', '{formattedLinks}');</script>";
                 ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
+
+                updateProcessStatus();
+
             }
             Session.Remove("UploadedDriveLinks");
         }
@@ -422,6 +426,53 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
         protected void sendEmail_Click(object sender, EventArgs e)
         {
             loadDetailsForEmail();
+
+        }
+
+        private void updateProcessStatus()
+        {
+            try
+            {
+                if (Session["clickedRequest"] != null)
+                {
+                    string requestId = Session["clickedRequest"].ToString();
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "UPDATE travelRequest SET travelProcessStat = @newStatus WHERE travelRequestID = @ID";
+
+                            // Set parameters for updating request status
+                            cmd.Parameters.AddWithValue("@newStatus", "Email");
+                            cmd.Parameters.AddWithValue("@ID", requestId);
+
+                            Session["processStat"] = "Email";
+                            // Execute the update query
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                else
+                {
+                    // Session is expired, redirect to login page
+                    Response.Write("<script>alert('Session Expired! Please login again.'); window.location.href = '../LoginPage.aspx'; </script>");
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request status update", ex);
+                Response.Write("<script>alert('An error occurred during travel request status update. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
 
         }
 

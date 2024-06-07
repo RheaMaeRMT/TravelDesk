@@ -28,7 +28,6 @@
                                                         </ItemTemplate>
 
                                                     </asp:TemplateField>
-                                                        <asp:BoundField DataField="travelRequestID" HeaderText="Request ID" SortExpression="travelRequestID" />
                                                         <asp:BoundField DataField="travelReqStatus" HeaderText="Status" SortExpression="travelReqStatus" />
                                                         <asp:BoundField DataField="travelType" HeaderText="Type of Request" SortExpression="travelType" />
                                                         <asp:BoundField DataField="FullName" HeaderText="Traveller Name" SortExpression="FullName" />

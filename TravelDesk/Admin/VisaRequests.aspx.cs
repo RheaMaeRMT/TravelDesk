@@ -23,7 +23,21 @@ namespace TravelDesk.Admin
             }
             else
             {
+                if (Session["visaStatus"] != null)
+                { 
+                    string status = Session["visaStatus"].ToString();
+
+                    if (status == "In-progress")
+                    {
+                        processVisa.Text = "Proceed";
+
+
+                    }
+
+
+                }
                 DisplayVisaReq();
+
             }
         }
 
@@ -53,8 +67,11 @@ namespace TravelDesk.Admin
 
                             using (var reader = cmd.ExecuteReader())
                             {
+                                
                                 if (reader.Read())
-                                {
+                                    {
+                                        string currentstatus = reader["travelReqStatus"].ToString();
+
                                     uploadBlock.Style["display"] = "block";
                                     pdfViewer.Style["display"] = "block";
 
@@ -80,7 +97,7 @@ namespace TravelDesk.Admin
 
 
                                     // Display or use the retrieved request details
-                                    travellerName.Text = employeeFname + " " + employeeMname + " " + employeeLname + " - Visa Request" ;
+                                    travellerName.Text = employeeFname + " " + employeeMname + " " + employeeLname + " - Visa Request";
 
                                     empID.Text = employeeID;
                                     empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
@@ -126,12 +143,17 @@ namespace TravelDesk.Admin
 
                                     //PROCEED TO GET THE STATUS AND DISPLAY IN TRACKING
                                     getTrackingStatus();
+
+
                                 }
                                 else
                                 {
-                                    // Handle the case where no request with the given ID is found
-                                    Response.Write("<script>alert('No request found with the specified ID.')</script>");
-                                }
+                                        // Handle the case where no request with the given ID is found
+                                        Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                                 }
+                                
+
+
                             }
                         }
                     }
@@ -153,8 +175,8 @@ namespace TravelDesk.Admin
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
-            Session.Remove("VreqStatus");
-            Session.Remove("clickedVRequest");
+            ////Session.Remove("VreqStatus");
+            ////Session.Remove("clickedVRequest");
 
         }
         private void getTrackingStatus()
@@ -211,6 +233,74 @@ namespace TravelDesk.Admin
 
         protected void processVisa_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["clickedVRequest"] != null)
+                {
+                    string request = Session["clickedVRequest"].ToString();
+                    string status = Session["visaStatus"].ToString();
+
+                    if (status == "In-Progress")
+                    {
+                        Response.Redirect("VisaRequestDetails.aspx");
+
+                    }
+                    else
+                    {
+                        using (var db = new SqlConnection(connectionString))
+                        {
+                            db.Open();
+                            using (var cmd = db.CreateCommand())
+                            {
+                                cmd.Parameters.Clear();
+                                cmd.CommandType = CommandType.Text;
+                                cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
+
+                                // Set parameters
+                                cmd.Parameters.AddWithValue("@newStatus", "In-progress");
+                                cmd.Parameters.AddWithValue("@ID", request);
+
+                                // Execute the update query
+                                int rowsAffected = cmd.ExecuteNonQuery();
+
+                                if (rowsAffected > 0)
+                                {
+
+                                    Session["VreqStatus"] = "In-progress";
+
+                                    Response.Redirect("VisaRequestDetails.aspx");
+
+                                }
+                                else
+                                {
+                                    // No rows were affected, meaning no matching travel request ID was found
+                                    Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    // Handle the case where the request ID stored in the session is null or empty
+                    Response.Write("<script>alert('Cannot Process Visa Request at the moment. Try again later.')</script>");
+                }
+
+
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred during insertion of date submitted and draft state. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
 
         }
     }

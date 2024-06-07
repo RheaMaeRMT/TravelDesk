@@ -577,6 +577,8 @@ namespace TravelDesk.Admin
         }
         private void saveAccomodationsDetails()
         {
+            string accomodation = accomodations.Text;
+
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
@@ -589,86 +591,78 @@ namespace TravelDesk.Admin
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeEmpID, arrangeAccomodation, " +
-                            "arrangeHotelName , arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo," +
-                            "arrangeHotel2Name, arrangeHotel2Add, arrangeHotel2Phone, arrangeHotel2From, arrangeHotel2To," +
-                            "arrangeHotel3Name, arrangeHotel3Add, arrangeHotel3Phone, arrangeHotel3From, arrangeHotel3To," +
-                            "arrangeHotel4Name, arrangeHotel4Add, arrangeHotel4Phone, arrangeHotel4From, arrangeHotel4To," +
-                            "arrangeHotel5Name, arrangeHotel5Add, arrangeHotel5Phone, arrangeHotel5From, arrangeHotel5To)"
-                             + "VALUES (@ID, @empID, @accomodations, " +
-                             " @hotelName, @hotelAddress, @contact, @from, @to," +
-                             " @hotel2Name, @hotel2Add, @hotel2Phone, @hotel2From, @hotel2To," +
-                             " @hotel3Name, @hotel3Add, @hotel3Phone, @hotel3From, @hotel3To," +
-                             " @hotel4Name, @hotel4Add, @hotel4Phone, @hotel4From, @hotel4To," +
-                             " @hotel5Name, @hotel5Add, @hotel5Phone, @hotel5From, @hotel5To)";
+
+                        if (accomodation == "c/o Traveller")
+                        {
+                            cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeEmpID, arrangeAccomodation, arrangeHotelName) " +
+                                              "VALUES (@ID, @empID, @accomodations, @hotelName)";
+
+                            cmd.Parameters.AddWithValue("@hotelName", coTraveller.Text);
+                        }
+                        else
+                        {
+                            cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeEmpID, arrangeAccomodation, arrangeHotelName, arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo, " +
+                                              "arrangeHotel2Name, arrangeHotel2Add, arrangeHotel2Phone, arrangeHotel2From, arrangeHotel2To, " +
+                                              "arrangeHotel3Name, arrangeHotel3Add, arrangeHotel3Phone, arrangeHotel3From, arrangeHotel3To, " +
+                                              "arrangeHotel4Name, arrangeHotel4Add, arrangeHotel4Phone, arrangeHotel4From, arrangeHotel4To, " +
+                                              "arrangeHotel5Name, arrangeHotel5Add, arrangeHotel5Phone, arrangeHotel5From, arrangeHotel5To) " +
+                                              "VALUES (@ID, @empID, @accomodations, @hotelName, @hotelAddress, @contact, @from, @to, " +
+                                              "@hotel2Name, @hotel2Add, @hotel2Phone, @hotel2From, @hotel2To, " +
+                                              "@hotel3Name, @hotel3Add, @hotel3Phone, @hotel3From, @hotel3To, " +
+                                              "@hotel4Name, @hotel4Add, @hotel4Phone, @hotel4From, @hotel4To, " +
+                                              "@hotel5Name, @hotel5Add, @hotel5Phone, @hotel5From, @hotel5To)";
+
+                            cmd.Parameters.AddWithValue("@hotelName", hotel.Text);
+                            cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
+                            cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
+                            cmd.Parameters.AddWithValue("@from", durationFrom.Text);
+                            cmd.Parameters.AddWithValue("@to", durationTo.Text);
+
+                            cmd.Parameters.AddWithValue("@hotel2Name", string.IsNullOrEmpty(hotelname2.Text) ? DBNull.Value : (object)hotelname2.Text);
+                            cmd.Parameters.AddWithValue("@hotel2Add", string.IsNullOrEmpty(address2.Text) ? DBNull.Value : (object)address2.Text);
+                            cmd.Parameters.AddWithValue("@hotel2Phone", string.IsNullOrEmpty(phone2.Text) ? DBNull.Value : (object)phone2.Text);
+                            cmd.Parameters.AddWithValue("@hotel2From", string.IsNullOrEmpty(from2.Text) ? DBNull.Value : (object)from2.Text);
+                            cmd.Parameters.AddWithValue("@hotel2To", string.IsNullOrEmpty(to2.Text) ? DBNull.Value : (object)to2.Text);
+
+                            cmd.Parameters.AddWithValue("@hotel3Name", string.IsNullOrEmpty(hotelname3.Text) ? DBNull.Value : (object)hotelname3.Text);
+                            cmd.Parameters.AddWithValue("@hotel3Add", string.IsNullOrEmpty(address3.Text) ? DBNull.Value : (object)address3.Text);
+                            cmd.Parameters.AddWithValue("@hotel3Phone", string.IsNullOrEmpty(phone3.Text) ? DBNull.Value : (object)phone3.Text);
+                            cmd.Parameters.AddWithValue("@hotel3From", string.IsNullOrEmpty(from3.Text) ? DBNull.Value : (object)from3.Text);
+                            cmd.Parameters.AddWithValue("@hotel3To", string.IsNullOrEmpty(to3.Text) ? DBNull.Value : (object)to3.Text);
+
+                            cmd.Parameters.AddWithValue("@hotel4Name", string.IsNullOrEmpty(hotelname4.Text) ? DBNull.Value : (object)hotelname4.Text);
+                            cmd.Parameters.AddWithValue("@hotel4Add", string.IsNullOrEmpty(address4.Text) ? DBNull.Value : (object)address4.Text);
+                            cmd.Parameters.AddWithValue("@hotel4Phone", string.IsNullOrEmpty(phone4.Text) ? DBNull.Value : (object)phone4.Text);
+                            cmd.Parameters.AddWithValue("@hotel4From", string.IsNullOrEmpty(from4.Text) ? DBNull.Value : (object)from4.Text);
+                            cmd.Parameters.AddWithValue("@hotel4To", string.IsNullOrEmpty(to4.Text) ? DBNull.Value : (object)to4.Text);
+
+                            cmd.Parameters.AddWithValue("@hotel5Name", string.IsNullOrEmpty(hotelname5.Text) ? DBNull.Value : (object)hotelname5.Text);
+                            cmd.Parameters.AddWithValue("@hotel5Add", string.IsNullOrEmpty(address5.Text) ? DBNull.Value : (object)address5.Text);
+                            cmd.Parameters.AddWithValue("@hotel5Phone", string.IsNullOrEmpty(phone5.Text) ? DBNull.Value : (object)phone5.Text);
+                            cmd.Parameters.AddWithValue("@hotel5From", string.IsNullOrEmpty(from5.Text) ? DBNull.Value : (object)from5.Text);
+                            cmd.Parameters.AddWithValue("@hotel5To", string.IsNullOrEmpty(to5.Text) ? DBNull.Value : (object)to5.Text);
+                        }
 
                         cmd.Parameters.AddWithValue("@ID", acc);
                         cmd.Parameters.AddWithValue("@empID", empID.Text);
                         cmd.Parameters.AddWithValue("@accomodations", accomodations.SelectedItem.Text);
-                        string accomodation = accomodations.Text;
-                        if (accomodation == "Hotel Accomodation")
-                        {
-                            cmd.Parameters.AddWithValue("@hotelName", hotel.Text);
-                            cmd.Parameters.AddWithValue("@hotel2Name", hotelname2.Text);
-                            cmd.Parameters.AddWithValue("@hotel3Name", hotelname3.Text);
-                            cmd.Parameters.AddWithValue("@hotel4Name", hotelname4.Text);
-                            cmd.Parameters.AddWithValue("@hotel5Name", hotelname5.Text);
-                        }
-                        else if (accomodation == "c/o Traveller")
-                        {
-                            cmd.Parameters.AddWithValue("@hotelName", coTraveller.Text);
-
-                        }
-                        cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
-                        cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
-                        cmd.Parameters.AddWithValue("@from", durationFrom.Text);
-                        cmd.Parameters.AddWithValue("@to", durationTo.Text);
-
-                        cmd.Parameters.AddWithValue("@hotel2Add", address2.Text);
-                        cmd.Parameters.AddWithValue("@hotel2Phone", phone2.Text);
-                        cmd.Parameters.AddWithValue("@hotel2From", from2.Text);
-                        cmd.Parameters.AddWithValue("@hotel2To", to2.Text);
-
-                        cmd.Parameters.AddWithValue("@hotel3Add", address3.Text);
-                        cmd.Parameters.AddWithValue("@hotel3Phone", phone3.Text);
-                        cmd.Parameters.AddWithValue("@hotel3From", from3.Text);
-                        cmd.Parameters.AddWithValue("@hotel3To", to3.Text);
-
-                        cmd.Parameters.AddWithValue("@hotel4Add", address4.Text);
-                        cmd.Parameters.AddWithValue("@hotel4Phone", phone4.Text);
-                        cmd.Parameters.AddWithValue("@hotel4From", from4.Text);
-                        cmd.Parameters.AddWithValue("@hotel4To", to4.Text);
-
-                        cmd.Parameters.AddWithValue("@hotel5Add", address5.Text);
-                        cmd.Parameters.AddWithValue("@hotel5Phone", phone5.Text);
-                        cmd.Parameters.AddWithValue("@hotel5From", from5.Text);
-                        cmd.Parameters.AddWithValue("@hotel5To", to5.Text);
 
                         cmd.ExecuteNonQuery();
 
                         Session["accomodationID"] = acc;
                         Session["empID"] = empID.Text;
                         saveFlightDetails();
-
                     }
-
                 }
                 catch (SqlException ex)
                 {
-                    // Log the exception or display a user-friendly error message
-                    // Example: Log.Error("An error occurred during travel request enrollment", ex);
                     Response.Write("<script>alert('An error occurred during insertion of ACCOMODATION DETAILS. Please try again.')</script>");
-                    // Log additional information from the SQL exception
-                    for (int i = 0; i < ex.Errors.Count; i++)
+                    foreach (SqlError error in ex.Errors)
                     {
-                        Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                        Response.Write($"<script>alert('SQL Error {error.Number}: {error.Message}')</script>");
                     }
                 }
-
             }
-
-
-
         }
         private void saveFlightDetails()
         {
@@ -1044,7 +1038,7 @@ namespace TravelDesk.Admin
                             cmd.CommandText = "UPDATE travelRequest SET travelProcessStat = @newStatus WHERE travelRequestID = @ID";
 
                             // Set parameters for updating request status
-                            cmd.Parameters.AddWithValue("@newStatus", "Arranged");
+                            cmd.Parameters.AddWithValue("@newStatus", "Arranged Request");
                             cmd.Parameters.AddWithValue("@ID", requestId);
 
                             // Execute the update query

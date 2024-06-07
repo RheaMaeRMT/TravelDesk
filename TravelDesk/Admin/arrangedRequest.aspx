@@ -319,8 +319,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div> 
-
-                                             <asp:LinkButton runat="server" ID="LinkButton3" class="btn btn-primary" style="color:white;font-size:16px;" OnClick="confirmArrangement_Click"> <i class="ti-money" style="color:white"></i> Process Billing </asp:LinkButton>     
                                     <!-- Page-body end -->
                                          </div>
                                 <div id="styleSelector"> </div>

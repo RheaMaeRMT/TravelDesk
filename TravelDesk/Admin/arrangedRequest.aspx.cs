@@ -1311,10 +1311,6 @@ namespace TravelDesk.Admin
 
         //}
 
-        protected void confirmArrangement_Click(object sender, EventArgs e)
-        {
-            Response.Write("<script> window.location.href = 'billingInformation.aspx'; </script>");
-        }
 
         void AddRowToTable(PdfPTable table, string label, string value)
         {
@@ -1854,7 +1850,7 @@ namespace TravelDesk.Admin
 
             // Add rows for others details
             AddRowToTable(othersTable, "Travel Requirements:", requirements.Text);
-            AddRowToTable(othersTable, "", ParseTextWithLinks(additionalNotes.Text));
+            AddRowToTable(othersTable, "Notes:", ParseTextWithLinks(additionalNotes.Text));
 
             // Add others table to document
             doc.Add(othersTable);

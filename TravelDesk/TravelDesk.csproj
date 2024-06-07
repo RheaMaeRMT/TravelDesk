@@ -432,6 +432,7 @@
     <Content Include="Admin\TravelRequests.aspx" />
     <Content Include="Admin\Travels.aspx" />
     <Content Include="Admin\VisaApplication.aspx" />
+    <Content Include="Admin\VisaRequestDetails.aspx" />
     <Content Include="Admin\VisaRequests.aspx" />
     <Content Include="ApproverLandingPage.aspx" />
     <Content Include="Approver\ApproverActivity.aspx" />
@@ -813,6 +814,13 @@
     </Compile>
     <Compile Include="Admin\VisaApplication.aspx.designer.cs">
       <DependentUpon>VisaApplication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\VisaRequestDetails.aspx.cs">
+      <DependentUpon>VisaRequestDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\VisaRequestDetails.aspx.designer.cs">
+      <DependentUpon>VisaRequestDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\VisaRequests.aspx.cs">
       <DependentUpon>VisaRequests.aspx</DependentUpon>
