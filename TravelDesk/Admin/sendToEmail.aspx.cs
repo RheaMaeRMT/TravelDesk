@@ -128,7 +128,6 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                 string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{message}', '{name}', '{formattedLinks}');</script>";
                 ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
 
-                updateProcessStatus();
 
             }
             Session.Remove("UploadedDriveLinks");
@@ -334,8 +333,8 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                     if (Session["travellerName"] != null)
                     {
                         string empFname = Session["travellerName"].ToString();
-                        string subFolder = "otherFiles";
-                        string folderPath = Server.MapPath("~/PDFs/travelArrangements/" + empFname + "/" + subFolder);
+                        //string subFolder = "otherFiles";
+                        string folderPath = Server.MapPath("~/PDFs/travelArrangements/" + empFname);
 
                         if (!Directory.Exists(folderPath))
                         {
@@ -425,6 +424,7 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
 
         protected void sendEmail_Click(object sender, EventArgs e)
         {
+            updateProcessStatus();
             loadDetailsForEmail();
 
         }
@@ -446,10 +446,10 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                             cmd.CommandText = "UPDATE travelRequest SET travelProcessStat = @newStatus WHERE travelRequestID = @ID";
 
                             // Set parameters for updating request status
-                            cmd.Parameters.AddWithValue("@newStatus", "Email");
+                            cmd.Parameters.AddWithValue("@newStatus", "Email Sent");
                             cmd.Parameters.AddWithValue("@ID", requestId);
 
-                            Session["processStat"] = "Email";
+                            Session["processStat"] = "Email Sent";
                             // Execute the update query
                             int rowsAffected = cmd.ExecuteNonQuery();
 

@@ -29,7 +29,7 @@ namespace TravelDesk.Admin
 
                     if (!string.IsNullOrEmpty(request))
                     {
-                        //changeReqStatus();
+                        changeReqStatus();
                         populateEmployeeDetails();
 
                     }
@@ -63,6 +63,7 @@ namespace TravelDesk.Admin
                             cmd.Parameters.AddWithValue("@newStatus", "Billing");
                             cmd.Parameters.AddWithValue("@ID", requestId);
 
+                            Session["requestStatus"] = "Billing";
                             // Execute the update query
                             int rowsAffected = cmd.ExecuteNonQuery();
 

@@ -18,6 +18,9 @@ using System.Web.UI;
 using MimeKit;
 using System.Text.RegularExpressions;
 using System.Web;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Services;
 
 namespace TravelDesk.Admin
 {
@@ -45,7 +48,7 @@ namespace TravelDesk.Admin
                         populateEmployeeDetails();
                         DisplayArrangement();
                         //checkIFexported();
-                        
+
                     }
                 }             
                 else
@@ -127,6 +130,7 @@ namespace TravelDesk.Admin
                                     Session["userEmail"] = email;
                                     Session["travellerName"] = name;
 
+                                    changeReqStatus();
                                     // Assign other request details to corresponding controls
                                 }
                                 else
@@ -156,6 +160,54 @@ namespace TravelDesk.Admin
                 }
             }
         }
+        private void changeReqStatus()
+        {
+            try
+            {
+                if (Session["clickedRequest"] != null)
+                {
+                    string requestId = Session["clickedRequest"].ToString();
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "UPDATE travelRequest SET travelProcessStat = @newStatus WHERE travelRequestID = @ID";
+
+                            // Set parameters for updating request status
+                            cmd.Parameters.AddWithValue("@newStatus", "Arranged Request");
+                            cmd.Parameters.AddWithValue("@ID", requestId);
+
+                            Session["requestStatus"] = "Arranged Request";
+                            // Execute the update query
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                else
+                {
+                    // Session is expired, redirect to login page
+                    Response.Write("<script>alert('Session Expired! Please login again.'); window.location.href = '../LoginPage.aspx'; </script>");
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request status update", ex);
+                Response.Write("<script>alert('An error occurred during travel request status update. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+
+        }
+
         private void DisplayArrangement()
         {
             try
@@ -1456,12 +1508,12 @@ namespace TravelDesk.Admin
                 // End the response
                 Response.Flush();
 
-
             }
 
-            return Task.CompletedTask;
+            return Task.FromResult(Task.CompletedTask);
 
         }
+
 
 
         public class FileParameter
@@ -1559,11 +1611,23 @@ namespace TravelDesk.Admin
                 // Add rows for hotel accommodations details if they are not null or empty
                 if (!string.IsNullOrEmpty(hotel.Text))
                 {
-                    AddRowToTable(hotelAccommodationsTable, "1st Accomodation", "");
-                    AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
-                    AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
-                    AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
-                    AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom.Text);
+                    if (!string.IsNullOrEmpty(hotel2.Text))
+                    {
+                        AddRowToTable(hotelAccommodationsTable, "1st Accomodation", "");
+                        AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
+                        AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
+                        AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
+                        AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom.Text);
+
+                    }
+                    else
+                    {
+                        AddRowToTable(hotelAccommodationsTable, "Hotel Name:", hotel.Text);
+                        AddRowToTable(hotelAccommodationsTable, "Address:", hotelAddress.Text);
+                        AddRowToTable(hotelAccommodationsTable, "Contact Number:", hotelContact.Text);
+                        AddRowToTable(hotelAccommodationsTable, "Duration of Stay:", durationFrom.Text);
+                    }
+
 
                     // Add empty row for spacing
                     PdfPCell emptyCell = new PdfPCell(new Phrase(" "));
@@ -2088,6 +2152,12 @@ namespace TravelDesk.Admin
         protected void sendToEmail_Click(object sender, EventArgs e)
         {
             Response.Write("<script> window.location.href = 'sendToEmail.aspx'; </script>");
+
+        }
+
+        protected void exportPDF_Click(object sender, EventArgs e)
+        {
+            Page.RegisterAsyncTask(new PageAsyncTask(exportasPdfAsync));
 
         }
 

@@ -54,7 +54,7 @@
 
 
                                                     <div class="card-block" style="margin-left:auto">
-                                                          <asp:LinkButton runat="server" ID="exportPDF" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClientClick="showConfirmModal(); return false"> <i class="ti-export" style="color:white"></i> Export PDF </asp:LinkButton>     
+                                                          <asp:LinkButton runat="server" ID="exportPDF" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClientClick="showConfirmModal(); return false" OnClick="exportPDF_Click"> <i class="ti-export" style="color:white"></i> Export PDF </asp:LinkButton>     
                                                           <asp:LinkButton runat="server" ID="sendEmailbtn" class="btn btn-primary" style="display:none;color:white;font-size:16px;border-radius:20px;width:200px" OnClientClick="showModal(); return false"> <i class="ti-email" style="color:white"></i> send to email </asp:LinkButton>     
                                                     </div>
                                                     <center>

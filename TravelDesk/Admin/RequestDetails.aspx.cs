@@ -31,13 +31,29 @@ namespace TravelDesk.Admin
                     {
                         string process = Session["processStat"].ToString();
 
-                        if (process == "Email")
+                        if (process == "Email Sent")
                         {
+                            Session["processStat"] = process;
+
                             processRequest.Text = "Proceed to Billing";
 
                         }
-                        else
+                        else if (process == "Arrangement")
                         {
+                            Session["processStat"] = process;
+
+                            processRequest.Text = "Proceed to " + process;
+
+                        }
+                        else if (process == "Arranged Request")
+                        {
+                            Session["processStat"] = process;
+
+                            processRequest.Text = "Proceed to " + process;
+                        }
+                        else if (process == "Billing")
+                        {
+                            Session["processStat"] = process;
                             processRequest.Text = "Proceed to " + process;
 
                         }
@@ -149,7 +165,7 @@ namespace TravelDesk.Admin
                                     string mul5ToDate = reader["routeM5ToDate"] != DBNull.Value ? reader["routeM5ToDate"].ToString() : "";
 
                                     // Display or use the retrieved request details
-                                    travellerName.Text = employeeFname + " " + employeeMname + " " + employeeLname + " - " + type + " Travel Request";
+                                    travellerName.Text = employeeFname + " " + employeeMname + " " + employeeLname + " - " + type;
 
                                     empID.Text = employeeID;
                                     empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
@@ -466,19 +482,23 @@ namespace TravelDesk.Admin
                 {
                     string status = Session["requestStatus"].ToString();
 
-                    if (status == "In-Progress")
+                    if (status == "In-progress")
                     {
                         string process = Session["processStat"].ToString();
 
-                        if (process == "Billing" || process == "Email")
+                        if (process == "Billing" || process == "Email Sent")
                         {
                             Response.Redirect("billingInformation.aspx");
                         }
-                        else if (process == "Arranged")
+                        else if (process == "Arranged Request")
                         {
                             Response.Redirect("arrangedRequest.aspx");
 
                         } 
+                        else if (process == "Arrangement")
+                        {
+                            Response.Redirect("TravelArrangements.aspx");
+                        }
                     }
                     else
                     {
