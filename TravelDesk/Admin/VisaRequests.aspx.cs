@@ -23,19 +23,44 @@ namespace TravelDesk.Admin
             }
             else
             {
-                if (Session["visaStatus"] != null)
+                if (Session["VreqStatus"] != null)
                 { 
                     string status = Session["visaStatus"].ToString();
 
                     if (status == "In-progress")
                     {
-                        processVisa.Text = "Proceed";
+                        if (Session["processStat"] != null)
+                        {
+                            string process = Session["processStat"].ToString();
 
+                            if (process == "Processing")
+                            {
+                                processVisa.Text = "Proceed to" + " " + process;
+
+
+                            }
+                            else if (process == "Billing")
+                            {
+                                processVisa.Text = "Proceed to" + " " + process;
+
+                            }
+
+                        }
+
+                        else
+                        {
+                            processVisa.Text = "Process Visa Request";
+                        }
 
                     }
+                    else if (status == "Completed")
+                    {
+                        processVisa.Text = "View Request";
 
-
+                    }
                 }
+
+
                 DisplayVisaReq();
 
             }
@@ -59,8 +84,7 @@ namespace TravelDesk.Admin
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = @"
-                                        SELECT * FROM travelRequest WHERE travelRequestID = @RequestId AND travelDraftStat = 'No'";
+                            cmd.CommandText = @"SELECT * FROM travelRequest WHERE travelRequestID = @RequestId AND travelDraftStat = 'No'";
 
 
                             cmd.Parameters.AddWithValue("@RequestId", requestId);
@@ -69,8 +93,8 @@ namespace TravelDesk.Admin
                             {
                                 
                                 if (reader.Read())
-                                    {
-                                        string currentstatus = reader["travelReqStatus"].ToString();
+                                {
+                                    string currentstatus = reader["travelReqStatus"].ToString();
 
                                     uploadBlock.Style["display"] = "block";
                                     pdfViewer.Style["display"] = "block";
@@ -150,7 +174,7 @@ namespace TravelDesk.Admin
                                 {
                                         // Handle the case where no request with the given ID is found
                                         Response.Write("<script>alert('No request found with the specified ID.')</script>");
-                                 }
+                                }
                                 
 
 
@@ -239,10 +263,26 @@ namespace TravelDesk.Admin
                 {
                     string request = Session["clickedVRequest"].ToString();
                     string status = Session["visaStatus"].ToString();
+                    string process = Session["processStat"].ToString();
 
-                    if (status == "In-Progress")
+                    if (status == "In-progress")
                     {
-                        Response.Redirect("VisaRequestDetails.aspx");
+                        if (process == "Processing")
+                        {
+                            Response.Redirect("VisaRequestDetails.aspx");
+                        }
+                        else if (process == "Billing")
+                        {
+                            Response.Redirect("VisaBilling.aspx");
+
+                        }
+                        else if (process == "Email Sent")
+                        {
+                            Response.Redirect("VisaBilling.aspx");
+                        }
+                    }
+                    else if (status == "Completed")
+                    {
 
                     }
                     else
@@ -254,10 +294,11 @@ namespace TravelDesk.Admin
                             {
                                 cmd.Parameters.Clear();
                                 cmd.CommandType = CommandType.Text;
-                                cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
+                                cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus, travelProcessStat = @processStat WHERE travelRequestID = @ID";
 
                                 // Set parameters
                                 cmd.Parameters.AddWithValue("@newStatus", "In-progress");
+                                cmd.Parameters.AddWithValue("@processStat", "Processing");
                                 cmd.Parameters.AddWithValue("@ID", request);
 
                                 // Execute the update query
@@ -267,6 +308,7 @@ namespace TravelDesk.Admin
                                 {
 
                                     Session["VreqStatus"] = "In-progress";
+                                    Session["processStat"] = "Processing";
 
                                     Response.Redirect("VisaRequestDetails.aspx");
 

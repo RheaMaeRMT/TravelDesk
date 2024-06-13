@@ -217,6 +217,7 @@ namespace TravelDesk.Admin
                             {
                                     string status = reader["travelReqStatus"].ToString();
                                     string type = reader["travelType"].ToString();
+                                    
 
                                      string processStat = reader["travelProcessStat"].ToString();
 
@@ -279,8 +280,10 @@ namespace TravelDesk.Admin
                                     {
                                         Session["clickedVRequest"] = requestID;
                                          Session["visaStatus"] = status;
-                                        //redirect to the next page after clicking the view button
-                                        Response.Redirect("VisaRequests.aspx");
+                                         Session["processStat"] = processStat;
+
+                                    ;                                        //redirect to the next page after clicking the view button
+                                    Response.Redirect("VisaRequests.aspx");
                                     }
 
                                 

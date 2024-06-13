@@ -276,7 +276,7 @@ namespace TravelDesk.Admin
                                             + "@travelID)";
 
                         cmd.Parameters.AddWithValue("@ID", ID);
-                        cmd.Parameters.AddWithValue("@hotel", "Approver");
+                        cmd.Parameters.AddWithValue("@hotel", hotelCharges.Text);
                         cmd.Parameters.AddWithValue("@plane", planeFare.Text);
                         cmd.Parameters.AddWithValue("@transfers", transfersFee.Text);
                         cmd.Parameters.AddWithValue("@perDiem", perDiem.Text);
