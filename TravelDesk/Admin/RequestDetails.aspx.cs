@@ -58,12 +58,20 @@ namespace TravelDesk.Admin
 
                         }
                     }
+                    else if (status == "Completed")
+                    {
+                        processRequest.Visible = false;
+                    }
                     else
                     {
                         processRequest.Text = "Process Request";
 
                     }
 
+
+                }
+                else
+                {
 
                 }
 
@@ -541,6 +549,8 @@ namespace TravelDesk.Admin
 
 
                 }
+
+
             }
             catch (SqlException ex)
             {

@@ -7,47 +7,47 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TravelDesk.Employee
+namespace TravelDesk
 {
 
 
-    public partial class EmployeeDashboard
+    public partial class VisaBilling
     {
 
         /// <summary>
-        /// New control.
+        /// billingLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button New;
+        protected global::System.Web.UI.WebControls.Label billingLabel;
 
         /// <summary>
-        /// Approved control.
+        /// Label16 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Approved;
+        protected global::System.Web.UI.WebControls.Label Label16;
 
         /// <summary>
-        /// Processing control.
+        /// txtVisaFee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Processing;
+        protected global::System.Web.UI.WebControls.TextBox txtVisaFee;
 
         /// <summary>
-        /// Arranged control.
+        /// submitVisaFee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Arranged;
+        protected global::System.Web.UI.WebControls.Button submitVisaFee;
     }
 }

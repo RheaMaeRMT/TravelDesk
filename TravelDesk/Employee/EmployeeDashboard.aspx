@@ -34,21 +34,37 @@
                         <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
-                                <div class="page-wrapper">
+                               <div class="card">
+                                  <div class="card-header">
+                                     <h5 style="color:#09426a"></h5>
+                                 </div>  
+                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                        <div class="row" style="color:black">
-                                            <!-- task, page, download counter  start -->
-                                            <div class="col-xl-1 col-md-6">
-
-                                            </div>
+                                        <div class="row" style="color:white">
                                             <div class="col-xl-3 col-md-6">
-                                                <div class="card">
+                                                <div class="card" style="background-color:#09426a">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <asp:Button runat="server" ID="Approved" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
-                                                                <a class="m-b-0 a" data-hover-message="Requests that has been submitted and auto-approved." >Approved Requests</a>
+                                                                <asp:Button runat="server" ID="New" OnClick="approved_Click" CssClass="h4"  style="color:white"  BorderStyle="None" BackColor="Transparent"/> <br />
+                                                                <a class="m-b-0 a" data-hover-message="New Requests that has been submitted." >New Requests</a>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="fa fa-check-circle f-28"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card" style="background-color:#09426a">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <asp:Button runat="server" ID="Approved" OnClick="approved_Click" CssClass="h4"  style="color:white"  BorderStyle="None" BackColor="Transparent"/> <br />
+                                                                <a class="m-b-0 a" data-hover-message="Requests that has been accepted for processing." >Processing Requests</a>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-check-circle f-28"></i>
@@ -58,12 +74,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-md-6">
-                                                <div class="card">
+                                                <div class="card" style="background-color:#09426a">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <asp:Button runat="server" ID="Processing" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
-                                                                <a class=" m-b-0 a" data-hover-message="Requests that has been accepted for travel arrangement processing.">Processing Requests</a>
+                                                                <asp:Button runat="server" ID="Processing" OnClick="approved_Click" CssClass=" h4"  style="color:white"  BorderStyle="None" BackColor="Transparent"/> <br />
+                                                                <a class=" m-b-0 a" data-hover-message="Requests that completed the request processing.">Completed Requests</a>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-spinner f-28"></i>
@@ -73,12 +89,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-xl-3 col-md-6">
-                                                <div class="card">
+                                                <div class="card" style="background-color:#09426a">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <asp:Button runat="server" ID="Arranged" OnClick="approved_Click" CssClass="text-c-purple h4" BorderStyle="None" BackColor="Transparent"/> <br />
-                                                                <a class=" m-b-0 a" data-hover-message="Requests that completed the travel arrangement process." >Arranged Requests</a>
+                                                                <asp:Button runat="server" ID="Arranged" OnClick="approved_Click" CssClass="h4"   style="color:white" BorderStyle="None" BackColor="Transparent"/> <br />
+                                                                <a class=" m-b-0 a" data-hover-message="Requests that completed the process and is closed." >Closed Requests</a>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-check-square f-28"></i>
@@ -91,7 +107,7 @@
                                     </div>
                                     <!-- Page-body end -->
                                 </div>
-                                <div id="styleSelector"> </div>
+                            </div>
                             </div>
                         </div>
                     </div>

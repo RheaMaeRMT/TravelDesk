@@ -29,6 +29,7 @@ namespace TravelDesk.Employee
                     if (status != null)
                     {
                         Console.WriteLine("STATUS", status);
+                        viewDrafts.Visible = true;
                         DisplayRequests();
                     }
 
@@ -38,6 +39,7 @@ namespace TravelDesk.Employee
                     DisplayAllRequests();
                 }
             }
+            
         }
 
         private void DisplayRequests()

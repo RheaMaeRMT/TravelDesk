@@ -119,13 +119,13 @@
                       <!-- Page-header start -->
                       <div style="background-color:white">
                                  <div>
-                                    <img src="/images/travelRequests.png" style="width: 250px;" alt="logo.png">
+                                    <img src="/images/visaRequests.png" style="width: 250px;" alt="logo.png">
 
                                 </div>
 
                       </div>
-                      <!-- Page-header end -->
-                        <div class="pcoded-inner-content">
+                      <%--<!-- Page-header end -->--%>
+                      <div class="pcoded-inner-content">
                             <!-- Main-body start -->
                             <div class="main-body">
                                 <div class="page-wrapper">

@@ -15,14 +15,16 @@
                       </div>
                       <!-- Page-header end -->
                         <div class="pcoded-inner-content">
-                            <!-- Main-body start -->
                             <div class="main-body">
+                                   <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br /> <br />
+                               <div class="card">
+                                  <div class="card-header">
+
+                                     <h5 style="color:#09426a"></h5>
+                                 </div>  
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                        <div class="page-body">
-                                                    <div class="card-block">
-                                                        <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br />
-                                                    </div> <br />
                                             <asp:GridView CssClass="table container" style="text-align:center" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound">               
                                                 <Columns>   
                                                     <asp:TemplateField HeaderText="Request ID">
@@ -55,7 +57,10 @@
 
                                     <!-- Page-body end -->
                                 </div>
-                                <div id="styleSelector"> </div>
+                            </div>
+
+
+
                             </div>
                         </div>
                     </div>

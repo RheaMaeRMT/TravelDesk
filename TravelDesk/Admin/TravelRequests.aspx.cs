@@ -225,12 +225,13 @@ namespace TravelDesk.Admin
                                     {
                                         if (status == "Completed")
                                         {
+                                            Session["requestStatus"] = status;
                                             Session["clickedRequest"] = requestID;
                                             string empID = reader["travelEmpID"].ToString();
                                             Session["employeeID"] = empID;
 
                                             //redirect to the next page after clicking the view button
-                                            Response.Redirect("arrangedRequest.aspx");
+                                            Response.Redirect("RequestDetails.aspx");
 
                                         }
                                         else if (status == "In-progress")
@@ -238,34 +239,7 @@ namespace TravelDesk.Admin
 
                                                 Session["requestStatus"] = status;
                                                 Session["processStat"] = processStat;
-                                                Response.Redirect("RequestDetails.aspx");
-
-                                            //if (processStat != null)
-                                            //{
-                                            //    if (processStat == "Email Sent" || processStat == "Billing")
-                                            //    {
-                                            //        Response.Redirect("billingInformation.aspx");
-                                            //    }
-                                            //    else if (processStat == "Arranged")
-                                            //    {
-                                            //        Session["clickedRequest"] = requestID;
-                                            //        string empID = reader["travelEmpID"].ToString();
-                                            //        Session["employeeID"] = empID;
-
-                                            //        //redirect to the next page
-                                            //        Response.Redirect("arrangedRequest.aspx");
-                                            //    }
-                                            //    else
-                                            //    {
-                                            //        Session["clickedRequest"] = requestID;
-                                            //        string empID = reader["travelEmpID"].ToString();
-                                            //        Session["employeeID"] = empID;
-                                            //        //redirect to the next page 
-                                            //        Response.Redirect("TravelArrangements.aspx");
-
-                                            //    }
-                                            //}
-                                            
+                                                Response.Redirect("RequestDetails.aspx");                                            
                                         }
                                         else
                                         {
@@ -279,14 +253,12 @@ namespace TravelDesk.Admin
                                     else if (type == "Visa Request")
                                     {
                                         Session["clickedVRequest"] = requestID;
-                                         Session["visaStatus"] = status;
-                                         Session["processStat"] = processStat;
+                                        Session["visaStatus"] = status;
+                                        Session["processStat"] = processStat;
 
-                                    ;                                        //redirect to the next page after clicking the view button
-                                    Response.Redirect("VisaRequests.aspx");
-                                    }
-
-                                
+                                       //redirect to the next page after clicking the view button
+                                        Response.Redirect("VisaRequests.aspx");
+                                    }                                
                             }
                             else
                             {

@@ -23,7 +23,7 @@ namespace TravelDesk.Admin
             }
             else
             {
-                if (Session["VreqStatus"] != null)
+                if (Session["visaStatus"] != null)
                 { 
                     string status = Session["visaStatus"].ToString();
 
@@ -36,17 +36,13 @@ namespace TravelDesk.Admin
                             if (process == "Processing")
                             {
                                 processVisa.Text = "Proceed to" + " " + process;
-
-
                             }
                             else if (process == "Billing")
                             {
                                 processVisa.Text = "Proceed to" + " " + process;
-
                             }
 
                         }
-
                         else
                         {
                             processVisa.Text = "Process Visa Request";
@@ -55,12 +51,9 @@ namespace TravelDesk.Admin
                     }
                     else if (status == "Completed")
                     {
-                        processVisa.Text = "View Request";
-
+                        processVisa.Visible = false;
                     }
                 }
-
-
                 DisplayVisaReq();
 
             }
@@ -101,7 +94,7 @@ namespace TravelDesk.Admin
 
 
                                     // Retrieve the request details from the reader
-                                    string employeeID = reader["travelRequestID"].ToString();
+                                    string employeeID = reader["travelEmpID"].ToString();
                                     string employeeFname = reader["travelFname"].ToString();
                                     string employeeMname = reader["travelMname"].ToString();
                                     string employeeLname = reader["travelLname"].ToString();

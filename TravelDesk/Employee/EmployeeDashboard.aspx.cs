@@ -33,8 +33,8 @@ namespace TravelDesk.Employee
                 int arrangedCount = populateDashboardArranged();
                 Arranged.Text = arrangedCount.ToString();
 
-                //int completedCount = populateDashboardCompleted();
-                //Completed.Text = completedCount.ToString();
+                int completedCount = populateDashboardCompleted();
+                New.Text = completedCount.ToString();
 
             }
 
@@ -57,7 +57,7 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Arranged'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Closed'";
                             cmd.Parameters.AddWithValue("@UserID", currentUser);
 
                             object result = cmd.ExecuteScalar();
@@ -109,7 +109,7 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Approved'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'In-progress'";
                             cmd.Parameters.AddWithValue("@UserID", currentUser);
 
                             object result = cmd.ExecuteScalar();
@@ -161,7 +161,7 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Processing'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Completed'";
                             cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
@@ -211,7 +211,7 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'Completed'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'New'";
                             cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
@@ -308,7 +308,7 @@ namespace TravelDesk.Employee
 
             if (clicked == "Approved")
             {
-                string status = clicked;
+                string status = "In-progress";
                 Session["reqStatus"] = status;
 
 
@@ -326,7 +326,7 @@ namespace TravelDesk.Employee
             }
             else if (clicked == "Processing")
             {
-                string status = clicked;
+                string status = "Completed";
                 Session["reqStatus"] = status;
 
                 Response.Write("<script>window.location.href = 'myTravelRequests.aspx'; </script>");
@@ -334,11 +334,18 @@ namespace TravelDesk.Employee
             }
             else if (clicked == "Arranged")
             {
-                string status = clicked;
+                string status = "Closed";
                 Session["reqStatus"] = status;
 
                 Response.Write("<script> window.location.href = 'myTravelRequests.aspx'; </script>");
 
+            }
+            else if (clicked == "New")
+            {
+                string status = "New";
+                Session["reqStatus"] = status;
+
+                Response.Write("<script> window.location.href = 'myTravelRequests.aspx'; </script>");
             }
 
 
