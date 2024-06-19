@@ -46,10 +46,12 @@ namespace TravelDesk.Admin
             {
                 // Set the default message in the emailMessage TextBox
                 string defaultMessage = @"Attached are the following:
+
 1. Travel Advance Form (TAF)
 2. E-ticket receipt
 3. Hotel confirmation
 4. Summary of travel arrangements
+
 For per diem processing, kindly fill out and submit signed TAF and approved request (through Acumatica) to Ms. Emelina Hortel.
 
 Per diem: P3,200 x 2.5 days = P

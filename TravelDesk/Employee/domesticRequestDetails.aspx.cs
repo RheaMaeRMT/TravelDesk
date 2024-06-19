@@ -365,10 +365,10 @@ namespace TravelDesk.Employee
             currentStatus.Text = currentStat;
 
             // Set boolean variables based on the value of currentStat
-            bool requestSubmitted = currentStat == "Approved";
-            bool processing = currentStat == "Processing";
-            bool arranged = currentStat == "Arranged";
+            bool requestSubmitted = currentStat == "New";
+            bool processing = currentStat == "In-progress";
             bool completed = currentStat == "Completed";
+            bool closed = currentStat == "Closed";
 
             // Generate the script block with the values
             string script = @"
@@ -376,8 +376,8 @@ namespace TravelDesk.Employee
             // Set the status of each stage (true for completed, false for uncompleted)
             var approved = " + requestSubmitted.ToString().ToLower() + @"; // Set value from server-side
             var processing = " + processing.ToString().ToLower() + @"; // Set value from server-side
-            var arranged = " + arranged.ToString().ToLower() + @"; // Set value from server-side
-            var completed = " + completed.ToString().ToLower() + @"; // Set value from server-side
+            var arranged = " + completed.ToString().ToLower() + @"; // Set value from server-side
+            var completed = " + closed.ToString().ToLower() + @"; // Set value from server-side
 
             // Update the appearance of circles based on the status
             if (approved) {
