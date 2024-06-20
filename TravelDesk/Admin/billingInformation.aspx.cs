@@ -194,17 +194,18 @@ namespace TravelDesk.Admin
         {
             try
             {
-                // Retrieve input values from TextBox controls
-                string hotelInput = hotelCharges.Text;
-                string planeInput = planeFare.Text;
+
+                // CHARGES
+                string hotelCharges = hotelChargesTotal.Text;
+                string planeCharges = planeFaresTotal.Text;
+                string transferCharges = transfersTotal.Text;
                 string perDiemInput = perDiem.Text;
-                string transfers = transfersFee.Text;
 
                 // Parse and sum the inputs
-                decimal hotelBill = ParseInput(hotelInput);
-                decimal planeBill = ParseInput(planeInput);
+                decimal hotelBill = ParseInput(hotelCharges);
+                decimal planeBill = ParseInput(planeCharges);
                 decimal perDiemTotal = ParseInput(perDiemInput);
-                decimal transferBill = ParseInput(transfers);
+                decimal transferBill = ParseInput(transferCharges);
 
                 // Display the total expenses
                 decimal totalExpenses = hotelBill + planeBill + perDiemTotal + transferBill;
@@ -276,9 +277,9 @@ namespace TravelDesk.Admin
                                             + "@travelID)";
 
                         cmd.Parameters.AddWithValue("@ID", ID);
-                        cmd.Parameters.AddWithValue("@hotel", hotelCharges.Text);
-                        cmd.Parameters.AddWithValue("@plane", planeFare.Text);
-                        cmd.Parameters.AddWithValue("@transfers", transfersFee.Text);
+                        cmd.Parameters.AddWithValue("@hotel", hotelChargesTotal.Text);
+                        cmd.Parameters.AddWithValue("@plane", planeFaresTotal.Text);
+                        cmd.Parameters.AddWithValue("@transfers", totalTransferCharges.Text);
                         cmd.Parameters.AddWithValue("@perDiem", perDiem.Text);
                         cmd.Parameters.AddWithValue("@total", totalExpensesTxt.Text);
                         cmd.Parameters.AddWithValue("@travelID", request);
@@ -379,6 +380,106 @@ namespace TravelDesk.Admin
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
+
+        }
+
+        protected void hotelTotal_Click(object sender, EventArgs e)
+        {
+
+                      
+            //hotel charges
+            string hotelc1 = hotelCharges.Text;
+            string hotelc2 = hotelCharges2.Text;
+            string hotelc3 = hotelCharges3.Text;
+            string hotelc4 = hotelCharges4.Text;
+            string hotelc5 = hotelCharges5.Text;
+
+            
+
+            // Parse and sum the inputs
+            decimal HotelBill1 = ParseInput(hotelc1);
+            decimal HotelBill2 = ParseInput(hotelc2);
+            decimal HotelBill3 = ParseInput(hotelc3);
+            decimal HotelBill4 = ParseInput(hotelc4);
+            decimal HotelBill5 = ParseInput(hotelc5);
+
+
+
+            decimal totalHotelCharges = HotelBill1 + HotelBill2 + HotelBill3 + HotelBill4 + HotelBill5;
+            hotelChargesTotal.Text = "₱" + totalHotelCharges.ToString("N2");
+
+            hotelTotal.Style["display"] = "none";
+            Button5.Style["display"] = "none";
+
+            if (hotel2.Visible)
+            {
+                hotel2.Style["display"] = "block";
+                Button1.Style["display"] = "none";
+
+            }
+            if (hotel3.Visible)
+            {
+                hotel3.Style["display"] = "block";
+                Button2.Style["display"] = "none";
+
+            }
+            if (hotel4.Visible)
+            {
+                hotel4.Style["display"] = "block";
+                Button3.Style["display"] = "none";
+
+            }
+            if (hotel5.Visible)
+            {
+                hotel5.Style["display"] = "block";
+                Button4.Style["display"] = "none";
+
+            }
+
+
+
+
+        }
+
+
+        protected void calculatePlaneFare_Click(object sender, EventArgs e)
+        {
+            string plane1 = planeFare.Text;
+            string plane2 = planeFare2.Text;
+            string plane3 = planeFare3.Text;
+            string plane4 = planeFare4.Text;
+            string plane5 = planeFare5.Text;
+
+            decimal planeBill1 = ParseInput(plane1);
+            decimal planeBill2 = ParseInput(plane2);
+            decimal planeBill3 = ParseInput(plane3);
+            decimal planeBill4 = ParseInput(plane4);
+            decimal planeBill5 = ParseInput(plane5);
+
+            decimal totalPlaneFare = planeBill1 + planeBill2 + planeBill3 + planeBill4 + planeBill5;
+            planeFaresTotal.Text = "₱" + totalPlaneFare.ToString("N2");
+
+        }
+
+        
+
+        protected void totalTransferCharges_Click(object sender, EventArgs e)
+        {
+            string transfer1 = trans1.Text;
+            string transfer2 = trans2.Text;
+            string transfer3 = trans3.Text;
+            string transfer4 = trans4.Text;
+            string transfer5 = trans5.Text;
+
+            decimal transBill1 = ParseInput(transfer1);
+            decimal transBill2 = ParseInput(transfer2);
+            decimal transBill3 = ParseInput(transfer3);
+            decimal transBill4 = ParseInput(transfer4);
+            decimal transBill5 = ParseInput(transfer5);
+
+            decimal totalTransfers = transBill1 + transBill2 + transBill3 + transBill4 + transBill5;
+            transfersTotal.Text = "₱" + totalTransfers.ToString("N2");
+
 
         }
     }

@@ -25,7 +25,7 @@
                                         <!-- Ensure ScriptManager is present -->
                                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-                                        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Height="100%" Width="100%">
+                                        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Height="100%" Width="100%" BackColor="White" style="background-color:transparent">
                                         </rsweb:ReportViewer>
 
                                     </div>
