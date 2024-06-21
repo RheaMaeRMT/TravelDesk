@@ -213,6 +213,11 @@ namespace TravelDesk.Admin
 
                 totalBlock.Style["display"] = "block";
                 calculate.Style["display"] = "none";
+                perDiem.Enabled = false;
+                perDiem.Style["color"] = "black";
+                perDiem.Style["background-color"] = "white";
+
+
             }
             catch (SqlException ex)
             {
@@ -279,7 +284,7 @@ namespace TravelDesk.Admin
                         cmd.Parameters.AddWithValue("@ID", ID);
                         cmd.Parameters.AddWithValue("@hotel", hotelChargesTotal.Text);
                         cmd.Parameters.AddWithValue("@plane", planeFaresTotal.Text);
-                        cmd.Parameters.AddWithValue("@transfers", totalTransferCharges.Text);
+                        cmd.Parameters.AddWithValue("@transfers", transfersTotal.Text);
                         cmd.Parameters.AddWithValue("@perDiem", perDiem.Text);
                         cmd.Parameters.AddWithValue("@total", totalExpensesTxt.Text);
                         cmd.Parameters.AddWithValue("@travelID", request);
@@ -385,16 +390,12 @@ namespace TravelDesk.Admin
 
         protected void hotelTotal_Click(object sender, EventArgs e)
         {
-
-                      
             //hotel charges
             string hotelc1 = hotelCharges.Text;
             string hotelc2 = hotelCharges2.Text;
             string hotelc3 = hotelCharges3.Text;
             string hotelc4 = hotelCharges4.Text;
             string hotelc5 = hotelCharges5.Text;
-
-            
 
             // Parse and sum the inputs
             decimal HotelBill1 = ParseInput(hotelc1);
@@ -403,65 +404,114 @@ namespace TravelDesk.Admin
             decimal HotelBill4 = ParseInput(hotelc4);
             decimal HotelBill5 = ParseInput(hotelc5);
 
-
-
             decimal totalHotelCharges = HotelBill1 + HotelBill2 + HotelBill3 + HotelBill4 + HotelBill5;
             hotelChargesTotal.Text = "₱" + totalHotelCharges.ToString("N2");
 
             hotelTotal.Style["display"] = "none";
             Button5.Style["display"] = "none";
+            Button1.Style["display"] = "none";
+            Button2.Style["display"] = "none";
+            Button3.Style["display"] = "none";
+            Button4.Style["display"] = "none";
 
-            if (hotel2.Visible)
+
+
+            if (hotelCharges2.Text != "₱")
             {
+                hotelCharges.Style["color"] = "black";
+                hotelCharges.Style["background-color"] = "white";
+                hotelCharges.Enabled = false;
+
                 hotel2.Style["display"] = "block";
-                Button1.Style["display"] = "none";
+                hotelCharges2.Enabled = false;
+                hotelCharges2.Style["color"] = "black";
+                hotelCharges2.Style["background-color"] = "white";
 
             }
-            if (hotel3.Visible)
+
+            if (hotelCharges3.Text != "₱")
             {
                 hotel3.Style["display"] = "block";
-                Button2.Style["display"] = "none";
-
+                hotelCharges3.Enabled = false;
+                hotelCharges3.Style["color"] = "black";
+                hotelCharges3.Style["background-color"] = "white";
             }
-            if (hotel4.Visible)
+
+            if (hotelCharges4.Text != "₱")
             {
                 hotel4.Style["display"] = "block";
-                Button3.Style["display"] = "none";
+                hotelCharges4.Enabled = false;
+                hotelCharges4.Style["color"] = "black";
+                hotelCharges4.Style["background-color"] = "white";
 
             }
-            if (hotel5.Visible)
+
+            if (hotelCharges5.Text != "₱")
             {
                 hotel5.Style["display"] = "block";
-                Button4.Style["display"] = "none";
-
+                hotelCharges5.Enabled = false;
+                hotelCharges5.Style["color"] = "black";
+                hotelCharges5.Style["background-color"] = "white";
             }
-
-
-
-
         }
-
 
         protected void calculatePlaneFare_Click(object sender, EventArgs e)
         {
-            string plane1 = planeFare.Text;
-            string plane2 = planeFare2.Text;
-            string plane3 = planeFare3.Text;
-            string plane4 = planeFare4.Text;
-            string plane5 = planeFare5.Text;
+            string planec1 = planeFare.Text;
+            string planec2 = planeFare2.Text;
+            string planec3 = planeFare3.Text;
+            string planec4 = planeFare4.Text;
+            string planec5 = planeFare5.Text;
 
-            decimal planeBill1 = ParseInput(plane1);
-            decimal planeBill2 = ParseInput(plane2);
-            decimal planeBill3 = ParseInput(plane3);
-            decimal planeBill4 = ParseInput(plane4);
-            decimal planeBill5 = ParseInput(plane5);
+            decimal planeBill1 = ParseInput(planec1);
+            decimal planeBill2 = ParseInput(planec2);
+            decimal planeBill3 = ParseInput(planec3);
+            decimal planeBill4 = ParseInput(planec4);
+            decimal planeBill5 = ParseInput(planec5);
 
             decimal totalPlaneFare = planeBill1 + planeBill2 + planeBill3 + planeBill4 + planeBill5;
             planeFaresTotal.Text = "₱" + totalPlaneFare.ToString("N2");
 
-        }
+            calculatePlaneFare.Style["display"] = "none";
+            Button6.Style["display"] = "none";
+            Button7.Style["display"] = "none";
+            Button8.Style["display"] = "none";
+            Button9.Style["display"] = "none";
+            Button10.Style["display"] = "none";
 
-        
+            if (planeFare2.Text != "₱")
+            {
+                planeFare.Style["color"] = "black";
+                planeFare.Style["background-color"] = "white";
+                planeFare.Enabled = false;
+
+                plane2.Style["display"] = "block";
+                planeFare2.Enabled = false;
+                planeFare2.Style["color"] = "black";
+                planeFare2.Style["background-color"] = "white";
+            }
+            if (planeFare3.Text != "₱")
+            {
+                plane3.Style["display"] = "block";
+                planeFare3.Enabled = false;
+                planeFare3.Style["color"] = "black";
+                planeFare3.Style["background-color"] = "white";
+            }
+            if (planeFare4.Text != "₱")
+            {
+                plane4.Style["display"] = "block";
+                planeFare4.Enabled = false;
+                planeFare4.Style["color"] = "black";
+                planeFare4.Style["background-color"] = "white";
+            }
+            if (planeFare5.Text != "₱")
+            {
+                plane5.Style["display"] = "block";
+                planeFare5.Enabled = false;
+                planeFare5.Style["color"] = "black";
+                planeFare5.Style["background-color"] = "white";
+            }
+        }
 
         protected void totalTransferCharges_Click(object sender, EventArgs e)
         {
@@ -480,6 +530,45 @@ namespace TravelDesk.Admin
             decimal totalTransfers = transBill1 + transBill2 + transBill3 + transBill4 + transBill5;
             transfersTotal.Text = "₱" + totalTransfers.ToString("N2");
 
+            totalTransferCharges.Style["display"] = "none";
+            Button12.Style["display"] = "none";
+            Button13.Style["display"] = "none";
+            Button14.Style["display"] = "none";
+            Button15.Style["display"] = "none";
+            Button16.Style["display"] = "none";
+
+            if (trans2.Text != "₱")
+            {
+                trans1.Style["color"] = "black";
+                trans1.Style["background-color"] = "white";
+                trans1.Enabled = false;
+
+                trans2.Style["display"] = "block";
+                trans2.Enabled = false;
+                trans2.Style["color"] = "black";
+                trans2.Style["background-color"] = "white";
+            }
+            if (trans3.Text != "₱")
+            {
+                trans3.Style["display"] = "block";
+                trans3.Enabled = false;
+                trans3.Style["color"] = "black";
+                trans3.Style["background-color"] = "white";
+            }
+            if (trans4.Text != "₱")
+            {
+                trans4.Style["display"] = "block";
+                trans4.Enabled = false;
+                trans4.Style["color"] = "black";
+                trans4.Style["background-color"] = "white";
+            }
+            if (trans5.Text != "₱")
+            {
+                trans5.Style["display"] = "block";
+                trans5.Enabled = false;
+                trans5.Style["color"] = "black";
+                trans5.Style["background-color"] = "white";
+            }
 
         }
     }

@@ -445,10 +445,11 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "UPDATE travelRequest SET travelProcessStat = @newStatus WHERE travelRequestID = @ID";
+                            cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @status, travelProcessStat = @newStatus WHERE travelRequestID = @ID";
 
                             // Set parameters for updating request status
                             cmd.Parameters.AddWithValue("@newStatus", "Email Sent");
+                            cmd.Parameters.AddWithValue("@status", "Email Sent");
                             cmd.Parameters.AddWithValue("@ID", requestId);
 
                             Session["processStat"] = "Email Sent";

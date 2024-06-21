@@ -171,23 +171,23 @@
                                                                                 <asp:Label runat="server" ID="currentStatus" style="color:#4CAF50;font-size:18px;margin-left:10px"></asp:Label>
                                                                                 <div class="tracker">
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="Visa Requests that has been received."><span>1</span></div>
-                                                                                        <div class="text">New Requests</div>
+                                                                                        <div class="circle" id="requestSubmittedCircle" data-hover-message="New Visa Requests received."><span>1</span></div>
+                                                                                        <div class="text">New Request</div>
                                                                                     </div>
                                                                                     <div class="line" style="margin-left:-40px"></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="processingCircle" data-hover-message="Visa Requests that has been accepted for processing."><span>2</span></div>
+                                                                                        <div class="circle" id="processingCircle" data-hover-message="Visa Requests that started the processing."><span>2</span></div>
                                                                                         <div class="text" style="margin-left:-10px">In-progress</div>
                                                                                     </div>
                                                                                     <div class="line" style="margin-left:-10px" ></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Visa Requests that completed the processing."><span>3</span></div>
-                                                                                        <div class="text" style="margin-left:-50px">Requirements Completed</div>
+                                                                                        <div class="circle" id="arrangedCircle" data-hover-message="Requirements are sent to travellers."><span>3</span></div>
+                                                                                        <div class="text" style="margin-left:-50px">Requirements Sent</div>
                                                                                     </div>
                                                                                     <div class="line" style="margin-left:-50px"></div>
                                                                                     <div class="stage">
-                                                                                        <div class="circle" id="completedCircle" data-hover-message="Requests that has been granted a Visa for Travel"><span>4</span></div>
-                                                                                        <div class="text">Closed Requests</div>
+                                                                                        <div class="circle" id="completedCircle" data-hover-message="Requests that completed the processing."><span>4</span></div>
+                                                                                        <div class="text">Completed Requests</div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

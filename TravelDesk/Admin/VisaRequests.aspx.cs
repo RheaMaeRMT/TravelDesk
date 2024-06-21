@@ -37,16 +37,22 @@ namespace TravelDesk.Admin
                             {
                                 processVisa.Text = "Proceed to" + " " + process;
                             }
-                            else if (process == "Billing")
-                            {
-                                processVisa.Text = "Proceed to" + " " + process;
-                            }
+                            //else if (process == "Billing")
+                            //{
+                            //    processVisa.Text = "Proceed to" + " " + process;
+                            //}
 
                         }
                         else
                         {
                             processVisa.Text = "Process Visa Request";
                         }
+
+                    }
+                    else if (status == "Requirements Sent")
+                    {
+                        string process = Session["processStat"].ToString();
+                        processVisa.Text = "Proceed to" + " " + process;
 
                     }
                     else if (status == "Completed")
@@ -199,13 +205,13 @@ namespace TravelDesk.Admin
         private void getTrackingStatus()
         {
             string currentStat = Session["VreqStatus"].ToString();
-            currentStatus.Text = currentStat + " " + "Request";
+            currentStatus.Text = currentStat;
 
             // Set boolean variables based on the value of currentStat
             bool requestSubmitted = currentStat == "New";
             bool processing = currentStat == "In-progress";
-            bool completed = currentStat == "Completed";
-            bool closed = currentStat == "Closed";
+            bool completed = currentStat == "Requirements Sent";
+            bool closed = currentStat == "Completed";
 
             // Generate the script block with the values
             string script = @"

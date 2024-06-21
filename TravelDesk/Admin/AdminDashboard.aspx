@@ -62,9 +62,9 @@
                                                                                                     <div class="card-block">
                                                                                                         <div class="row align-items-center">
                                                                                                             <div class="col-8">
-                                                                                                                <asp:Button runat="server" ID="Completed" OnClick="approved_Click" CssClass=" h4" BorderStyle="None" BackColor="Transparent"/> <br />
+                                                                                                                <asp:Button runat="server" ID="RequirementsSent" OnClick="approved_Click" CssClass=" h4" BorderStyle="None" BackColor="Transparent"/> <br />
                                                 <%--                                                                <asp:Label ID="completed" runat="server" class="text-c-purple h4"></asp:Label> <br />--%>
-                                                                                                                <a class=" m-b-0">Travel Requirements Completed</a>
+                                                                                                                <a class=" m-b-0">Travel Requirements Sent</a>
                                                                                                             </div>
                                                                                                             <div class="col-4 text-right">
                                                                                                                 <i class="fa fa-check-square f-28"></i>
@@ -78,9 +78,9 @@
                                                                                                     <div class="card-block">
                                                                                                         <div class="row align-items-center">
                                                                                                             <div class="col-8">
-                                                                                                                <asp:Button runat="server" ID="Closed" OnClick="approved_Click" CssClass="h4" BorderStyle="None" BackColor="Transparent"/> <br />
+                                                                                                                <asp:Button runat="server" ID="Completed" OnClick="approved_Click" CssClass="h4" BorderStyle="None" BackColor="Transparent"/> <br />
                                                 <%--                                                                <asp:Label ID="cancelled" runat="server" class="text-c-purple h4"></asp:Label> <br />--%>
-                                                                                                                <a class="m-b-0">Closed Requests</a>
+                                                                                                                <a class="m-b-0">Completed Requests</a>
                                                                                                             </div>
                                                                                                             <div class="col-4 text-right">
                                                                                                                 <i class=" ti-medall f-28"></i>

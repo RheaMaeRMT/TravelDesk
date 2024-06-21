@@ -136,10 +136,9 @@
                                                                                                  </div>   
                                                                                                 <asp:Button runat="server" CssClass="btn btn-primary" id="hotelTotal" Text="Calculate Hotel Charges" style="margin-left:50px" Width="195px" OnClick="hotelTotal_Click"/> <br /> <br />
 
-                                                                                                <center>
-                                                                                                    <asp:Label runat="server" Text="TOTAL:" style="color:white"></asp:Label>
+                                                                                                    <asp:Label runat="server" Text="TOTAL:" style="color:white;margin-left:150px"></asp:Label>
                                                                                                     <asp:TextBox ID="hotelChargesTotal" runat="server" Width="265px" Text="₱" Style="background-color:white;color:black" Enabled="false" CssClass="textboxes" placeholder="₱" Height="40px"></asp:TextBox> 
-                                                                                                </center> <br /><br />
+                                                                                                <br /><br />
                                                                                             </div> 
                                                                                                     <div class="auto-style5" style="background-color:#0a426a;" >
                                                                                                          <div class="card-block" style="width: 732px">
@@ -169,10 +168,9 @@
                                                                                                          </div>  
                                                                                                 <asp:Button runat="server" CssClass="btn btn-primary" id="calculatePlaneFare" Text="Calculate Plane Fares" style="margin-left:50px" Width="195px" OnClick="calculatePlaneFare_Click"/>  <br /> <br />
 
-                                                                                                <center>
-                                                                                                    <asp:Label runat="server" Text="TOTAL:" style="color:white"></asp:Label>                                                                                                   
+                                                                                                    <asp:Label runat="server" Text="TOTAL:" style="color:white;margin-left:150px"></asp:Label>                                                                                                   
                                                                                                     <asp:TextBox ID="planeFaresTotal" runat="server" Width="265px" Text="₱" Style="background-color:white;color:black" Enabled="false" CssClass="textboxes" placeholder="₱" Height="40px"></asp:TextBox> 
-                                                                                                </center> <br /><br />
+                                                                                               <br /><br />
                                                                                                         
                                                                                                     </div> 
 
@@ -206,10 +204,9 @@
                                                                                                  </div>   
                                                                                                 <asp:Button runat="server" CssClass="btn btn-primary" id="totalTransferCharges" Text="Calculate Transfer Charges" style="margin-left:50px" Width="216px" OnClick="totalTransferCharges_Click" /> <br /> <br />
 
-                                                                                                <center>
-                                                                                                    <asp:Label runat="server" Text="TOTAL:" style="color:white"></asp:Label>                                                                                                    
+                                                                                                    <asp:Label runat="server" Text="TOTAL:" style="color:white;margin-left:150px"></asp:Label>                                                                                                    
                                                                                                     <asp:TextBox ID="transfersTotal" runat="server" Width="265px" Text="₱" Style="background-color:white;color:black" Enabled="false" CssClass="textboxes" placeholder="₱" Height="40px"></asp:TextBox> 
-                                                                                                </center> <br /><br />
+                                                                                                <br /><br />
                                                                                             </div> 
                                                                                                     <div class="auto-style5" style="background-color:#0a426a;" >
                                                                                                          <div class="card-block" style="width: 732px">
@@ -224,8 +221,8 @@
                                                                                         <center>
                                                                                              <asp:Button runat="server" class="btn btn-primary" Text="Calculate" ID="calculate" CausesValidation="false" Width="100px" OnClick="calculate_Click" /> <br />
                                                                                                  <div class="card-block" style="display:none" runat="server" id="totalBlock"> <br />
-                                                                                                    <asp:Label ID="Label6" runat="server" Text="Total Expenses:" style="margin-left:-120px"></asp:Label>
-                                                                                                    <asp:TextBox ID="totalExpensesTxt" runat="server" Width="300px" Style="margin-left: 40px;color:black; font-size:16px" CssClass="textboxes" Enabled="false"></asp:TextBox>
+                                                                                                    <asp:Label ID="Label6" runat="server" Text="TOTAL EXPENSES (PHP):" style="margin-left:-120px"></asp:Label>
+                                                                                                    <asp:TextBox ID="totalExpensesTxt" runat="server" Width="265px" Text="₱" Style="background-color:#0a426a;color:white;font-size:20px" Enabled="false" CssClass="textboxes" placeholder="₱" Height="40px"></asp:TextBox> 
                                                                                                  </div> 
 
                                                                                                 </center>

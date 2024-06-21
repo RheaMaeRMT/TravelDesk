@@ -31,7 +31,7 @@ namespace TravelDesk.Admin
                     {
                         string process = Session["processStat"].ToString();
 
-                        if (process == "Email Sent")
+                        if (process == "Requirements Sent")
                         {
                             Session["processStat"] = process;
 
@@ -57,6 +57,14 @@ namespace TravelDesk.Admin
                             processRequest.Text = "Proceed to " + process;
 
                         }
+                    }
+                    else if (status == "Requirements Sent")
+                    {
+                       string process = "Requirements Sent";
+                       Session["processStat"] = process;
+
+                        processRequest.Text = "Proceed to Billing";
+
                     }
                     else if (status == "Completed")
                     {
@@ -437,8 +445,8 @@ namespace TravelDesk.Admin
             // Set boolean variables based on the value of currentStat
             bool requestSubmitted = currentStat == "New";
             bool processing = currentStat == "In-progress";
-            bool completed = currentStat == "Completed";
-            bool closed = currentStat == "Closed";
+            bool completed = currentStat == "Requirements Sent";
+            bool closed = currentStat == "Completed";
 
             // Generate the script block with the values
             string script = @"

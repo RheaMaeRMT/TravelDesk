@@ -234,7 +234,7 @@ namespace TravelDesk.Admin
                                             Response.Redirect("RequestDetails.aspx");
 
                                         }
-                                        else if (status == "In-progress")
+                                        else if (status == "In-progress" || status == "Email Sent")
                                         {
 
                                                 Session["requestStatus"] = status;

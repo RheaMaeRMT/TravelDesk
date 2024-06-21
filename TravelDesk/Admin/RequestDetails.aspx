@@ -177,12 +177,12 @@
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="arrangedCircle" data-hover-message="Requests that completed the process."><span>3</span></div>
-                                                                                        <div class="text" style="margin-left:-50px">Requirements Completed</div>
+                                                                                        <div class="text" style="margin-left:-50px">Requirements Sent</div>
                                                                                     </div>
                                                                                     <div class="line" style="margin-left:-50px"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="completedCircle" data-hover-message="Requests that has been completed and closed."><span>4</span></div>
-                                                                                        <div class="text">Closed Requests</div>
+                                                                                        <div class="text">Completed Requests</div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

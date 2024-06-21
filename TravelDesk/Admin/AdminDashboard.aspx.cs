@@ -32,10 +32,10 @@ namespace TravelDesk
                 Inprogress.Text = pendingCount.ToString();
 
                 int completedCount = populateDashboardCompleted();
-                Completed.Text = completedCount.ToString();
+                RequirementsSent.Text = completedCount.ToString();
 
                 int processingCount = populateDashboardArranged();
-                Closed.Text = processingCount.ToString();
+                Completed.Text = processingCount.ToString();
 
                 ////POPULATE NUMBERS FOR VISA REQUESTS
                 //int visaPendingCount = populateVisaPending();
@@ -301,7 +301,7 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'In-progress'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'In-progress' ";
                             cmd.Parameters.AddWithValue("@UserID", currentUser);
 
                             object result = cmd.ExecuteScalar();
@@ -352,7 +352,7 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Completed' ";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Requirements Sent' ";
                             cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
@@ -402,7 +402,7 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Closed'";
+                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelReqStatus = 'Completed'";
                             cmd.Parameters.AddWithValue("@UserID", currentManager);
 
                             object result = cmd.ExecuteScalar();
@@ -504,8 +504,6 @@ namespace TravelDesk
                 Session["reqStatus"] = status;
 
                 Response.Write("<script> window.location.href = 'TravelRequests.aspx'; </script>");
-
-
             }
             else if (clicked == "Inprogress")
             {
@@ -515,15 +513,15 @@ namespace TravelDesk
                 Response.Write("<script> window.location.href = 'TravelRequests.aspx'; </script>");
 
             }
-            else if (clicked == "Completed")
+            else if (clicked == "RequirementsSent")
             {
-                string status = clicked;
+                string status = "Requirements Sent";
                 Session["reqStatus"] = status;
 
                 Response.Write("<script>window.location.href = 'TravelRequests.aspx'; </script>");
 
             }
-            else if (clicked == "Closed")
+            else if (clicked == "Completed")
             {
                 string status = clicked;
                 Session["reqStatus"] = status;
