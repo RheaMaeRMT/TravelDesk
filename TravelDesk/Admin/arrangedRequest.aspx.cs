@@ -1471,42 +1471,52 @@ namespace TravelDesk.Admin
                 Session["pdfDownloadComplete"] = true;
 
                 // Retrieve ID and name for filename
-                string ID = Session["clickedRequest"].ToString();
-                string recipientEmail = Session["userEmail"].ToString();
-                
-                string name = employeeName.Text;
 
-                // Construct filename
-                string filename = name + "_" + ID + ".pdf";
-
-                // Create a directory path using empFname
-                string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), name);
-
-                // Check if the directory exists, if not, create it
-                if (!Directory.Exists(folderPath))
+                if (Session["clickedRequest"] != null)
                 {
-                    Directory.CreateDirectory(folderPath);
+                    string ID = Session["clickedRequest"].ToString();
+
+                    if (Session["userEmail"] != null)
+                    {
+                        string recipientEmail = Session["userEmail"].ToString();
+
+                        string name = employeeName.Text;
+
+                        // Construct filename
+                        string filename = name + "_" + ID + ".pdf";
+
+                        // Create a directory path using empFname
+                        string folderPath = Path.Combine(Server.MapPath("/PDFs/travelArrangements"), name);
+
+                        // Check if the directory exists, if not, create it
+                        if (!Directory.Exists(folderPath))
+                        {
+                            Directory.CreateDirectory(folderPath);
+                        }
+                        string filePath = Path.Combine(folderPath, filename);
+                        File.WriteAllBytes(filePath, pdfBytes);
+
+
+                        // Clear the response
+                        Response.Clear();
+
+                        // Set content type and header for file download
+                        Response.ContentType = "application/pdf";
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + filename);
+
+                        Session["arrangementPath"] = filePath;
+
+
+
+                        // Write the PDF bytes to the response
+                        Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
+
+                        // End the response
+                        Response.Flush();
+                    }
+
                 }
-                string filePath = Path.Combine(folderPath, filename);
-                File.WriteAllBytes(filePath, pdfBytes);
-
-
-                // Clear the response
-                Response.Clear();
-
-                // Set content type and header for file download
-                Response.ContentType = "application/pdf";
-                Response.AddHeader("Content-Disposition", "attachment; filename=" + filename);
-
-                Session["arrangementPath"] = filePath;
-
-
-
-                // Write the PDF bytes to the response
-                Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length);
-
-                // End the response
-                Response.Flush();
+                
 
             }
 

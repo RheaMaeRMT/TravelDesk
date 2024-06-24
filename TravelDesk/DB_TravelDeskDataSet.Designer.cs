@@ -331,6 +331,8 @@ namespace TravelDesk {
             
             private global::System.Data.DataColumn columnvisaFee;
             
+            private global::System.Data.DataColumn columnbillTotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public GetTravelReportDataTable() {
@@ -574,6 +576,14 @@ namespace TravelDesk {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn billTotalColumn {
+                get {
+                    return this.columnbillTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -635,7 +645,8 @@ namespace TravelDesk {
                         string billPerDiem, 
                         string billPlane, 
                         string billTransfers, 
-                        string visaFee) {
+                        string visaFee, 
+                        string billTotal) {
                 GetTravelReportRow rowGetTravelReportRow = ((GetTravelReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         travelRequestID,
@@ -663,7 +674,8 @@ namespace TravelDesk {
                         billPerDiem,
                         billPlane,
                         billTransfers,
-                        visaFee};
+                        visaFee,
+                        billTotal};
                 rowGetTravelReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowGetTravelReportRow);
                 return rowGetTravelReportRow;
@@ -712,6 +724,7 @@ namespace TravelDesk {
                 this.columnbillPlane = base.Columns["billPlane"];
                 this.columnbillTransfers = base.Columns["billTransfers"];
                 this.columnvisaFee = base.Columns["visaFee"];
+                this.columnbillTotal = base.Columns["billTotal"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -769,6 +782,8 @@ namespace TravelDesk {
                 base.Columns.Add(this.columnbillTransfers);
                 this.columnvisaFee = new global::System.Data.DataColumn("visaFee", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnvisaFee);
+                this.columnbillTotal = new global::System.Data.DataColumn("billTotal", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbillTotal);
                 this.columntravelRequestID.AllowDBNull = false;
                 this.columntravelRequestID.MaxLength = 50;
                 this.columntravelHomeFacility.MaxLength = 100;
@@ -1338,6 +1353,22 @@ namespace TravelDesk {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string billTotal {
+                get {
+                    try {
+                        return ((string)(this[this.tableGetTravelReport.billTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'billTotal\' in table \'GetTravelReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableGetTravelReport.billTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IstravelHomeFacilityNull() {
                 return this.IsNull(this.tableGetTravelReport.travelHomeFacilityColumn);
             }
@@ -1599,6 +1630,18 @@ namespace TravelDesk {
             public void SetvisaFeeNull() {
                 this[this.tableGetTravelReport.visaFeeColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsbillTotalNull() {
+                return this.IsNull(this.tableGetTravelReport.billTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetbillTotalNull() {
+                this[this.tableGetTravelReport.billTotalColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -1786,6 +1829,7 @@ namespace TravelDesk.DB_TravelDeskDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("billPlane", "billPlane");
             tableMapping.ColumnMappings.Add("billTransfers", "billTransfers");
             tableMapping.ColumnMappings.Add("visaFee", "visaFee");
+            tableMapping.ColumnMappings.Add("billTotal", "billTotal");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

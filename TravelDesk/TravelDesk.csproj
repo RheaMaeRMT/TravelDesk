@@ -934,6 +934,9 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="DB_TravelDeskDataSet.cs">
+      <DependentUpon>DB_TravelDeskDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DB_TravelDeskDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

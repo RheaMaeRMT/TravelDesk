@@ -201,6 +201,7 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
         {
             if (Directory.Exists(folderPath))
             {
+
                 string[] fileEntries = Directory.GetFiles(folderPath, "*.pdf");
 
                 StringBuilder sb = new StringBuilder();
@@ -219,11 +220,13 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
         }
 
         private List<string> LINKS = new List<string>();
-        private string UploadFileToGoogleDrive(HttpPostedFile postedFile)
+
+        private List<string> UploadFilesToGoogleDrive(string folderPath)
         {
+            List<string> driveLinks = new List<string>();
+
             try
             {
-
                 // Path to the service account JSON key file
                 var serviceAccountCredentialFilePath = @"C:\Users\HR-OJT\source\repos\InnodataTravelDesk\TravelDesk\App_Data\service-account.json";
 
@@ -251,37 +254,42 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                 // Ensure the subfolder exists (create if necessary)
                 string subfolderId = CreateSubfolderIfNotExists(service, parentFolderId, subfolderName);
 
-                // Upload the file to the subfolder
-                var fileMetadata = new Google.Apis.Drive.v3.Data.File()
-                {
-                    Name = Path.GetFileName(postedFile.FileName),
-                    Parents = new List<string> { subfolderId } // Ensure the file is uploaded to the subfolder
-                };
+                // Get all PDF files from the specified folder
+                string[] fileEntries = Directory.GetFiles(folderPath, "*.pdf");
 
-                FilesResource.CreateMediaUpload request;
-                using (var stream = postedFile.InputStream)
+                foreach (string filePath in fileEntries)
                 {
-                    request = service.Files.Create(fileMetadata, stream, postedFile.ContentType);
-                    request.Fields = "id, webContentLink"; // Request the ID and web content link of the uploaded file
-                    request.Upload();
+                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = Path.GetFileName(filePath),
+                        Parents = new List<string> { subfolderId } // Ensure the file is uploaded to the subfolder
+                    };
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                    {
+                        var request = service.Files.Create(fileMetadata, fileStream, MimeMapping.GetMimeMapping(filePath));
+                        request.Fields = "id, webContentLink"; // Request the ID and web content link of the uploaded file
+                        request.Upload();
+
+                        var file = request.ResponseBody;
+
+                        // Log file upload success
+                        Console.WriteLine("File uploaded successfully to Google Drive. File ID: " + file.Id);
+
+                        // Construct the Google Drive link
+                        string driveLink = file.WebContentLink;
+                        Console.WriteLine("Google Drive link: " + driveLink);
+
+                        driveLinks.Add(driveLink);
+                        LINKS.Add(driveLink);
+                    }
                 }
-
-                var file = request.ResponseBody;
-
-                // Log file upload success
-                Console.WriteLine("File uploaded successfully to Google Drive. File ID: " + file.Id);
-
-                // Construct the Google Drive link
-                string driveLink = file.WebContentLink;
-                Console.WriteLine("Google Drive link: " + driveLink);
-
-                LINKS.Add(driveLink);
 
                 // Log the current list of links
                 Console.WriteLine("Current LINKS: " + string.Join(", ", LINKS));
 
-                // Return the Google Drive link
-                return driveLink;
+                // Return the list of Google Drive links
+                return driveLinks;
             }
             catch (Google.GoogleApiException gEx)
             {
@@ -296,6 +304,41 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                 Console.WriteLine("Error uploading file to Google Drive: " + ex.Message);
                 Console.WriteLine("Stack Trace: " + ex.StackTrace);
                 return null;
+            }
+        }
+
+        // Custom class to simulate HttpPostedFile
+        public class SimulatedHttpPostedFile : HttpPostedFileBase
+        {
+            private string fileName;
+            private string contentType;
+            private Stream fileContent;
+
+            public SimulatedHttpPostedFile(string fileName, string contentType, Stream fileContent)
+            {
+                this.fileName = fileName;
+                this.contentType = contentType;
+                this.fileContent = fileContent;
+            }
+
+            public override int ContentLength
+            {
+                get { return (int)fileContent.Length; }
+            }
+
+            public override string FileName
+            {
+                get { return fileName; }
+            }
+
+            public override string ContentType
+            {
+                get { return contentType; }
+            }
+
+            public override Stream InputStream
+            {
+                get { return fileContent; }
             }
         }
         private string CreateSubfolderIfNotExists(DriveService service, string parentFolderId, string subfolderName)
@@ -326,6 +369,176 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
             return file.Id;
         }
 
+        //protected void uploadButton_Click(object sender, EventArgs e)
+        //{
+        //    //try
+        //    //{
+        //    //    if (attachments.HasFile)
+        //    //    {
+        //    //        if (Session["travellerName"] != null)
+        //    //        {
+        //    //            string empFname = Session["travellerName"].ToString();
+        //    //            //string subFolder = "otherFiles";
+        //    //            string folderPath = Server.MapPath("~/PDFs/travelArrangements/" + empFname);
+
+        //    //            if (!Directory.Exists(folderPath))
+        //    //            {
+        //    //                Directory.CreateDirectory(folderPath);
+        //    //            }
+
+        //    //            HttpFileCollection attachmentsCollection = Request.Files;
+        //    //            List<string> driveLinks = new List<string>();
+
+        //    //            for (int i = 0; i < attachmentsCollection.Count; i++)
+        //    //            {
+        //    //                HttpPostedFile attachment = attachmentsCollection[i];
+
+        //    //                if (attachment.ContentLength > 0)
+        //    //                {
+        //    //                    string filename = Server.HtmlEncode(empFname + "_" + Path.GetFileName(attachment.FileName));
+        //    //                    string extension = Path.GetExtension(filename).ToLower();
+
+        //    //                    if (extension == ".pdf")
+        //    //                    {
+        //    //                        if (attachment.ContentLength < 4100000)
+        //    //                        {
+        //    //                            string savePath = Path.Combine(folderPath, filename);
+        //    //                            attachment.SaveAs(savePath);
+
+        //    //                            try
+        //    //                            {
+        //    //                                string driveLink = UploadFileToGoogleDrive(attachment);
+        //    //                                if (!string.IsNullOrEmpty(driveLink))
+        //    //                                {
+        //    //                                    driveLinks.Add(driveLink);
+        //    //                                }
+        //    //                                else
+        //    //                                {
+        //    //                                    Response.Write("<script>alert('Failed to upload " + filename + " to Google Drive.')</script>");
+        //    //                                }
+        //    //                            }
+        //    //                            catch (Exception ex)
+        //    //                            {
+        //    //                                Response.Write("<script>alert('Error uploading " + filename + " to Google Drive: " + ex.Message + "')</script>");
+        //    //                            }
+        //    //                        }
+        //    //                        else
+        //    //                        {
+        //    //                            Response.Write("<script>alert('File " + filename + " was not uploaded because the file size is more than 4MB.')</script>");
+        //    //                        }
+        //    //                    }
+        //    //                    else
+        //    //                    {
+        //    //                        Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file.')</script>");
+        //    //                    }
+        //    //                }
+        //    //            }
+
+        //    //            ListUploadedFiles(folderPath);
+
+        //    //            // Print the Google Drive links to the console (for debugging)
+        //    //            foreach (var link in driveLinks)
+        //    //            {
+        //    //                Console.WriteLine("Uploaded to Google Drive: " + link);
+        //    //            }
+
+        //    //            if (driveLinks.Count > 0)
+        //    //            {
+        //    //                Session["UploadedDriveLinks"] = driveLinks;
+        //    //            }
+
+        //    //            Response.Write("<script>alert('Files uploaded successfully.')</script>");
+        //    //        }
+        //    //        else
+        //    //        {
+        //    //            Response.Write("<script>alert('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+        //    //        }
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        Response.Write("<script>alert('No files inserted. Please attach the PDF file you want to upload.')</script>");
+        //    //    }
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    Console.WriteLine("Error uploading file: " + ex.Message);
+        //    //    Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
+        //    //    Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
+        //    //}
+
+        //    try
+        //    {
+        //        if (attachments.HasFile)
+        //        {
+        //            if (Session["travellerName"] != null)
+        //            {
+        //                string empFname = Session["travellerName"].ToString();
+        //                string folderPath = Server.MapPath("~/PDFs/travelArrangements/" + empFname);
+
+        //                // Create the directory if it doesn't exist
+        //                if (!Directory.Exists(folderPath))
+        //                {
+        //                    Directory.CreateDirectory(folderPath);
+        //                }
+
+        //                HttpFileCollection attachmentsCollection = Request.Files;
+
+        //                // Save uploaded files to the server
+        //                for (int i = 0; i < attachmentsCollection.Count; i++)
+        //                {
+        //                    HttpPostedFile attachment = attachmentsCollection[i];
+
+        //                    if (attachment.ContentLength > 0)
+        //                    {
+        //                        string filename = Server.HtmlEncode(empFname + "_" + Path.GetFileName(attachment.FileName));
+        //                        string extension = Path.GetExtension(filename).ToLower();
+
+        //                        // Check if the file is a PDF
+        //                        if (extension == ".pdf")
+        //                        {
+        //                            // Check file size (less than 4MB)
+        //                            if (attachment.ContentLength < 4100000)
+        //                            {
+        //                                string savePath = Path.Combine(folderPath, filename);
+        //                                attachment.SaveAs(savePath); // Save the file
+        //                            }
+        //                            else
+        //                            {
+        //                                Response.Write("<script>alert('File " + filename + " was not uploaded because the file size is more than 4MB.')</script>");
+        //                            }
+        //                        }
+        //                        else
+        //                        {
+        //                            Response.Write("<script>alert('Invalid File Upload. Please upload a PDF file.')</script>");
+        //                        }
+        //                    }
+        //                }
+
+        //                // Upload all files in the folderPath to Google Drive
+        //                UploadFileToGoogleDrive(folderPath);
+
+        //                ListUploadedFiles(folderPath); // List all files in the directory after upload
+
+        //                Response.Write("<script>alert('Files uploaded successfully.')</script>");
+        //            }
+        //            else
+        //            {
+        //                Response.Write("<script>alert('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            Response.Write("<script>alert('No files inserted. Please attach the PDF file you want to upload.')</script>");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Error uploading file: " + ex.Message);
+        //        Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
+        //        Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
+        //    }
+        //}
+
         protected void uploadButton_Click(object sender, EventArgs e)
         {
             try
@@ -335,49 +548,34 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                     if (Session["travellerName"] != null)
                     {
                         string empFname = Session["travellerName"].ToString();
-                        //string subFolder = "otherFiles";
                         string folderPath = Server.MapPath("~/PDFs/travelArrangements/" + empFname);
 
+                        // Create the directory if it doesn't exist
                         if (!Directory.Exists(folderPath))
                         {
                             Directory.CreateDirectory(folderPath);
                         }
 
                         HttpFileCollection attachmentsCollection = Request.Files;
-                        List<string> driveLinks = new List<string>();
 
+                        // Save uploaded files to the server
                         for (int i = 0; i < attachmentsCollection.Count; i++)
                         {
                             HttpPostedFile attachment = attachmentsCollection[i];
 
                             if (attachment.ContentLength > 0)
                             {
-                                string filename = Server.HtmlEncode(empFname + "_" + Path.GetFileName(attachment.FileName));
+                                string filename = Server.HtmlEncode(Path.GetFileName(attachment.FileName));
                                 string extension = Path.GetExtension(filename).ToLower();
 
+                                // Check if the file is a PDF
                                 if (extension == ".pdf")
                                 {
+                                    // Check file size (less than 4MB)
                                     if (attachment.ContentLength < 4100000)
                                     {
                                         string savePath = Path.Combine(folderPath, filename);
-                                        attachment.SaveAs(savePath);
-
-                                        try
-                                        {
-                                            string driveLink = UploadFileToGoogleDrive(attachment);
-                                            if (!string.IsNullOrEmpty(driveLink))
-                                            {
-                                                driveLinks.Add(driveLink);
-                                            }
-                                            else
-                                            {
-                                                Response.Write("<script>alert('Failed to upload " + filename + " to Google Drive.')</script>");
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Response.Write("<script>alert('Error uploading " + filename + " to Google Drive: " + ex.Message + "')</script>");
-                                        }
+                                        attachment.SaveAs(savePath); // Save the file
                                     }
                                     else
                                     {
@@ -391,18 +589,15 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                             }
                         }
 
-                        ListUploadedFiles(folderPath);
+                        // Upload all files in the folderPath to Google Drive
+                        List<string> driveLinks = UploadFilesToGoogleDrive(folderPath);
 
-                        // Print the Google Drive links to the console (for debugging)
-                        foreach (var link in driveLinks)
-                        {
-                            Console.WriteLine("Uploaded to Google Drive: " + link);
-                        }
-
-                        if (driveLinks.Count > 0)
+                        if (driveLinks != null && driveLinks.Count > 0)
                         {
                             Session["UploadedDriveLinks"] = driveLinks;
                         }
+
+                        ListUploadedFiles(folderPath); // List all files in the directory after upload
 
                         Response.Write("<script>alert('Files uploaded successfully.')</script>");
                     }
@@ -423,6 +618,7 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                 Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
             }
         }
+
 
         protected void sendEmail_Click(object sender, EventArgs e)
         {
@@ -449,7 +645,7 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
 
                             // Set parameters for updating request status
                             cmd.Parameters.AddWithValue("@newStatus", "Email Sent");
-                            cmd.Parameters.AddWithValue("@status", "Email Sent");
+                            cmd.Parameters.AddWithValue("@status", "Requirements Sent");
                             cmd.Parameters.AddWithValue("@ID", requestId);
 
                             Session["processStat"] = "Email Sent";

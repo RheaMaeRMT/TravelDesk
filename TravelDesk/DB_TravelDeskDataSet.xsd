@@ -9,7 +9,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="GetTravelReportTableAdapter" GeneratorDataComponentClassName="GetTravelReportTableAdapter" Name="GetTravelReport" UserDataComponentName="GetTravelReportTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DB_TravelDesk (Web.config)" DbObjectName="DB_TravelDesk.dbo.GetTravelReport" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DB_TravelDesk (Web.config)" DbObjectName="DB_TravelDesk.dbo.GetTravelReport" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.GetTravelReport</CommandText>
@@ -47,6 +47,7 @@
               <Mapping SourceColumn="billPlane" DataSetColumn="billPlane" />
               <Mapping SourceColumn="billTransfers" DataSetColumn="billTransfers" />
               <Mapping SourceColumn="visaFee" DataSetColumn="visaFee" />
+              <Mapping SourceColumn="billTotal" DataSetColumn="billTotal" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -58,7 +59,7 @@
   <xs:element name="DB_TravelDeskDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DB_TravelDeskDataSet" msprop:Generator_UserDSName="DB_TravelDeskDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="GetTravelReport" msprop:Generator_TableClassName="GetTravelReportDataTable" msprop:Generator_TableVarName="tableGetTravelReport" msprop:Generator_TablePropName="GetTravelReport" msprop:Generator_RowDeletingName="GetTravelReportRowDeleting" msprop:Generator_RowChangingName="GetTravelReportRowChanging" msprop:Generator_RowEvHandlerName="GetTravelReportRowChangeEventHandler" msprop:Generator_RowDeletedName="GetTravelReportRowDeleted" msprop:Generator_UserTableName="GetTravelReport" msprop:Generator_RowChangedName="GetTravelReportRowChanged" msprop:Generator_RowEvArgName="GetTravelReportRowChangeEvent" msprop:Generator_RowClassName="GetTravelReportRow">
+        <xs:element name="GetTravelReport" msprop:Generator_TableClassName="GetTravelReportDataTable" msprop:Generator_TableVarName="tableGetTravelReport" msprop:Generator_RowChangedName="GetTravelReportRowChanged" msprop:Generator_TablePropName="GetTravelReport" msprop:Generator_RowDeletingName="GetTravelReportRowDeleting" msprop:Generator_RowChangingName="GetTravelReportRowChanging" msprop:Generator_RowEvHandlerName="GetTravelReportRowChangeEventHandler" msprop:Generator_RowDeletedName="GetTravelReportRowDeleted" msprop:Generator_RowClassName="GetTravelReportRow" msprop:Generator_UserTableName="GetTravelReport" msprop:Generator_RowEvArgName="GetTravelReportRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="travelRequestID" msprop:Generator_ColumnVarNameInTable="columntravelRequestID" msprop:Generator_ColumnPropNameInRow="travelRequestID" msprop:Generator_ColumnPropNameInTable="travelRequestIDColumn" msprop:Generator_UserColumnName="travelRequestID">
@@ -213,6 +214,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="billTotal" msprop:Generator_ColumnVarNameInTable="columnbillTotal" msprop:Generator_ColumnPropNameInRow="billTotal" msprop:Generator_ColumnPropNameInTable="billTotalColumn" msprop:Generator_UserColumnName="billTotal" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

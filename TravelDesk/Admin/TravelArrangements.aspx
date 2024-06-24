@@ -129,7 +129,7 @@
                                                             </div>
                                                             <div class="card-block">
                                                                 <asp:Label ID="Label5" runat="server" Text="Accomodations"></asp:Label>
-                                                                <asp:DropDownList ID="accomodations" runat="server"  Style="margin-left: 60px" Width="345px" onchange="accomodationOptions()">
+                                                                <asp:DropDownList ID="accomodations" runat="server"  Style="margin-left: 60px" Width="345px" onchange="accomodationOptions()" OnSelectedIndexChanged="accomodations_SelectedIndexChanged">
                                                                 <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True" />
                                                                     <asp:ListItem Value="Hotel Accomodation" Text="Hotel Accomodation"> </asp:ListItem>
                                                                     <asp:ListItem Value="c/o Traveller" Text="c/o Traveller">  </asp:ListItem>
@@ -221,7 +221,11 @@
                                                             </div>
                                                              <div class="card-block">
                                                                 <asp:Label ID="Label16" runat="server" Text="Airline" Style="margin-left: 30px;"></asp:Label>
-                                                                <asp:TextBox ID="airline" runat="server" Width="300px" Style="margin-left: 60px;" CssClass="textboxes"></asp:TextBox> <hr />
+                                                                <asp:TextBox ID="airline" runat="server" Width="300px" Style="margin-left: 60px;" CssClass="textboxes"></asp:TextBox>
+                                                                <asp:Label ID="Label43" runat="server" Text="Class" Style="margin-left: 30px;"></asp:Label>
+                                                                <asp:TextBox ID="travelClass" runat="server" Width="300px" Style="margin-left: 60px;" CssClass="textboxes"></asp:TextBox>
+
+                                                                 <hr />
                                                              </div> 
                                                                                             <asp:Label ID="Label13" runat="server" Text="Flight Schedule" Style="margin-left: 30px;font-weight:bolder"></asp:Label>
                                                                                                 <div class="card-block">
@@ -358,7 +362,7 @@
                                                                                     <!-- Nav tabs -->
                                                                                     <ul class="nav nav-tabs md-tabs " role="tablist">
                                                                                         <li class="nav-item">
-                                                                                            <a class="nav-link " data-toggle="tab" href="#employeeDetails" role="tab"><i class="icofont icofont-home"></i>Traveller Information</a>
+                                                                                            <a class="nav-link " data-toggle="tab" href="#employeeDetails" role="tab"><i class="icofont icofont-home"></i>Traveler Information</a>
                                                                                             <div class="slide"></div>
                                                                                         </li>
                                                                                         <li class="nav-item">

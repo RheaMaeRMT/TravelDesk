@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -172,7 +173,6 @@ namespace TravelDesk.Admin
                                         }
                                     }
 
-                                    // Assign other request details to corresponding controls
                                 }
                                 else
                                 {
@@ -201,6 +201,7 @@ namespace TravelDesk.Admin
                 }
             }
         }
+
         private void DisplayRequest()
         {
             try
@@ -592,25 +593,64 @@ namespace TravelDesk.Admin
                     {
                         cmd.CommandType = CommandType.Text;
 
-                        if (accomodation == "c/o Traveller")
+                        if (accomodation == "c/o Traveler")
                         {
-                            cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeEmpID, arrangeAccomodation, arrangeHotelName) " +
-                                              "VALUES (@ID, @empID, @accomodations, @hotelName)";
+                            string hotelName = accomodation;
 
-                            cmd.Parameters.AddWithValue("@hotelName", coTraveller.Text);
+                            cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeEmpID, arrangeAccomodation, arrangeHotelName, arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo, " +
+                                          "arrangeHotel2Name, arrangeHotel2Add, arrangeHotel2Phone, arrangeHotel2From, arrangeHotel2To, " +
+                                          "arrangeHotel3Name, arrangeHotel3Add, arrangeHotel3Phone, arrangeHotel3From, arrangeHotel3To, " +
+                                          "arrangeHotel4Name, arrangeHotel4Add, arrangeHotel4Phone, arrangeHotel4From, arrangeHotel4To, " +
+                                          "arrangeHotel5Name, arrangeHotel5Add, arrangeHotel5Phone, arrangeHotel5From, arrangeHotel5To) " +
+                                          "VALUES (@ID, @empID, @accomodations, @hotelName, @hotelAddress, @contact, @from, @to, " +
+                                          "@hotel2Name, @hotel2Add, @hotel2Phone, @hotel2From, @hotel2To, " +
+                                          "@hotel3Name, @hotel3Add, @hotel3Phone, @hotel3From, @hotel3To, " +
+                                          "@hotel4Name, @hotel4Add, @hotel4Phone, @hotel4From, @hotel4To, " +
+                                          "@hotel5Name, @hotel5Add, @hotel5Phone, @hotel5From, @hotel5To)";
+
+                            cmd.Parameters.AddWithValue("@hotelName", hotelName);
+                            cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
+                            cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
+                            cmd.Parameters.AddWithValue("@from", durationFrom.Text);
+                            cmd.Parameters.AddWithValue("@to", durationTo.Text);
+
+                            cmd.Parameters.AddWithValue("@hotel2Name", string.IsNullOrEmpty(hotelname2.Text) ? DBNull.Value : (object)hotelname2.Text);
+                            cmd.Parameters.AddWithValue("@hotel2Add", string.IsNullOrEmpty(address2.Text) ? DBNull.Value : (object)address2.Text);
+                            cmd.Parameters.AddWithValue("@hotel2Phone", string.IsNullOrEmpty(phone2.Text) ? DBNull.Value : (object)phone2.Text);
+                            cmd.Parameters.AddWithValue("@hotel2From", string.IsNullOrEmpty(from2.Text) ? DBNull.Value : (object)from2.Text);
+                            cmd.Parameters.AddWithValue("@hotel2To", string.IsNullOrEmpty(to2.Text) ? DBNull.Value : (object)to2.Text);
+
+                            cmd.Parameters.AddWithValue("@hotel3Name", string.IsNullOrEmpty(hotelname3.Text) ? DBNull.Value : (object)hotelname3.Text);
+                            cmd.Parameters.AddWithValue("@hotel3Add", string.IsNullOrEmpty(address3.Text) ? DBNull.Value : (object)address3.Text);
+                            cmd.Parameters.AddWithValue("@hotel3Phone", string.IsNullOrEmpty(phone3.Text) ? DBNull.Value : (object)phone3.Text);
+                            cmd.Parameters.AddWithValue("@hotel3From", string.IsNullOrEmpty(from3.Text) ? DBNull.Value : (object)from3.Text);
+                            cmd.Parameters.AddWithValue("@hotel3To", string.IsNullOrEmpty(to3.Text) ? DBNull.Value : (object)to3.Text);
+
+                            cmd.Parameters.AddWithValue("@hotel4Name", string.IsNullOrEmpty(hotelname4.Text) ? DBNull.Value : (object)hotelname4.Text);
+                            cmd.Parameters.AddWithValue("@hotel4Add", string.IsNullOrEmpty(address4.Text) ? DBNull.Value : (object)address4.Text);
+                            cmd.Parameters.AddWithValue("@hotel4Phone", string.IsNullOrEmpty(phone4.Text) ? DBNull.Value : (object)phone4.Text);
+                            cmd.Parameters.AddWithValue("@hotel4From", string.IsNullOrEmpty(from4.Text) ? DBNull.Value : (object)from4.Text);
+                            cmd.Parameters.AddWithValue("@hotel4To", string.IsNullOrEmpty(to4.Text) ? DBNull.Value : (object)to4.Text);
+
+                            cmd.Parameters.AddWithValue("@hotel5Name", string.IsNullOrEmpty(hotelname5.Text) ? DBNull.Value : (object)hotelname5.Text);
+                            cmd.Parameters.AddWithValue("@hotel5Add", string.IsNullOrEmpty(address5.Text) ? DBNull.Value : (object)address5.Text);
+                            cmd.Parameters.AddWithValue("@hotel5Phone", string.IsNullOrEmpty(phone5.Text) ? DBNull.Value : (object)phone5.Text);
+                            cmd.Parameters.AddWithValue("@hotel5From", string.IsNullOrEmpty(from5.Text) ? DBNull.Value : (object)from5.Text);
+                            cmd.Parameters.AddWithValue("@hotel5To", string.IsNullOrEmpty(to5.Text) ? DBNull.Value : (object)to5.Text);
+
                         }
                         else
                         {
                             cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeEmpID, arrangeAccomodation, arrangeHotelName, arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo, " +
-                                              "arrangeHotel2Name, arrangeHotel2Add, arrangeHotel2Phone, arrangeHotel2From, arrangeHotel2To, " +
-                                              "arrangeHotel3Name, arrangeHotel3Add, arrangeHotel3Phone, arrangeHotel3From, arrangeHotel3To, " +
-                                              "arrangeHotel4Name, arrangeHotel4Add, arrangeHotel4Phone, arrangeHotel4From, arrangeHotel4To, " +
-                                              "arrangeHotel5Name, arrangeHotel5Add, arrangeHotel5Phone, arrangeHotel5From, arrangeHotel5To) " +
-                                              "VALUES (@ID, @empID, @accomodations, @hotelName, @hotelAddress, @contact, @from, @to, " +
-                                              "@hotel2Name, @hotel2Add, @hotel2Phone, @hotel2From, @hotel2To, " +
-                                              "@hotel3Name, @hotel3Add, @hotel3Phone, @hotel3From, @hotel3To, " +
-                                              "@hotel4Name, @hotel4Add, @hotel4Phone, @hotel4From, @hotel4To, " +
-                                              "@hotel5Name, @hotel5Add, @hotel5Phone, @hotel5From, @hotel5To)";
+                                          "arrangeHotel2Name, arrangeHotel2Add, arrangeHotel2Phone, arrangeHotel2From, arrangeHotel2To, " +
+                                          "arrangeHotel3Name, arrangeHotel3Add, arrangeHotel3Phone, arrangeHotel3From, arrangeHotel3To, " +
+                                          "arrangeHotel4Name, arrangeHotel4Add, arrangeHotel4Phone, arrangeHotel4From, arrangeHotel4To, " +
+                                          "arrangeHotel5Name, arrangeHotel5Add, arrangeHotel5Phone, arrangeHotel5From, arrangeHotel5To) " +
+                                          "VALUES (@ID, @empID, @accomodations, @hotelName, @hotelAddress, @contact, @from, @to, " +
+                                          "@hotel2Name, @hotel2Add, @hotel2Phone, @hotel2From, @hotel2To, " +
+                                          "@hotel3Name, @hotel3Add, @hotel3Phone, @hotel3From, @hotel3To, " +
+                                          "@hotel4Name, @hotel4Add, @hotel4Phone, @hotel4From, @hotel4To, " +
+                                          "@hotel5Name, @hotel5Add, @hotel5Phone, @hotel5From, @hotel5To)";
 
                             cmd.Parameters.AddWithValue("@hotelName", hotel.Text);
                             cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
@@ -679,19 +719,61 @@ namespace TravelDesk.Admin
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO travelFlight (travelFlightID, travelAirline, routeM1Flight, routeM1From, routeM1FromDate, routeM1To, routeM1ETA, routeM1ETD, " +
-                            " routeM2Flight, routeM2From, routeM2FromDate, routeM2To, routeM2ETA, routeM2ETD, " +
+                        cmd.CommandText = "INSERT INTO travelFlight (travelFlightID, travelAirline, travelClass, travelDates, travelRoute " +
+                            "routeM1Flight, routeM1From, routeM1FromDate, routeM1To, routeM1ETA, routeM1ETD, " +
+                            "routeM2Flight, routeM2From, routeM2FromDate, routeM2To, routeM2ETA, routeM2ETD, " +
                             "routeM3Flight, routeM3From, routeM3FromDate, routeM3To,  routeM3ETA, routeM3ETD, " +
                             "routeM4Flight, routeM4From, routeM4FromDate, routeM4To, routeM4ETA, routeM4ETD, " +
-                            "routeM5Flight,  routeM5From, routeM5FromDate, routeM5To,  routeM5ETA, routeM5ETD)"
-                            + "VALUES (@ID, @airline, @r1f, @r1From, @r1FromDate, @r1To, @r1A, @r1D, " +
+                            "routeM5Flight, routeM5From, routeM5FromDate, routeM5To,  routeM5ETA, routeM5ETD)"
+                            + "VALUES (@ID, @airline, @travelClass, @travelDates, @routes," +
+                            " @r1f, @r1From, @r1FromDate, @r1To, @r1A, @r1D, " +
                             " @r2f, @r2From, @r2FromDate, @r2To, @r2A, @r2D, " +
                             " @r3f, @r3From, @r3FromDate, @r3To, @r3A, @r3D, " +
                             " @r4f, @r4From, @r4FromDate, @r4To, @r4A, @r4D, " +
                             " @r5f, @r5From, @r5FromDate, @r5To, @r5A, @r5D)";
 
+                        //FOR THE ROUTE
+                        string route = "";
+                        if (r1From != null) route += r1From.Text;
+                        if (r2From != null) route += r2From.Text;
+                        if (r3From != null) route += r3From.Text;
+                        if (r4From != null) route += r4From.Text;
+                        if (r5From != null) route += r5From.Text;
+
+
                         cmd.Parameters.AddWithValue("@ID", flight);
                         cmd.Parameters.AddWithValue("@airline", airline.Text);
+                        cmd.Parameters.AddWithValue("@travelClass", travelClass.Text);
+
+
+                        if (r1FromDate != null && r2FromDate != null)
+                        {
+                            string r1FromDateText = r1FromDate.Text; // Assuming this is something like "2024-01-31"
+                            string r2FromDateText = r2FromDate.Text; // Assuming this is something like "2024-02-03"
+
+                            // Parse the date strings to DateTime objects
+                            DateTime FromDate1 = DateTime.ParseExact(r1FromDateText, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                            DateTime FromDate2 = DateTime.ParseExact(r2FromDateText, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                            // Format the dates to "MMM d"
+                            string formattedR1FromDate = FromDate1.ToString("MMM d", CultureInfo.InvariantCulture);
+                            string formattedR2FromDate = FromDate2.ToString("MMM d", CultureInfo.InvariantCulture);
+
+                            // Concatenate the formatted strings
+                            string travelDates = formattedR1FromDate + "-" + formattedR2FromDate;
+
+                            // Add the concatenated string as a parameter
+                            cmd.Parameters.AddWithValue("@travelDates", travelDates);
+
+                        }
+                        else
+                        {
+                            string travelDates = r1FromDate.Text;
+                            cmd.Parameters.AddWithValue("@travelDates", travelDates);
+                        }
+
+                        cmd.Parameters.AddWithValue("@routes", route);
+
 
                         string Flight1 = Regex.Replace(r1Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
                         cmd.Parameters.AddWithValue("@r1f", Flight1);
@@ -700,7 +782,6 @@ namespace TravelDesk.Admin
                         cmd.Parameters.AddWithValue("@r1To", r1To.Text);
                         cmd.Parameters.AddWithValue("@r1A", r1ETA.Text);
                         cmd.Parameters.AddWithValue("@r1D", r1ETD.Text);
-
 
 
                         string Flight2 = Regex.Replace(r2Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
@@ -712,7 +793,6 @@ namespace TravelDesk.Admin
                         cmd.Parameters.AddWithValue("@r2D", r2ETD.Text);
 
 
-
                         string Flight3 = Regex.Replace(r3Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
                         cmd.Parameters.AddWithValue("@r3f", Flight3);
                         cmd.Parameters.AddWithValue("@r3From", r3From.Text);
@@ -720,7 +800,6 @@ namespace TravelDesk.Admin
                         cmd.Parameters.AddWithValue("@r3To", r3To.Text);
                         cmd.Parameters.AddWithValue("@r3A", r3ETA.Text);
                         cmd.Parameters.AddWithValue("@r3D", r3ETD.Text);
-
 
 
                         string Flight4 = Regex.Replace(r4Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
@@ -740,6 +819,9 @@ namespace TravelDesk.Admin
                         cmd.Parameters.AddWithValue("@r5A", r5ETA.Text);
                         cmd.Parameters.AddWithValue("@r5D", r5ETD.Text);
                         cmd.ExecuteNonQuery();
+
+
+
 
                         Session["flightID"] = flight;
                         saveTransfersDetails();
@@ -1189,6 +1271,11 @@ namespace TravelDesk.Admin
                 }
             }
 
+
+        }
+
+        protected void accomodations_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 
