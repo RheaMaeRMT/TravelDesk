@@ -350,15 +350,17 @@ namespace TravelDesk.Admin
 
 
 
-                                accomodations.Text = accomodationType;
 
-                                if (accomodationType == "c/o Traveller")
+                                if (Name == "c/o Traveler")
                                 {
                                     careofEmployee.Style["display"] = "block";
-                                    employeeHotel.Text = Name;
+                                    employeeHotel.Text = accomodationType;
+                                    accomodations.Text = Name;
+
                                 }
-                                else
+                                else if (accomodationType == "Hotel Accomodation")
                                 {
+                                    accomoDiv.Style["display"] = "none";
                                     hotelAccomodations.Style["display"] = "block";
                                     hotel.Text = Name;
                                     hotelAddress.Text = Address;

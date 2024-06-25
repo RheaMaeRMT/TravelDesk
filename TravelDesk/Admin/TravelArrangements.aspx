@@ -132,7 +132,7 @@
                                                                 <asp:DropDownList ID="accomodations" runat="server"  Style="margin-left: 60px" Width="345px" onchange="accomodationOptions()" OnSelectedIndexChanged="accomodations_SelectedIndexChanged">
                                                                 <asp:ListItem Text="-- Select Option --" Value="" Disabled="true" Selected="True" />
                                                                     <asp:ListItem Value="Hotel Accomodation" Text="Hotel Accomodation"> </asp:ListItem>
-                                                                    <asp:ListItem Value="c/o Traveller" Text="c/o Traveller">  </asp:ListItem>
+                                                                    <asp:ListItem Value="c/o Traveler" Text="c/o Traveler">  </asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </div>
                                                             <div class="card-block" style="display:none; margin-left:50px;" id="hotelAccomodations" runat="server">
@@ -211,7 +211,7 @@
                                                             </div>
 
                                                             <div class="card-block" style="display:none;margin-left:50px" runat="server" id="travellerAccomodation">
-                                                                <asp:Label ID="Label2" runat="server" Text="care of Traveller"></asp:Label> <br /> <br />
+                                                                <asp:Label ID="Label2" runat="server" Text="care of Traveler"></asp:Label> <br /> <br />
                                                                 <asp:Label ID="Label3" runat="server" Text="Hotel Name" Style="margin-left: 40px;"></asp:Label>
                                                                 <asp:TextBox ID="coTraveller" runat="server" Width="300px" Style="margin-left: 50px;" CssClass="textboxes"></asp:TextBox>
                                                             </div>

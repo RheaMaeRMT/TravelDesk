@@ -6,57 +6,57 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.15752in</Width>
+              <Width>1.24086in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.15752in</Width>
+              <Width>0.97002in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.0221in</Width>
+              <Width>1.54293in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.15752in</Width>
+              <Width>1.32419in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.15752in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1in</Width>
+              <Width>0.90752in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.15752in</Width>
+              <Width>0.91667in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.00127in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.15752in</Width>
+              <Width>0.89583in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.44919in</Width>
+              <Width>0.90752in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.48044in</Width>
+              <Width>1.08461in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.15752in</Width>
+              <Width>1.09502in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.30335in</Width>
+              <Width>0.84502in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.28125in</Width>
+              <Width>1.18877in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.375in</Width>
+              <Width>1.08333in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.09375in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.36979in</Height>
+              <Height>0.36805in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -685,7 +685,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.36979in</Height>
+              <Height>0.25347in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -859,14 +859,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox9">
+                    <Textbox Name="travelDates">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!travelDates.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -877,7 +877,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox9</rd:DefaultName>
+                      <rd:DefaultName>travelDates</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -893,14 +893,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox13">
+                    <Textbox Name="travelRoute">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!travelRoute.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -911,7 +911,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox13</rd:DefaultName>
+                      <rd:DefaultName>travelRoute</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -961,14 +961,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox17">
+                    <Textbox Name="travelClass">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!travelClass.Value</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -979,7 +979,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <rd:DefaultName>travelClass</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -991,6 +991,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1262,29 +1263,33 @@
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <DataSetName>DataSet1</DataSetName>
-        <Height>0.73958in</Height>
-        <Width>20.01397in</Width>
+        <Height>0.62152in</Height>
+        <Width>17.09731in</Width>
         <Style>
           <Border>
             <Style>Solid</Style>
           </Border>
+          <FontSize>9pt</FontSize>
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.80208in</Height>
+    <Height>0.64583in</Height>
     <Style>
       <Border>
-        <Style>None</Style>
+        <Style>Solid</Style>
       </Border>
       <BackgroundColor>LightGrey</BackgroundColor>
     </Style>
   </Body>
-  <Width>20.01397in</Width>
+  <Width>17.20147in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
@@ -1415,6 +1420,18 @@
         </Field>
         <Field Name="billTotal">
           <DataField>billTotal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="travelClass">
+          <DataField>travelClass</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="travelDates">
+          <DataField>travelDates</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="travelRoute">
+          <DataField>travelRoute</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

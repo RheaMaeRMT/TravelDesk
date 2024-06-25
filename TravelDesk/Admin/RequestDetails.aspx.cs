@@ -516,6 +516,11 @@ namespace TravelDesk.Admin
                             Response.Redirect("TravelArrangements.aspx");
                         }
                     }
+                    else if (status == "Requirements Sent")
+                    {
+                        Response.Redirect("billingInformation.aspx");
+
+                    }
                     else
                     {
                         string request = Session["clickedRequest"].ToString();

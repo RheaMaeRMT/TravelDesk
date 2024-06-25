@@ -89,7 +89,7 @@
                                                             <div class="card-block">
                                                                 <p style="font-size: 18px; color: white; background-color: #09426a; padding-top: 5px; padding-left: 5px">Accomodations</p>
                                                             </div>
-                                                            <div class="card-block">
+                                                            <div class="card-block" id="accomoDiv" runat="server">
                                                                 <asp:Label ID="Label5" runat="server" Text="Accomodations"></asp:Label>
                                                                 <asp:TextBox ID="accomodations" runat="server"   Style="margin-left: 60px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
                                                             </div>

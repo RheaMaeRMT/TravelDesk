@@ -48,6 +48,9 @@
               <Mapping SourceColumn="billTransfers" DataSetColumn="billTransfers" />
               <Mapping SourceColumn="visaFee" DataSetColumn="visaFee" />
               <Mapping SourceColumn="billTotal" DataSetColumn="billTotal" />
+              <Mapping SourceColumn="travelClass" DataSetColumn="travelClass" />
+              <Mapping SourceColumn="travelDates" DataSetColumn="travelDates" />
+              <Mapping SourceColumn="travelRoute" DataSetColumn="travelRoute" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -215,6 +218,27 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="billTotal" msprop:Generator_ColumnVarNameInTable="columnbillTotal" msprop:Generator_ColumnPropNameInRow="billTotal" msprop:Generator_ColumnPropNameInTable="billTotalColumn" msprop:Generator_UserColumnName="billTotal" type="xs:string" minOccurs="0" />
+              <xs:element name="travelClass" msprop:Generator_ColumnVarNameInTable="columntravelClass" msprop:Generator_ColumnPropNameInRow="travelClass" msprop:Generator_ColumnPropNameInTable="travelClassColumn" msprop:Generator_UserColumnName="travelClass" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="travelDates" msprop:Generator_ColumnVarNameInTable="columntravelDates" msprop:Generator_ColumnPropNameInRow="travelDates" msprop:Generator_ColumnPropNameInTable="travelDatesColumn" msprop:Generator_UserColumnName="travelDates" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="travelRoute" msprop:Generator_ColumnVarNameInTable="columntravelRoute" msprop:Generator_ColumnPropNameInRow="travelRoute" msprop:Generator_ColumnPropNameInTable="travelRouteColumn" msprop:Generator_UserColumnName="travelRoute" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -333,6 +333,12 @@ namespace TravelDesk {
             
             private global::System.Data.DataColumn columnbillTotal;
             
+            private global::System.Data.DataColumn columntravelClass;
+            
+            private global::System.Data.DataColumn columntravelDates;
+            
+            private global::System.Data.DataColumn columntravelRoute;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public GetTravelReportDataTable() {
@@ -584,6 +590,30 @@ namespace TravelDesk {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn travelClassColumn {
+                get {
+                    return this.columntravelClass;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn travelDatesColumn {
+                get {
+                    return this.columntravelDates;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn travelRouteColumn {
+                get {
+                    return this.columntravelRoute;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -646,7 +676,10 @@ namespace TravelDesk {
                         string billPlane, 
                         string billTransfers, 
                         string visaFee, 
-                        string billTotal) {
+                        string billTotal, 
+                        string travelClass, 
+                        string travelDates, 
+                        string travelRoute) {
                 GetTravelReportRow rowGetTravelReportRow = ((GetTravelReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         travelRequestID,
@@ -675,7 +708,10 @@ namespace TravelDesk {
                         billPlane,
                         billTransfers,
                         visaFee,
-                        billTotal};
+                        billTotal,
+                        travelClass,
+                        travelDates,
+                        travelRoute};
                 rowGetTravelReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowGetTravelReportRow);
                 return rowGetTravelReportRow;
@@ -725,6 +761,9 @@ namespace TravelDesk {
                 this.columnbillTransfers = base.Columns["billTransfers"];
                 this.columnvisaFee = base.Columns["visaFee"];
                 this.columnbillTotal = base.Columns["billTotal"];
+                this.columntravelClass = base.Columns["travelClass"];
+                this.columntravelDates = base.Columns["travelDates"];
+                this.columntravelRoute = base.Columns["travelRoute"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -784,6 +823,12 @@ namespace TravelDesk {
                 base.Columns.Add(this.columnvisaFee);
                 this.columnbillTotal = new global::System.Data.DataColumn("billTotal", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbillTotal);
+                this.columntravelClass = new global::System.Data.DataColumn("travelClass", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntravelClass);
+                this.columntravelDates = new global::System.Data.DataColumn("travelDates", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntravelDates);
+                this.columntravelRoute = new global::System.Data.DataColumn("travelRoute", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntravelRoute);
                 this.columntravelRequestID.AllowDBNull = false;
                 this.columntravelRequestID.MaxLength = 50;
                 this.columntravelHomeFacility.MaxLength = 100;
@@ -810,6 +855,9 @@ namespace TravelDesk {
                 this.columnbillPlane.MaxLength = 50;
                 this.columnbillTransfers.MaxLength = 50;
                 this.columnvisaFee.MaxLength = 50;
+                this.columntravelClass.MaxLength = 50;
+                this.columntravelDates.MaxLength = 50;
+                this.columntravelRoute.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1369,6 +1417,54 @@ namespace TravelDesk {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string travelClass {
+                get {
+                    try {
+                        return ((string)(this[this.tableGetTravelReport.travelClassColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'travelClass\' in table \'GetTravelReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableGetTravelReport.travelClassColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string travelDates {
+                get {
+                    try {
+                        return ((string)(this[this.tableGetTravelReport.travelDatesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'travelDates\' in table \'GetTravelReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableGetTravelReport.travelDatesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string travelRoute {
+                get {
+                    try {
+                        return ((string)(this[this.tableGetTravelReport.travelRouteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'travelRoute\' in table \'GetTravelReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableGetTravelReport.travelRouteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IstravelHomeFacilityNull() {
                 return this.IsNull(this.tableGetTravelReport.travelHomeFacilityColumn);
             }
@@ -1642,6 +1738,42 @@ namespace TravelDesk {
             public void SetbillTotalNull() {
                 this[this.tableGetTravelReport.billTotalColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IstravelClassNull() {
+                return this.IsNull(this.tableGetTravelReport.travelClassColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SettravelClassNull() {
+                this[this.tableGetTravelReport.travelClassColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IstravelDatesNull() {
+                return this.IsNull(this.tableGetTravelReport.travelDatesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SettravelDatesNull() {
+                this[this.tableGetTravelReport.travelDatesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IstravelRouteNull() {
+                return this.IsNull(this.tableGetTravelReport.travelRouteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SettravelRouteNull() {
+                this[this.tableGetTravelReport.travelRouteColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -1830,6 +1962,9 @@ namespace TravelDesk.DB_TravelDeskDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("billTransfers", "billTransfers");
             tableMapping.ColumnMappings.Add("visaFee", "visaFee");
             tableMapping.ColumnMappings.Add("billTotal", "billTotal");
+            tableMapping.ColumnMappings.Add("travelClass", "travelClass");
+            tableMapping.ColumnMappings.Add("travelDates", "travelDates");
+            tableMapping.ColumnMappings.Add("travelRoute", "travelRoute");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

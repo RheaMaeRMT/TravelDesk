@@ -595,7 +595,7 @@ namespace TravelDesk.Admin
 
                         if (accomodation == "c/o Traveler")
                         {
-                            string hotelName = accomodation;
+                            string hotelName = coTraveller.Text;
 
                             cmd.CommandText = "INSERT INTO travelAccomodation (arrangedAccID, arrangeEmpID, arrangeAccomodation, arrangeHotelName, arrangeHotelAdd, arrangeHotelPhone, arrangeHotelFrom, arrangeHotelTo, " +
                                           "arrangeHotel2Name, arrangeHotel2Add, arrangeHotel2Phone, arrangeHotel2From, arrangeHotel2To, " +
@@ -608,7 +608,9 @@ namespace TravelDesk.Admin
                                           "@hotel4Name, @hotel4Add, @hotel4Phone, @hotel4From, @hotel4To, " +
                                           "@hotel5Name, @hotel5Add, @hotel5Phone, @hotel5From, @hotel5To)";
 
-                            cmd.Parameters.AddWithValue("@hotelName", hotelName);
+
+                            cmd.Parameters.AddWithValue("@accomodations", hotelName);
+                            cmd.Parameters.AddWithValue("@hotelName", accomodation);
                             cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
                             cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
                             cmd.Parameters.AddWithValue("@from", durationFrom.Text);
@@ -652,6 +654,7 @@ namespace TravelDesk.Admin
                                           "@hotel4Name, @hotel4Add, @hotel4Phone, @hotel4From, @hotel4To, " +
                                           "@hotel5Name, @hotel5Add, @hotel5Phone, @hotel5From, @hotel5To)";
 
+                            cmd.Parameters.AddWithValue("@accomodations", accomodations.SelectedItem.Text);
                             cmd.Parameters.AddWithValue("@hotelName", hotel.Text);
                             cmd.Parameters.AddWithValue("@hotelAddress", hotelAddress.Text);
                             cmd.Parameters.AddWithValue("@contact", hotelPhone.Text);
@@ -685,7 +688,6 @@ namespace TravelDesk.Admin
 
                         cmd.Parameters.AddWithValue("@ID", acc);
                         cmd.Parameters.AddWithValue("@empID", empID.Text);
-                        cmd.Parameters.AddWithValue("@accomodations", accomodations.SelectedItem.Text);
 
                         cmd.ExecuteNonQuery();
 
@@ -704,9 +706,9 @@ namespace TravelDesk.Admin
                 }
             }
         }
+
         private void saveFlightDetails()
         {
-
             using (var db = new SqlConnection(connectionString))
             {
                 db.Open();
@@ -719,120 +721,144 @@ namespace TravelDesk.Admin
                     using (var cmd = db.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "INSERT INTO travelFlight (travelFlightID, travelAirline, travelClass, travelDates, travelRoute " +
-                            "routeM1Flight, routeM1From, routeM1FromDate, routeM1To, routeM1ETA, routeM1ETD, " +
-                            "routeM2Flight, routeM2From, routeM2FromDate, routeM2To, routeM2ETA, routeM2ETD, " +
-                            "routeM3Flight, routeM3From, routeM3FromDate, routeM3To,  routeM3ETA, routeM3ETD, " +
-                            "routeM4Flight, routeM4From, routeM4FromDate, routeM4To, routeM4ETA, routeM4ETD, " +
-                            "routeM5Flight, routeM5From, routeM5FromDate, routeM5To,  routeM5ETA, routeM5ETD)"
-                            + "VALUES (@ID, @airline, @travelClass, @travelDates, @routes," +
-                            " @r1f, @r1From, @r1FromDate, @r1To, @r1A, @r1D, " +
-                            " @r2f, @r2From, @r2FromDate, @r2To, @r2A, @r2D, " +
-                            " @r3f, @r3From, @r3FromDate, @r3To, @r3A, @r3D, " +
-                            " @r4f, @r4From, @r4FromDate, @r4To, @r4A, @r4D, " +
-                            " @r5f, @r5From, @r5FromDate, @r5To, @r5A, @r5D)";
+                        cmd.CommandText = "INSERT INTO travelFlight (travelFlightID, travelAirline, travelClass, travelDates, travelRoute, " +
+                                          "routeM1Flight, routeM1From, routeM1FromDate, routeM1To, routeM1ETA, routeM1ETD, " +
+                                          "routeM2Flight, routeM2From, routeM2FromDate, routeM2To, routeM2ETA, routeM2ETD, " +
+                                          "routeM3Flight, routeM3From, routeM3FromDate, routeM3To, routeM3ETA, routeM3ETD, " +
+                                          "routeM4Flight, routeM4From, routeM4FromDate, routeM4To, routeM4ETA, routeM4ETD, " +
+                                          "routeM5Flight, routeM5From, routeM5FromDate, routeM5To, routeM5ETA, routeM5ETD) " +
+                                          "VALUES (@ID, @airline, @travelClass, @travelDates, @routes, " +
+                                          "@r1f, @r1From, @r1FromDate, @r1To, @r1A, @r1D, " +
+                                          "@r2f, @r2From, @r2FromDate, @r2To, @r2A, @r2D, " +
+                                          "@r3f, @r3From, @r3FromDate, @r3To, @r3A, @r3D, " +
+                                          "@r4f, @r4From, @r4FromDate, @r4To, @r4A, @r4D, " +
+                                          "@r5f, @r5From, @r5FromDate, @r5To, @r5A, @r5D)";
+                       
+                        // FOR THE ROUTE
+                        List<string> routeParts = new List<string>();
 
-                        //FOR THE ROUTE
-                        string route = "";
-                        if (r1From != null) route += r1From.Text;
-                        if (r2From != null) route += r2From.Text;
-                        if (r3From != null) route += r3From.Text;
-                        if (r4From != null) route += r4From.Text;
-                        if (r5From != null) route += r5From.Text;
+                        if (r1From != null && !string.IsNullOrEmpty(r1From.Text))
+                        {
+                            routeParts.Add(r1From.Text);
+
+                            if (r1To != null && !string.IsNullOrEmpty(r1To.Text))
+                            {
+                                routeParts.Add(r1To.Text);
+                            }
+
+                            if (r2From != null && !string.IsNullOrEmpty(r2From.Text))
+                            {
+                                if (!routeParts.Contains(r2From.Text)) // Avoid duplicate entries
+                                {
+                                    routeParts.Add(r2From.Text);
+                                }
+
+                                if (r2To != null && !string.IsNullOrEmpty(r2To.Text))
+                                {
+                                    routeParts.Add(r2To.Text);
+                                }
+
+                                if (r3From != null && !string.IsNullOrEmpty(r3From.Text))
+                                {
+                                    if (!routeParts.Contains(r3From.Text)) // Avoid duplicate entries
+                                    {
+                                        routeParts.Add(r3From.Text);
+                                    }
+
+                                    if (r3To != null && !string.IsNullOrEmpty(r3To.Text))
+                                    {
+                                        routeParts.Add(r3To.Text);
+                                    }
+
+                                    if (r4From != null && !string.IsNullOrEmpty(r4From.Text))
+                                    {
+                                        if (!routeParts.Contains(r4From.Text)) // Avoid duplicate entries
+                                        {
+                                            routeParts.Add(r4From.Text);
+                                        }
+
+                                        if (r4To != null && !string.IsNullOrEmpty(r4To.Text))
+                                        {
+                                            routeParts.Add(r4To.Text);
+                                        }
+
+                                        if (r5From != null && !string.IsNullOrEmpty(r5From.Text))
+                                        {
+                                            if (!routeParts.Contains(r5From.Text)) // Avoid duplicate entries
+                                            {
+                                                routeParts.Add(r5From.Text);
+                                            }
+
+                                            if (r5To != null && !string.IsNullOrEmpty(r5To.Text))
+                                            {
+                                                routeParts.Add(r5To.Text);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        string route = string.Join(" - ", routeParts);
 
 
                         cmd.Parameters.AddWithValue("@ID", flight);
                         cmd.Parameters.AddWithValue("@airline", airline.Text);
                         cmd.Parameters.AddWithValue("@travelClass", travelClass.Text);
+                        cmd.Parameters.AddWithValue("@routes", route);
 
+                        // Handling the travel dates
+                        string travelDates = string.Empty;
 
-                        if (r1FromDate != null && r2FromDate != null)
+                        if (!string.IsNullOrEmpty(r1FromDate?.Text))
                         {
-                            string r1FromDateText = r1FromDate.Text; // Assuming this is something like "2024-01-31"
-                            string r2FromDateText = r2FromDate.Text; // Assuming this is something like "2024-02-03"
+                            if (DateTime.TryParseExact(r1FromDate.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fromDate1))
+                            {
+                                string formattedR1FromDate = fromDate1.ToString("MMM d", CultureInfo.InvariantCulture);
+                                travelDates = formattedR1FromDate;
 
-                            // Parse the date strings to DateTime objects
-                            DateTime FromDate1 = DateTime.ParseExact(r1FromDateText, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                            DateTime FromDate2 = DateTime.ParseExact(r2FromDateText, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-                            // Format the dates to "MMM d"
-                            string formattedR1FromDate = FromDate1.ToString("MMM d", CultureInfo.InvariantCulture);
-                            string formattedR2FromDate = FromDate2.ToString("MMM d", CultureInfo.InvariantCulture);
-
-                            // Concatenate the formatted strings
-                            string travelDates = formattedR1FromDate + "-" + formattedR2FromDate;
-
-                            // Add the concatenated string as a parameter
-                            cmd.Parameters.AddWithValue("@travelDates", travelDates);
-
+                                if (!string.IsNullOrEmpty(r2FromDate?.Text))
+                                {
+                                    if (DateTime.TryParseExact(r2FromDate.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fromDate2))
+                                    {
+                                        string formattedR2FromDate = fromDate2.ToString("MMM d", CultureInfo.InvariantCulture);
+                                        travelDates = formattedR1FromDate + "-" + formattedR2FromDate;
+                                    }
+                                    else
+                                    {
+                                        throw new FormatException("The second date string was not recognized as a valid DateTime.");
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                throw new FormatException("The first date string was not recognized as a valid DateTime.");
+                            }
                         }
                         else
                         {
-                            string travelDates = r1FromDate.Text;
-                            cmd.Parameters.AddWithValue("@travelDates", travelDates);
+                            throw new ArgumentNullException("r1FromDate cannot be null or empty.");
                         }
 
-                        cmd.Parameters.AddWithValue("@routes", route);
+                        // Add the travel dates parameter
+                        cmd.Parameters.AddWithValue("@travelDates", travelDates);
 
+                        // Adding other route parameters
+                        AddRouteParameters(cmd, "@r1", r1Flight, r1From, r1FromDate, r1To, r1ETA, r1ETD);
+                        AddRouteParameters(cmd, "@r2", r2Flight, r2From, r2FromDate, r2To, r2ETA, r2ETD);
+                        AddRouteParameters(cmd, "@r3", r3Flight, r3From, r3FromDate, r3To, r3ETA, r3ETD);
+                        AddRouteParameters(cmd, "@r4", r4Flight, r4From, r4FromDate, r4To, r4ETA, r4ETD);
+                        AddRouteParameters(cmd, "@r5", r5Flight, r5From, r5FromDate, r5To, r5ETA, r5ETD);
 
-                        string Flight1 = Regex.Replace(r1Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
-                        cmd.Parameters.AddWithValue("@r1f", Flight1);
-                        cmd.Parameters.AddWithValue("@r1From", r1From.Text);
-                        cmd.Parameters.AddWithValue("@r1FromDate", string.IsNullOrEmpty(r1FromDate.Text) ? (object)DBNull.Value : r1FromDate.Text);
-                        cmd.Parameters.AddWithValue("@r1To", r1To.Text);
-                        cmd.Parameters.AddWithValue("@r1A", r1ETA.Text);
-                        cmd.Parameters.AddWithValue("@r1D", r1ETD.Text);
-
-
-                        string Flight2 = Regex.Replace(r2Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
-                        cmd.Parameters.AddWithValue("@r2f", Flight2);
-                        cmd.Parameters.AddWithValue("@r2From", r2From.Text);
-                        cmd.Parameters.AddWithValue("@r2FromDate", string.IsNullOrEmpty(r2FromDate.Text) ? (object)DBNull.Value : r2FromDate.Text);
-                        cmd.Parameters.AddWithValue("@r2To", r2To.Text);
-                        cmd.Parameters.AddWithValue("@r2A", r2ETA.Text);
-                        cmd.Parameters.AddWithValue("@r2D", r2ETD.Text);
-
-
-                        string Flight3 = Regex.Replace(r3Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
-                        cmd.Parameters.AddWithValue("@r3f", Flight3);
-                        cmd.Parameters.AddWithValue("@r3From", r3From.Text);
-                        cmd.Parameters.AddWithValue("@r3FromDate", string.IsNullOrEmpty(r3FromDate.Text) ? (object)DBNull.Value : r3FromDate.Text);
-                        cmd.Parameters.AddWithValue("@r3To", r3To.Text);
-                        cmd.Parameters.AddWithValue("@r3A", r3ETA.Text);
-                        cmd.Parameters.AddWithValue("@r3D", r3ETD.Text);
-
-
-                        string Flight4 = Regex.Replace(r4Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
-                        cmd.Parameters.AddWithValue("@r4f", Flight4);
-                        cmd.Parameters.AddWithValue("@r4From", r4From.Text);
-                        cmd.Parameters.AddWithValue("@r4FromDate", string.IsNullOrEmpty(r4FromDate.Text) ? (object)DBNull.Value : r4FromDate.Text);
-                        cmd.Parameters.AddWithValue("@r4To", r4To.Text);
-                        cmd.Parameters.AddWithValue("@r4A", r4ETA.Text);
-                        cmd.Parameters.AddWithValue("@r4D", r4ETD.Text);
-
-
-                        string Flight5 = Regex.Replace(r5Flight.Text, @"\s+", ""); // Remove all whitespace characters from the user input
-                        cmd.Parameters.AddWithValue("@r5f", Flight5);
-                        cmd.Parameters.AddWithValue("@r5From", r5From.Text);
-                        cmd.Parameters.AddWithValue("@r5FromDate", string.IsNullOrEmpty(r5FromDate.Text) ? (object)DBNull.Value : r5FromDate.Text);
-                        cmd.Parameters.AddWithValue("@r5To", r5To.Text);
-                        cmd.Parameters.AddWithValue("@r5A", r5ETA.Text);
-                        cmd.Parameters.AddWithValue("@r5D", r5ETD.Text);
                         cmd.ExecuteNonQuery();
-
-
-
 
                         Session["flightID"] = flight;
                         saveTransfersDetails();
-
                     }
-
                 }
                 catch (SqlException ex)
                 {
                     // Log the exception or display a user-friendly error message
-                    // Example: Log.Error("An error occurred during travel request enrollment", ex);
                     Response.Write("<script>alert('An error occurred during insertion of FLIGHT DETAILS. Please try again.')</script>");
                     // Log additional information from the SQL exception
                     for (int i = 0; i < ex.Errors.Count; i++)
@@ -840,10 +866,19 @@ namespace TravelDesk.Admin
                         Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                     }
                 }
-
             }
-
         }
+
+        private void AddRouteParameters(SqlCommand cmd, string prefix, TextBox flight, TextBox from, TextBox fromDate, TextBox to, TextBox eta, TextBox etd)
+        {
+            cmd.Parameters.AddWithValue(prefix + "f", string.IsNullOrEmpty(flight?.Text) ? (object)DBNull.Value : Regex.Replace(flight.Text, @"\s+", ""));
+            cmd.Parameters.AddWithValue(prefix + "From", string.IsNullOrEmpty(from?.Text) ? (object)DBNull.Value : from.Text);
+            cmd.Parameters.AddWithValue(prefix + "FromDate", string.IsNullOrEmpty(fromDate?.Text) ? (object)DBNull.Value : fromDate.Text);
+            cmd.Parameters.AddWithValue(prefix + "To", string.IsNullOrEmpty(to?.Text) ? (object)DBNull.Value : to.Text);
+            cmd.Parameters.AddWithValue(prefix + "A", string.IsNullOrEmpty(eta?.Text) ? (object)DBNull.Value : eta.Text);
+            cmd.Parameters.AddWithValue(prefix + "D", string.IsNullOrEmpty(etd?.Text) ? (object)DBNull.Value : etd.Text);
+        }
+
         private void saveTransfersDetails()
         {
 
