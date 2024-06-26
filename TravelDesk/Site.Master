@@ -207,7 +207,7 @@
                                     <li class=" ">
                                         <a href="/Admin/TravelReport" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-envelope"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Travels
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Domestic Travel
                                             </span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
@@ -215,7 +215,7 @@
                                     <li class="">
                                         <a href="/Admin/Employees" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Employees</span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">International Travel</span>
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>

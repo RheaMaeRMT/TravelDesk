@@ -425,6 +425,7 @@
     <Content Include="Admin\billingInformation.aspx" />
     <Content Include="Admin\emailSent.aspx" />
     <Content Include="Admin\Employees.aspx" />
+    <Content Include="Admin\InternationalReport.aspx" />
     <Content Include="Admin\Managers.aspx" />
     <Content Include="Admin\RequestDetails.aspx" />
     <Content Include="Admin\sendToEmail.aspx" />
@@ -778,6 +779,13 @@
     <Compile Include="Admin\Employees.aspx.designer.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\InternationalReport.aspx.cs">
+      <DependentUpon>InternationalReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\InternationalReport.aspx.designer.cs">
+      <DependentUpon>InternationalReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Managers.aspx.cs">
       <DependentUpon>Managers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1130,6 +1138,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Admin\Reports\InternationalReport.rdlc" />
     <EmbeddedResource Include="Admin\Reports\TravelReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>

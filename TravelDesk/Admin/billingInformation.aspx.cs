@@ -131,36 +131,12 @@ namespace TravelDesk.Admin
                                     string status = reader["travelProcessStat"].ToString();
 
 
-                                    // Display or use the retrieved request details
 
-                                    //empID.Text = employeeID;
-                                    //empFName.Text = employeeFname + " " + employeeMname + " " + employeeLname;
-                                    //empLevel.Text = employeeLevel;
-
-                                    //empEmail.Text = email;
-                                    //empMobile.Text = employeePhone;
-
-                                    //empCode.Text = employeeProjCode;
-                                    //empFacility.Text = travelFacility;
-                                    //empDeptUnit.Text = DU;
+                                    
                                     billingLabel.Text = "In-Progress:" + " " + status;
 
 
-                                    //if (!string.IsNullOrEmpty(employeeBirth))
-                                    //{
-                                    //    //Parse the date string into a DateTime object
-                                    //    DateTime arrivalDateTime;
-                                    //    if (DateTime.TryParse(employeeBirth, out arrivalDateTime))
-                                    //    {
-                                    //        //Format the DateTime object into the desired format
-                                    //        string formattedArrivalDate = arrivalDateTime.ToString("MM/dd/yyyy");
-
-                                    //        //Assign the formatted date to the TextBox
-                                    //        empBdate.Text = formattedArrivalDate;
-                                    //    }
-                                    //}
-
-                                    // Assign other request details to corresponding controls
+                                    getHotelDetails();
                                 }
                                 else
                                 {
@@ -188,6 +164,70 @@ namespace TravelDesk.Admin
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
+        }
+        private void getHotelDetails()
+        {
+            try
+            {
+                string employee = Session["EmployeeID"].ToString();
+
+                if (!string.IsNullOrEmpty(employee))
+                {
+                    // Query the database to retrieve the request details based on the ID
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "SELECT * FROM travelAccomodation WHERE arrangeEmpID = @employeeID";
+                            cmd.Parameters.AddWithValue("@employeeID", employee);
+
+                            using (var reader = cmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    string accomodation = reader["arrangeHotelName"].ToString();
+
+                                    //DISABLE HOTEL BILLING INPUT
+                                    if (accomodation == "c/o Traveler")
+                                    {
+                                        hotelCharges.Enabled = false;
+                                        Button5.Enabled = false;
+                                        hotelTotal.Enabled = false;
+                                        hotelChargesTotal.Enabled = false;
+                                        hotelChargesTotal.Text = "₱0";
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    // Handle the case where no request with the given ID is found
+                                    Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle the case where the request ID stored in the session is null or empty
+                    Response.Write("<script>alert('Invalid request ID.')</script>");
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                Response.Write("<script>alert('An error occurred while retrieving the employee details.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
         }
 
         protected void calculate_Click(object sender, EventArgs e)
