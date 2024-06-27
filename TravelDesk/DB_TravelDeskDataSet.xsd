@@ -62,7 +62,7 @@
   <xs:element name="DB_TravelDeskDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DB_TravelDeskDataSet" msprop:Generator_UserDSName="DB_TravelDeskDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="GetTravelReport" msprop:Generator_TableClassName="GetTravelReportDataTable" msprop:Generator_TableVarName="tableGetTravelReport" msprop:Generator_RowChangedName="GetTravelReportRowChanged" msprop:Generator_TablePropName="GetTravelReport" msprop:Generator_RowDeletingName="GetTravelReportRowDeleting" msprop:Generator_RowChangingName="GetTravelReportRowChanging" msprop:Generator_RowEvHandlerName="GetTravelReportRowChangeEventHandler" msprop:Generator_RowDeletedName="GetTravelReportRowDeleted" msprop:Generator_RowClassName="GetTravelReportRow" msprop:Generator_UserTableName="GetTravelReport" msprop:Generator_RowEvArgName="GetTravelReportRowChangeEvent">
+        <xs:element name="GetTravelReport" msprop:Generator_TableClassName="GetTravelReportDataTable" msprop:Generator_TableVarName="tableGetTravelReport" msprop:Generator_TablePropName="GetTravelReport" msprop:Generator_RowDeletingName="GetTravelReportRowDeleting" msprop:Generator_RowChangingName="GetTravelReportRowChanging" msprop:Generator_RowEvHandlerName="GetTravelReportRowChangeEventHandler" msprop:Generator_RowDeletedName="GetTravelReportRowDeleted" msprop:Generator_UserTableName="GetTravelReport" msprop:Generator_RowChangedName="GetTravelReportRowChanged" msprop:Generator_RowEvArgName="GetTravelReportRowChangeEvent" msprop:Generator_RowClassName="GetTravelReportRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="travelRequestID" msprop:Generator_ColumnVarNameInTable="columntravelRequestID" msprop:Generator_ColumnPropNameInRow="travelRequestID" msprop:Generator_ColumnPropNameInTable="travelRequestIDColumn" msprop:Generator_UserColumnName="travelRequestID">
@@ -244,5 +244,9 @@
         </xs:element>
       </xs:choice>
     </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:GetTravelReport" />
+      <xs:field xpath="mstns:travelRequestID" />
+    </xs:unique>
   </xs:element>
 </xs:schema>

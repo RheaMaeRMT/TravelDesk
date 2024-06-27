@@ -192,13 +192,6 @@
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-<%--                                    <li>
-                                        <a href="/Admin/VisaApplication" class="waves-effect waves-dark active">
-                                            <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.form-components.main">VISA Requests</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>--%>
                                 </ul>
 
                                 <div class="pcoded-navigation-label" data-i18n="nav.category.forms">REPORTS</div>
@@ -213,7 +206,7 @@
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="/Admin/Employees" class="waves-effect waves-dark">
+                                        <a href="/Admin/InternationalReport" class="waves-effect waves-dark">
                                             <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
                                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">International Travel</span>
                                             <span class="pcoded-mcaret"></span>

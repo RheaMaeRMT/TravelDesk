@@ -19,12 +19,13 @@ namespace TravelDesk.Admin
         {
             if (!IsPostBack)
             {
-                LoadReport();
-
+                string travelType = "Domestic Travel"; // or "International Travel"
+                LoadReport(travelType);
             }
 
         }
-        private void LoadReport()
+
+        private void LoadReport(string travelType)
         {
             string reportPath = Server.MapPath("~/Admin/Reports/TravelReport.rdlc");
 
@@ -32,6 +33,9 @@ namespace TravelDesk.Admin
             {
                 SqlCommand cmd = new SqlCommand("GetTravelReport", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                // Add the travelType parameter
+                cmd.Parameters.Add(new SqlParameter("@TravelType", travelType));
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 System.Data.DataSet ds = new System.Data.DataSet();

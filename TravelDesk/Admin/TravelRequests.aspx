@@ -20,7 +20,23 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                            <asp:GridView CssClass="table container" class="table-hover" EditRowStyle-HorizontalAlign="Center" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound" AllowSorting="true" OnSorting="travelRequests_Sorting">               
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <asp:Label id="statusLabel" runat="server" style="font-size:18px;color:black"></asp:Label>
+                                                        <div class="card-header-right">
+                                                            <asp:DropDownList runat="server" ID="sortbyRequest" Font-Size="Medium">
+                                                                <asp:ListItem Value="All" Selected="True"> All</asp:ListItem>
+                                                                <asp:ListItem Value="Visa Request"> Visa Request </asp:ListItem>
+                                                                <asp:ListItem Value="Domestic Travel" > Domestic Travel </asp:ListItem>
+                                                                <asp:ListItem Value="International Travel"> International Travel </asp:ListItem>
+
+                                                            </asp:DropDownList>
+                                                            <asp:Button runat="server" ID="sortData" CssClass="btn btn-primary" Font-Size="14px" Height="35px" style="margin-top: -10px" Text="Sort" OnClick="sortData_Click"/>
+                                                            <asp:Button runat="server" ID="Button1" CssClass="btn btn-primary" Font-Size="14px" Height="35px" style="margin-top: -10px;background-color:transparent; border-color:transparent" Enabled="false" OnClick="sortData_Click"/>
+                                                            <asp:Button runat="server" ID="Button2" CssClass="btn btn-primary" Font-Size="14px" Height="35px" style="margin-top: -10px;background-color:transparent; border-color:transparent" Enabled="false" OnClick="sortData_Click"/>
+                                                            </div>
+                                                    </div>
+                                            <asp:GridView CssClass="table container" class="table-hover" EditRowStyle-HorizontalAlign="Center" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black" OnRowDataBound="travelRequests_RowDataBound" AllowSorting="true" OnSorting="travelRequests_Sorting" style="margin-top: 0px">               
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="Request ID">
                                                         <ItemTemplate>
@@ -48,6 +64,9 @@
                                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                                 <SortedDescendingHeaderStyle BackColor="#383838" />
                                             </asp:GridView>
+
+                                                </div>
+
                                                                                 
 
  

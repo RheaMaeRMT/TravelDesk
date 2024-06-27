@@ -719,6 +719,13 @@ namespace TravelDesk {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public GetTravelReportRow FindBytravelRequestID(string travelRequestID) {
+                return ((GetTravelReportRow)(this.Rows.Find(new object[] {
+                            travelRequestID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 GetTravelReportDataTable cln = ((GetTravelReportDataTable)(base.Clone()));
                 cln.InitVars();
@@ -829,7 +836,10 @@ namespace TravelDesk {
                 base.Columns.Add(this.columntravelDates);
                 this.columntravelRoute = new global::System.Data.DataColumn("travelRoute", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntravelRoute);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columntravelRequestID}, true));
                 this.columntravelRequestID.AllowDBNull = false;
+                this.columntravelRequestID.Unique = true;
                 this.columntravelRequestID.MaxLength = 50;
                 this.columntravelHomeFacility.MaxLength = 100;
                 this.columnFullName.ReadOnly = true;

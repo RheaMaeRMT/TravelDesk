@@ -28,6 +28,7 @@ namespace TravelDesk.Admin
                 if (status == null)
                 {
                     DisplayAllRequests(); //method to display all the requests
+
                 }
                 else
                 {
@@ -52,106 +53,257 @@ namespace TravelDesk.Admin
             }
         }
 
-        private void DisplayRequests()
+        //private void DisplayRequests()
+        //{
+        //    string status = Session["reqStatus"]?.ToString();
+        //    statusLabel.Text = "List of Requests:" + " " + status;
+
+        //    if (!string.IsNullOrEmpty(status))
+        //    {
+        //        if (status == "ALL")
+        //        {
+        //            DisplayAllRequests();
+        //        }
+        //        else
+        //        {
+        //            // Construct the SQL query using parameterized queries to prevent SQL injection
+        //            //string query = "SELECT trave travelReqStatus, travelType, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelDestination, travelDU, travelProjectCode, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
+        //            string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+        //                tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+        //                CASE 
+        //                    WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+        //                    WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+        //                    WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+        //                    ELSE tr.travelDestination                             
+        //                END AS travelDestination, 
+        //               CASE 
+        //                    WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+        //                    WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+        //                    WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+        //                    WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+        //                END AS travelDates, 
+        //                tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+        //        FROM travelRequest tr
+        //        LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+        //        WHERE tr.travelReqStatus = @Status";
+
+
+
+        //            // Set up the database connection and command
+        //            using (SqlConnection connection = new SqlConnection(connectionString))
+        //            using (SqlCommand command = new SqlCommand(query, connection))
+        //            {
+        //                // Add parameters
+        //                command.Parameters.AddWithValue("@Status", status);
+
+        //                try
+        //                {
+        //                    // Open the connection
+        //                    connection.Open();
+
+        //                    // Execute the query
+        //                    SqlDataReader reader = command.ExecuteReader();
+
+        //                    // Bind the reader result to the GridView
+        //                    travelRequests.DataSource = reader;
+        //                    travelRequests.DataBind();
+
+        //                    // Close the reader
+        //                    reader.Close();
+        //                }
+        //                catch (SqlException ex)
+        //                {
+        //                    // Log the exception or display a user-friendly error message
+        //                    // Example: Log.Error("An error occurred during travel request enrollment", ex);
+        //                    Response.Write("<script>alert('An error occurred during retrieval of Travel Request records. Please try again.')</script>");
+        //                    // Log additional information from the SQL exception
+        //                    for (int i = 0; i < ex.Errors.Count; i++)
+        //                    {
+        //                        Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //    }
+
+        //    // Remove the reqStatus session variable after displaying the requests
+        //    Session.Remove("reqStatus");
+        //}
+        //private void DisplayAllRequests()
+        //{
+        //    statusLabel.Text = "List of Requests: ALL ";
+
+        //    try
+        //    {
+
+        //        // Construct the SQL query using parameterized queries to prevent SQL injection
+        //        string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+        //                tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+        //                CASE 
+        //                    WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+        //                    WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+        //                    WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+        //                    ELSE tr.travelDestination                             
+        //                END AS travelDestination, 
+        //                CASE 
+        //                    WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+        //                    WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+        //                    WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+        //                    WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+        //                END AS travelDates, 
+        //                tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+        //            FROM travelRequest tr
+        //            LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+        //            WHERE tr.travelReqStatus != 'Draft'";
+
+        //        // Set up the database connection and command
+        //        using (SqlConnection connection = new SqlConnection(connectionString))
+        //        using (SqlCommand command = new SqlCommand(query, connection))
+        //        {
+
+        //            try
+        //            {
+        //                // Open the connection
+        //                connection.Open();
+
+        //                // Execute the query
+        //                SqlDataReader reader = command.ExecuteReader();
+
+        //                // Bind the reader result to the GridView
+        //                travelRequests.DataSource = reader;
+        //                travelRequests.DataBind();
+
+        //                // Close the reader
+        //                reader.Close();
+        //            }
+        //            catch (SqlException ex)
+        //            {
+        //                // Log the exception or display a user-friendly error message
+        //                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+        //                Response.Write("<script>alert('An error occurred during route request enrollment. Please try again.')</script>");
+        //                // Log additional information from the SQL exception
+        //                for (int i = 0; i < ex.Errors.Count; i++)
+        //                {
+        //                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+
+        //    }
+
+
+        //}
+
+        private void DisplayRequests(string sortExpression = null, string sortDirection = null)
         {
             string status = Session["reqStatus"]?.ToString();
+            statusLabel.Text = "List of Requests: " + status;
 
             if (!string.IsNullOrEmpty(status))
             {
-
-                // Construct the SQL query using parameterized queries to prevent SQL injection
-                //string query = "SELECT trave travelReqStatus, travelType, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelDestination, travelDU, travelProjectCode, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
-                string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
-                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
-                        CASE 
-                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
-                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
-                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
-                            ELSE tr.travelDestination                             
-                        END AS travelDestination, 
-                       CASE 
-                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
-                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
-                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
-                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
-                        END AS travelDates, 
-                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
-                FROM travelRequest tr
-                LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
-                WHERE tr.travelReqStatus = @Status";
-
-                // Set up the database connection and command
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                using (SqlCommand command = new SqlCommand(query, connection))
+                if (status == "ALL")
                 {
-                    // Add parameters
-                    command.Parameters.AddWithValue("@Status", status);
+                    DisplayAllRequests(sortExpression, sortDirection);
+                }
+                else
+                {
+                    string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                CASE 
+                    WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                    WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                    WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                    ELSE tr.travelDestination                             
+                END AS travelDestination, 
+                CASE 
+                    WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                    WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                    WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                    WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+                END AS travelDates, 
+                tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+            FROM travelRequest tr
+            LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+            WHERE tr.travelReqStatus = @Status";
 
-                    try
+                    Session["newStatus"] = status.ToString();
+                    string newStat = Session["newStatus"].ToString();
+                    if (!string.IsNullOrEmpty(sortExpression))
                     {
-                        // Open the connection
-                        connection.Open();
-
-                        // Execute the query
-                        SqlDataReader reader = command.ExecuteReader();
-
-                        // Bind the reader result to the GridView
-                        travelRequests.DataSource = reader;
-                        travelRequests.DataBind();
-
-                        // Close the reader
-                        reader.Close();
+                        query += $" ORDER BY {sortExpression} {sortDirection}";
                     }
-                    catch (SqlException ex)
+
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Log the exception or display a user-friendly error message
-                        // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                        Response.Write("<script>alert('An error occurred during retrieval of Travel Request records. Please try again.')</script>");
-                        // Log additional information from the SQL exception
-                        for (int i = 0; i < ex.Errors.Count; i++)
+                        command.Parameters.AddWithValue("@Status", status);
+
+                        try
                         {
-                            Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                            connection.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+                            travelRequests.DataSource = reader;
+                            travelRequests.DataBind();
+                            reader.Close();
+                        }
+                        catch (SqlException ex)
+                        {
+                            Response.Write("<script>alert('An error occurred during retrieval of Travel Request records. Please try again.')</script>");
+                            for (int i = 0; i < ex.Errors.Count; i++)
+                            {
+                                Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                            }
                         }
                     }
                 }
             }
-
-            // Remove the reqStatus session variable after displaying the requests
+            else
+            {
+                DisplayAllRequests(sortExpression, sortDirection);
+            }
             Session.Remove("reqStatus");
         }
-        private void DisplayAllRequests()
+
+        private void DisplayAllRequests(string sortExpression = null, string sortDirection = null)
         {
-            string userID = Session["userID"]?.ToString();
+            statusLabel.Text = "List of Requests: ALL ";
+
             try
             {
-
-                // Construct the SQL query using parameterized queries to prevent SQL injection
+                // Construct the SQL query
                 string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
-                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
-                        CASE 
-                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
-                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
-                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
-                            ELSE tr.travelDestination                             
-                        END AS travelDestination, 
-                        CASE 
-                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
-                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
-                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
-                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
-                        END AS travelDates, 
-                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
-                    FROM travelRequest tr
-                    LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
-                    WHERE tr.travelReqStatus != 'Draft'";
+                tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                CASE 
+                    WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                    WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                    WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                    ELSE tr.travelDestination                             
+                END AS travelDestination, 
+                CASE 
+                    WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                    WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                    WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                    WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+                END AS travelDates, 
+                tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+            FROM travelRequest tr
+            LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+            WHERE tr.travelReqStatus != 'Draft'";
+
+                // Append sorting
+                if (!string.IsNullOrEmpty(sortExpression))
+                {
+                    query += $" ORDER BY {sortExpression} {sortDirection}";
+                }
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Add parameters
-                    command.Parameters.AddWithValue("@UserID", userID);
-
                     try
                     {
                         // Open the connection
@@ -170,9 +322,7 @@ namespace TravelDesk.Admin
                     catch (SqlException ex)
                     {
                         // Log the exception or display a user-friendly error message
-                        // Example: Log.Error("An error occurred during travel request enrollment", ex);
                         Response.Write("<script>alert('An error occurred during route request enrollment. Please try again.')</script>");
-                        // Log additional information from the SQL exception
                         for (int i = 0; i < ex.Errors.Count; i++)
                         {
                             Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
@@ -182,10 +332,55 @@ namespace TravelDesk.Admin
             }
             catch
             {
+                // Handle exception
+            }
+        }
 
+        protected void travelRequests_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            string sortDirection = GetSortDirection(e.SortExpression);
+            string status = Session["newStatus"]?.ToString();
+
+            if (!string.IsNullOrEmpty(status) && status != "ALL")
+            {
+                DisplayRequests(e.SortExpression, sortDirection);
+            }
+            else
+            {
+                DisplayAllRequests(e.SortExpression, sortDirection);
+            }
+        }
+
+        private string GetSortDirection(string column)
+        {
+            // By default, set the sort direction to ascending.
+            string sortDirection = "ASC";
+
+            // Retrieve the last column that was sorted.
+            string sortExpression = ViewState["SortExpression"] as string;
+
+            if (sortExpression != null)
+            {
+                // Check if the same column is being sorted.
+                // Otherwise, the default value can be returned.
+                if (sortExpression == column)
+                {
+                    string lastDirection = ViewState["SortDirection"] as string;
+                    if ((lastDirection != null) && (lastDirection == "ASC"))
+                    {
+                        sortDirection = "DESC";
+                    }
+                }
             }
 
+            // Save new values in ViewState.
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = column;
+
+            return sortDirection;
         }
+
+
         protected void viewDetails_Click(object sender, EventArgs e)
         {
             //Get the GridViewRow that contains the clicked button
@@ -271,44 +466,289 @@ namespace TravelDesk.Admin
             }
         }
 
-        protected void travelRequests_Sorting(object sender, GridViewSortEventArgs e)
+
+        protected void sortData_Click(object sender, EventArgs e)
         {
-            // Retrieve the DataTable from the GridView's DataSource
-            DataTable dt = travelRequests.DataSource as DataTable;
+            string sort = sortbyRequest.Text; // Assuming sortData.Text contains the sorting criteria
+            //string status = Session["reqStatus"]?.ToString();
+            string esc = "List of Requests:";
+            string currentStat = statusLabel.Text;
+            string status = currentStat.Replace(esc, "").Trim();
 
-            if (dt != null)
+
+            if (status == "ALL")
             {
-                // Sort the DataTable based on the clicked column
-                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
-
-                // Rebind the sorted data to the GridView
-                travelRequests.DataSource = dt;
-                travelRequests.DataBind();
-            }
-        }
-        private string GetSortDirection(string column)
-        {
-            // By default, set the sort direction to ascending
-            string sortDirection = "ASC";
-
-            // Retrieve the sort expression and sort direction from ViewState
-            string sortExpression = ViewState["SortExpression"] as string;
-            string sortDir = ViewState["SortDirection"] as string;
-
-            // If the clicked column is the same as the previously sorted column, reverse the sort direction
-            if (sortExpression != null && sortExpression.Equals(column))
-            {
-                if (sortDir != null && sortDir.Equals("ASC"))
+                //SORTING OF ALL REQUESTS
+                if (sort == "All") 
                 {
-                    sortDirection = "DESC";
+                    try
+                    {
+                        // Construct the SQL query using parameterized queries to prevent SQL injection
+                        string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                            ELSE tr.travelDestination                             
+                        END AS travelDestination, 
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+                        END AS travelDates, 
+                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+                    FROM travelRequest tr
+                    LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+                    WHERE tr.travelReqStatus != 'Draft' ";
+
+                        // Set up the database connection and command
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+
+                            try
+                            {
+                                // Open the connection
+                                connection.Open();
+
+                                // Execute the query
+                                SqlDataReader reader = command.ExecuteReader();
+
+                                // Bind the reader result to the GridView
+                                travelRequests.DataSource = reader;
+                                travelRequests.DataBind();
+
+                                // Close the reader
+                                reader.Close();
+                            }
+                            catch (SqlException ex)
+                            {
+                                // Log the exception or display a user-friendly error message
+                                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                                Response.Write("<script>alert('An error occurred during sorting of ALL requests - ALL SORT. Please try again.')</script>");
+                                // Log additional information from the SQL exception
+                                for (int i = 0; i < ex.Errors.Count; i++)
+                                {
+                                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle any other exceptions
+                        Response.Write("<script>alert('An unexpected error occurred. Please try again later.')</script>");
+                    }
+
+                }
+                else
+                {
+                    try
+                    {
+                        // Construct the SQL query using parameterized queries to prevent SQL injection
+                        string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                            ELSE tr.travelDestination                             
+                        END AS travelDestination, 
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+                        END AS travelDates, 
+                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+                    FROM travelRequest tr
+                    LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+                    WHERE tr.travelReqStatus != 'Draft' AND tr.travelType = @sort";
+
+                        // Set up the database connection and command
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            // Add parameters
+                            command.Parameters.AddWithValue("@sort", sort);
+
+                            try
+                            {
+                                // Open the connection
+                                connection.Open();
+
+                                // Execute the query
+                                SqlDataReader reader = command.ExecuteReader();
+
+                                // Bind the reader result to the GridView
+                                travelRequests.DataSource = reader;
+                                travelRequests.DataBind();
+
+                                // Close the reader
+                                reader.Close();
+                            }
+                            catch (SqlException ex)
+                            {
+                                // Log the exception or display a user-friendly error message
+                                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                                Response.Write("<script>alert('An error occurred STATUS - SPECIFIC. Please try again.')</script>");
+                                // Log additional information from the SQL exception
+                                for (int i = 0; i < ex.Errors.Count; i++)
+                                {
+                                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle any other exceptions
+                        Response.Write("<script>alert('An unexpected error occurred. Please try again later.')</script>");
+                    }
+
+                }
+            } 
+            else
+            {
+
+                //SORTING OF STATUS-SPECIFIC REQUEST
+                if (sort == "All")
+                {
+                    try
+                    {
+                        // Construct the SQL query using parameterized queries to prevent SQL injection
+                        string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                            ELSE tr.travelDestination                             
+                        END AS travelDestination, 
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+                        END AS travelDates, 
+                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+                    FROM travelRequest tr
+                    LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+                    WHERE tr.travelReqStatus != 'Draft' AND tr.travelReqStatus = @status";
+
+                        // Set up the database connection and command
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            // Add parameters
+                            command.Parameters.AddWithValue("@status", status);
+
+                            try
+                            {
+                                // Open the connection
+                                connection.Open();
+
+                                // Execute the query
+                                SqlDataReader reader = command.ExecuteReader();
+
+                                // Bind the reader result to the GridView
+                                travelRequests.DataSource = reader;
+                                travelRequests.DataBind();
+
+                                // Close the reader
+                                reader.Close();
+                            }
+                            catch (SqlException ex)
+                            {
+                                // Log the exception or display a user-friendly error message
+                                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                                Response.Write("<script>alert('An error occurred during travel request enrollment. Please try again.')</script>");
+                                // Log additional information from the SQL exception
+                                for (int i = 0; i < ex.Errors.Count; i++)
+                                {
+                                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle any other exceptions
+                        Response.Write("<script>alert('An unexpected error occurred. Please try again later.')</script>");
+                    }
+
+                }
+                else
+                {
+                    try
+                    {
+                        // Construct the SQL query using parameterized queries to prevent SQL injection
+                        string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                            ELSE tr.travelDestination                             
+                        END AS travelDestination, 
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+                        END AS travelDates, 
+                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+                    FROM travelRequest tr
+                    LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+                    WHERE tr.travelReqStatus != 'Draft' AND tr.travelReqStatus = @status AND tr.travelType = @sort";
+
+                        // Set up the database connection and command
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            // Add parameters
+                            command.Parameters.AddWithValue("@sort", sort);
+                            command.Parameters.AddWithValue("@status", status);
+
+                            try
+                            {
+                                // Open the connection
+                                connection.Open();
+
+                                // Execute the query
+                                SqlDataReader reader = command.ExecuteReader();
+
+                                // Bind the reader result to the GridView
+                                travelRequests.DataSource = reader;
+                                travelRequests.DataBind();
+
+                                // Close the reader
+                                reader.Close();
+                            }
+                            catch (SqlException ex)
+                            {
+                                // Log the exception or display a user-friendly error message
+                                // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                                Response.Write("<script>alert('An error occurred during travel request enrollment. Please try again.')</script>");
+                                // Log additional information from the SQL exception
+                                for (int i = 0; i < ex.Errors.Count; i++)
+                                {
+                                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle any other exceptions
+                        Response.Write("<script>alert('An unexpected error occurred. Please try again later.')</script>");
+                    }
+
                 }
             }
-
-            // Store the current sort expression and sort direction in ViewState
-            ViewState["SortExpression"] = column;
-            ViewState["SortDirection"] = sortDirection;
-
-            return sortDirection;
         }
+
     }
 }
