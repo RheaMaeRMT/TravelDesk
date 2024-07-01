@@ -8,39 +8,6 @@
             Width: 260px;
             margin-left:80px;
         }
-        .auto-style1 {
-            margin-left: 97px;
-        }
-        .auto-style3 {
-            margin-left: 76px;
-        }
-        .auto-style4 {
-            margin-left: 83px;
-        }
-        .auto-style5 {
-            margin-left: 152px;
-        }
-        .auto-style6 {
-            margin-left: 106px;
-        }
-        .auto-style7 {
-            margin-left: 88px;
-        }
-        .auto-style9 {
-            margin-left: 65px;
-        }
-        .auto-style10 {
-            margin-left: 114px;
-        }
-        .auto-style11 {
-            margin-left: 78px;
-        }
-        .auto-style12 {
-            margin-left: 92px;
-        }
-        .auto-style13 {
-            margin-left: 75px;
-        }
         .required{
             color:red;
             font-size:14px;
@@ -121,16 +88,17 @@
     
 </script>
 <script>
-    function sendEmailWithDriveLinks(receiverEmail, name, formattedLinks) {
+    function sendEmailWithDriveLinks(receiverEmail, name, message,formattedLinks) {
         const emailData = {
             to_email: receiverEmail,
             to_name: name,
+            message: message,
             from_name: "Travel Desk"
         };
 
         if (formattedLinks !== "") {
             
-            emailData.fileLinks = "Requirements:\n " + formattedLinks;
+            emailData.fileLinks = "Attachments:\n " + formattedLinks;
         }
 
         console.log("Email Data:", emailData);
@@ -138,7 +106,8 @@
         emailjs.send("service_6updv5w", "template_tp5wuwk", emailData) // Personal Email JS
             .then(function (response) {
                 console.log('Email Sent!', response);
-                window.location.replace("emailSent.aspx"); // Replace with your desired URL
+                alert("Email Sent !");
+                window.location.replace("VisaBilling.aspx"); // Replace with your desired URL
             }, function (error) {
                 alert("Email send failed");
                 console.error("Email send failed:", error);
@@ -199,7 +168,12 @@
                                                                                 <div class="card-block">
                                                                                     <p style="font-size:18px;color:white;background-color:#808080;padding-top:5px;padding-left:5px"> Visa Requirements</p>
                                                                                 </div>
-                                                                                    <asp:Label ID="Label12" runat="server" Text="Requirements to be completed by traveller"  Style="margin-left: 30px;font-size:16px"></asp:Label> <br /> <br />
+                                                                                    <asp:Label ID="Label14" runat="server" Text="Message:"  Style="margin-left: 30px;font-size:16px"></asp:Label>
+                                                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="emailBody" ErrorMessage="*" CssClass="required"></asp:RequiredFieldValidator>
+                                                                                <br /> <br />
+                                                                                <asp:TextBox runat="server" ID="emailBody" Style="margin-left: 100px;font-size:16px" TextMode="MultiLine" Height="122px" Width="836px"></asp:TextBox>
+                                                                                <br /><br /><br />
+                                                                                    <asp:Label ID="Label12" runat="server" Text="Attach Files:"  Style="margin-left: 30px;font-size:16px"></asp:Label> <br /> <br />
                                                                                 <asp:FileUpload runat="server" ID="requirementFiles" AllowMultiple="true" Style="margin-left: 60px; border-radius: 5px;font-size:16px" />                                              
                                                                                 <asp:Button runat="server" class="btn btn-primary" Text="Upload Files" ID="attachFiles" Style="margin-left: 10px; border-radius: 5px;font-size:14px" OnClick="attachFiles_Click"/> <br /><br />
                                                                                   <asp:PlaceHolder ID="fileListPlaceholder" runat="server"></asp:PlaceHolder>

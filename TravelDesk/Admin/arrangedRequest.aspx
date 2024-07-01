@@ -24,6 +24,18 @@
 
 </script>
 
+<script type="text/javascript">
+    window.onload = function () {
+        // Check if the export was successful
+        if ('<%= Session["exportSuccess"] %>' === 'True') {
+            // Display an alert message
+            alert('PDF Exported Successfully!');
+            // Clear the session flag
+            <% Session["exportSuccess"] = null; %>
+        }
+    };
+</script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
         <div class="pcoded-main-container">
@@ -54,7 +66,7 @@
 
 
                                                     <div class="card-block" style="margin-left:auto">
-                                                          <asp:LinkButton runat="server" ID="exportPDF" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClientClick="showConfirmModal(); return false" OnClick="exportPDF_Click"> <i class="ti-export" style="color:white"></i> Export PDF </asp:LinkButton>     
+                                                          <asp:LinkButton runat="server" ID="exportPDF" class="btn btn-primary" style="color:white;font-size:16px;border-radius:20px;width:200px;" OnClientClick="showConfirmModal(); return false"> <i class="ti-export" style="color:white"></i> Export PDF </asp:LinkButton>     
                                                           <asp:LinkButton runat="server" ID="sendEmailbtn" class="btn btn-primary" style="display:none;color:white;font-size:16px;border-radius:20px;width:200px" OnClientClick="showModal(); return false"> <i class="ti-email" style="color:white"></i> send to email </asp:LinkButton>     
                                                     </div>
                                                     <center>
@@ -282,7 +294,7 @@
                                                                             </div>
                                                                             <div class="modal-body" style="font-size:16px"> <br />
                                                                                 <center>
-                                                                              <asp:Label ID="Label18" runat="server"> Travel Arrangement has been successfully exported and downloaded. </asp:Label> 
+                                                                              <asp:Label ID="Label18" runat="server"> Export and Download Travel Arrangement to PDF </asp:Label> 
                                                                                 <asp:Label ID="label" runat="server"> Do you wish to send a copy to </asp:Label> <br />
                                                                                     <asp:Label runat="server" Font-Bold="true" ID="employeeEmail"> </asp:Label>
 
@@ -305,12 +317,13 @@
                                                                             </div>
                                                                             <div class="modal-body" style="font-size:16px"> <br />
                                                                                 <center>
-                                                                              <asp:Label ID="Label39" runat="server"> Travel Arrangement has been exported to PDF</asp:Label> 
+                                                                              <asp:Label ID="Label39" runat="server" style="font-size:16px;font-weight:bold"> Export Travel Arrangement to PDF</asp:Label> 
                                                                                 <asp:Label ID="label40" runat="server"> </asp:Label> <br />
-                                                                                    <asp:Label runat="server" Font-Bold="true" ID="Label41"> Click button to Download </asp:Label>
+<%--                                                                                    <asp:Label runat="server" Font-Bold="true" ID="Label41"> Click button to Download </asp:Label>--%>
 
-                                                                                    <br /> <br />
-                                                                                         <asp:LinkButton runat="server" ID="confirmExport"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClick="confirmExport_Click"> <i class="ti-download" style="color:white"></i> Download </asp:LinkButton>     
+                                                                                    <br />
+<%--                                                                                         <asp:LinkButton runat="server" ID="exportPDFClick"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClick="exportPDF_Click1" > <i class="ti-export" style="color:white"></i> Export </asp:LinkButton>     --%>
+                                                                                         <asp:LinkButton runat="server" ID="confirmExport"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px" OnClick="confirmExport_Click"> <i class="ti-download" style="color:white"></i> Export </asp:LinkButton>    
                                                                                          <asp:LinkButton runat="server" ID="sendToEmail"  class="btn btn-primary" style="color:white;font-size:16px;border-radius:10px"  OnClick="sendToEmail_Click"> <i class="ti-share" style="color:white"></i> Email Traveler </asp:LinkButton>     
 
                                                                                 </center>

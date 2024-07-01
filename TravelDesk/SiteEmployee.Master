@@ -200,7 +200,7 @@
                                     </li>
                                 </ul>
 
-                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">REPORTS</div>
+<%--                                <div class="pcoded-navigation-label" data-i18n="nav.category.forms">REPORTS</div>
                                 <ul class="pcoded-item pcoded-left-item">
 
                                     <li class=" ">
@@ -211,7 +211,7 @@
                                             <span class="pcoded-mcaret"></span>
                                         </a>
                                     </li>
-                                </ul>
+                                </ul>--%>
 
                             </div>
                                 </div>

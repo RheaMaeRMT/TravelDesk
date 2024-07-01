@@ -177,7 +177,7 @@
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="arrangedCircle" data-hover-message="Requests that completed the travel arrangement process."><span>3</span></div>
-                                                                                        <div class="text">Arranged</div>
+                                                                                        <div class="text">Completed</div>
                                                                                     </div>
 <%--                                                                                    <div class="line"></div>
                                                                                     <div class="stage">

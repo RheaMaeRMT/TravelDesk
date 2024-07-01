@@ -41,7 +41,7 @@
                                  <div class="page-wrapper">
                                     <!-- Page-body start -->
                                     <div class="page-body">
-                                        <div class="row" style="color:white">
+                                        <div class="row" style="color:white;margin-left:150px">
                                             <div class="col-xl-3 col-md-6">
                                                 <div class="card" style="background-color:#09426a">
                                                     <div class="card-block">
@@ -64,7 +64,7 @@
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
                                                                 <asp:Button runat="server" ID="Approved" OnClick="approved_Click" CssClass="h4"  style="color:white"  BorderStyle="None" BackColor="Transparent"/> <br />
-                                                                <a class="m-b-0 a" data-hover-message="Requests that has been accepted for processing." >Processing Requests</a>
+                                                                <a class="m-b-0 a" data-hover-message="Requests that has been accepted for processing." >In-Progress Requests</a>
                                                             </div>
                                                             <div class="col-4 text-right">
                                                                 <i class="fa fa-check-circle f-28"></i>
@@ -88,22 +88,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6">
-                                                <div class="card" style="background-color:#09426a">
-                                                    <div class="card-block">
-                                                        <div class="row align-items-center">
-                                                            <div class="col-8">
-                                                                <asp:Button runat="server" ID="Arranged" OnClick="approved_Click" CssClass="h4"   style="color:white" BorderStyle="None" BackColor="Transparent"/> <br />
-                                                                <a class=" m-b-0 a" data-hover-message="Requests that completed the process and is closed." >Closed Requests</a>
-                                                            </div>
-                                                            <div class="col-4 text-right">
-                                                                <i class="fa fa-check-square f-28"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
+                                        
                                     </div>
                                     <!-- Page-body end -->
                                 </div>

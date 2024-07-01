@@ -449,7 +449,7 @@ namespace TravelDesk.Admin
                                     {
                                         Session["clickedVRequest"] = requestID;
                                         Session["visaStatus"] = status;
-                                        Session["processStat"] = processStat;
+                                        Session["processStat"] = "";
 
                                        //redirect to the next page after clicking the view button
                                         Response.Redirect("VisaRequests.aspx");

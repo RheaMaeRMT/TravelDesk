@@ -33,9 +33,9 @@ namespace TravelDesk.Admin
                         {
                             string process = Session["processStat"].ToString();
 
-                            if (process == "Processing")
+                            if (process == "")
                             {
-                                processVisa.Text = "Proceed to" + " " + process;
+                                processVisa.Text = "Proceed";
                             }
                             //else if (process == "Billing")
                             //{
@@ -51,8 +51,7 @@ namespace TravelDesk.Admin
                     }
                     else if (status == "Requirements Sent")
                     {
-                        string process = Session["processStat"].ToString();
-                        processVisa.Text = "Proceed to" + " " + process;
+                        processVisa.Text = "Proceed to Billing";
 
                     }
                     else if (status == "Completed")
@@ -279,9 +278,15 @@ namespace TravelDesk.Admin
                         {
                             Response.Redirect("VisaBilling.aspx");
                         }
+                        else
+                        {
+                            updateProcessStatus();
+                            Response.Redirect("VisaRequestDetails.aspx");
+                        }
                     }
-                    else if (status == "Completed")
+                    else if (status == "Requirements Sent")
                     {
+                        Response.Redirect("VisaBilling.aspx");
 
                     }
                     else
@@ -336,6 +341,52 @@ namespace TravelDesk.Admin
                 // Log the exception or display a user-friendly error message
                 // Example: Log.Error("An error occurred during travel request enrollment", ex);
                 Response.Write("<script>alert('An error occurred during insertion of date submitted and draft state. Please try again.')</script>");
+                // Log additional information from the SQL exception
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
+
+        }
+        private void updateProcessStatus()
+        {
+            try
+            {
+                if (Session["clickedRequest"] != null)
+                {
+                    string requestId = Session["clickedRequest"].ToString();
+
+                    using (var db = new SqlConnection(connectionString))
+                    {
+                        db.Open();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "UPDATE travelRequest SET travelProcessStat = @status WHERE travelRequestID = @ID";
+
+                            // Set parameters for updating request status
+                            cmd.Parameters.AddWithValue("@status", "Processing");
+                            cmd.Parameters.AddWithValue("@ID", requestId);
+
+                            Session["processStat"] = "Processing";
+                            // Execute the update query
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                else
+                {
+                    // Session is expired, redirect to login page
+                    Response.Write("<script>alert('Session Expired! Please login again.'); window.location.href = '../LoginPage.aspx'; </script>");
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Log the exception or display a user-friendly error message
+                // Example: Log.Error("An error occurred during travel request status update", ex);
+                Response.Write("<script>alert('An error occurred during travel request status update. Please try again.')</script>");
                 // Log additional information from the SQL exception
                 for (int i = 0; i < ex.Errors.Count; i++)
                 {

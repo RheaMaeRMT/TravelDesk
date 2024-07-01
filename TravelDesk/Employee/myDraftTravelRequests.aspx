@@ -20,9 +20,7 @@
                                 <div class="page-wrapper">
                                     <!-- Page-body start -->
                                        <div class="page-body">
-                                                    <div class="card-block">
-                                                        <asp:LinkButton runat="server" Text="Drafts" class="btn btn-primary" ID="viewDrafts" OnClick="viewDrafts_Click"></asp:LinkButton> <br />
-                                                    </div> <br />
+<br />
                                             <asp:GridView CssClass="table container" class="table-hover" ID="travelRequests" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" AutoGenerateColumns="False" CellSpacing="2" ForeColor="Black">               
                                                 <Columns>   
                                                     <asp:TemplateField>

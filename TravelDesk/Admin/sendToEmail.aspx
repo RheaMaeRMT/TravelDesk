@@ -31,7 +31,8 @@
             to_email: receiverEmail,
             to_name: name,
             from_name: "Travel Desk",
-            message: message
+            message: message,
+            fileLinks: formattedLinks
         };
 
         if (formattedLinks !== "") {

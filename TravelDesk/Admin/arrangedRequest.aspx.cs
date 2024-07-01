@@ -2167,11 +2167,7 @@ namespace TravelDesk.Admin
 
         }
 
-        protected void exportPDF_Click(object sender, EventArgs e)
-        {
-            Page.RegisterAsyncTask(new PageAsyncTask(exportasPdfAsync));
 
-        }
 
         //protected void sendFile_Click(object sender, EventArgs e)
         //{

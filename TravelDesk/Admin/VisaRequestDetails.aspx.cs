@@ -186,6 +186,8 @@ namespace TravelDesk.Admin
 
                 string receiverEmail = Session["userEmail"].ToString();
                 string name = Session["travellerName"].ToString();
+                string emailMessage = emailBody.Text;
+                emailMessage = HttpUtility.JavaScriptStringEncode(emailMessage);
 
                 // Retrieve drive links from session
                 List<string> driveLinks = (List<string>)Session["UploadedDriveLinks"] ?? new List<string>();
@@ -197,7 +199,7 @@ namespace TravelDesk.Admin
                 string formattedLinks = driveLinks.Count > 0 ? HttpUtility.JavaScriptStringEncode(GetFormattedLinks(driveLinks)) : "";
 
                 // Pass the email details including the uploaded file links to the JavaScript function
-                string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{name}', '{formattedLinks}');</script>";
+                string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{name}', '{emailMessage}', '{formattedLinks}');</script>";
                 ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
 
 

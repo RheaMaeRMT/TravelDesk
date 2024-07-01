@@ -133,6 +133,7 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
 
             }
             Session.Remove("UploadedDriveLinks");
+
         }
 
         private string GetFormattedLinks(List<string> driveLinks)
@@ -451,9 +452,9 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
 
         protected void sendEmail_Click(object sender, EventArgs e)
         {
+            attachArrangementPDF();
             updateProcessStatus();
             loadDetailsForEmail();
-            attachArrangementPDF();
 
         }
 
@@ -523,6 +524,7 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
             {
                 Response.Write("<script>alert('An error occurred: " + Server.HtmlEncode(ex.Message) + "')</script>");
             }
+
         }
 
         private void updateProcessStatus()

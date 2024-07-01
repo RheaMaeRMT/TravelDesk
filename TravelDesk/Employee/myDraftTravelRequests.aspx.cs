@@ -40,7 +40,7 @@ namespace TravelDesk.Employee
             string userID = Session["userID"]?.ToString();
             string status = Session["reqStatus"]?.ToString();
 
-            viewDrafts.Style["display"] = "none";
+            ////viewDrafts.Style["display"] = "none";
 
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
@@ -86,12 +86,12 @@ namespace TravelDesk.Employee
             // Remove the reqStatus session variable after displaying the requests
             Session.Remove("reqStatus");
         }
-        protected void viewDrafts_Click(object sender, EventArgs e)
-        {
-            Session["reqStatus"] = "Draft";
-            Response.Write("<script>window.location.href = 'myDraftRequests.aspx'; </script>");
+        ////protected void viewDrafts_Click(object sender, EventArgs e)
+        ////{
+        ////    Session["reqStatus"] = "Draft";
+        ////    Response.Write("<script>window.location.href = 'myDraftRequests.aspx'; </script>");
 
-        }
+        ////}
 
         protected void viewDetails_Click(object sender, EventArgs e)
         {

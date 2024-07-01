@@ -30,9 +30,6 @@ namespace TravelDesk.Employee
                 int pendingCount = populateDashboardProcessing();
                 Processing.Text = pendingCount.ToString();
 
-                int arrangedCount = populateDashboardArranged();
-                Arranged.Text = arrangedCount.ToString();
-
                 int completedCount = populateDashboardCompleted();
                 New.Text = completedCount.ToString();
 
