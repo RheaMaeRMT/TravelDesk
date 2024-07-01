@@ -433,6 +433,7 @@
     <Content Include="Admin\TravelReport.aspx" />
     <Content Include="Admin\TravelRequests.aspx" />
     <Content Include="Admin\VisaApplication.aspx" />
+    <Content Include="Admin\VisaReports.aspx" />
     <Content Include="Admin\VisaRequestDetails.aspx" />
     <Content Include="Admin\VisaRequests.aspx" />
     <Content Include="ApproverLandingPage.aspx" />
@@ -678,6 +679,17 @@
     <Content Include="DB_TravelDeskDataSet.xss">
       <DependentUpon>DB_TravelDeskDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="DB_TravelDeskVisaDataSet.xsc">
+      <DependentUpon>DB_TravelDeskVisaDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DB_TravelDeskVisaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DB_TravelDeskVisaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DB_TravelDeskVisaDataSet.xss">
+      <DependentUpon>DB_TravelDeskVisaDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="images\2ndLogoTD.png" />
     <Content Include="images\icons8-plane-50.png" />
@@ -835,6 +847,13 @@
     <Compile Include="Admin\VisaApplication.aspx.designer.cs">
       <DependentUpon>VisaApplication.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\VisaReports.aspx.cs">
+      <DependentUpon>VisaReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\VisaReports.aspx.designer.cs">
+      <DependentUpon>VisaReports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\VisaRequestDetails.aspx.cs">
       <DependentUpon>VisaRequestDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -949,6 +968,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DB_TravelDeskDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DB_TravelDeskVisaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB_TravelDeskVisaDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Employee\DomesticRequest.aspx.cs">
       <DependentUpon>DomesticRequest.aspx</DependentUpon>
@@ -1140,6 +1164,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Admin\Reports\InternationalReport.rdlc" />
     <EmbeddedResource Include="Admin\Reports\TravelReport.rdlc" />
+    <EmbeddedResource Include="Admin\Reports\VisaRequestReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

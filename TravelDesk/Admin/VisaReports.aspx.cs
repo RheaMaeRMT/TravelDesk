@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace TravelDesk.Admin
 {
-	public partial class InternationalReport : System.Web.UI.Page
+    public partial class VisaReports : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DB_TravelDesk"].ConnectionString;
 
@@ -18,23 +18,20 @@ namespace TravelDesk.Admin
         {
             if (!IsPostBack)
             {
-                string travelType = "Visa Request"; // or "International Travel"
-                LoadReport(travelType);
+                LoadReport();
             }
 
         }
-
-        private void LoadReport(string travelType)
+        private void LoadReport()
         {
-            string reportPath = Server.MapPath("~/Admin/Reports/InternationalReport.rdlc");
+            string reportPath = Server.MapPath("~/Admin/Reports/VisaRequestReport.rdlc");
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("GetTravelReport", conn);
+                SqlCommand cmd = new SqlCommand("GetVisaReport", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                // Add the travelType parameter
-                cmd.Parameters.Add(new SqlParameter("@TravelType", travelType));
+           
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 System.Data.DataSet ds = new System.Data.DataSet();
@@ -47,7 +44,6 @@ namespace TravelDesk.Admin
                 ReportViewer1.LocalReport.Refresh();
             }
         }
-
 
     }
 }
