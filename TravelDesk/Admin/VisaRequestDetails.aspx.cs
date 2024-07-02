@@ -491,5 +491,42 @@ namespace TravelDesk.Admin
             }
 
         }
+
+        //DELETE PDF FILE (1 BY 1)
+        protected void DeleteFileButton_Click(object sender, EventArgs e)
+        {
+            string filePath = hiddenFilePath.Value;
+            DeleteFile(filePath);
+
+            // Refresh the file list after deletion
+            string empFname = Session["travellerName"].ToString();
+            string subFolder = "otherFiles";
+            string path = Path.Combine(empFname, subFolder);
+            string folderPath = Path.Combine(Server.MapPath("~/PDFs/VisaRequest/VisaRequirements/"), empFname);
+            ListUploadedFiles(folderPath);
+        }
+
+        protected void DeleteFile(string filePath)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    Response.Write("<script>alert('File deleted successfully.')</script>");
+                }
+                else
+                {
+                    Response.Write("<script>alert('File not found.')</script>");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error deleting file: " + ex.Message);
+                Response.Write("<script>alert('An error occurred while deleting the file. Please try again.')</script>");
+                Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
+            }
+        }
+
     }
 }

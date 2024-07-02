@@ -25,13 +25,13 @@ namespace TravelDesk.Employee
             if (!IsPostBack)
             {
                 int approvedCount = populateDashboardApproved();
-                Approved.Text = approvedCount.ToString();
+                Approved.Text = approvedCount.ToString(); //IN-PROGRESS
 
                 int pendingCount = populateDashboardProcessing();
-                Processing.Text = pendingCount.ToString();
+                Processing.Text = pendingCount.ToString(); //COMPLETED
 
                 int completedCount = populateDashboardCompleted();
-                New.Text = completedCount.ToString();
+                New.Text = completedCount.ToString(); //NEW
 
             }
 
@@ -91,7 +91,6 @@ namespace TravelDesk.Employee
         //POPULATE NUMBERS IN THE DASHBOARD
         private int populateDashboardApproved()
         {
-
             int countApproved = 0;
 
             try
@@ -106,7 +105,11 @@ namespace TravelDesk.Employee
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "SELECT COUNT(*) FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = 'In-progress'";
+                            cmd.CommandText = @"
+                        SELECT COUNT(*) 
+                        FROM travelRequest 
+                        WHERE travelUserID = @UserID 
+                          AND (travelReqStatus = 'In-progress' OR travelReqStatus = 'Requirements Sent')";
                             cmd.Parameters.AddWithValue("@UserID", currentUser);
 
                             object result = cmd.ExecuteScalar();
@@ -116,18 +119,15 @@ namespace TravelDesk.Employee
                             }
                         }
                     }
-
                 }
                 else
                 {
-                    Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
-
+                    Response.Write("<script>alert('Session Expired!'); window.location.href = '../LoginPage.aspx';</script>");
                 }
             }
             catch (SqlException ex)
             {
                 // Log the exception or display a user-friendly error message
-                // Example: Log.Error("An error occurred during travel request enrollment", ex);
                 Response.Write("<script>alert('An error occurred during travel request enrollment. Please try again.')</script>");
                 // Log additional information from the SQL exception
                 for (int i = 0; i < ex.Errors.Count; i++)
@@ -136,11 +136,7 @@ namespace TravelDesk.Employee
                 }
             }
 
-
             return countApproved;
-
-
-
         }
         private int populateDashboardProcessing()
         {
@@ -306,7 +302,9 @@ namespace TravelDesk.Employee
             if (clicked == "Approved")
             {
                 string status = "In-progress";
+                string status2 = "Requirements Sent";
                 Session["reqStatus"] = status;
+                Session["reqStatus2"] = status2;
 
 
                 Response.Write("<script> window.location.href = 'myTravelRequests.aspx'; </script>");

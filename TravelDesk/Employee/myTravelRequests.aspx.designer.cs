@@ -24,6 +24,24 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.LinkButton viewDrafts;
 
         /// <summary>
+        /// sortbyRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList sortbyRequest;
+
+        /// <summary>
+        /// sortData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button sortData;
+
+        /// <summary>
         /// travelRequests control.
         /// </summary>
         /// <remarks>

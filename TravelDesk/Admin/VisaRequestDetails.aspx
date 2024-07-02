@@ -88,6 +88,14 @@
     
 </script>
 <script>
+    function deleteFile(filePath) {
+        // Set the hidden field value to the file path
+        document.getElementById('<%= hiddenFilePath.ClientID %>').value = filePath;
+
+                // Trigger the postback to delete the file
+                __doPostBack('<%= deleteFileButton.UniqueID %>', '');
+    }
+
     function sendEmailWithDriveLinks(receiverEmail, name, message,formattedLinks) {
         const emailData = {
             to_email: receiverEmail,
@@ -175,8 +183,15 @@
                                                                                 <br /><br /><br />
                                                                                     <asp:Label ID="Label12" runat="server" Text="Attach Files:"  Style="margin-left: 30px;font-size:16px"></asp:Label> <br /> <br />
                                                                                 <asp:FileUpload runat="server" ID="requirementFiles" AllowMultiple="true" Style="margin-left: 60px; border-radius: 5px;font-size:16px" />                                              
-                                                                                <asp:Button runat="server" class="btn btn-primary" Text="Upload Files" ID="attachFiles" Style="margin-left: 10px; border-radius: 5px;font-size:14px" OnClick="attachFiles_Click"/> <br /><br />
-                                                                                  <asp:PlaceHolder ID="fileListPlaceholder" runat="server"></asp:PlaceHolder>
+                                                                                <asp:Button runat="server" class="btn btn-primary" Text="Upload Files" ID="attachFiles" Style="margin-left: 10px; border-radius: 5px;font-size:14px" OnClick="attachFiles_Click" CausesValidation="False"/> <br /><br />
+                                                              <div class="card-block">
+                                                                    <asp:Label ID="attached" runat="server" style="display:none"> Attachments:</asp:Label> <br />
+
+                                                                <asp:PlaceHolder ID="fileListPlaceholder" runat="server"></asp:PlaceHolder>
+                                                                <asp:HiddenField ID="hiddenFilePath" runat="server" />
+                                                                <asp:HiddenField ID="hiddenFileLinks" runat="server" />
+                                                                  <asp:Button ID="deleteFileButton" runat="server" Text="Delete File" Style="display: none;" OnClick="DeleteFileButton_Click" />
+                                                              </div>        <br />
                                                                                 <asp:Button runat="server" class="btn btn-primary" Text="Send to Traveller" ID="sendToTraveller" Style="margin-left: 10px; border-radius: 5px;font-size:14px" OnClick="sendToTraveller_Click"/>
                                                                             </div>
                                                                             <div class="tab-pane" id="requestDetails" role="tabpanel">
