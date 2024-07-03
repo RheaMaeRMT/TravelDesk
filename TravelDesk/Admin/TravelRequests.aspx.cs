@@ -212,7 +212,7 @@ namespace TravelDesk.Admin
                 else
                 {
                     string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
-                tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                tr.travelLname + ',' +  ' ' + tr.travelFname AS FullName,  
                 CASE 
                     WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
                     WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
@@ -276,7 +276,7 @@ namespace TravelDesk.Admin
             {
                 // Construct the SQL query
                 string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
-                tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                tr.travelLname + ',' +  ' ' + tr.travelFname AS FullName,  
                 CASE 
                     WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
                     WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To

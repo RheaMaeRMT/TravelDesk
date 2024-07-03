@@ -57,6 +57,11 @@ namespace TravelDesk.Admin
                             processRequest.Text = "Proceed to " + process;
 
                         }
+                        else
+                        {
+                            processRequest.Text = "Process Request";
+
+                        }
                     }
                     else if (status == "Requirements Sent")
                     {

@@ -46,7 +46,7 @@
                                                     </asp:TemplateField>
                                                         <asp:BoundField DataField="travelReqStatus" HeaderText="Status" SortExpression="travelReqStatus" />
                                                         <asp:BoundField DataField="travelType" HeaderText="Type of Request" SortExpression="travelType" />
-                                                        <asp:BoundField DataField="FullName" HeaderText="Traveller Name" SortExpression="FullName" />
+                                                        <asp:BoundField DataField="FullName" HeaderText="Name of Traveler" SortExpression="FullName" />
                                                         <asp:BoundField DataField="travelDestination" HeaderText="Destination" SortExpression="travelDestination" />
                                                         <asp:BoundField DataField="travelDates" HeaderText="Travel Dates" SortExpression="travelDates" />
                                                         <asp:BoundField DataField="travelDU" HeaderText="Department Unit" SortExpression="travelDU" />

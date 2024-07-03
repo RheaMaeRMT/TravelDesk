@@ -47,6 +47,7 @@ namespace TravelDesk.Employee
             string userID = Session["userID"]?.ToString();
             string status = Session["reqStatus"]?.ToString();
             string status2 = Session["reqStatus2"]?.ToString();
+            statusLabel.Text = "List of Requests: " + status;
 
             viewDrafts.Style["display"] = "none";
 
