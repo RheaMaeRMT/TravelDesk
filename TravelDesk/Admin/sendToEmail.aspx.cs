@@ -126,10 +126,15 @@ You may check status of your flight at https://www.airasia.com/flightstatus/en/G
                 // Ensure the formatted links are encoded to be used in JavaScript
                 string formattedLinks = driveLinks.Count > 0 ? HttpUtility.JavaScriptStringEncode(GetFormattedLinks(driveLinks)) : "";
 
-                // Pass the email details including the uploaded file links to the JavaScript function
-                string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{message}', '{name}', '{formattedLinks}');</script>";
-                ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
 
+                //// Pass the email details including the uploaded file links to the JavaScript function
+                //string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{message}', '{name}', '{formattedLinks}');</script>";
+                //ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
+
+
+                // Pass the email details including the uploaded file links to the JavaScript function for preview
+                string script = $"<script>displayEmailPreview('{receiverEmail}', '{message}', '{name}', '{formattedLinks}');</script>";
+                ClientScript.RegisterStartupScript(this.GetType(), "DisplayEmailPreviewScript", script);
 
             }
             Session.Remove("UploadedDriveLinks");

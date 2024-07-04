@@ -6,6 +6,11 @@
             return false; // Prevents the default behavior of the button click event
 
         }
+        function showPreview() {
+            $('#previewModal').modal('show');
+            return false; // Prevents the default behavior of the button click event
+
+        }
         function deleteFile(filePath) {
             // Set the hidden field value to the file path
             document.getElementById('<%= hiddenFilePath.ClientID %>').value = filePath;
@@ -26,21 +31,43 @@
     
 </script>
 <script>
-    function sendEmailWithDriveLinks(receiverEmail, message, name, formattedLinks) {
+    function generateEmailPreview(emailData) {
+        return `
+        <pre>
+${emailData.message}
+
+${emailData.fileLinks}
+
+Please do not hesitate to reach out to me if you have any questions or require further information.
+
+Best Regards,
+Travel Desk
+        </pre>
+    `;
+    }
+
+    function displayEmailPreview(receiverEmail, message, name, formattedLinks) {
         const emailData = {
             to_email: receiverEmail,
             to_name: name,
             from_name: "Travel Desk",
             message: message,
-            fileLinks: formattedLinks
+            fileLinks: formattedLinks !== "" ? "Attached Files:\n " + formattedLinks : ""
         };
 
-        if (formattedLinks !== "") {
-            
-            emailData.fileLinks = "Attached Files:\n " + formattedLinks;
-        }
+        // Generate and display email preview
+        const emailPreview = generateEmailPreview(emailData);
+        document.getElementById('emailPreview').innerHTML = emailPreview;
 
-        console.log("Email Data:", emailData);
+        // Store emailData in a hidden element or a global variable for sending later
+        document.getElementById('hiddenEmailData').value = JSON.stringify(emailData);
+
+        // Show the modal
+        $('#previewModal').modal('show');
+    }
+
+    function sendEmailWithDriveLinks() {
+        const emailData = JSON.parse(document.getElementById('hiddenEmailData').value);
 
         emailjs.send("service_6updv5w", "template_p46ovxf", emailData) // Personal Email JS
             .then(function (response) {
@@ -51,6 +78,32 @@
                 console.error("Email send failed:", error);
             });
     }
+
+    //function sendEmailWithDriveLinks(receiverEmail, message, name, formattedLinks) {
+    //    const emailData = {
+    //        to_email: receiverEmail,
+    //        to_name: name,
+    //        from_name: "Travel Desk",
+    //        message: message,
+    //        fileLinks: formattedLinks
+    //    };
+
+    //    if (formattedLinks !== "") {
+            
+    //        emailData.fileLinks = "Attached Files:\n " + formattedLinks;
+    //    }
+
+    //    console.log("Email Data:", emailData);
+
+    //    emailjs.send("service_6updv5w", "template_p46ovxf", emailData) // Personal Email JS
+    //        .then(function (response) {
+    //            console.log('Email Sent!', response);
+    //            window.location.replace("emailSent.aspx"); // Replace with your desired URL
+    //        }, function (error) {
+    //            alert("Email send failed");
+    //            console.error("Email send failed:", error);
+    //        });
+    //}
 </script>
 <script src="https://alcdn.msauth.net/browser/2.18.0/js/msal-browser.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -175,7 +228,7 @@
                                                                   <asp:Button ID="deleteFileButton" runat="server" Text="Delete File" Style="display: none;" OnClick="DeleteFileButton_Click" />
                                                               </div>        
                                                         <div class="card-block" style="background-color:white">
-                                                             <asp:LinkButton runat="server" ID="sendEmail"  class="btn btn-primary" style="color:black;font-size:16px;border-radius:10px;background-color:gainsboro;border-color:transparent" OnClick="sendEmail_Click" > <i class="ti-email" style="color:black"></i> Send </asp:LinkButton>     
+                                                             <asp:LinkButton runat="server" ID="sendEmailpreview"  class="btn btn-primary" style="color:black;font-size:16px;border-radius:10px;background-color:gainsboro;border-color:transparent" OnClick="sendEmail_Click" > <i class="ti-email" style="color:black"></i> Send </asp:LinkButton>     
                                                            <asp:LinkButton runat="server" ID="attachFiles"  class="btn btn-primary"  style="color:black;font-size:16px;border-radius:10px;background-color:gainsboro;border-color:transparent" OnClientClick="showUpload(); return false"> <i class="ti-link" style="color:black"></i> Attach </asp:LinkButton>   <br />
 
 
@@ -202,6 +255,24 @@
 
                                                                                 </div>
                                                                                 </center>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                                                                    <div class="modal-dialog modal-md" role="document" style="max-width:fit-content;color:black;font-size:20px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">Email Preview</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>                                                                         
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                    <div id="emailPreview"></div>
+                                                                                    <input type="hidden" id="hiddenEmailData">
+                                                                                    <asp:LinkButton runat="server" ID="sendEmail"  class="btn btn-primary" style="color:black;font-size:16px;border-radius:10px;background-color:gainsboro;border-color:transparent" OnClientClick="sendEmailWithDriveLinks(); return false;"> <i class="ti-email" style="color:black"></i> Send </asp:LinkButton>     
 
                                                                             </div>
                                                                         </div>

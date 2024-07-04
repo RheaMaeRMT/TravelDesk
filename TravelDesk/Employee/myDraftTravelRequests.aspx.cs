@@ -45,7 +45,9 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted FROM travelRequest WHERE travelUserID = @UserID AND travelReqStatus = @Status";
+                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted " +
+                    "FROM travelRequest WHERE travelUserID = @UserID " +
+                    "AND travelReqStatus = @Status";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -124,12 +126,12 @@ namespace TravelDesk.Employee
                             {
                                 string type = reader["travelType"].ToString();
 
-                                if (type == "Domestic")
+                                if (type == "Domestic Travel")
                                 {
                                     //redirect to the next page after clicking the view button
                                     Response.Redirect("domesticRequestDetails.aspx");
                                 }
-                                else if (type == "International")
+                                else if (type == "International Travel")
                                 {
                                     //redirect to the next page after clicking the view button
                                     Response.Redirect("internationalRequestDetails.aspx");
