@@ -185,6 +185,9 @@
                                                                                         <div class="text">Completed</div>
                                                                                     </div>--%>
                                                                                 </div>
+                                                                                <div>
+                                                                                        <asp:Button runat="server" ID="completeDraft" Text="Complete Request" CssClass="btn btn-primary" OnClick="updateRequest_Click"/>
+                                                                                </div>
                                                                             </div>
                                                                             <div class="tab-pane" id="requestDetails" role="tabpanel">
 
@@ -363,6 +366,7 @@
                                                         </div>
                                                         <!-- Tab variant tab card start -->
                                                     </div>
+
                                                 </div>
                                     <!-- Page-body end -->
                                 </div>

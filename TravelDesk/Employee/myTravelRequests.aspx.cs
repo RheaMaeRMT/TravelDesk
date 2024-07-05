@@ -596,16 +596,16 @@ namespace TravelDesk.Employee
                             {
                                 string type = reader["travelType"].ToString();
 
-                                if (type == "Domestic Travel")
+                                if (type == "Domestic Travel" || type == "International Travel")
                                 {
                                     //redirect to the next page after clicking the view button
                                     Response.Redirect("domesticRequestDetails.aspx");
                                 }
-                                else if (type == "International Travel")
-                                {
-                                    //redirect to the next page after clicking the view button
-                                    Response.Redirect("internationalRequestDetails.aspx");
-                                }
+                                //else if (type == "International Travel")
+                                //{
+                                //    //redirect to the next page after clicking the view button
+                                //    Response.Redirect("internationalRequestDetails.aspx");
+                                //}
                                 else if (type == "Visa Request")
                                 {
                                     //redirect to the next page after clicking the view button

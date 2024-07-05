@@ -87,7 +87,18 @@ namespace TravelDesk.Employee
 
                                     string proof = reader["travelProofPath"].ToString();
                                     string remarks = reader["travelRemarks"].ToString();
+                                    string status = reader["travelReqStatus"].ToString();
 
+                                    //HIDE COMPLETE BUTTON IF DRAFT
+                                    if (status == "Draft")
+                                    {
+                                        completeDraft.Style["display"] = "block";
+                                    }
+                                    else
+                                    {
+                                        completeDraft.Style["display"] = "none";
+
+                                    }
 
 
                                     //FOR FLIGHT DETAILS - ROUTE
@@ -324,8 +335,6 @@ namespace TravelDesk.Employee
                                     }
 
 
-                                    string status = reader["travelReqStatus"].ToString();
-
                                     Session["currentStatus"] = status;
 
                                     //PROCEED TO GET THE STATUS AND DISPLAY IN TRACKING
@@ -434,14 +443,15 @@ namespace TravelDesk.Employee
                                 if (reader.Read())
                                 {
                                     // GET THE VALUE OF THE STATUS
-                                    string approvalStatus = reader["travelApprovalStat"].ToString();
-                                    if (approvalStatus == "Approved" || approvalStatus == "Processing" || approvalStatus == "Completed" || approvalStatus == "Arranged")
+                                    string approvalStatus = reader["travelReqStatus"].ToString();
+                                    if (approvalStatus == "Completed" || approvalStatus == "In-progress" || approvalStatus == "Completed" || approvalStatus == "Arranged")
                                     {
                                         Response.Write("<script>alert('Update Unavailable: This travel request is already " + approvalStatus + " !');</script>");
                                     }
-                                    else if (approvalStatus == "Pending")
+                                    else if (approvalStatus == "Draft")
                                     {
-                                        Response.Redirect("modifyDomesticRequests.aspx");
+                                        Session["requestStatus"] = approvalStatus;
+                                        Response.Redirect("DomesticRequest.aspx");
 
                                     }
 
@@ -466,6 +476,11 @@ namespace TravelDesk.Employee
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
+
+        }
+
+        protected void completeDraft_Click(object sender, EventArgs e)
+        {
 
         }
     }

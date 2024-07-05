@@ -125,16 +125,26 @@ namespace TravelDesk.Employee
                             if (reader.Read())
                             {
                                 string type = reader["travelType"].ToString();
+                                string status = reader["travelReqStatus"].ToString();
+
+                                
 
                                 if (type == "Domestic Travel")
                                 {
-                                    //redirect to the next page after clicking the view button
-                                    Response.Redirect("domesticRequestDetails.aspx");
+                                    if (status == "Draft")
+                                    {
+                                        Session["requestStatus"] = status;
+                                        //redirect to the next page after clicking the view button
+                                        Response.Redirect("domesticRequestDetails.aspx");
+
+                                    }
                                 }
                                 else if (type == "International Travel")
                                 {
+                                    Response.Redirect("domesticRequestDetails.aspx");
+
                                     //redirect to the next page after clicking the view button
-                                    Response.Redirect("internationalRequestDetails.aspx");
+                                    //Response.Redirect("internationalRequestDetails.aspx");
                                 }
 
 

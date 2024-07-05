@@ -24,6 +24,15 @@ namespace TravelDesk.Employee
         protected global::System.Web.UI.WebControls.Label currentStatus;
 
         /// <summary>
+        /// completeDraft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button completeDraft;
+
+        /// <summary>
         /// Label11 control.
         /// </summary>
         /// <remarks>

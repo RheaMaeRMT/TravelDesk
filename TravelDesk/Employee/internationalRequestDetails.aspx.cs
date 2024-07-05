@@ -336,7 +336,7 @@ namespace TravelDesk.Employee
                                 else
                                 {
                                     // Handle the case where no request with the given ID is found
-                                    Response.Write("<script>alert('No request found with the specified ID.')</script>");
+                                    Response.Write("<script>alert('No records found.')</script>");
                                 }
                             }
                         }
