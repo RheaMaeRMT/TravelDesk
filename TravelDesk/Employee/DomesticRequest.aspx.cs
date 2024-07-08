@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
@@ -99,8 +100,9 @@ namespace TravelDesk.Employee
                                     string remarks = reader["travelRemarks"].ToString();
                                     string status = reader["travelReqStatus"].ToString();
 
-
-
+                                    string fullname = empFname + ' ' + empMname + ' ' + empLname;
+                                    Session["forFoldername"] = fullname;
+                                    
                                     //FOR FLIGHT DETAILS - ROUTE
                                     string oneFrom = reader["routeOFrom"] != DBNull.Value ? reader["routeOFrom"].ToString() : "";
                                     string oneTo = reader["routeOTo"] != DBNull.Value ? reader["routeOTo"].ToString() : "";
@@ -187,32 +189,7 @@ namespace TravelDesk.Employee
                                         round1From.Text = r1From;
                                         round1To.Text = r1To;
 
-                                        //if (!string.IsNullOrEmpty(r1return))
-                                        //{
-                                        //    // Parse the date string into a DateTime object
-                                        //    DateTime arrivalDateTime;
-                                        //    if (DateTime.TryParse(r1return, out arrivalDateTime))
-                                        //    {
-                                        //        // Format the DateTime object into the desired format
-                                        //        string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
-
-                                        //        // Assign the formatted date to the TextBox
-                                        //        roun2.Text = formattedArrivalDate;
-                                        //    }
-                                        //}
-                                        //if (!string.IsNullOrEmpty(r1depart))
-                                        //{
-                                        //    // Parse the date string into a DateTime object
-                                        //    DateTime arrivalDateTime;
-                                        //    if (DateTime.TryParse(r1depart, out arrivalDateTime))
-                                        //    {
-                                        //        // Format the DateTime object into the desired format
-                                        //        string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
-
-                                        //        // Assign the formatted date to the TextBox
-                                        //        round2departure.Text = formattedArrivalDate;
-                                        //    }
-                                        //}
+                                      
                                     }
                                     else if (!string.IsNullOrEmpty(mul1From) && (!string.IsNullOrEmpty(mul1To)))
                                     {
@@ -334,8 +311,11 @@ namespace TravelDesk.Employee
                                         }
                                     }
 
+                                    checkFilesuploaded();
 
                                     Session["currentStatus"] = status;
+
+                                    
                                 }
                             }
                         }
@@ -346,11 +326,16 @@ namespace TravelDesk.Employee
                     // Redirect to login page if clickedRequest is null or empty
                     Response.Write("<script>alert('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
                 }
+
+                Session.Remove("requestStatus");
+
+
+                
             }
             catch (SqlException ex)
             {
                 // Handle SQL exception
-                Response.Write("<script>alert('An error occurred during travel request enrollment. Please try again.')</script>");
+                Response.Write("<script>alert('An error occurred during display of request details from draft.')</script>");
                 // Log additional information from the SQL exception
                 for (int i = 0; i < ex.Errors.Count; i++)
                 {
@@ -358,22 +343,82 @@ namespace TravelDesk.Employee
                 }
             }
         }
+        private void checkFilesuploaded()
+        {
+            string employeeFirstName = Session["forFoldername"].ToString();
+
+            // Concatenate the first and last name to create a unique folder name
+            string folderName = employeeFirstName;
+
+            // Create a directory path using the concatenated folder name
+            string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName);
+
+            // Check if the directory exists
+            if (!Directory.Exists(saveDIR))
+            {
+                uploadBlock.Style["display"] = "block";
+            }
+            else
+            {
+                // DIRECTORY EXISTS, SO DISPLAY THE UPLOADED FILES
+                string[] pdfFiles = Directory.GetFiles(saveDIR, "*.pdf");
+                RequiredFieldValidator29.Enabled = false;
+
+                if (pdfFiles.Length > 0)
+                {
+                    // Get the relative URL for the first PDF file
+                    string relativePath = GetRelativeUrl(pdfFiles[0]);
+                    string fileName = System.IO.Path.GetFileName(pdfFiles[0]);
+
+
+                    // Update the iframe source
+                    pdfViewer.Attributes["src"] = ResolveUrl(relativePath);
+
+                    // Save the pdfPath and filename in session variables
+                    Session["imgPath"] = relativePath;
+                    Session["filename"] = fileName;
+
+                    pdfBlock.Style["display"] = "block";
+                    uploadBlock.Style["display"] = "none";
+                }
+                else
+                {
+                    // No PDF files found
+                    uploadBlock.Style["display"] = "block";
+                    pdfBlock.Style["display"] = "none";
+                }
+            }
+        }
+
+        private string GetRelativeUrl(string fullPath)
+        {
+            // Remove the physical path of the application root to get the relative path
+            string appRoot = Server.MapPath("~");
+            string relativePath = fullPath.Replace(appRoot, "").Replace("\\", "/");
+            return "~/" + relativePath.TrimStart('/');
+        }
+
+        public new string ResolveUrl(string path)
+        {
+            return VirtualPathUtility.ToAbsolute(path);
+        }
 
         protected void submitRequestbtn_Click(object sender, EventArgs e)
         {
             Random rand = new Random();
             int random = rand.Next(50, 999);
 
-            //CHECK IF NEW REQUEST OR FROM DRAFTS
-            if (Session["requestStatus"] != null)
-            {
-                string statusDraft = Session["requestStatus"].ToString();
+            ////CHECK IF NEW REQUEST OR FROM DRAFTS
+            //if (Session["requestStatus"] != null)
+            //{
+            //    string statusDraft = Session["requestStatus"].ToString();
 
-                if (statusDraft == "Draft")
-                {
-                    //UPDATE REQUEST DETAILS HERE
-                }
-            }
+            //    if (statusDraft == "Draft")
+            //    {
+            //        saveUpdateDraft();
+
+            //    }
+            //}
             try
             {
 
@@ -389,9 +434,8 @@ namespace TravelDesk.Employee
                         {
                             if (Session["userID"] != null)
                             {
-                                // Session values are not null, proceed with inserting into the database
+                                string imgPath = Session["imgPath"].ToString();
                                 string filename = Session["filename"].ToString();
-                                string imgPath = Session["pdfPath"].ToString();
                                 string userID = Session["userID"].ToString();
 
                                 using (var db = new SqlConnection(connectionString))
@@ -468,7 +512,8 @@ namespace TravelDesk.Employee
 
                                         if (ctr >= 1)
                                         {
-
+                                            string clickedRequest = Session["clickedRequest"]?.ToString(); // Null-conditional operator added
+                                            removeDraft(clickedRequest);
                                             insertRoute(ID);
                                         }
                                         else
@@ -499,7 +544,7 @@ namespace TravelDesk.Employee
                         {
                             // Session values are not null, proceed with inserting into the database
                             string filename = Session["filename"] != null ? Session["filename"].ToString() : string.Empty;
-                            string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : string.Empty;
+                            string imgPath = Session["imgPath"] != null ? Session["imgPath"].ToString() : string.Empty;
                             string userID = Session["userID"].ToString();
 
                             using (var db = new SqlConnection(connectionString))
@@ -576,7 +621,6 @@ namespace TravelDesk.Employee
 
                                     if (ctr >= 1)
                                     {
-
                                         insertRoute(ID);
                                     }
                                     else
@@ -613,77 +657,6 @@ namespace TravelDesk.Employee
 
         }
 
-        //UPLOAD IMAGE
-        //protected void btnUpload_Click(object sender, EventArgs e)
-        //{
-        //    string saveDIR = Server.MapPath("/approvalProofs");
-        //    try
-        //    {
-        //        if (employeeUpload.HasFile)
-        //        {
-        //            string filename = Server.HtmlEncode(employeeUpload.FileName);
-        //            string extension = System.IO.Path.GetExtension(filename);
-        //            int filesize = employeeUpload.PostedFile.ContentLength;
-        //            if (File.Exists(System.IO.Path.Combine(saveDIR, filename)))
-        //            {
-        //                Response.Write("<script>alert('File already exists.')</script>");
-        //                //uploadBlock.Style["dipsplay"] = "block";
-
-        //            }
-        //            else
-        //            {
-        //                if ((extension == ".jpg") || (extension == ".jpeg") || (extension == ".png") || (extension == ".JPG") || (extension == ".JPEG") || (extension == ".PNG"))
-        //                {
-        //                    if (filesize < 4100000)
-        //                    {
-        //                        string savePath = System.IO.Path.Combine(saveDIR, filename);
-        //                        employeeUpload.SaveAs(savePath);
-        //                        productImage.Visible = true;
-        //                        productImage.ImageUrl = System.IO.Path.Combine("/approvalProofs/", filename);
-        //                        Session["imgPath"] = System.IO.Path.Combine("/approvalProofs/", filename);
-        //                        Session["filename"] = filename;
-
-        //                        Response.Write("<script>alert('Your file was uploaded successfully.')</script>");
-
-        //                        // Log success message to the console
-        //                        Console.WriteLine("File uploaded successfully: " + filename);
-        //                        Console.WriteLine("Image path: " + Session["imgPath"]);
-
-        //                        // Display contents after successful upload
-        //                        displayContents();
-
-        //                    }
-        //                    else
-        //                    {
-        //                        Response.Write("<script>alert('Your file was not uploaded because the image size is more than 4MB.')</script>");
-        //                        uploadBlock.Style["dipsplay"] = "block";
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    Response.Write("<script>alert('Invalid File Upload. Please upload an image as proof of your travel approval.')</script>");
-        //                    uploadBlock.Style["dipsplay"] = "block";
-
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            Response.Write("<script>alert('Upload failed: No file selected.')</script>");
-        //            uploadBlock.Style["dipsplay"] = "block";
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log the exception to the console
-        //        Console.WriteLine("Error uploading file: " + ex.Message);
-
-        //        // Display error message in an alert box and in the console
-        //        Response.Write("<script>alert('An error occurred while uploading the file. Please try again.')</script>");
-        //        Response.Write("<pre style='background: white;'>" + ex.ToString() + "</pre>");
-        //    }
-        //}
 
         protected void btnUpload_Click(object sender, EventArgs e) //UPLOAD PDF
         {
@@ -957,8 +930,55 @@ namespace TravelDesk.Employee
             }
         }
 
+        private void removeDraft(string clickedRequest)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    // Step 1: Delete related records in the route table
+                    string deleteRouteSql = "DELETE FROM route WHERE routeTravelID = @TravelRequestID";
+
+                    using (SqlCommand deleteRouteCmd = new SqlCommand(deleteRouteSql, conn))
+                    {
+                        deleteRouteCmd.Parameters.AddWithValue("@TravelRequestID", clickedRequest);
+
+                        int routeRowsAffected = deleteRouteCmd.ExecuteNonQuery();
+
+                        Console.WriteLine($"{routeRowsAffected} related records deleted from route table.");
+                    }
+
+                    // Step 2: Delete the record from travelRequest table
+                    string deleteTravelRequestSql = "DELETE FROM travelRequest WHERE travelRequestID = @TravelRequestID";
+
+                    using (SqlCommand deleteTravelRequestCmd = new SqlCommand(deleteTravelRequestSql, conn))
+                    {
+                        deleteTravelRequestCmd.Parameters.AddWithValue("@TravelRequestID", clickedRequest);
+
+                        int travelRequestRowsAffected = deleteTravelRequestCmd.ExecuteNonQuery();
+
+                        if (travelRequestRowsAffected > 0)
+                        {
+                            Console.WriteLine("Travel request removed successfully.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Travel request not found or failed to remove.");
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("SQL Error: " + ex.Message);
+            }
+        }
+
         protected void saveAsDraft_Click(object sender, EventArgs e)
         {
+            EnableAllRequiredFieldValidators();
 
             Random rand = new Random();
             int random = rand.Next(50, 999);
@@ -1025,7 +1045,7 @@ namespace TravelDesk.Employee
                             }
                             cmd.Parameters.AddWithValue("@reqStatus", "Draft");
                             cmd.Parameters.AddWithValue("@remarks", string.IsNullOrEmpty(employeeRemarks.Text) ? DBNull.Value : (object)employeeRemarks.Text);
-                            cmd.Parameters.AddWithValue("@type", "Domestic");
+                            cmd.Parameters.AddWithValue("@type", "Domestic Travel");
                             cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem == null ? DBNull.Value : (object)flightOptions.SelectedItem.Text);
                             cmd.Parameters.AddWithValue("@userID", string.IsNullOrEmpty(userID) ? DBNull.Value : (object)userID);
                             cmd.Parameters.AddWithValue("@proofname", string.IsNullOrEmpty(filename) ? DBNull.Value : (object)filename);
@@ -1081,6 +1101,20 @@ namespace TravelDesk.Employee
             RequiredFieldValidator29.Enabled = false;
 
             DisableRouteRequiredFieldValidators();
+        }
+        protected void EnableAllRequiredFieldValidators()
+        {
+            RequiredFieldValidator30.Enabled = true;
+            RequiredFieldValidator2.Enabled = true;
+            RequiredFieldValidator88.Enabled = true;
+            RequiredFieldValidator5.Enabled = true;
+            RequiredFieldValidator20.Enabled = true;
+            RequiredFieldValidator16.Enabled = true;
+            RequiredFieldValidator3.Enabled = true;
+            RequiredFieldValidator57.Enabled = true;
+            RequiredFieldValidator25.Enabled = true;
+            RequiredFieldValidator27.Enabled = true;
+            RequiredFieldValidator29.Enabled = true;
         }
 
         protected void DisableRouteRequiredFieldValidators()

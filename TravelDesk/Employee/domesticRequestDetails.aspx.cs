@@ -89,6 +89,10 @@ namespace TravelDesk.Employee
                                     string remarks = reader["travelRemarks"].ToString();
                                     string status = reader["travelReqStatus"].ToString();
 
+                                    string fullname = empFname + ' ' + empMname + ' ' + empLname;
+                                    Session["forFoldername"] = fullname;
+
+
                                     //HIDE COMPLETE BUTTON IF DRAFT
                                     if (status == "Draft")
                                     {
@@ -450,7 +454,7 @@ namespace TravelDesk.Employee
                                     }
                                     else if (approvalStatus == "Draft")
                                     {
-                                        Session["requestStatus"] = approvalStatus;
+                                        Session["requestStatus"] = approvalStatus; 
                                         Response.Redirect("DomesticRequest.aspx");
 
                                     }

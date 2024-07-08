@@ -45,9 +45,25 @@ namespace TravelDesk.Employee
             if (!string.IsNullOrEmpty(status) && (!string.IsNullOrEmpty(userID)))
             {
                 // Construct the SQL query using parameterized queries to prevent SQL injection
-                string query = "SELECT travelReqStatus, travelType, travelRequestID, travelUserID, travelFname + ' ' + ISNULL(travelMname, '') + ' ' + travelLname AS FullName,  travelHomeFacility, travelProjectCode, travelDU, travelRemarks, travelOptions, travelPurpose, travelDateSubmitted " +
-                    "FROM travelRequest WHERE travelUserID = @UserID " +
-                    "AND travelReqStatus = @Status";
+                string query = @"SELECT tr.travelRequestID, tr.travelReqStatus, tr.travelType, 
+                        tr.travelFname + ' ' + ISNULL(tr.travelMname, '') + ' ' + tr.travelLname AS FullName,  
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeOTo 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeR1To
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1To
+                            ELSE tr.travelDestination                             
+                        END AS travelDestination, 
+                        CASE 
+                            WHEN tr.travelOptions = 'One Way' THEN rt.routeODate 
+                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart
+                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate   
+                            WHEN tr.travelType = 'Visa Request' THEN travelEstdate
+                        END AS travelDates, 
+                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+                    FROM travelRequest tr
+                    LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
+                    WHERE tr.travelUserID = @UserID 
+                    AND tr.travelReqStatus = 'Draft'";
 
                 // Set up the database connection and command
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -55,7 +71,6 @@ namespace TravelDesk.Employee
                 {
                     // Add parameters
                     command.Parameters.AddWithValue("@UserID", userID);
-                    command.Parameters.AddWithValue("@Status", "Draft");
 
                     try
                     {
@@ -95,6 +110,22 @@ namespace TravelDesk.Employee
 
         ////}
 
+        protected void travelRequests_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Button btnRequestID = e.Row.FindControl("btnRequestID") as Button;
+                if (btnRequestID != null)
+                {
+                    // Set the text of the button from the value of travelRequestID
+                    string firstData = DataBinder.Eval(e.Row.DataItem, "travelRequestID").ToString();
+                    btnRequestID.Text = firstData;
+
+                }
+            }
+        }
+
+
         protected void viewDetails_Click(object sender, EventArgs e)
         {
             //Get the GridViewRow that contains the clicked button
@@ -102,7 +133,7 @@ namespace TravelDesk.Employee
             GridViewRow row = (GridViewRow)btn.NamingContainer;
 
             //Get the order ID from the first cell in the row
-            string requestID = row.Cells[3].Text;
+            string requestID = btn.Text;
 
             Console.WriteLine(requestID);
 
