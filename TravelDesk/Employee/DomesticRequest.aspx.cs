@@ -157,12 +157,13 @@ namespace TravelDesk.Employee
                                         if (DateTime.TryParse(empBdate, out arrivalDateTime))
                                         {
                                             // Format the DateTime object into the desired format
-                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                            string formattedArrivalDate = arrivalDateTime.ToString("yyyy-MM-dd"); // Use YYYY-MM-DD for TextMode="Date"
 
                                             // Assign the formatted date to the TextBox
                                             employeeBdate.Text = formattedArrivalDate;
                                         }
                                     }
+
                                     if (!string.IsNullOrEmpty(oneFrom))
                                     {
                                         oneWaynput.Style["display"] = "block";
@@ -176,7 +177,7 @@ namespace TravelDesk.Employee
                                             if (DateTime.TryParse(oneDate, out arrivalDateTime))
                                             {
                                                 // Format the DateTime object into the desired format
-                                                string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                                string formattedArrivalDate = arrivalDateTime.ToString("yyyy-MM-dd");
 
                                                 // Assign the formatted date to the TextBox
                                                 onewayDate.Text = formattedArrivalDate;
@@ -212,7 +213,7 @@ namespace TravelDesk.Employee
                                                 if (DateTime.TryParse(mul1ToDate, out arrivalDateTime))
                                                 {
                                                     // Format the DateTime object into the desired format
-                                                    string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                                    string formattedArrivalDate = arrivalDateTime.ToString("yyyy-MM-dd");
 
                                                     // Assign the formatted date to the TextBox
                                                     TextBox12.Text = formattedArrivalDate;
@@ -226,7 +227,7 @@ namespace TravelDesk.Employee
                                                 if (DateTime.TryParse(mul2ToDate, out arrivalDateTime))
                                                 {
                                                     // Format the DateTime object into the desired format
-                                                    string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                                    string formattedArrivalDate = arrivalDateTime.ToString("yyyy-MM-dd");
 
                                                     // Assign the formatted date to the TextBox
                                                     TextBox14.Text = formattedArrivalDate;
@@ -250,7 +251,7 @@ namespace TravelDesk.Employee
                                                     if (DateTime.TryParse(mul3ToDate, out arrivalDateTime))
                                                     {
                                                         // Format the DateTime object into the desired format
-                                                        string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                                        string formattedArrivalDate = arrivalDateTime.ToString("yyyy-MM-dd");
 
                                                         // Assign the formatted date to the TextBox
                                                         TextBox18.Text = formattedArrivalDate;
@@ -273,7 +274,7 @@ namespace TravelDesk.Employee
                                                         if (DateTime.TryParse(mul4ToDate, out arrivalDateTime))
                                                         {
                                                             // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                                            string formattedArrivalDate = arrivalDateTime.ToString("yyyy-MM-dd");
 
                                                             // Assign the formatted date to the TextBox
                                                             TextBox30.Text = formattedArrivalDate;
@@ -296,7 +297,7 @@ namespace TravelDesk.Employee
                                                         if (DateTime.TryParse(mul5ToDate, out arrivalDateTime))
                                                         {
                                                             // Format the DateTime object into the desired format
-                                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
+                                                            string formattedArrivalDate = arrivalDateTime.ToString("yyyy-MM-dd");
 
                                                             // Assign the formatted date to the TextBox
                                                             TextBox22.Text = formattedArrivalDate;
@@ -346,12 +347,12 @@ namespace TravelDesk.Employee
         private void checkFilesuploaded()
         {
             string employeeFirstName = Session["forFoldername"].ToString();
-
-            // Concatenate the first and last name to create a unique folder name
             string folderName = employeeFirstName;
 
+            string clickedRequest = Session["clickedRequest"]?.ToString(); // Null-conditional operator added
+
             // Create a directory path using the concatenated folder name
-            string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName);
+            string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName, clickedRequest);
 
             // Check if the directory exists
             if (!Directory.Exists(saveDIR))
@@ -408,17 +409,7 @@ namespace TravelDesk.Employee
             Random rand = new Random();
             int random = rand.Next(50, 999);
 
-            ////CHECK IF NEW REQUEST OR FROM DRAFTS
-            //if (Session["requestStatus"] != null)
-            //{
-            //    string statusDraft = Session["requestStatus"].ToString();
-
-            //    if (statusDraft == "Draft")
-            //    {
-            //        saveUpdateDraft();
-
-            //    }
-            //}
+            
             try
             {
 
@@ -481,7 +472,16 @@ namespace TravelDesk.Employee
                                         cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
                                         cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
                                         cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
-                                        cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
+
+                                        DateTime birthDate;
+                                        if (DateTime.TryParse(employeeBdate.Text, out birthDate))
+                                        {
+                                            cmd.Parameters.AddWithValue("@empBdate", birthDate);
+                                        }
+                                        else
+                                        {
+                                            throw new Exception("Invalid Birthdate format.");
+                                        }
                                         cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
                                         cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
                                         cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
@@ -501,7 +501,7 @@ namespace TravelDesk.Employee
                                         cmd.Parameters.AddWithValue("@reqStatus", "New");
                                         cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);                                       
                                         cmd.Parameters.AddWithValue("@type", "Domestic Travel");
-                                        cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);
+                                        cmd.Parameters.AddWithValue("@options", flightOptions.Text);
                                         cmd.Parameters.AddWithValue("@userID", userID);
                                         cmd.Parameters.AddWithValue("@proofname", filename);
                                         cmd.Parameters.AddWithValue("@proofpath", imgPath);
@@ -544,7 +544,7 @@ namespace TravelDesk.Employee
                         {
                             // Session values are not null, proceed with inserting into the database
                             string filename = Session["filename"] != null ? Session["filename"].ToString() : string.Empty;
-                            string imgPath = Session["imgPath"] != null ? Session["imgPath"].ToString() : string.Empty;
+                            string imgPath = Session["pdfPath"] != null ? Session["imgPath"].ToString() : string.Empty;
                             string userID = Session["userID"].ToString();
 
                             using (var db = new SqlConnection(connectionString))
@@ -589,7 +589,11 @@ namespace TravelDesk.Employee
                                     cmd.Parameters.AddWithValue("@empFName", employeeFName.Text);
                                     cmd.Parameters.AddWithValue("@empMName", employeeMName.Text);
                                     cmd.Parameters.AddWithValue("@empLName", employeeLName.Text);
-                                    cmd.Parameters.AddWithValue("@empBdate", employeeBdate.Text);
+                                    DateTime birthDate;
+                                    if (DateTime.TryParse(employeeBdate.Text, out birthDate))
+                                    {
+                                        cmd.Parameters.AddWithValue("@empBdate", birthDate);
+                                    }
                                     cmd.Parameters.AddWithValue("@empDu", employeeDU.Text);
                                     cmd.Parameters.AddWithValue("@empEmail", employeeEmail.Text);
                                     cmd.Parameters.AddWithValue("@level", employeeLevel.Text);
@@ -621,6 +625,8 @@ namespace TravelDesk.Employee
 
                                     if (ctr >= 1)
                                     {
+                                        string clickedRequest = Session["clickedRequest"]?.ToString(); // Null-conditional operator added
+                                        removeDraft(clickedRequest);
                                         insertRoute(ID);
                                     }
                                     else
@@ -664,13 +670,14 @@ namespace TravelDesk.Employee
             {
                 if (Session["userName"] != null)
                 {
+                    string clickedRequest = Session["clickedRequest"]?.ToString(); // Null-conditional operator added
                     string employeeFirstName = Session["userName"].ToString();
 
                     // Concatenate the first and last name to create a unique folder name
                     string folderName = employeeFirstName;
 
                     // Create a directory path using the concatenated folder name
-                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName);
+                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName, clickedRequest);
 
                     // Check if the directory exists, if not, create it
                     if (!Directory.Exists(saveDIR))
@@ -697,7 +704,7 @@ namespace TravelDesk.Employee
                                 employeeUpload.SaveAs(savePath);
 
                                 // Store file path in session
-                                Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", folderName, filename);
+                                Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", folderName, clickedRequest, filename);
                                 Session["filename"] = filename;
 
                                 string pdfPath = Session["pdfPath"].ToString();
@@ -714,11 +721,8 @@ namespace TravelDesk.Employee
                                 uploadBlock.Style["display"] = "none";
 
                                 string path = Session["pdfPath"].ToString();
-                                Session["filePath"] = path;
+                                Session["imgPath"] = path;
 
-                                // Log success message to the console
-                                Console.WriteLine("File uploaded successfully: " + filename);
-                                Console.WriteLine("PDF path: " + Session["imgPath"]);
 
                                 // Display contents after successful upload
                                 displayContents();
@@ -817,7 +821,15 @@ namespace TravelDesk.Employee
                         //ONE WAY
                         cmd.Parameters.AddWithValue("@onewayFrom", onewayFrom.Text);
                         cmd.Parameters.AddWithValue("@onewayTo", onewayTo.Text);
-                        cmd.Parameters.AddWithValue("@onewayDate", onewayDate.Text);
+
+                        DateTime travelDate;
+                        if (DateTime.TryParse(onewayDate.Text, out travelDate))
+                        {
+                            cmd.Parameters.AddWithValue("@onewayDate", travelDate);
+                        }
+                        else
+                        {
+                        }
 
                         //ROUND TRIP
                         cmd.Parameters.AddWithValue("@round1From", round1From.Text);
@@ -976,116 +988,246 @@ namespace TravelDesk.Employee
             }
         }
 
+
         protected void saveAsDraft_Click(object sender, EventArgs e)
         {
-            EnableAllRequiredFieldValidators();
+            string clickedRequest = Session["clickedRequest"]?.ToString();
 
-            Random rand = new Random();
-            int random = rand.Next(50, 999);
-
-
-            try
+            if (!string.IsNullOrEmpty(clickedRequest))
             {
-
-                if (Session["userID"] != null)
+                string travelReqStatus;
+  
+                try
                 {
-                    // Session values are not null, proceed with inserting into the database
-                    string filename = Session["filename"] != null ? Session["filename"].ToString() : null;
-                    string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : null;
-                    string userID = Session["userID"].ToString();
-
-                    string levelText = employeeLevel.Text;
                     using (var db = new SqlConnection(connectionString))
                     {
                         db.Open();
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
-                                + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+                            cmd.CommandText = "SELECT travelReqStatus FROM travelRequest WHERE travelRequestID = @clickedRequest";
+                            cmd.Parameters.AddWithValue("@clickedRequest", clickedRequest);
 
+                            travelReqStatus = cmd.ExecuteScalar()?.ToString();
+                        }
+                    }
 
-                            string ID = "DR" + random + "DRAFT";
-                            cmd.Parameters.AddWithValue("@ID", ID);
+                    if (travelReqStatus == "Draft")
+                    {
+                        // Existing draft logic
+                        string requestID = clickedRequest;
 
-                            string location = homeFacility.Text;
-
-                            // Check if the textbox with ID "othersFacility" is displayed
-                            if (location == "Others")
+                        try
+                        {
+                            if (Session["userID"] != null)
                             {
-                                // If displayed, use its value as @location
-                                cmd.Parameters.AddWithValue("@location", othersFacility.Text);
+                                string filename = Session["filename"] != null ? Session["filename"].ToString() : null;
+                                string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : null;
+                                string userID = Session["userID"].ToString();
+
+                                using (var db = new SqlConnection(connectionString))
+                                {
+                                    db.Open();
+                                    using (var cmd = db.CreateCommand())
+                                    {
+                                        cmd.CommandType = CommandType.Text;
+                                        cmd.CommandText = "UPDATE travelRequest SET travelHomeFacility = @location, travelEmpID = @empID, travelFname = @empFName, travelMname = @empMName, travelLname = @empLName, travelBdate = @empBdate, travelDU = @empDu, travelEmail = @empEmail, travelLevel = @level, travelMobilenum = @mobile, travelProjectCode = @projCode, travelPurpose = @purpose, travelRemarks = @remarks, travelOptions = @options, travelProofname = @proofname, travelProofPath = @proofpath, travelDraftStat = @draftStat WHERE travelRequestID = @ID";
+
+                                        cmd.Parameters.AddWithValue("@ID", requestID);
+                                        string location = homeFacility.Text;
+
+                                        if (location == "Others")
+                                        {
+                                            cmd.Parameters.AddWithValue("@location", othersFacility.Text);
+                                        }
+                                        else
+                                        {
+                                            cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+                                        }
+
+                                        cmd.Parameters.AddWithValue("@empID", string.IsNullOrEmpty(employeeID.Text) ? DBNull.Value : (object)employeeID.Text);
+                                        cmd.Parameters.AddWithValue("@empFName", string.IsNullOrEmpty(employeeFName.Text) ? DBNull.Value : (object)employeeFName.Text);
+                                        cmd.Parameters.AddWithValue("@empMName", string.IsNullOrEmpty(employeeMName.Text) ? DBNull.Value : (object)employeeMName.Text);
+                                        cmd.Parameters.AddWithValue("@empLName", string.IsNullOrEmpty(employeeLName.Text) ? DBNull.Value : (object)employeeLName.Text);
+                                        DateTime birthDate;
+                                        if (DateTime.TryParse(employeeBdate.Text, out birthDate))
+                                        {
+                                            cmd.Parameters.AddWithValue("@empBdate", birthDate);
+                                        }
+                                        cmd.Parameters.AddWithValue("@empDu", string.IsNullOrEmpty(employeeDU.Text) ? DBNull.Value : (object)employeeDU.Text);
+                                        cmd.Parameters.AddWithValue("@empEmail", string.IsNullOrEmpty(employeeEmail.Text) ? DBNull.Value : (object)employeeEmail.Text);
+                                        cmd.Parameters.AddWithValue("@level", string.IsNullOrEmpty(employeeLevel.Text) ? DBNull.Value : (object)employeeLevel.Text);
+                                        cmd.Parameters.AddWithValue("@mobile", string.IsNullOrEmpty(employeePhone.Text) ? DBNull.Value : (object)employeePhone.Text);
+                                        cmd.Parameters.AddWithValue("@projCode", string.IsNullOrEmpty(employeeProjCode.Text) ? DBNull.Value : (object)employeeProjCode.Text);
+                                        string purpose = employeePurpose.Text;
+                                        if (purpose == "Others")
+                                        {
+                                            cmd.Parameters.AddWithValue("@purpose", otherspecified.Text);
+                                        }
+                                        else
+                                        {
+                                            cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+                                        }
+                                        cmd.Parameters.AddWithValue("@remarks", string.IsNullOrEmpty(employeeRemarks.Text) ? DBNull.Value : (object)employeeRemarks.Text);
+                                        cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);
+                                        cmd.Parameters.AddWithValue("@proofname", string.IsNullOrEmpty(filename) ? DBNull.Value : (object)filename);
+                                        cmd.Parameters.AddWithValue("@proofpath", string.IsNullOrEmpty(imgPath) ? DBNull.Value : (object)imgPath);
+                                        cmd.Parameters.AddWithValue("@draftStat", "Yes");
+
+                                        var ctr = cmd.ExecuteNonQuery();
+
+                                        if (ctr >= 1)
+                                        {
+                                            updateDraftRoute(requestID);
+                                        }
+                                        else
+                                        {
+                                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                        }
+                                    }
+                                }
                             }
                             else
                             {
-                                // If hidden, use the selected item in the homeFacility dropdown
-                                cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+                                Response.Write("<script>alert('Session Expired! Please login again.')</script>");
                             }
-
-                            cmd.Parameters.AddWithValue("@empID", string.IsNullOrEmpty(employeeID.Text) ? DBNull.Value : (object)employeeID.Text);
-                            cmd.Parameters.AddWithValue("@empFName", string.IsNullOrEmpty(employeeFName.Text) ? DBNull.Value : (object)employeeFName.Text);
-                            cmd.Parameters.AddWithValue("@empMName", string.IsNullOrEmpty(employeeMName.Text) ? DBNull.Value : (object)employeeMName.Text);
-                            cmd.Parameters.AddWithValue("@empLName", string.IsNullOrEmpty(employeeLName.Text) ? DBNull.Value : (object)employeeLName.Text);
-                            cmd.Parameters.AddWithValue("@empBdate", string.IsNullOrEmpty(employeeBdate.Text) ? DBNull.Value : (object)employeeBdate.Text);
-                            cmd.Parameters.AddWithValue("@empDu", string.IsNullOrEmpty(employeeDU.Text) ? DBNull.Value : (object)employeeDU.Text);
-                            cmd.Parameters.AddWithValue("@empEmail", string.IsNullOrEmpty(employeeEmail.Text) ? DBNull.Value : (object)employeeEmail.Text);
-                            cmd.Parameters.AddWithValue("@level", string.IsNullOrEmpty(employeeLevel.Text) ? DBNull.Value : (object)employeeLevel.Text);
-                            cmd.Parameters.AddWithValue("@mobile", string.IsNullOrEmpty(employeePhone.Text) ? DBNull.Value : (object)employeePhone.Text);
-                            cmd.Parameters.AddWithValue("@projCode", string.IsNullOrEmpty(employeeProjCode.Text) ? DBNull.Value : (object)employeeProjCode.Text);
-                            string purpose = employeePurpose.Text;
-                            if (purpose == "Others")
+                        }
+                        catch (SqlException ex)
+                        {
+                            Response.Write("<script>alert('An error occurred during updating of draft. Please try again.')</script>");
+                            for (int i = 0; i < ex.Errors.Count; i++)
                             {
-                                cmd.Parameters.AddWithValue("@purpose", otherspecified.Text);
+                                Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //submtted is a new draft and not existing
 
+                        Random rand = new Random();
+                        int random = rand.Next(50, 999);
+
+
+                        try
+                        {
+
+                            if (Session["userID"] != null)
+                            {
+                                // Session values are not null, proceed with inserting into the database
+                                string filename = Session["filename"] != null ? Session["filename"].ToString() : null;
+                                string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : null;
+                                string userID = Session["userID"].ToString();
+
+                                string levelText = employeeLevel.Text;
+                                using (var db = new SqlConnection(connectionString))
+                                {
+                                    db.Open();
+                                    using (var cmd = db.CreateCommand())
+                                    {
+                                        cmd.CommandType = CommandType.Text;
+                                        cmd.CommandText = "INSERT INTO travelRequest (travelRequestID, travelHomeFacility, travelEmpID, travelFname, travelMname, travelLname, travelBdate, travelDU, travelEmail, travelLevel, travelMobilenum, travelProjectCode, travelPurpose, travelReqStatus, travelRemarks, travelType, travelOptions, travelUserID, travelProofname, travelProofPath, travelDateCreated, travelDraftStat)"
+                                            + "VALUES (@ID, @location, @empID, @empFName, @empMName, @empLName, @empBdate, @empDu, @empEmail, @level, @mobile, @projCode, @purpose, @reqStatus, @remarks, @type, @options, @userID, @proofname, @proofpath, @created, @draftStat)";
+
+
+                                        string ID = "DR" + random + "DRAFT";
+                                        cmd.Parameters.AddWithValue("@ID", ID);
+
+                                        string location = homeFacility.Text;
+
+                                        // Check if the textbox with ID "othersFacility" is displayed
+                                        if (location == "Others")
+                                        {
+                                            // If displayed, use its value as @location
+                                            cmd.Parameters.AddWithValue("@location", othersFacility.Text);
+                                        }
+                                        else
+                                        {
+                                            // If hidden, use the selected item in the homeFacility dropdown
+                                            cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+                                        }
+
+                                        cmd.Parameters.AddWithValue("@empID", string.IsNullOrEmpty(employeeID.Text) ? DBNull.Value : (object)employeeID.Text);
+                                        cmd.Parameters.AddWithValue("@empFName", string.IsNullOrEmpty(employeeFName.Text) ? DBNull.Value : (object)employeeFName.Text);
+                                        cmd.Parameters.AddWithValue("@empMName", string.IsNullOrEmpty(employeeMName.Text) ? DBNull.Value : (object)employeeMName.Text);
+                                        cmd.Parameters.AddWithValue("@empLName", string.IsNullOrEmpty(employeeLName.Text) ? DBNull.Value : (object)employeeLName.Text);
+                                        DateTime birthDate;
+                                        if (DateTime.TryParse(employeeBdate.Text, out birthDate))
+                                        {
+                                            cmd.Parameters.AddWithValue("@empBdate", birthDate);
+                                        }
+                                        cmd.Parameters.AddWithValue("@empDu", string.IsNullOrEmpty(employeeDU.Text) ? DBNull.Value : (object)employeeDU.Text);
+                                        cmd.Parameters.AddWithValue("@empEmail", string.IsNullOrEmpty(employeeEmail.Text) ? DBNull.Value : (object)employeeEmail.Text);
+                                        cmd.Parameters.AddWithValue("@level", string.IsNullOrEmpty(employeeLevel.Text) ? DBNull.Value : (object)employeeLevel.Text);
+                                        cmd.Parameters.AddWithValue("@mobile", string.IsNullOrEmpty(employeePhone.Text) ? DBNull.Value : (object)employeePhone.Text);
+                                        cmd.Parameters.AddWithValue("@projCode", string.IsNullOrEmpty(employeeProjCode.Text) ? DBNull.Value : (object)employeeProjCode.Text);
+                                        string purpose = employeePurpose.Text;
+                                        if (purpose == "Others")
+                                        {
+                                            cmd.Parameters.AddWithValue("@purpose", otherspecified.Text);
+
+                                        }
+                                        else
+                                        {
+                                            cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+
+                                        }
+                                        cmd.Parameters.AddWithValue("@reqStatus", "Draft");
+                                        cmd.Parameters.AddWithValue("@remarks", string.IsNullOrEmpty(employeeRemarks.Text) ? DBNull.Value : (object)employeeRemarks.Text);
+                                        cmd.Parameters.AddWithValue("@type", "Domestic Travel");
+                                        cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);
+                                        cmd.Parameters.AddWithValue("@userID", string.IsNullOrEmpty(userID) ? DBNull.Value : (object)userID);
+                                        cmd.Parameters.AddWithValue("@proofname", string.IsNullOrEmpty(filename) ? DBNull.Value : (object)filename);
+                                        cmd.Parameters.AddWithValue("@proofpath", string.IsNullOrEmpty(imgPath) ? DBNull.Value : (object)imgPath);
+                                        cmd.Parameters.AddWithValue("@created", DateTime.Now); // Always add the current datetime
+                                        cmd.Parameters.AddWithValue("@draftStat", "Yes");
+
+                                        var ctr = cmd.ExecuteNonQuery();
+
+                                        if (ctr >= 1)
+                                        {
+                                            insertDraftRoute(ID);
+                                        }
+                                        else
+                                        {
+                                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                        }
+                                    }
+                                }
                             }
                             else
                             {
-                                cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
-
+                                // Session values are null
+                                Response.Write("<script>alert('Session Expired! Please login again.')</script>");
                             }
-                            cmd.Parameters.AddWithValue("@reqStatus", "Draft");
-                            cmd.Parameters.AddWithValue("@remarks", string.IsNullOrEmpty(employeeRemarks.Text) ? DBNull.Value : (object)employeeRemarks.Text);
-                            cmd.Parameters.AddWithValue("@type", "Domestic Travel");
-                            cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem == null ? DBNull.Value : (object)flightOptions.SelectedItem.Text);
-                            cmd.Parameters.AddWithValue("@userID", string.IsNullOrEmpty(userID) ? DBNull.Value : (object)userID);
-                            cmd.Parameters.AddWithValue("@proofname", string.IsNullOrEmpty(filename) ? DBNull.Value : (object)filename);
-                            cmd.Parameters.AddWithValue("@proofpath", string.IsNullOrEmpty(imgPath) ? DBNull.Value : (object)imgPath);
-                            cmd.Parameters.AddWithValue("@created", DateTime.Now); // Always add the current datetime
-                            cmd.Parameters.AddWithValue("@draftStat", "Yes");
 
-                            var ctr = cmd.ExecuteNonQuery();
 
-                            if (ctr >= 1)
+                        }
+                        catch (SqlException ex)
+                        {
+                            // Log the exception or display a user-friendly error message
+                            // Example: Log.Error("An error occurred during travel request enrollment", ex);
+                            Response.Write("<script>alert('An error occurred during creating new draft. Please try again.')</script>");
+                            // Log additional information from the SQL exception
+                            for (int i = 0; i < ex.Errors.Count; i++)
                             {
-                                insertDraftRoute(ID);
-                            }
-                            else
-                            {
-                                Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                             }
                         }
                     }
                 }
-                else
+                catch (SqlException ex)
                 {
-                    // Session values are null
-                    Response.Write("<script>alert('Session Expired! Please login again.')</script>");
+                    Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                    for (int i = 0; i < ex.Errors.Count; i++)
+                    {
+                        Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                    }
                 }
 
-
-            }
-            catch (SqlException ex)
-            {
-                // Log the exception or display a user-friendly error message
-                // Example: Log.Error("An error occurred during travel request enrollment", ex);
-                Response.Write("<script>alert('An error occurred during travel request enrollment. Please try again.')</script>");
-                // Log additional information from the SQL exception
-                for (int i = 0; i < ex.Errors.Count; i++)
-                {
-                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
-                }
             }
         }
+
         protected void DisableAllRequiredFieldValidators()
         {
             RequiredFieldValidator30.Enabled = false;
@@ -1149,6 +1291,111 @@ namespace TravelDesk.Employee
             RequiredFieldValidator24.Enabled = false;
             RequiredFieldValidator28.Enabled = false;
 
+        }
+
+        private void updateDraftRoute(string requestID)
+        {
+            try
+            {
+                using (var db = new SqlConnection(connectionString))
+                {
+                    db.Open();
+                    using (var cmd = db.CreateCommand())
+                    {
+                        cmd.Parameters.Clear();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "UPDATE route SET routeOFrom = @onewayFrom, routeOTo = @onewayTo, routeODate = @onewayDate, routeR1From = @round1From, routeR1To = @round1To, routeRdepart = @departDate, routeRreturn = @returnDate, routeM1From = @mul1From, routeM1To = @mul1To, routeM1ToDate = @mul1ToDate, routeM2From = @mul2From, routeM2To = @mul2To, routeM2ToDate = @mul2ToDate, routeM3From = @mul3From, routeM3To = @mul3To, routeM3ToDate = @mul3ToDate, routeM4From = @mul4From, routeM4To = @mul4To, routeM4ToDate = @mul4ToDate, routeM5From = @mul5From, routeM5To = @mul5To, routeM5ToDate = @mul5ToDate WHERE routeTravelID = @routeTravelID";
+
+                        cmd.Parameters.AddWithValue("@routeTravelID", requestID);
+
+                        if (oneWaynput.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator13.Enabled = false;
+                            RequiredFieldValidator4.Enabled = false;
+                            RequiredFieldValidator6.Enabled = false;
+                        }
+                        if (roundTripInput.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator17.Enabled = false;
+                            RequiredFieldValidator18.Enabled = false;
+                            RequiredFieldValidator8.Enabled = false;
+                            RequiredFieldValidator7.Enabled = false;
+                        }
+                        if (multipleInput.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator21.Enabled = false;
+                            RequiredFieldValidator22.Enabled = false;
+                            RequiredFieldValidator26.Enabled = false;
+                        }
+                        if (additionalFields.Style["display"] == "none")
+                        {
+                            RequiredFieldValidator50.Enabled = false;
+                            RequiredFieldValidator32.Enabled = false;
+                            RequiredFieldValidator9.Enabled = false;
+                            RequiredFieldValidator10.Enabled = false;
+                            RequiredFieldValidator11.Enabled = false;
+                            RequiredFieldValidator12.Enabled = false;
+                            RequiredFieldValidator14.Enabled = false;
+                            RequiredFieldValidator15.Enabled = false;
+                            RequiredFieldValidator19.Enabled = false;
+                        }
+
+                        // ONE WAY
+                        cmd.Parameters.AddWithValue("@onewayFrom", onewayFrom.Text);
+                        cmd.Parameters.AddWithValue("@onewayTo", onewayTo.Text);
+                        cmd.Parameters.AddWithValue("@onewayDate", onewayDate.Text);
+
+                        // ROUND TRIP
+                        cmd.Parameters.AddWithValue("@round1From", round1From.Text);
+                        cmd.Parameters.AddWithValue("@round1To", round1To.Text);
+                        cmd.Parameters.AddWithValue("@departDate", roundDepart.Text);
+                        cmd.Parameters.AddWithValue("@returnDate", roundReturn.Text);
+
+                        // MULTIPLE
+                        cmd.Parameters.AddWithValue("@mul1From", TextBox7.Text);
+                        cmd.Parameters.AddWithValue("@mul1To", TextBox8.Text);
+                        cmd.Parameters.AddWithValue("@mul1ToDate", string.IsNullOrEmpty(TextBox12.Text) ? (object)DBNull.Value : TextBox12.Text);
+
+                        cmd.Parameters.AddWithValue("@mul2From", TextBox9.Text);
+                        cmd.Parameters.AddWithValue("@mul2To", TextBox10.Text);
+                        cmd.Parameters.AddWithValue("@mul2ToDate", string.IsNullOrEmpty(TextBox14.Text) ? (object)DBNull.Value : TextBox14.Text);
+
+                        cmd.Parameters.AddWithValue("@mul3From", TextBox15.Text);
+                        cmd.Parameters.AddWithValue("@mul3To", TextBox17.Text);
+                        cmd.Parameters.AddWithValue("@mul3ToDate", string.IsNullOrEmpty(TextBox18.Text) ? (object)DBNull.Value : TextBox18.Text);
+
+                        cmd.Parameters.AddWithValue("@mul4From", TextBox27.Text);
+                        cmd.Parameters.AddWithValue("@mul4To", TextBox29.Text);
+                        cmd.Parameters.AddWithValue("@mul4ToDate", string.IsNullOrEmpty(TextBox30.Text) ? (object)DBNull.Value : TextBox30.Text);
+
+                        cmd.Parameters.AddWithValue("@mul5From", TextBox19.Text);
+                        cmd.Parameters.AddWithValue("@mul5To", TextBox21.Text);
+                        cmd.Parameters.AddWithValue("@mul5ToDate", string.IsNullOrEmpty(TextBox22.Text) ? (object)DBNull.Value : TextBox22.Text);
+
+                        // Execute the update
+                        var ctr = cmd.ExecuteNonQuery();
+
+                        if (ctr >= 1)
+                        {
+                            Session.Remove("filePath");
+                            Session.Remove("filename");
+                            Response.Write("<script>alert('Request Updated! You can access your DRAFTS in the Requests'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('An error occurred for the route details. Please try again.')</script>");
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Response.Write("<script>alert('An error occurred during route request update. Please try again.')</script>");
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                }
+            }
         }
 
         private void insertDraftRoute(string ID)

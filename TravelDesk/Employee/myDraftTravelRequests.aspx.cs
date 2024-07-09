@@ -172,10 +172,14 @@ namespace TravelDesk.Employee
                                 }
                                 else if (type == "International Travel")
                                 {
-                                    Response.Redirect("domesticRequestDetails.aspx");
-
                                     //redirect to the next page after clicking the view button
-                                    //Response.Redirect("internationalRequestDetails.aspx");
+                                    if (status == "Draft")
+                                    {
+                                        Session["requestStatus"] = status;
+                                        //redirect to the next page after clicking the view button
+                                        Response.Redirect("internationalRequestDetails.aspx");
+
+                                    }
                                 }
 
 

@@ -200,7 +200,7 @@
 
                                            </div>
                                                              <asp:Button runat="server" class="btn btn-primary" Text="Submit" ID="submitRequestbtn" OnClick="submitRequestbtn_Click"/>
-                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="saveAsDraft" OnClientClick = "disableValidators();" OnClick="saveAsDraft_Click" />
+<%--                                                             <asp:Button runat="server" class="btn btn-primary" Text="Save as Draft" ID="saveAsDraft" OnClientClick = "disableValidators();" OnClick="saveAsDraft_Click" />--%>
 
                                     <!-- Page-body end -->
                                 </div>

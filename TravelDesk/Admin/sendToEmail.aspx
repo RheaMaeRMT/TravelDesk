@@ -261,7 +261,7 @@ Travel Desk
                                                                     </div>
                                                                 </div> 
                                                                 <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-                                                                    <div class="modal-dialog modal-md" role="document" style="max-width:fit-content;color:black;font-size:20px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                                                                    <div class="modal-dialog" role="document" style="max-width:max-content;max-height:-100px;color:black;font-size:20px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title">Email Preview</h5>

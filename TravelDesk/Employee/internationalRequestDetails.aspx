@@ -167,17 +167,17 @@
                                                                                 <div class="tracker">
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="requestSubmittedCircle" data-hover-message="Requests that has been submitted and auto-approved."><span>1</span></div>
-                                                                                        <div class="text">Approved</div>
+                                                                                        <div class="text">New</div>
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="processingCircle" data-hover-message="Requests that has been accepted for travel arrangement processing."><span>2</span></div>
-                                                                                        <div class="text">Processing</div>
+                                                                                        <div class="text">In-progress</div>
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="arrangedCircle" data-hover-message="Requests that completed the travel arrangement process."><span>3</span></div>
-                                                                                        <div class="text">Arranged</div>
+                                                                                        <div class="text">Completed</div>
                                                                                     </div>
 <%--                                                                                    <div class="line"></div>
                                                                                     <div class="stage">
@@ -185,6 +185,10 @@
                                                                                         <div class="text">Completed</div>
                                                                                     </div>--%>
                                                                                 </div>
+                                                                                <div>
+                                                                                        <asp:Button runat="server" ID="completeDraft" Text="Complete Request" CssClass="btn btn-primary" OnClick="updateRequest_Click"/>
+                                                                                </div>
+
                                                                             </div>
                                                                             <div class="tab-pane" id="requestDetails" role="tabpanel">
 

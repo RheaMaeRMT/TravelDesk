@@ -377,9 +377,10 @@ namespace TravelDesk.Employee
             string currentStat = Session["currentStatus"].ToString();
             currentStatus.Text = currentStat;
 
+
             // Set boolean variables based on the value of currentStat
             bool requestSubmitted = currentStat == "New";
-            bool processing = currentStat == "In-progress";
+            bool processing = currentStat == "Requirements Sent";
             bool completed = currentStat == "Completed";
             bool closed = currentStat == "Closed";
 
@@ -422,7 +423,8 @@ namespace TravelDesk.Employee
 
             // Inject the script into the page
             ClientScript.RegisterStartupScript(this.GetType(), "trackingStatus", script);
-        }
+        
+    }
 
         protected void updateRequest_Click(object sender, EventArgs e)
         {

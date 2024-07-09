@@ -167,12 +167,12 @@
                                                                                 <div class="tracker">
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="requestSubmittedCircle" data-hover-message="Requests that has been submitted and auto-approved."><span>1</span></div>
-                                                                                        <div class="text">Approved</div>
+                                                                                        <div class="text">New</div>
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
                                                                                         <div class="circle" id="processingCircle" data-hover-message="Requests that has been accepted for travel arrangement processing."><span>2</span></div>
-                                                                                        <div class="text">Processing</div>
+                                                                                        <div class="text">In-progress</div>
                                                                                     </div>
                                                                                     <div class="line"></div>
                                                                                     <div class="stage">
