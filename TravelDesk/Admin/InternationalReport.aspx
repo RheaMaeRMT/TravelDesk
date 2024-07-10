@@ -46,9 +46,9 @@
                                         <!-- Ensure ScriptManager is present -->
                                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-<%--                                        <asp:TextBox ID="txtStartDate" runat="server" CssClass="datepicker" TextMode="Date" DataFormatString="yyyy-MM-dd"></asp:TextBox>
+                                        <asp:TextBox ID="txtStartDate" runat="server" CssClass="datepicker" TextMode="Date" DataFormatString="yyyy-MM-dd"></asp:TextBox>
                                         <asp:TextBox ID="txtEndDate" runat="server" CssClass="datepicker" TextMode="Date" DataFormatString="yyyy-MM-dd"></asp:TextBox>
-                                        <asp:Button ID="btnFilter" runat="server" Text="Filter" OnClick="btnFilter_Click" />--%>
+                                        <asp:Button ID="btnFilter" runat="server" CssClass="btn btn-primary" Text="Filter" OnClick="btnFilter_Click" />
 
                                         <rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="103%" BackColor="White" style="background-color:transparent; margin-left:-30px" CssClass="m-l-0">
                                         </rsweb:ReportViewer>

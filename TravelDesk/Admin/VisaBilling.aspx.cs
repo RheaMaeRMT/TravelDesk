@@ -96,10 +96,11 @@ namespace TravelDesk
                         using (var cmd = db.CreateCommand())
                         {
                             cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID";
+                            cmd.CommandText = "UPDATE travelRequest SET travelReqStatus = @newStatus WHERE travelRequestID = @ID, travelReqCompleted = @date";
 
                             // Set parameters for updating request status
                             cmd.Parameters.AddWithValue("@newStatus", "Completed");
+                            cmd.Parameters.AddWithValue("@date", DateTime.Now);
                             cmd.Parameters.AddWithValue("@ID", requestId);
 
                             // Execute the update query
