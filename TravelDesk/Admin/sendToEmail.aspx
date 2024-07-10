@@ -24,8 +24,8 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script type="text/javascript">
     (function () {
-        //emailjs.init("7kzw_508bI-BkJqPm"); // TravelDesk
-        emailjs.init("4R2vvYNuFdqznyjBm"); // Personal Email JS
+        emailjs.init("7kzw_508bI-BkJqPm"); // TravelDesk
+        //emailjs.init("4R2vvYNuFdqznyjBm"); // Personal Email JS
 
     })();
     
@@ -69,7 +69,7 @@
     function sendEmailWithDriveLinks() {
         const emailData = JSON.parse(document.getElementById('hiddenEmailData').value);
 
-        emailjs.send("service_6updv5w", "template_p46ovxf", emailData) // Personal Email JS
+        emailjs.send("service_rwuwsiv", "template_pofgyf1", emailData) // Personal Email JS
             .then(function (response) {
                 console.log('Email Sent!', response);
                 window.location.replace("emailSent.aspx"); // Replace with your desired URL
