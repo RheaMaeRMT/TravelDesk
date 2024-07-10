@@ -233,8 +233,6 @@
                                                                                     <asp:Label ID="Label46" runat="server" Text="Email" Style="padding-left: 60px"></asp:Label>
                                                                                     <asp:TextBox ID="employeeEmail" runat="server" Width="300px" Style="margin-left: 50px; border-radius: 5px" CssClass="textboxes"  Enabled="false" ></asp:TextBox>
 
-                                                                                    <asp:Label ID="Label16" runat="server" Text="Birthdate" Style="padding-left: 50px"></asp:Label>
-                                                                                    <asp:TextBox ID="employeeBdate" runat="server" Width="150px" Style="margin-left: 30px; border-radius: 5px" CssClass="textboxes"  Enabled="false"></asp:TextBox>
 
 
 

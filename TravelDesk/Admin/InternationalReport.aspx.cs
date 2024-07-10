@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace TravelDesk.Admin
 {
-	public partial class InternationalReport : System.Web.UI.Page
+    public partial class InternationalReport : System.Web.UI.Page
     {
         string connectionString = ConfigurationManager.ConnectionStrings["DB_TravelDesk"].ConnectionString;
 

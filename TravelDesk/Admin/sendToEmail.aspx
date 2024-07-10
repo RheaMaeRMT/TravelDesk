@@ -33,17 +33,17 @@
 <script>
     function generateEmailPreview(emailData) {
         return `
-        <pre>
-${emailData.message}
+                <pre>
+        ${emailData.message}
 
-${emailData.fileLinks}
+        ${emailData.fileLinks}
 
-Please do not hesitate to reach out to me if you have any questions or require further information.
+        Please do not hesitate to reach out to me if you have any questions or require further information.
 
-Best Regards,
-Travel Desk
-        </pre>
-    `;
+        Best Regards,
+        Travel Desk
+                </pre>
+            `;
     }
 
     function displayEmailPreview(receiverEmail, message, name, formattedLinks) {

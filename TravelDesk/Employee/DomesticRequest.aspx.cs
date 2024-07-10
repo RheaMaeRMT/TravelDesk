@@ -916,6 +916,7 @@ namespace TravelDesk.Employee
                             //remove the session to get the new files uploaded incase same session different request
                             Session.Remove("filePath");
                             Session.Remove("filename");
+                            Session.Remove("clickedRequest");
 
                             // The update was successful
                             Response.Write("<script>alert ('Travel Request Submitted!'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
@@ -1379,6 +1380,9 @@ namespace TravelDesk.Employee
                         {
                             Session.Remove("filePath");
                             Session.Remove("filename");
+                            Session.Remove("clickedRequest");
+
+
                             Response.Write("<script>alert('Request Updated! You can access your DRAFTS in the Requests'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
                         }
                         else
@@ -1494,6 +1498,8 @@ namespace TravelDesk.Employee
                         {
                             Session.Remove("filePath");
                             Session.Remove("filename");
+                            Session.Remove("clickedRequest");
+
                             Response.Write("<script>alert ('Request Saved! You can access your DRAFTS in the Requests'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
 
                         }

@@ -157,6 +157,8 @@ namespace TravelDesk.Admin
             loadDetailsForEmail();
             updateProcessStatus();
 
+
+
         }
         protected void ListUploadedFiles(string folderPath)
         {
@@ -186,8 +188,8 @@ namespace TravelDesk.Admin
 
                 string receiverEmail = Session["userEmail"].ToString();
                 string name = Session["travellerName"].ToString();
-                string emailMessage = emailBody.Text;
-                emailMessage = HttpUtility.JavaScriptStringEncode(emailMessage);
+                string message = emailBody.Text;
+                message = HttpUtility.JavaScriptStringEncode(message);
 
                 // Retrieve drive links from session
                 List<string> driveLinks = (List<string>)Session["UploadedDriveLinks"] ?? new List<string>();
@@ -198,10 +200,14 @@ namespace TravelDesk.Admin
                 // Ensure the formatted links are encoded to be used in JavaScript
                 string formattedLinks = driveLinks.Count > 0 ? HttpUtility.JavaScriptStringEncode(GetFormattedLinks(driveLinks)) : "";
 
-                // Pass the email details including the uploaded file links to the JavaScript function
-                string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{name}', '{emailMessage}', '{formattedLinks}');</script>";
-                ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
+                //// Pass the email details including the uploaded file links to the JavaScript function
+                //string script = $"<script>sendEmailWithDriveLinks('{receiverEmail}', '{name}', '{emailMessage}', '{formattedLinks}');</script>";
+                //ClientScript.RegisterStartupScript(this.GetType(), "SendEmailScript", script);
 
+
+                // Pass the email details including the uploaded file links to the JavaScript function for preview
+                string script = $"<script>displayEmailPreview('{receiverEmail}', '{message}', '{name}', '{formattedLinks}');</script>";
+                ClientScript.RegisterStartupScript(this.GetType(), "DisplayEmailPreviewScript", script);
 
             }
             Session.Remove("UploadedDriveLinks");

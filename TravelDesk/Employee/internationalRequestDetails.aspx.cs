@@ -154,19 +154,6 @@ namespace TravelDesk.Employee
                                     employeePurpose.Text = travelPurpose;
                                     employeeRemarks.Text = remarks;
 
-                                    if (!string.IsNullOrEmpty(empBdate))
-                                    {
-                                        // Parse the date string into a DateTime object
-                                        DateTime arrivalDateTime;
-                                        if (DateTime.TryParse(empBdate, out arrivalDateTime))
-                                        {
-                                            // Format the DateTime object into the desired format
-                                            string formattedArrivalDate = arrivalDateTime.ToString("MMMM dd, yyyy");
-
-                                            // Assign the formatted date to the TextBox
-                                            employeeBdate.Text = formattedArrivalDate;
-                                        }
-                                    }
                                     if (!string.IsNullOrEmpty(oneFrom))
                                     {
                                         oneWaynput.Style["display"] = "block";

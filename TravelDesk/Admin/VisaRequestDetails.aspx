@@ -96,31 +96,79 @@
                 __doPostBack('<%= deleteFileButton.UniqueID %>', '');
     }
 
-    function sendEmailWithDriveLinks(receiverEmail, name, message,formattedLinks) {
+    function generateEmailPreview(emailData) {
+        return `
+                <pre>
+        ${emailData.message}
+
+        ${emailData.fileLinks}
+
+        Please do not hesitate to reach out to me if you have any questions or require further information.
+
+        Best Regards,
+        Travel Desk
+                </pre>
+            `;
+    }
+
+    function displayEmailPreview(receiverEmail, message, name, formattedLinks) {
         const emailData = {
             to_email: receiverEmail,
             to_name: name,
+            from_name: "Travel Desk",
             message: message,
-            from_name: "Travel Desk"
+            fileLinks: formattedLinks !== "" ? "Attached Files:\n " + formattedLinks : ""
         };
 
-        if (formattedLinks !== "") {
-            
-            emailData.fileLinks = "Attachments:\n " + formattedLinks;
-        }
+        // Generate and display email preview
+        const emailPreview = generateEmailPreview(emailData);
+        document.getElementById('emailPreview').innerHTML = emailPreview;
 
-        console.log("Email Data:", emailData);
+        // Store emailData in a hidden element or a global variable for sending later
+        document.getElementById('hiddenEmailData').value = JSON.stringify(emailData);
+
+        // Show the modal
+        $('#previewModal').modal('show');
+    }
+
+    function sendEmailWithDriveLinks() {
+        const emailData = JSON.parse(document.getElementById('hiddenEmailData').value);
 
         emailjs.send("service_6updv5w", "template_tp5wuwk", emailData) // Personal Email JS
             .then(function (response) {
                 console.log('Email Sent!', response);
-                alert("Email Sent !");
-                window.location.replace("VisaBilling.aspx"); // Replace with your desired URL
+                window.location.replace("visaEmailSent.aspx"); // Replace with your desired URL
             }, function (error) {
                 alert("Email send failed");
                 console.error("Email send failed:", error);
             });
     }
+
+    //function sendEmailWithDriveLinks(receiverEmail, name, message,formattedLinks) {
+    //    const emailData = {
+    //        to_email: receiverEmail,
+    //        to_name: name,
+    //        message: message,
+    //        from_name: "Travel Desk"
+    //    };
+
+    //    if (formattedLinks !== "") {
+            
+    //        emailData.fileLinks = "Attached Files:\n " + formattedLinks;
+    //    }
+
+    //    console.log("Email Data:", emailData);
+
+    //    emailjs.send("service_6updv5w", "template_tp5wuwk", emailData) // Personal Email JS
+    //        .then(function (response) {
+    //            console.log('Email Sent!', response);
+    //            alert("Email Sent !");
+    //            window.location.replace("VisaBilling.aspx"); // Replace with your desired URL
+    //        }, function (error) {
+    //            alert("Email send failed");
+    //            console.error("Email send failed:", error);
+    //        });
+    //}
 </script>
 <script src="https://alcdn.msauth.net/browser/2.18.0/js/msal-browser.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -289,6 +337,26 @@
                                                         <!-- Tab variant tab card start -->
                                                     </div>
                                                 </div>
+
+                                                                <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                                                                    <div class="modal-dialog" role="document" style="max-width:max-content;max-height:-100px;color:black;font-size:20px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">Email Preview</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>                                                                         
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                    <div id="emailPreview"></div>
+                                                                                    <input type="hidden" id="hiddenEmailData">
+                                                                                    <asp:LinkButton runat="server" ID="sendEmail"  class="btn btn-primary" style="color:black;font-size:16px;border-radius:10px;background-color:gainsboro;border-color:transparent" OnClientClick="sendEmailWithDriveLinks(); return false;"> <i class="ti-email" style="color:black"></i> Send </asp:LinkButton>     
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+
                                     <!-- Page-body end -->
                                 </div>
                                 <div id="styleSelector"> </div>

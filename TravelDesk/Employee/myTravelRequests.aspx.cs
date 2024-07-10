@@ -63,11 +63,11 @@ namespace TravelDesk.Employee
                         ELSE tr.travelDestination                             
                     END AS travelDestination, 
                     CASE 
-                        WHEN tr.travelOptions = 'One Way' THEN rt.routeODate 
-                        WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart
-                        WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate                          
-                    END AS travelDates, 
-                    tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
+                   END AS travelDates,                     tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
             FROM travelRequest tr
             LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
             WHERE tr.travelUserID = @UserID 
@@ -505,12 +505,12 @@ namespace TravelDesk.Employee
                             ELSE tr.travelDestination                             
                         END AS travelDestination, 
                         CASE 
-                            WHEN tr.travelOptions = 'One Way' THEN rt.routeODate 
-                            WHEN tr.travelOptions = 'Round trip' THEN rt.routeRdepart
-                            WHEN tr.travelOptions = 'Multiple' THEN rt.routeM1ToDate   
-                            WHEN tr.travelType = 'Visa Request' THEN travelEstdate
+                            WHEN tr.travelOptions = 'One Way' THEN FORMAT(rt.routeODate, 'MMMM dd')
+                            WHEN tr.travelOptions = 'Round trip' THEN FORMAT(rt.routeRdepart, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeRreturn, 'MMMM dd, yyyy')
+                            WHEN tr.travelOptions = 'Multiple' THEN FORMAT(rt.routeM1ToDate, 'MMMM dd') + ' ' + '-' + ' ' + FORMAT(rt.routeM2ToDate, 'MMMM dd, yyyy')
+                            WHEN tr.travelType = 'Visa Request' THEN FORMAT(travelEstdate, 'MMMM dd')
                         END AS travelDates, 
-                        tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
+tr.travelDU, tr.travelProjectCode, tr.travelDateSubmitted 
                     FROM travelRequest tr
                     LEFT JOIN route rt ON tr.travelRequestID = rt.routeTravelID
                     WHERE tr.travelUserID = @UserID 

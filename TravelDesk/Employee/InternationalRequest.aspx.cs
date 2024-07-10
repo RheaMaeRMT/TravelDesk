@@ -23,7 +23,7 @@ namespace TravelDesk.Employee
         {
             if (Session["userID"] == null && Session["userName"] == null)
             {
-                Response.Write("<script>alert ('Session Expired!'); window.location.href = '../LoginPage.aspx'; </script>");
+                Response.Write("<script>alert ('Session Expired! Please login again'); window.location.href = '../LoginPage.aspx'; </script>");
 
             }
 
@@ -422,6 +422,7 @@ namespace TravelDesk.Employee
                     pdfBlock.Style["display"] = "none";
                 }
             }
+
         }
 
         private string GetRelativeUrl(string fullPath)
@@ -486,6 +487,8 @@ namespace TravelDesk.Employee
 
                                         string ID = "IR" + levelText + random + Name;
                                         cmd.Parameters.AddWithValue("@ID", ID);
+
+                                        Session["IDforUpload"] = ID; 
 
                                         string location = homeFacility.Text;
 
@@ -818,10 +821,11 @@ namespace TravelDesk.Employee
                     // Concatenate the first and last name to create a unique folder name
                     string folderName = employeeFirstName;
 
-                    string clickedRequest = Session["clickedRequest"]?.ToString(); // Null-conditional operator added
+                    string clickedRequest = Session["IDforUpload"]?.ToString(); // Null-conditional operator added
+
 
                     // Create a directory path using the concatenated folder name
-                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName, clickedRequest);
+                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/approvalProofs"), folderName);
 
                     // Check if the directory exists, if not, create it
                     if (!Directory.Exists(saveDIR))
@@ -845,7 +849,7 @@ namespace TravelDesk.Employee
                                 employeeUpload.SaveAs(savePath);
 
                                 // Store file path in session
-                                Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", folderName, clickedRequest, filename);
+                                Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", folderName, filename);
                                 Session["filename"] = filename;
 
                                 string pdfPath = Session["pdfPath"].ToString();
@@ -1078,90 +1082,114 @@ namespace TravelDesk.Employee
                     Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
                 }
             }
+
+            Session.Remove("clickedRequest");
         }
 
         protected void saveAsDraft_Click(object sender, EventArgs e)
         {
-            string requestID = Session["clickedRequest"].ToString();
-            string statusDraft = Session["requestStatus"].ToString();
-
-            if (statusDraft == "Draft")
+            if (Session["requestStatus"] != null)
             {
+                string statusDraft = Session["requestStatus"].ToString();
 
-                try
+                if (statusDraft == "Draft")
                 {
-                    if (Session["userID"] != null)
+                    string requestID = Session["clickedRequest"].ToString();
+
+                    if (requestID != null)
                     {
-                        string filename = Session["filename"] != null ? Session["filename"].ToString() : null;
-                        string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : null;
-                        string passportName = Session["passportName"] != null ? Session["passportName"].ToString() : null;
-                        string passportPath = Session["passportPath"] != null ? Session["passportPath"].ToString() : null;
-
-                        string levelText = employeeLevel.Text;
-                        string userID = Session["userID"].ToString();
-
-                        using (var db = new SqlConnection(connectionString))
+                        try
                         {
-                            db.Open();
-                            using (var cmd = db.CreateCommand())
+                            if (Session["userID"] != null)
                             {
-                                cmd.CommandType = CommandType.Text;
-                                cmd.CommandText = "UPDATE travelRequest SET travelHomeFacility = @location, travelEmpID = @empID, travelFname = @empFName, travelMname = @empMName, travelLname = @empLName, travelDU = @empDu, travelEmail = @empEmail, travelLevel = @level, travelMobilenum = @mobile, travelProjectCode = @projCode, travelPurpose = @purpose, travelRemarks = @remarks, travelProofname = @proofname, travelProofPath = @proofpath, travelPassportPath = @passportPath, travelPassportName = @passportName WHERE travelRequestID = @ID";
+                                string filename = Session["filename"] != null ? Session["filename"].ToString() : null;
+                                string imgPath = Session["pdfPath"] != null ? Session["pdfPath"].ToString() : null;
+                                string passportName = Session["passportName"] != null ? Session["passportName"].ToString() : null;
+                                string passportPath = Session["passportPath"] != null ? Session["passportPath"].ToString() : null;
 
-                                cmd.Parameters.AddWithValue("@ID", requestID);
-                                string location = homeFacility.Text;
+                                string levelText = employeeLevel.Text;
+                                string userID = Session["userID"].ToString();
 
-                                if (location == "Others")
+                                using (var db = new SqlConnection(connectionString))
                                 {
-                                    cmd.Parameters.AddWithValue("@location", othersFacility.Text);
-                                }
-                                else
-                                {
-                                    cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
-                                }
+                                    db.Open();
+                                    using (var cmd = db.CreateCommand())
+                                    {
+                                        cmd.CommandType = CommandType.Text;
+                                        cmd.CommandText = "UPDATE travelRequest SET travelHomeFacility = @location, travelEmpID = @empID, travelFname = @empFName, travelMname = @empMName, travelLname = @empLName, travelDU = @empDu, travelEmail = @empEmail, travelLevel = @level, travelMobilenum = @mobile, travelProjectCode = @projCode, travelPurpose = @purpose, travelRemarks = @remarks, travelOptions = @options, travelProofname = @proofname, travelProofPath = @proofpath, travelPassportPath = @passportPath, travelPassportName = @passportName, travelDraftStat = @draftStat WHERE travelRequestID = @ID";
 
-                                cmd.Parameters.AddWithValue("@empID", string.IsNullOrEmpty(employeeID.Text) ? DBNull.Value : (object)employeeID.Text);
-                                cmd.Parameters.AddWithValue("@empFName", string.IsNullOrEmpty(employeeFName.Text) ? DBNull.Value : (object)employeeFName.Text);
-                                cmd.Parameters.AddWithValue("@empMName", string.IsNullOrEmpty(employeeMName.Text) ? DBNull.Value : (object)employeeMName.Text);
-                                cmd.Parameters.AddWithValue("@empLName", string.IsNullOrEmpty(employeeLName.Text) ? DBNull.Value : (object)employeeLName.Text);
-                                cmd.Parameters.AddWithValue("@empDu", string.IsNullOrEmpty(employeeDU.Text) ? DBNull.Value : (object)employeeDU.Text);
-                                cmd.Parameters.AddWithValue("@empEmail", string.IsNullOrEmpty(employeeEmail.Text) ? DBNull.Value : (object)employeeEmail.Text);
-                                cmd.Parameters.AddWithValue("@level", string.IsNullOrEmpty(employeeLevel.Text) ? DBNull.Value : (object)employeeLevel.Text);
-                                cmd.Parameters.AddWithValue("@mobile", string.IsNullOrEmpty(employeePhone.Text) ? DBNull.Value : (object)employeePhone.Text);
-                                cmd.Parameters.AddWithValue("@projCode", string.IsNullOrEmpty(employeeProjCode.Text) ? DBNull.Value : (object)employeeProjCode.Text);
-                                cmd.Parameters.AddWithValue("@purpose", string.IsNullOrEmpty(employeePurpose.Text) ? DBNull.Value : (object)employeePurpose.Text);
-                                cmd.Parameters.AddWithValue("@remarks", string.IsNullOrEmpty(employeeRemarks.Text) ? DBNull.Value : (object)employeeRemarks.Text);
-                                cmd.Parameters.AddWithValue("@proofname", string.IsNullOrEmpty(filename) ? DBNull.Value : (object)filename);
-                                cmd.Parameters.AddWithValue("@proofpath", string.IsNullOrEmpty(imgPath) ? DBNull.Value : (object)imgPath);
-                                cmd.Parameters.AddWithValue("@passportPath", string.IsNullOrEmpty(passportPath) ? DBNull.Value : (object)passportPath);
-                                cmd.Parameters.AddWithValue("@passportName", string.IsNullOrEmpty(passportName) ? DBNull.Value : (object)passportName);
+                                        cmd.Parameters.AddWithValue("@ID", requestID);
+                                        string location = homeFacility.Text;
 
-                                var ctr = cmd.ExecuteNonQuery();
+                                        if (location == "Others")
+                                        {
+                                            cmd.Parameters.AddWithValue("@location", othersFacility.Text);
+                                        }
+                                        else
+                                        {
+                                            cmd.Parameters.AddWithValue("@location", homeFacility.SelectedItem.Text);
+                                        }
 
-                                if (ctr >= 1)
-                                {
-                                    updateDraftRoute(requestID);
-                                }
-                                else
-                                {
-                                    Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                        cmd.Parameters.AddWithValue("@empID", string.IsNullOrEmpty(employeeID.Text) ? DBNull.Value : (object)employeeID.Text);
+                                        cmd.Parameters.AddWithValue("@empFName", string.IsNullOrEmpty(employeeFName.Text) ? DBNull.Value : (object)employeeFName.Text);
+                                        cmd.Parameters.AddWithValue("@empMName", string.IsNullOrEmpty(employeeMName.Text) ? DBNull.Value : (object)employeeMName.Text);
+                                        cmd.Parameters.AddWithValue("@empLName", string.IsNullOrEmpty(employeeLName.Text) ? DBNull.Value : (object)employeeLName.Text);
+                                        cmd.Parameters.AddWithValue("@empDu", string.IsNullOrEmpty(employeeDU.Text) ? DBNull.Value : (object)employeeDU.Text);
+                                        cmd.Parameters.AddWithValue("@empEmail", string.IsNullOrEmpty(employeeEmail.Text) ? DBNull.Value : (object)employeeEmail.Text);
+                                        cmd.Parameters.AddWithValue("@level", string.IsNullOrEmpty(employeeLevel.Text) ? DBNull.Value : (object)employeeLevel.Text);
+                                        cmd.Parameters.AddWithValue("@mobile", string.IsNullOrEmpty(employeePhone.Text) ? DBNull.Value : (object)employeePhone.Text);
+                                        cmd.Parameters.AddWithValue("@projCode", string.IsNullOrEmpty(employeeProjCode.Text) ? DBNull.Value : (object)employeeProjCode.Text);
+                                        string purpose = employeePurpose.Text;
+                                        if (purpose == "Others")
+                                        {
+                                            cmd.Parameters.AddWithValue("@purpose", otherspecified.Text);
+                                        }
+                                        else
+                                        {
+                                            cmd.Parameters.AddWithValue("@purpose", employeePurpose.Text);
+                                        }
+                                        cmd.Parameters.AddWithValue("@remarks", employeeRemarks.Text);
+                                        cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);
+                                        cmd.Parameters.AddWithValue("@proofname", string.IsNullOrEmpty(filename) ? DBNull.Value : (object)filename);
+                                        cmd.Parameters.AddWithValue("@proofpath", string.IsNullOrEmpty(imgPath) ? DBNull.Value : (object)imgPath);
+                                        cmd.Parameters.AddWithValue("@passportPath", string.IsNullOrEmpty(passportPath) ? DBNull.Value : (object)passportPath);
+                                        cmd.Parameters.AddWithValue("@passportName", string.IsNullOrEmpty(passportName) ? DBNull.Value : (object)passportName);
+                                        cmd.Parameters.AddWithValue("@draftStat", "Yes");
+
+                                        var ctr = cmd.ExecuteNonQuery();
+
+                                        if (ctr >= 1)
+                                        {
+                                            updateDraftRoute(requestID);
+                                        }
+                                        else
+                                        {
+                                            Response.Write("<script>alert('An error occurred. Please try again.')</script>");
+                                        }
+                                    }
                                 }
                             }
+                            else
+                            {
+                                Response.Write("<script>alert ('Session Expired! Please login again'); window.location.href = '../LoginPage.aspx'; </script>");
+                            }
                         }
+                        catch (SqlException ex)
+                        {
+                            Response.Write("<script>alert('An error occurred during travel request update. Please try again.')</script>");
+                            for (int i = 0; i < ex.Errors.Count; i++)
+                            {
+                                Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
+                            }
+                        }
+
                     }
                     else
                     {
-                        Response.Write("<script>alert('Session Expired! Please login again.')</script>");
+                        Response.Write("<script>alert ('Session Expired! Please login again'); window.location.href = '../LoginPage.aspx'; </script>");
                     }
                 }
-                catch (SqlException ex)
-                {
-                    Response.Write("<script>alert('An error occurred during travel request update. Please try again.')</script>");
-                    for (int i = 0; i < ex.Errors.Count; i++)
-                    {
-                        Response.Write("<script>alert('SQL Error " + i + ": " + ex.Errors[i].Number + " - " + ex.Errors[i].Message + "')</script>");
-                    }
-                }
+
             }
             else
             {
@@ -1223,7 +1251,7 @@ namespace TravelDesk.Employee
                                 cmd.Parameters.AddWithValue("@reqStatus", "Draft");
                                 cmd.Parameters.AddWithValue("@remarks", string.IsNullOrEmpty(employeeRemarks.Text) ? DBNull.Value : (object)employeeRemarks.Text);
                                 cmd.Parameters.AddWithValue("@type", "International Travel");
-                                cmd.Parameters.AddWithValue("@options", flightOptions.SelectedItem == null ? DBNull.Value : (object)flightOptions.SelectedItem.Text);
+                                cmd.Parameters.AddWithValue("@options", flightOptions.SelectedValue);
                                 cmd.Parameters.AddWithValue("@userID", string.IsNullOrEmpty(userID) ? DBNull.Value : (object)userID);
                                 cmd.Parameters.AddWithValue("@proofname", string.IsNullOrEmpty(filename) ? DBNull.Value : (object)filename);
                                 cmd.Parameters.AddWithValue("@proofpath", string.IsNullOrEmpty(imgPath) ? DBNull.Value : (object)imgPath);
@@ -1266,6 +1294,8 @@ namespace TravelDesk.Employee
                     }
                 }
             }
+
+
         }
         protected void DisableAllRequiredFieldValidators()
         {
@@ -1401,13 +1431,15 @@ namespace TravelDesk.Employee
 
                         if (ctr >= 1)
                         {
+                            Response.Write("<script>alert('Request Updated! You can access your DRAFTS in the Requests'); window.location.href = 'myTravelRequests.aspx'; </script>");
+                            
+                            Session.Remove("clickedRequest");
                             Session.Remove("filePath");
                             Session.Remove("pdfPath");
                             Session.Remove("passportName");
                             Session.Remove("passportPath");
                             Session.Remove("filePassportPath");
 
-                            Response.Write("<script>alert('Request Updated! You can access your DRAFTS in the Requests'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
                         }
                         else
                         {
@@ -1520,14 +1552,15 @@ namespace TravelDesk.Employee
 
                         if (ctr >= 1)
                         {
+
+                            Response.Write("<script>alert ('Request Saved! You can access your DRAFTS in the Requests'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
+                           
                             Session.Remove("filePath");
                             Session.Remove("pdfPath");
                             Session.Remove("passportName");
                             Session.Remove("passportPath");
                             Session.Remove("filePassportPath");
-    
-
-                            Response.Write("<script>alert ('Request Saved! You can access your DRAFTS in the Requests'); window.location.href = 'EmployeeDashboard.aspx'; </script>");
+                            Session.Remove("clickedRequest");
 
                         }
                         else
@@ -1628,7 +1661,7 @@ namespace TravelDesk.Employee
                     string clickedRequest = Session["clickedRequest"]?.ToString(); // Null-conditional operator added
 
                     // Create a directory path using the concatenated folder name
-                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/employeePassports"), folderName, clickedRequest);
+                    string saveDIR = System.IO.Path.Combine(Server.MapPath("/PDFs/TravelRequest/employeePassports"), folderName);
 
                     // Check if the directory exists, if not, create it
                     if (!Directory.Exists(saveDIR))
@@ -1653,7 +1686,7 @@ namespace TravelDesk.Employee
 
 
                                 // Store file path in session
-                                Session["passportPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/employeePassports/", folderName, clickedRequest, filename);
+                                Session["passportPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/employeePassports/", folderName, filename);
                                 Session["passportName"] = filename;
 
                                 string pdfPath = Session["passportPath"].ToString();
@@ -1663,10 +1696,6 @@ namespace TravelDesk.Employee
                                 passportBlock.Style["display"] = "block";
 
                                 //DISPLAY APPROVAL PROOF:
-                                // Store file path in session
-                                Session["pdfPath"] = System.IO.Path.Combine("/PDFs/TravelRequest/approvalProofs/", folderName, clickedRequest, filename);
-                                Session["filename"] = filename;
-
                                 string approvalPath = Session["pdfPath"].ToString();
 
                                 // Show the PDF viewer for travel approval
